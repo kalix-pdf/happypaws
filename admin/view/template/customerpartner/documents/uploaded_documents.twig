@@ -1,0 +1,40 @@
+{{ customheader }}
+
+<div class="text-center row">
+    <h1>Store Name: {{ companyname }}</h1>
+
+    {% if files is not empty %}
+        <h1>Customer ID: {{ customer_id }}</h1>
+        <h2>Uploaded documents</h2>
+        {% for file in files %}
+            <div class="col-md-4">
+                <div class="uploaded-file card shadow-lg border rounded p-4 m-5">
+                    <p>{{ file.type }}</p> <br>
+                    <a href="{{ file.image_path }}" target="_blank">
+                        <img src="{{ file.image_path }}" alt="{{ file.type }}"
+                        class="img-fluid d-block mx-auto" style="width: 300px;">
+                    </a> <br> <br> 
+                    {% if file.sbsType is defined %}
+                    <h2>Subscription Type:</h2>
+                    {% if file.sbsType == 1 %}
+                        <h2>PISO PER DAY PER PRODUCT</h2>
+                    {% endif %}
+                    {% if file.sbsType == 2 %}
+                        <h2>PISO PER MONTH PER PRODUCT</h2>
+                    {% endif %}
+                    {% if file.sbsType == 3 %}
+                        <h2>COMMISSION TYPE</h2>
+                    {% endif %}
+                {% endif %}
+                </div>
+                
+            </div>
+            
+        {% endfor %}
+    {% else %}  
+        <p>No files uploaded yet.</p>
+        
+    {% endif %}
+</div>
+<br>
+{{ footer }}

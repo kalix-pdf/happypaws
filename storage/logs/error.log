@@ -1,0 +1,10 @@
+2025-04-07 21:48:57 - PHP Warning:  Undefined array key "payment_method" in D:\xampp\htdocs\store\storage\modification\catalog\controller\checkout\checkout.php on line 55
+2025-04-08 5:30:29 - PHP Warning:  mysqli::query(): (42S02/1146): Table 'smesoftc_ocart3x0x3x9.oc_translation' doesn't exist in C:\xampp\htdocs\store\system\library\db\mysqli.php on line 25
+2025-04-08 14:38:42 - PHP Warning:  Undefined array key "totals" in C:\xampp\htdocs\store\catalog\controller\extension\payment\xendit.php on line 46
+2025-04-08 14:38:42 - PHP Warning:  foreach() argument must be of type array|object, null given in C:\xampp\htdocs\store\catalog\controller\extension\payment\xendit.php on line 46
+2025-04-08 14:38:42 - PHP Warning:  Undefined variable $total in C:\xampp\htdocs\store\catalog\controller\extension\payment\xendit.php on line 59
+2025-04-08 14:38:42 - PHP Warning:  Trying to access array offset on value of type null in C:\xampp\htdocs\store\catalog\controller\extension\payment\xendit.php on line 59
+2025-04-08 14:44:51 - PHP Warning:  Undefined variable $totalss in C:\xampp\htdocs\store\catalog\controller\extension\payment\xendit.php on line 60
+2025-04-08 14:45:26 - PHP Warning:  Undefined variable $totalss in C:\xampp\htdocs\store\catalog\controller\extension\payment\xendit.php on line 61
+2025-04-08 14:47:56 - PHP Warning:  Undefined variable $totalss in C:\xampp\htdocs\store\catalog\controller\extension\payment\xendit.php on line 63
+2025-04-08 14:49:06 - PHP Warning:  Undefined variable $totalss in C:\xampp\htdocs\store\catalog\controller\extension\payment\xendit.php on line 63

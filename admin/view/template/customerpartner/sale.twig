@@ -1,0 +1,49 @@
+<style type="text/css">
+  .popover{
+    color: #666;
+    {# z-index:9999 !important;
+		width:100%; #}
+  }
+</style>
+<div class="tile tile-primary">
+  <div class="tile-heading">{{ heading_title}} <span class="pull-right">
+    {% if percentage > 0 %}
+    <i class="fa fa-caret-up"></i>
+    {% elseif percentage < 0 %}
+    <i class="fa fa-caret-down"></i>
+    {% endif %}
+    {{ percentage}}% </span></div>
+  <div class="tile-body" id="popover" data-toggle="popover" data-trigger="hover"><i class="fa fa-credit-card"></i>
+    <h2 class="pull-right">{{ total}}</h2>
+  </div>
+  <div class="tile-footer"></div>
+</div>
+
+<script type="text/javascript">
+
+  $('#toggle-order').on('click',function(){
+    $('a[href="#tab-order"]').trigger('click');
+  })
+
+  jQuery(document).ready(function(){
+    html = '';
+    html += '<table class="table table-responsive table-bordered table-striped">';
+    html += '<table class="table table-responsive table-bordered table-striped">';
+    html += '<tr style="background:#fff;"><td style="color:#000; font-weight:bold;">Total Sale</td><td style="color:#69b572; font-weight:bold;"> {{ total }}</td></tr>';
+    html += '<tr style="background:#fff;"><td style="color:#000; font-weight:bold;">Your Income</td><td style="color:#22ade2; font-weight:bold;"> {{ seller_amount }}</td></tr>';
+    html += '<tr style="background:#fff;"><td style="color:#000; font-weight:bold;">Admin Commission</td><td  style="color:#f37587;">- {{ admin_amount }}</td></tr>';
+    html += '<tr style="background:#fff;"><td style="color:#000; font-weight:bold;">Paid Balance</td><td style="color:#9C27B0;"> {{ paid_amount }}</td></tr>';
+    html += '<tr style="background:#fff;"><td style="color:#000;font-weight:bold;">Remaining Balance</td><td style="color:#FF9800;font-weight:bold;"> {{ payable_amount }}</td></tr>';
+    html += '</table>';
+    $('#popover').popover(
+              {
+                html : true,
+                content : html,
+                //title: '{{heading_title}}',
+                
+                placement : 'top',
+              }
+          );
+  })
+
+</script>

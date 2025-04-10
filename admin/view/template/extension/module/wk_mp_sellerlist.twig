@@ -1,0 +1,150 @@
+{{ header }}
+{{ column_left }}
+<div id="content">
+	<div class="page-header">
+		<div class="container-fluid">
+			<div class="pull-right">
+
+				<button type="submit" onclick="$('#form-save').submit();" data-toggle="tooltip" title="{{ button_save }} " class="btn btn-primary">
+					<i class="fa fa-save"></i>
+				</button>
+				<a onclick="location = '{{ cancel }} ';" data-toggle="tooltip" title="{{ button_cancel }} " class="btn btn-default">
+					<i class="fa fa-reply"></i>
+				</a>
+				</a>
+			</div>
+			<h1>{{ heading_title }}
+			</h1>
+			<ul class="breadcrumb">
+				{% for breadcrumb in breadcrumbs %}
+					<li>
+						<a href="{{ breadcrumb.href }} ">{{ breadcrumb.text }}
+						</a>
+					</li>
+				{% endfor %}
+			</ul>
+		</div>
+	</div>
+	<div class="container-fluid">
+		{% if error_warning %}
+			<div class="alert alert-danger">
+				<i class="fa fa-exclamation-circle"></i>
+				{{ error_warning }}
+				<button type="button" class="close" data-dismiss="alert">&times;</button>
+			</div>
+		{% endif %}
+
+		{% if text_success %}
+			<div class="alert alert-success alert-dismissible">
+				<i class="fa fa-exclamation-circle"></i>
+				{{ text_success }}
+				<button type="button" class="close" data-dismiss="alert">&times;</button>
+			</div>
+		{% endif %}
+		<div class="panel panel-default">
+			<div class="panel-heading">
+				<h3 class="panel-title">
+					<i class="fa fa-pencil"></i>
+					{{ heading_title }}
+				</h3>
+			</div>
+			<div class="panel-body">
+				<div class="alert alert-info">
+					<i class="fa fa-exclamation-circle"></i>
+					{{ welcome }}
+					<button type="button" class="close" data-dismiss="alert">&times;</button>
+				</div>
+
+				<form action="{{ action }}" method="post" enctype="multipart/form-data" id="form-module" class="form-horizontal">
+
+					<div class="form-group">
+						<label class="col-sm-2 control-label" for="input-status">{{ text_mpsellerlist_status }}
+						</label>
+						<div class="col-sm-10">
+							<select name="status" id="input-status" class="form-control">
+								{% if status %}
+									<option value="1" selected="selected">{{ text_enabled }}
+									</option>
+									<option value="0">{{ text_disabled }}
+									</option>
+								{% else %}
+									<option value="1">{{ text_enabled }}
+									</option>
+									<option value="0" selected="selected">{{ text_disabled }}
+									</option>
+								{% endif %}
+							</select>
+						</div>
+					</div>
+
+					<div class="form-group required">
+						<label class="col-sm-2 control-label" for="input-name">{{ entry_name }}
+						</label>
+						<div class="col-sm-10">
+							<input type="text" name="name" value="{% if name %}{{ name }}{% else %}{{ '' }}{% endif %}" placeholder="{{ entry_name }} " id="input-name" class="form-control"/>
+							{% if error_name %}
+								<div class="text-danger">{{ error_name }}
+								</div>
+							{% endif %}
+						</div>
+					</div>
+
+					<div class="form-group">
+						<label class="col-sm-2 control-label" for="input-seller">
+							<span data-toggle="tooltip" title="{{ help_seller }}">{{ entry_seller }}</span>
+						</label>
+						<div class="col-sm-10">
+							<input type="text" name="sellers" value="" placeholder="{{ entry_seller }}" id="input-seller" class="form-control"/>
+							<div id="seller" class="well well-sm" style="height: 150px; overflow: auto;">
+								{% for seller in sellers %}
+									<div id="seller{{ seller.customer_id }}">
+										<i class="fa fa-minus-circle"></i>
+										{{ seller.screenname~' ( '~seller.name~' )' }}
+										<input type="hidden" name="sellers[]" value="{{ seller.customer_id }}"/>
+									</div>
+								{% endfor %}
+							</div>
+						</div>
+					</div>
+
+				</form>
+			</div>
+			<!--panel-body-->
+		</div>
+		<!--panel-default-->
+	</div>
+	<!--container-fluid-->
+</div>
+<!--content-->
+ <script>
+ // seller
+  $('input[name=\'sellers\']').autocomplete({
+	  'source': function(request, response) {
+		  $.ajax({
+			  url: 'index.php?route=extension/module/wk_mp_sellerlist/autocomplete&user_token={{ user_token }}&filter_name=' + encodeURIComponent(request),
+			  dataType: 'json',
+			  success: function(json) {
+				  response($.map(json, function(item) {
+					  return {
+						  label: item['seller_name'],
+						  brand: item['seller_brand'],
+						  value: item['seller_id']
+					  }
+				  }));
+			  }
+		  });
+	  },
+	  'select': function(item) {
+		  $('input[name=\'sellers\']').val('');
+
+		  $('#seller' + item['value']).remove();
+
+		  $('#seller').append('<div id="seller' + item['value'] + '"><i class="fa fa-minus-circle"></i> ' + item['brand'] + ' ( ' + item['label'] + ' )<input type="hidden" name="sellers[]" value="' + item['value'] + '" /></div>');
+	  }
+  });
+
+  $('#seller').delegate('.fa-minus-circle', 'click', function() {
+	  $(this).parent().remove();
+  });
+</script>
+{{ footer }}

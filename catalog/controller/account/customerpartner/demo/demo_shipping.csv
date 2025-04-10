@@ -1,0 +1,4 @@
+country_code,zip_from,zip_to,city,weight_from,weight_to,price,max_days,seller_id
+IN,110002,110041,New Delhi,0,2,12.25,3,
+IN,201301,201309,Noida,1,5,20.87,2,
+GB,*,*,*,0,5,10.65,1,

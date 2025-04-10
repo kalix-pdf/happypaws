@@ -1,0 +1,1594 @@
+[17-Dec-2024 18:01:57 Asia/Hong_Kong] PHP Fatal error:  Uncaught Exception: Error: You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '1' GROUP BY cp.category_id' at line 1<br />Error No: 1064<br />SELECT cp.category_id AS category_id, mc.category_image, c1.image, mc.category_icon, GROUP_CONCAT(cd1.name ORDER BY cp.level SEPARATOR '&nbsp;&nbsp;&gt;&nbsp;&nbsp;') AS name, c1.parent_id FROM oc_category_path cp LEFT JOIN oc_category c1 ON (cp.category_id = c1.category_id) LEFT JOIN oc_category c2 ON (cp.path_id = c2.category_id) LEFT JOIN oc_category_description cd1 ON (cp.path_id = cd1.category_id) LEFT JOIN oc_category_description cd2 ON (cp.category_id = cd2.category_id) LEFT JOIN oc_mobikul_category mc ON (cp.category_id = mc.category_id) LEFT JOIN oc_category_to_store c2s ON (c1.category_id = c2s.category_id) WHERE c1.status=1 AND c1.parent_id='0' AND cd1.language_id = '1' AND cd2.language_id = '1'' AND c1.status = '1' GROUP BY cp.category_id in /home/smesoftc/happypaws.ph/opencart/system/library/db/mysqli.php:49
+Stack trace:
+#0 /home/smesoftc/happypaws.ph/opencart/system/library/db.php(45): DB\MySQLi->query()
+#1 /home/smesoftc/happypaws.ph/opencart/catalog/model/wkrestapi/catalog.php(4047): DB->query()
+#2 /home/smesoftc/happypaws.ph/storage3/modification/system/engine/loader.php(259): ModelWkrestapiCatalog->getCategories()
+#3 /home/smesoftc/happypaws.ph/opencart/system/engine/proxy.php(47): Loader->{closure}()
+#4 /home/smesoftc/happypaws.ph/opencart/catalog/controller/api/wkrestapi/common.php(1256): Proxy->__call()
+#5 /home/smesoftc/happypaws.ph/opencart/catalog/controller/api/wkrestapi/common.php(309): ControllerApiWkrestapiCommon->getCategoriesArray()
+#6 /home/smesoftc/happypaws.ph/storage3/modification/system/engine/action.php(79): ControllerApiWkrestapiCommon->homepage()
+#7 /home/smesoftc/happypaws.ph/opencart/catalog/controller/startup/router.php(25): Action->execute()
+#8 /home/smesoftc/happypaws.ph/storage3/modification/system/engine/action.php(79): ControllerStartupRouter->index()
+#9 /home/smesoftc/happypaws.ph/storage3/modification/system/engine/router.php(72): Action->execute()
+#10 /home/smesoftc/happypaws.ph/storage3/modification/system/engine/router.php(61): Router->execute()
+#11 /home/smesoftc/happypaws.ph/opencart/system/framework.php(169): Router->dispatch()
+#12 /home/smesoftc/happypaws.ph/opencart/system/startup.php(104): require_once('/home/smesoftc/...')
+#13 /home/smesoftc/happypaws.ph/opencart/index.php(20): start()
+#14 {main}
+  thrown in /home/smesoftc/happypaws.ph/opencart/system/library/db/mysqli.php on line 49
+[17-Dec-2024 18:02:26 Asia/Hong_Kong] PHP Fatal error:  Uncaught Exception: Error: You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '1' GROUP BY cp.category_id' at line 1<br />Error No: 1064<br />SELECT cp.category_id AS category_id, mc.category_image, c1.image, mc.category_icon, GROUP_CONCAT(cd1.name ORDER BY cp.level SEPARATOR '&nbsp;&nbsp;&gt;&nbsp;&nbsp;') AS name, c1.parent_id FROM oc_category_path cp LEFT JOIN oc_category c1 ON (cp.category_id = c1.category_id) LEFT JOIN oc_category c2 ON (cp.path_id = c2.category_id) LEFT JOIN oc_category_description cd1 ON (cp.path_id = cd1.category_id) LEFT JOIN oc_category_description cd2 ON (cp.category_id = cd2.category_id) LEFT JOIN oc_mobikul_category mc ON (cp.category_id = mc.category_id) LEFT JOIN oc_category_to_store c2s ON (c1.category_id = c2s.category_id) WHERE c1.status=1 AND c1.parent_id='0' AND cd1.language_id = '1' AND cd2.language_id = '1'' AND c1.status = '1' GROUP BY cp.category_id in /home/smesoftc/happypaws.ph/opencart/system/library/db/mysqli.php:49
+Stack trace:
+#0 /home/smesoftc/happypaws.ph/opencart/system/library/db.php(45): DB\MySQLi->query()
+#1 /home/smesoftc/happypaws.ph/opencart/catalog/model/wkrestapi/catalog.php(4047): DB->query()
+#2 /home/smesoftc/happypaws.ph/storage3/modification/system/engine/loader.php(259): ModelWkrestapiCatalog->getCategories()
+#3 /home/smesoftc/happypaws.ph/opencart/system/engine/proxy.php(47): Loader->{closure}()
+#4 /home/smesoftc/happypaws.ph/opencart/catalog/controller/api/wkrestapi/common.php(1256): Proxy->__call()
+#5 /home/smesoftc/happypaws.ph/opencart/catalog/controller/api/wkrestapi/common.php(309): ControllerApiWkrestapiCommon->getCategoriesArray()
+#6 /home/smesoftc/happypaws.ph/storage3/modification/system/engine/action.php(79): ControllerApiWkrestapiCommon->homepage()
+#7 /home/smesoftc/happypaws.ph/opencart/catalog/controller/startup/router.php(25): Action->execute()
+#8 /home/smesoftc/happypaws.ph/storage3/modification/system/engine/action.php(79): ControllerStartupRouter->index()
+#9 /home/smesoftc/happypaws.ph/storage3/modification/system/engine/router.php(72): Action->execute()
+#10 /home/smesoftc/happypaws.ph/storage3/modification/system/engine/router.php(61): Router->execute()
+#11 /home/smesoftc/happypaws.ph/opencart/system/framework.php(169): Router->dispatch()
+#12 /home/smesoftc/happypaws.ph/opencart/system/startup.php(104): require_once('/home/smesoftc/...')
+#13 /home/smesoftc/happypaws.ph/opencart/index.php(20): start()
+#14 {main}
+  thrown in /home/smesoftc/happypaws.ph/opencart/system/library/db/mysqli.php on line 49
+[17-Dec-2024 18:05:00 Asia/Hong_Kong] PHP Fatal error:  Uncaught Exception: Error: You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '1' GROUP BY cp.category_id' at line 1<br />Error No: 1064<br />SELECT cp.category_id AS category_id, mc.category_image, c1.image, mc.category_icon, GROUP_CONCAT(cd1.name ORDER BY cp.level SEPARATOR '&nbsp;&nbsp;&gt;&nbsp;&nbsp;') AS name, c1.parent_id FROM oc_category_path cp LEFT JOIN oc_category c1 ON (cp.category_id = c1.category_id) LEFT JOIN oc_category c2 ON (cp.path_id = c2.category_id) LEFT JOIN oc_category_description cd1 ON (cp.path_id = cd1.category_id) LEFT JOIN oc_category_description cd2 ON (cp.category_id = cd2.category_id) LEFT JOIN oc_mobikul_category mc ON (cp.category_id = mc.category_id) LEFT JOIN oc_category_to_store c2s ON (c1.category_id = c2s.category_id) WHERE c1.status=1 AND c1.parent_id='0' AND cd1.language_id = '1' AND cd2.language_id = '1'' AND c1.status = '1' GROUP BY cp.category_id in /home/smesoftc/happypaws.ph/opencart/system/library/db/mysqli.php:49
+Stack trace:
+#0 /home/smesoftc/happypaws.ph/opencart/system/library/db.php(45): DB\MySQLi->query()
+#1 /home/smesoftc/happypaws.ph/opencart/catalog/model/wkrestapi/catalog.php(4047): DB->query()
+#2 /home/smesoftc/happypaws.ph/storage3/modification/system/engine/loader.php(259): ModelWkrestapiCatalog->getCategories()
+#3 /home/smesoftc/happypaws.ph/opencart/system/engine/proxy.php(47): Loader->{closure}()
+#4 /home/smesoftc/happypaws.ph/opencart/catalog/controller/api/wkrestapi/common.php(1256): Proxy->__call()
+#5 /home/smesoftc/happypaws.ph/opencart/catalog/controller/api/wkrestapi/common.php(309): ControllerApiWkrestapiCommon->getCategoriesArray()
+#6 /home/smesoftc/happypaws.ph/storage3/modification/system/engine/action.php(79): ControllerApiWkrestapiCommon->homepage()
+#7 /home/smesoftc/happypaws.ph/opencart/catalog/controller/startup/router.php(25): Action->execute()
+#8 /home/smesoftc/happypaws.ph/storage3/modification/system/engine/action.php(79): ControllerStartupRouter->index()
+#9 /home/smesoftc/happypaws.ph/storage3/modification/system/engine/router.php(72): Action->execute()
+#10 /home/smesoftc/happypaws.ph/storage3/modification/system/engine/router.php(61): Router->execute()
+#11 /home/smesoftc/happypaws.ph/opencart/system/framework.php(169): Router->dispatch()
+#12 /home/smesoftc/happypaws.ph/opencart/system/startup.php(104): require_once('/home/smesoftc/...')
+#13 /home/smesoftc/happypaws.ph/opencart/index.php(20): start()
+#14 {main}
+  thrown in /home/smesoftc/happypaws.ph/opencart/system/library/db/mysqli.php on line 49
+[17-Dec-2024 18:06:22 Asia/Hong_Kong] PHP Fatal error:  Uncaught Exception: Error: You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '1' GROUP BY cp.category_id' at line 1<br />Error No: 1064<br />SELECT cp.category_id AS category_id, mc.category_image, c1.image, mc.category_icon, GROUP_CONCAT(cd1.name ORDER BY cp.level SEPARATOR '&nbsp;&nbsp;&gt;&nbsp;&nbsp;') AS name, c1.parent_id FROM oc_category_path cp LEFT JOIN oc_category c1 ON (cp.category_id = c1.category_id) LEFT JOIN oc_category c2 ON (cp.path_id = c2.category_id) LEFT JOIN oc_category_description cd1 ON (cp.path_id = cd1.category_id) LEFT JOIN oc_category_description cd2 ON (cp.category_id = cd2.category_id) LEFT JOIN oc_mobikul_category mc ON (cp.category_id = mc.category_id) LEFT JOIN oc_category_to_store c2s ON (c1.category_id = c2s.category_id) WHERE c1.status=1 AND c1.parent_id='0' AND cd1.language_id = '1' AND cd2.language_id = '1'' AND c1.status = '1' GROUP BY cp.category_id in /home/smesoftc/happypaws.ph/opencart/system/library/db/mysqli.php:49
+Stack trace:
+#0 /home/smesoftc/happypaws.ph/opencart/system/library/db.php(45): DB\MySQLi->query()
+#1 /home/smesoftc/happypaws.ph/opencart/catalog/model/wkrestapi/catalog.php(4047): DB->query()
+#2 /home/smesoftc/happypaws.ph/storage3/modification/system/engine/loader.php(259): ModelWkrestapiCatalog->getCategories()
+#3 /home/smesoftc/happypaws.ph/opencart/system/engine/proxy.php(47): Loader->{closure}()
+#4 /home/smesoftc/happypaws.ph/opencart/catalog/controller/api/wkrestapi/common.php(1256): Proxy->__call()
+#5 /home/smesoftc/happypaws.ph/opencart/catalog/controller/api/wkrestapi/common.php(309): ControllerApiWkrestapiCommon->getCategoriesArray()
+#6 /home/smesoftc/happypaws.ph/storage3/modification/system/engine/action.php(79): ControllerApiWkrestapiCommon->homepage()
+#7 /home/smesoftc/happypaws.ph/opencart/catalog/controller/startup/router.php(25): Action->execute()
+#8 /home/smesoftc/happypaws.ph/storage3/modification/system/engine/action.php(79): ControllerStartupRouter->index()
+#9 /home/smesoftc/happypaws.ph/storage3/modification/system/engine/router.php(72): Action->execute()
+#10 /home/smesoftc/happypaws.ph/storage3/modification/system/engine/router.php(61): Router->execute()
+#11 /home/smesoftc/happypaws.ph/opencart/system/framework.php(169): Router->dispatch()
+#12 /home/smesoftc/happypaws.ph/opencart/system/startup.php(104): require_once('/home/smesoftc/...')
+#13 /home/smesoftc/happypaws.ph/opencart/index.php(20): start()
+#14 {main}
+  thrown in /home/smesoftc/happypaws.ph/opencart/system/library/db/mysqli.php on line 49
+[17-Dec-2024 18:18:17 Asia/Hong_Kong] PHP Fatal error:  Uncaught Exception: Error: You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '1' GROUP BY cp.category_id' at line 1<br />Error No: 1064<br />SELECT cp.category_id AS category_id, mc.category_image, c1.image, mc.category_icon, GROUP_CONCAT(cd1.name ORDER BY cp.level SEPARATOR '&nbsp;&nbsp;&gt;&nbsp;&nbsp;') AS name, c1.parent_id FROM oc_category_path cp LEFT JOIN oc_category c1 ON (cp.category_id = c1.category_id) LEFT JOIN oc_category c2 ON (cp.path_id = c2.category_id) LEFT JOIN oc_category_description cd1 ON (cp.path_id = cd1.category_id) LEFT JOIN oc_category_description cd2 ON (cp.category_id = cd2.category_id) LEFT JOIN oc_mobikul_category mc ON (cp.category_id = mc.category_id) LEFT JOIN oc_category_to_store c2s ON (c1.category_id = c2s.category_id) WHERE c1.status=1 AND c1.parent_id='0' AND cd1.language_id = '1' AND cd2.language_id = '1'' AND c1.status = '1' GROUP BY cp.category_id in /home/smesoftc/happypaws.ph/opencart/system/library/db/mysqli.php:49
+Stack trace:
+#0 /home/smesoftc/happypaws.ph/opencart/system/library/db.php(45): DB\MySQLi->query()
+#1 /home/smesoftc/happypaws.ph/opencart/catalog/model/wkrestapi/catalog.php(4047): DB->query()
+#2 /home/smesoftc/happypaws.ph/storage3/modification/system/engine/loader.php(259): ModelWkrestapiCatalog->getCategories()
+#3 /home/smesoftc/happypaws.ph/opencart/system/engine/proxy.php(47): Loader->{closure}()
+#4 /home/smesoftc/happypaws.ph/opencart/catalog/controller/api/wkrestapi/common.php(1256): Proxy->__call()
+#5 /home/smesoftc/happypaws.ph/opencart/catalog/controller/api/wkrestapi/common.php(309): ControllerApiWkrestapiCommon->getCategoriesArray()
+#6 /home/smesoftc/happypaws.ph/storage3/modification/system/engine/action.php(79): ControllerApiWkrestapiCommon->homepage()
+#7 /home/smesoftc/happypaws.ph/opencart/catalog/controller/startup/router.php(25): Action->execute()
+#8 /home/smesoftc/happypaws.ph/storage3/modification/system/engine/action.php(79): ControllerStartupRouter->index()
+#9 /home/smesoftc/happypaws.ph/storage3/modification/system/engine/router.php(72): Action->execute()
+#10 /home/smesoftc/happypaws.ph/storage3/modification/system/engine/router.php(61): Router->execute()
+#11 /home/smesoftc/happypaws.ph/opencart/system/framework.php(169): Router->dispatch()
+#12 /home/smesoftc/happypaws.ph/opencart/system/startup.php(104): require_once('/home/smesoftc/...')
+#13 /home/smesoftc/happypaws.ph/opencart/index.php(20): start()
+#14 {main}
+  thrown in /home/smesoftc/happypaws.ph/opencart/system/library/db/mysqli.php on line 49
+[17-Dec-2024 18:18:19 Asia/Hong_Kong] PHP Fatal error:  Uncaught Exception: Error: You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '1' GROUP BY cp.category_id' at line 1<br />Error No: 1064<br />SELECT cp.category_id AS category_id, mc.category_image, c1.image, mc.category_icon, GROUP_CONCAT(cd1.name ORDER BY cp.level SEPARATOR '&nbsp;&nbsp;&gt;&nbsp;&nbsp;') AS name, c1.parent_id FROM oc_category_path cp LEFT JOIN oc_category c1 ON (cp.category_id = c1.category_id) LEFT JOIN oc_category c2 ON (cp.path_id = c2.category_id) LEFT JOIN oc_category_description cd1 ON (cp.path_id = cd1.category_id) LEFT JOIN oc_category_description cd2 ON (cp.category_id = cd2.category_id) LEFT JOIN oc_mobikul_category mc ON (cp.category_id = mc.category_id) LEFT JOIN oc_category_to_store c2s ON (c1.category_id = c2s.category_id) WHERE c1.status=1 AND c1.parent_id='0' AND cd1.language_id = '1' AND cd2.language_id = '1'' AND c1.status = '1' GROUP BY cp.category_id in /home/smesoftc/happypaws.ph/opencart/system/library/db/mysqli.php:49
+Stack trace:
+#0 /home/smesoftc/happypaws.ph/opencart/system/library/db.php(45): DB\MySQLi->query()
+#1 /home/smesoftc/happypaws.ph/opencart/catalog/model/wkrestapi/catalog.php(4047): DB->query()
+#2 /home/smesoftc/happypaws.ph/storage3/modification/system/engine/loader.php(259): ModelWkrestapiCatalog->getCategories()
+#3 /home/smesoftc/happypaws.ph/opencart/system/engine/proxy.php(47): Loader->{closure}()
+#4 /home/smesoftc/happypaws.ph/opencart/catalog/controller/api/wkrestapi/common.php(1256): Proxy->__call()
+#5 /home/smesoftc/happypaws.ph/opencart/catalog/controller/api/wkrestapi/common.php(309): ControllerApiWkrestapiCommon->getCategoriesArray()
+#6 /home/smesoftc/happypaws.ph/storage3/modification/system/engine/action.php(79): ControllerApiWkrestapiCommon->homepage()
+#7 /home/smesoftc/happypaws.ph/opencart/catalog/controller/startup/router.php(25): Action->execute()
+#8 /home/smesoftc/happypaws.ph/storage3/modification/system/engine/action.php(79): ControllerStartupRouter->index()
+#9 /home/smesoftc/happypaws.ph/storage3/modification/system/engine/router.php(72): Action->execute()
+#10 /home/smesoftc/happypaws.ph/storage3/modification/system/engine/router.php(61): Router->execute()
+#11 /home/smesoftc/happypaws.ph/opencart/system/framework.php(169): Router->dispatch()
+#12 /home/smesoftc/happypaws.ph/opencart/system/startup.php(104): require_once('/home/smesoftc/...')
+#13 /home/smesoftc/happypaws.ph/opencart/index.php(20): start()
+#14 {main}
+  thrown in /home/smesoftc/happypaws.ph/opencart/system/library/db/mysqli.php on line 49
+[17-Dec-2024 18:19:32 Asia/Hong_Kong] PHP Fatal error:  Uncaught Exception: Error: You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '1' GROUP BY cp.category_id' at line 1<br />Error No: 1064<br />SELECT cp.category_id AS category_id, mc.category_image, c1.image, mc.category_icon, GROUP_CONCAT(cd1.name ORDER BY cp.level SEPARATOR '&nbsp;&nbsp;&gt;&nbsp;&nbsp;') AS name, c1.parent_id FROM oc_category_path cp LEFT JOIN oc_category c1 ON (cp.category_id = c1.category_id) LEFT JOIN oc_category c2 ON (cp.path_id = c2.category_id) LEFT JOIN oc_category_description cd1 ON (cp.path_id = cd1.category_id) LEFT JOIN oc_category_description cd2 ON (cp.category_id = cd2.category_id) LEFT JOIN oc_mobikul_category mc ON (cp.category_id = mc.category_id) LEFT JOIN oc_category_to_store c2s ON (c1.category_id = c2s.category_id) WHERE c1.status=1 AND c1.parent_id='0' AND cd1.language_id = '1' AND cd2.language_id = '1'' AND c1.status = '1' GROUP BY cp.category_id in /home/smesoftc/happypaws.ph/opencart/system/library/db/mysqli.php:49
+Stack trace:
+#0 /home/smesoftc/happypaws.ph/opencart/system/library/db.php(45): DB\MySQLi->query()
+#1 /home/smesoftc/happypaws.ph/opencart/catalog/model/wkrestapi/catalog.php(4047): DB->query()
+#2 /home/smesoftc/happypaws.ph/storage3/modification/system/engine/loader.php(259): ModelWkrestapiCatalog->getCategories()
+#3 /home/smesoftc/happypaws.ph/opencart/system/engine/proxy.php(47): Loader->{closure}()
+#4 /home/smesoftc/happypaws.ph/opencart/catalog/controller/api/wkrestapi/common.php(1256): Proxy->__call()
+#5 /home/smesoftc/happypaws.ph/opencart/catalog/controller/api/wkrestapi/common.php(309): ControllerApiWkrestapiCommon->getCategoriesArray()
+#6 /home/smesoftc/happypaws.ph/storage3/modification/system/engine/action.php(79): ControllerApiWkrestapiCommon->homepage()
+#7 /home/smesoftc/happypaws.ph/opencart/catalog/controller/startup/router.php(25): Action->execute()
+#8 /home/smesoftc/happypaws.ph/storage3/modification/system/engine/action.php(79): ControllerStartupRouter->index()
+#9 /home/smesoftc/happypaws.ph/storage3/modification/system/engine/router.php(72): Action->execute()
+#10 /home/smesoftc/happypaws.ph/storage3/modification/system/engine/router.php(61): Router->execute()
+#11 /home/smesoftc/happypaws.ph/opencart/system/framework.php(169): Router->dispatch()
+#12 /home/smesoftc/happypaws.ph/opencart/system/startup.php(104): require_once('/home/smesoftc/...')
+#13 /home/smesoftc/happypaws.ph/opencart/index.php(20): start()
+#14 {main}
+  thrown in /home/smesoftc/happypaws.ph/opencart/system/library/db/mysqli.php on line 49
+[17-Dec-2024 18:19:35 Asia/Hong_Kong] PHP Fatal error:  Uncaught Exception: Error: You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '1' GROUP BY cp.category_id' at line 1<br />Error No: 1064<br />SELECT cp.category_id AS category_id, mc.category_image, c1.image, mc.category_icon, GROUP_CONCAT(cd1.name ORDER BY cp.level SEPARATOR '&nbsp;&nbsp;&gt;&nbsp;&nbsp;') AS name, c1.parent_id FROM oc_category_path cp LEFT JOIN oc_category c1 ON (cp.category_id = c1.category_id) LEFT JOIN oc_category c2 ON (cp.path_id = c2.category_id) LEFT JOIN oc_category_description cd1 ON (cp.path_id = cd1.category_id) LEFT JOIN oc_category_description cd2 ON (cp.category_id = cd2.category_id) LEFT JOIN oc_mobikul_category mc ON (cp.category_id = mc.category_id) LEFT JOIN oc_category_to_store c2s ON (c1.category_id = c2s.category_id) WHERE c1.status=1 AND c1.parent_id='0' AND cd1.language_id = '1' AND cd2.language_id = '1'' AND c1.status = '1' GROUP BY cp.category_id in /home/smesoftc/happypaws.ph/opencart/system/library/db/mysqli.php:49
+Stack trace:
+#0 /home/smesoftc/happypaws.ph/opencart/system/library/db.php(45): DB\MySQLi->query()
+#1 /home/smesoftc/happypaws.ph/opencart/catalog/model/wkrestapi/catalog.php(4047): DB->query()
+#2 /home/smesoftc/happypaws.ph/storage3/modification/system/engine/loader.php(259): ModelWkrestapiCatalog->getCategories()
+#3 /home/smesoftc/happypaws.ph/opencart/system/engine/proxy.php(47): Loader->{closure}()
+#4 /home/smesoftc/happypaws.ph/opencart/catalog/controller/api/wkrestapi/common.php(1256): Proxy->__call()
+#5 /home/smesoftc/happypaws.ph/opencart/catalog/controller/api/wkrestapi/common.php(309): ControllerApiWkrestapiCommon->getCategoriesArray()
+#6 /home/smesoftc/happypaws.ph/storage3/modification/system/engine/action.php(79): ControllerApiWkrestapiCommon->homepage()
+#7 /home/smesoftc/happypaws.ph/opencart/catalog/controller/startup/router.php(25): Action->execute()
+#8 /home/smesoftc/happypaws.ph/storage3/modification/system/engine/action.php(79): ControllerStartupRouter->index()
+#9 /home/smesoftc/happypaws.ph/storage3/modification/system/engine/router.php(72): Action->execute()
+#10 /home/smesoftc/happypaws.ph/storage3/modification/system/engine/router.php(61): Router->execute()
+#11 /home/smesoftc/happypaws.ph/opencart/system/framework.php(169): Router->dispatch()
+#12 /home/smesoftc/happypaws.ph/opencart/system/startup.php(104): require_once('/home/smesoftc/...')
+#13 /home/smesoftc/happypaws.ph/opencart/index.php(20): start()
+#14 {main}
+  thrown in /home/smesoftc/happypaws.ph/opencart/system/library/db/mysqli.php on line 49
+[17-Dec-2024 18:19:51 Asia/Hong_Kong] PHP Fatal error:  Uncaught Exception: Error: You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '1' GROUP BY cp.category_id' at line 1<br />Error No: 1064<br />SELECT cp.category_id AS category_id, mc.category_image, c1.image, mc.category_icon, GROUP_CONCAT(cd1.name ORDER BY cp.level SEPARATOR '&nbsp;&nbsp;&gt;&nbsp;&nbsp;') AS name, c1.parent_id FROM oc_category_path cp LEFT JOIN oc_category c1 ON (cp.category_id = c1.category_id) LEFT JOIN oc_category c2 ON (cp.path_id = c2.category_id) LEFT JOIN oc_category_description cd1 ON (cp.path_id = cd1.category_id) LEFT JOIN oc_category_description cd2 ON (cp.category_id = cd2.category_id) LEFT JOIN oc_mobikul_category mc ON (cp.category_id = mc.category_id) LEFT JOIN oc_category_to_store c2s ON (c1.category_id = c2s.category_id) WHERE c1.status=1 AND c1.parent_id='0' AND cd1.language_id = '1' AND cd2.language_id = '1'' AND c1.status = '1' GROUP BY cp.category_id in /home/smesoftc/happypaws.ph/opencart/system/library/db/mysqli.php:49
+Stack trace:
+#0 /home/smesoftc/happypaws.ph/opencart/system/library/db.php(45): DB\MySQLi->query()
+#1 /home/smesoftc/happypaws.ph/opencart/catalog/model/wkrestapi/catalog.php(4047): DB->query()
+#2 /home/smesoftc/happypaws.ph/storage3/modification/system/engine/loader.php(259): ModelWkrestapiCatalog->getCategories()
+#3 /home/smesoftc/happypaws.ph/opencart/system/engine/proxy.php(47): Loader->{closure}()
+#4 /home/smesoftc/happypaws.ph/opencart/catalog/controller/api/wkrestapi/common.php(1256): Proxy->__call()
+#5 /home/smesoftc/happypaws.ph/opencart/catalog/controller/api/wkrestapi/common.php(309): ControllerApiWkrestapiCommon->getCategoriesArray()
+#6 /home/smesoftc/happypaws.ph/storage3/modification/system/engine/action.php(79): ControllerApiWkrestapiCommon->homepage()
+#7 /home/smesoftc/happypaws.ph/opencart/catalog/controller/startup/router.php(25): Action->execute()
+#8 /home/smesoftc/happypaws.ph/storage3/modification/system/engine/action.php(79): ControllerStartupRouter->index()
+#9 /home/smesoftc/happypaws.ph/storage3/modification/system/engine/router.php(72): Action->execute()
+#10 /home/smesoftc/happypaws.ph/storage3/modification/system/engine/router.php(61): Router->execute()
+#11 /home/smesoftc/happypaws.ph/opencart/system/framework.php(169): Router->dispatch()
+#12 /home/smesoftc/happypaws.ph/opencart/system/startup.php(104): require_once('/home/smesoftc/...')
+#13 /home/smesoftc/happypaws.ph/opencart/index.php(20): start()
+#14 {main}
+  thrown in /home/smesoftc/happypaws.ph/opencart/system/library/db/mysqli.php on line 49
+[17-Dec-2024 18:20:59 Asia/Hong_Kong] PHP Fatal error:  Uncaught Exception: Error: You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '1'' at line 1<br />Error No: 1064<br />SELECT cp.category_id AS category_id, mc.category_image, c1.image, mc.category_icon, GROUP_CONCAT(cd1.name ORDER BY cp.level SEPARATOR '&nbsp;&nbsp;&gt;&nbsp;&nbsp;') AS name, c1.parent_id FROM oc_category_path cp LEFT JOIN oc_category c1 ON (cp.category_id = c1.category_id) LEFT JOIN oc_category c2 ON (cp.path_id = c2.category_id) LEFT JOIN oc_category_description cd1 ON (cp.path_id = cd1.category_id) LEFT JOIN oc_category_description cd2 ON (cp.category_id = cd2.category_id) LEFT JOIN oc_mobikul_category mc ON (cp.category_id = mc.category_id) LEFT JOIN oc_category_to_store c2s ON (c1.category_id = c2s.category_id) WHERE c1.status=1 AND c1.parent_id='0' AND cd1.language_id = '1' AND cd2.language_id = '1'' AND c1.status = '1' in /home/smesoftc/happypaws.ph/opencart/system/library/db/mysqli.php:49
+Stack trace:
+#0 /home/smesoftc/happypaws.ph/opencart/system/library/db.php(45): DB\MySQLi->query()
+#1 /home/smesoftc/happypaws.ph/opencart/catalog/model/wkrestapi/catalog.php(4047): DB->query()
+#2 /home/smesoftc/happypaws.ph/storage3/modification/system/engine/loader.php(259): ModelWkrestapiCatalog->getCategories()
+#3 /home/smesoftc/happypaws.ph/opencart/system/engine/proxy.php(47): Loader->{closure}()
+#4 /home/smesoftc/happypaws.ph/opencart/catalog/controller/api/wkrestapi/common.php(1256): Proxy->__call()
+#5 /home/smesoftc/happypaws.ph/opencart/catalog/controller/api/wkrestapi/common.php(309): ControllerApiWkrestapiCommon->getCategoriesArray()
+#6 /home/smesoftc/happypaws.ph/storage3/modification/system/engine/action.php(79): ControllerApiWkrestapiCommon->homepage()
+#7 /home/smesoftc/happypaws.ph/opencart/catalog/controller/startup/router.php(25): Action->execute()
+#8 /home/smesoftc/happypaws.ph/storage3/modification/system/engine/action.php(79): ControllerStartupRouter->index()
+#9 /home/smesoftc/happypaws.ph/storage3/modification/system/engine/router.php(72): Action->execute()
+#10 /home/smesoftc/happypaws.ph/storage3/modification/system/engine/router.php(61): Router->execute()
+#11 /home/smesoftc/happypaws.ph/opencart/system/framework.php(169): Router->dispatch()
+#12 /home/smesoftc/happypaws.ph/opencart/system/startup.php(104): require_once('/home/smesoftc/...')
+#13 /home/smesoftc/happypaws.ph/opencart/index.php(20): start()
+#14 {main}
+  thrown in /home/smesoftc/happypaws.ph/opencart/system/library/db/mysqli.php on line 49
+[17-Dec-2024 18:21:09 Asia/Hong_Kong] PHP Fatal error:  Uncaught Exception: Error: You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '1' GROUP BY cp.category_id' at line 1<br />Error No: 1064<br />SELECT cp.category_id AS category_id, mc.category_image, c1.image, mc.category_icon, GROUP_CONCAT(cd1.name ORDER BY cp.level SEPARATOR '&nbsp;&nbsp;&gt;&nbsp;&nbsp;') AS name, c1.parent_id FROM oc_category_path cp LEFT JOIN oc_category c1 ON (cp.category_id = c1.category_id) LEFT JOIN oc_category c2 ON (cp.path_id = c2.category_id) LEFT JOIN oc_category_description cd1 ON (cp.path_id = cd1.category_id) LEFT JOIN oc_category_description cd2 ON (cp.category_id = cd2.category_id) LEFT JOIN oc_mobikul_category mc ON (cp.category_id = mc.category_id) LEFT JOIN oc_category_to_store c2s ON (c1.category_id = c2s.category_id) WHERE c1.status=1 AND c1.parent_id='0' AND cd1.language_id = '1' AND cd2.language_id = '1'' AND c1.status = '1' GROUP BY cp.category_id in /home/smesoftc/happypaws.ph/opencart/system/library/db/mysqli.php:49
+Stack trace:
+#0 /home/smesoftc/happypaws.ph/opencart/system/library/db.php(45): DB\MySQLi->query()
+#1 /home/smesoftc/happypaws.ph/opencart/catalog/model/wkrestapi/catalog.php(4047): DB->query()
+#2 /home/smesoftc/happypaws.ph/storage3/modification/system/engine/loader.php(259): ModelWkrestapiCatalog->getCategories()
+#3 /home/smesoftc/happypaws.ph/opencart/system/engine/proxy.php(47): Loader->{closure}()
+#4 /home/smesoftc/happypaws.ph/opencart/catalog/controller/api/wkrestapi/common.php(1256): Proxy->__call()
+#5 /home/smesoftc/happypaws.ph/opencart/catalog/controller/api/wkrestapi/common.php(309): ControllerApiWkrestapiCommon->getCategoriesArray()
+#6 /home/smesoftc/happypaws.ph/storage3/modification/system/engine/action.php(79): ControllerApiWkrestapiCommon->homepage()
+#7 /home/smesoftc/happypaws.ph/opencart/catalog/controller/startup/router.php(25): Action->execute()
+#8 /home/smesoftc/happypaws.ph/storage3/modification/system/engine/action.php(79): ControllerStartupRouter->index()
+#9 /home/smesoftc/happypaws.ph/storage3/modification/system/engine/router.php(72): Action->execute()
+#10 /home/smesoftc/happypaws.ph/storage3/modification/system/engine/router.php(61): Router->execute()
+#11 /home/smesoftc/happypaws.ph/opencart/system/framework.php(169): Router->dispatch()
+#12 /home/smesoftc/happypaws.ph/opencart/system/startup.php(104): require_once('/home/smesoftc/...')
+#13 /home/smesoftc/happypaws.ph/opencart/index.php(20): start()
+#14 {main}
+  thrown in /home/smesoftc/happypaws.ph/opencart/system/library/db/mysqli.php on line 49
+[17-Dec-2024 18:22:28 Asia/Hong_Kong] PHP Fatal error:  Uncaught Exception: Error: You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '1' GROUP BY cp.category_id' at line 1<br />Error No: 1064<br />SELECT cp.category_id AS category_id, mc.category_image, c1.image, mc.category_icon, GROUP_CONCAT(cd1.name ORDER BY cp.level SEPARATOR '&nbsp;&nbsp;&gt;&nbsp;&nbsp;') AS name, c1.parent_id FROM oc_category_path cp LEFT JOIN oc_category c1 ON (cp.category_id = c1.category_id) LEFT JOIN oc_category c2 ON (cp.path_id = c2.category_id) LEFT JOIN oc_category_description cd1 ON (cp.path_id = cd1.category_id) LEFT JOIN oc_category_description cd2 ON (cp.category_id = cd2.category_id) LEFT JOIN oc_mobikul_category mc ON (cp.category_id = mc.category_id) LEFT JOIN oc_category_to_store c2s ON (c1.category_id = c2s.category_id) WHERE c1.status=1 AND c1.parent_id='0' AND cd1.language_id = '1' AND cd2.language_id = '1'' AND c1.status = '1' GROUP BY cp.category_id in /home/smesoftc/happypaws.ph/opencart/system/library/db/mysqli.php:49
+Stack trace:
+#0 /home/smesoftc/happypaws.ph/opencart/system/library/db.php(45): DB\MySQLi->query()
+#1 /home/smesoftc/happypaws.ph/opencart/catalog/model/wkrestapi/catalog.php(4047): DB->query()
+#2 /home/smesoftc/happypaws.ph/storage3/modification/system/engine/loader.php(259): ModelWkrestapiCatalog->getCategories()
+#3 /home/smesoftc/happypaws.ph/opencart/system/engine/proxy.php(47): Loader->{closure}()
+#4 /home/smesoftc/happypaws.ph/opencart/catalog/controller/api/wkrestapi/common.php(1256): Proxy->__call()
+#5 /home/smesoftc/happypaws.ph/opencart/catalog/controller/api/wkrestapi/common.php(309): ControllerApiWkrestapiCommon->getCategoriesArray()
+#6 /home/smesoftc/happypaws.ph/storage3/modification/system/engine/action.php(79): ControllerApiWkrestapiCommon->homepage()
+#7 /home/smesoftc/happypaws.ph/opencart/catalog/controller/startup/router.php(25): Action->execute()
+#8 /home/smesoftc/happypaws.ph/storage3/modification/system/engine/action.php(79): ControllerStartupRouter->index()
+#9 /home/smesoftc/happypaws.ph/storage3/modification/system/engine/router.php(72): Action->execute()
+#10 /home/smesoftc/happypaws.ph/storage3/modification/system/engine/router.php(61): Router->execute()
+#11 /home/smesoftc/happypaws.ph/opencart/system/framework.php(169): Router->dispatch()
+#12 /home/smesoftc/happypaws.ph/opencart/system/startup.php(104): require_once('/home/smesoftc/...')
+#13 /home/smesoftc/happypaws.ph/opencart/index.php(20): start()
+#14 {main}
+  thrown in /home/smesoftc/happypaws.ph/opencart/system/library/db/mysqli.php on line 49
+[17-Dec-2024 18:24:44 Asia/Hong_Kong] PHP Fatal error:  Uncaught Exception: Error: You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '1' GROUP BY cp.category_id' at line 1<br />Error No: 1064<br />SELECT cp.category_id AS category_id, mc.category_image, c1.image, mc.category_icon, GROUP_CONCAT(cd1.name ORDER BY cp.level SEPARATOR '&nbsp;&nbsp;&gt;&nbsp;&nbsp;') AS name, c1.parent_id FROM oc_category_path cp LEFT JOIN oc_category c1 ON (cp.category_id = c1.category_id) LEFT JOIN oc_category c2 ON (cp.path_id = c2.category_id) LEFT JOIN oc_category_description cd1 ON (cp.path_id = cd1.category_id) LEFT JOIN oc_category_description cd2 ON (cp.category_id = cd2.category_id) LEFT JOIN oc_mobikul_category mc ON (cp.category_id = mc.category_id) LEFT JOIN oc_category_to_store c2s ON (c1.category_id = c2s.category_id) WHERE c1.status=1 AND c1.parent_id='0' AND cd1.language_id = '1' AND cd2.language_id = '1 AND c1.status = '1' GROUP BY cp.category_id in /home/smesoftc/happypaws.ph/opencart/system/library/db/mysqli.php:49
+Stack trace:
+#0 /home/smesoftc/happypaws.ph/opencart/system/library/db.php(45): DB\MySQLi->query()
+#1 /home/smesoftc/happypaws.ph/opencart/catalog/model/wkrestapi/catalog.php(4047): DB->query()
+#2 /home/smesoftc/happypaws.ph/storage3/modification/system/engine/loader.php(259): ModelWkrestapiCatalog->getCategories()
+#3 /home/smesoftc/happypaws.ph/opencart/system/engine/proxy.php(47): Loader->{closure}()
+#4 /home/smesoftc/happypaws.ph/opencart/catalog/controller/api/wkrestapi/common.php(1256): Proxy->__call()
+#5 /home/smesoftc/happypaws.ph/opencart/catalog/controller/api/wkrestapi/common.php(309): ControllerApiWkrestapiCommon->getCategoriesArray()
+#6 /home/smesoftc/happypaws.ph/storage3/modification/system/engine/action.php(79): ControllerApiWkrestapiCommon->homepage()
+#7 /home/smesoftc/happypaws.ph/opencart/catalog/controller/startup/router.php(25): Action->execute()
+#8 /home/smesoftc/happypaws.ph/storage3/modification/system/engine/action.php(79): ControllerStartupRouter->index()
+#9 /home/smesoftc/happypaws.ph/storage3/modification/system/engine/router.php(72): Action->execute()
+#10 /home/smesoftc/happypaws.ph/storage3/modification/system/engine/router.php(61): Router->execute()
+#11 /home/smesoftc/happypaws.ph/opencart/system/framework.php(169): Router->dispatch()
+#12 /home/smesoftc/happypaws.ph/opencart/system/startup.php(104): require_once('/home/smesoftc/...')
+#13 /home/smesoftc/happypaws.ph/opencart/index.php(20): start()
+#14 {main}
+  thrown in /home/smesoftc/happypaws.ph/opencart/system/library/db/mysqli.php on line 49
+[17-Dec-2024 18:24:47 Asia/Hong_Kong] PHP Fatal error:  Uncaught Exception: Error: You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '1' GROUP BY cp.category_id' at line 1<br />Error No: 1064<br />SELECT cp.category_id AS category_id, mc.category_image, c1.image, mc.category_icon, GROUP_CONCAT(cd1.name ORDER BY cp.level SEPARATOR '&nbsp;&nbsp;&gt;&nbsp;&nbsp;') AS name, c1.parent_id FROM oc_category_path cp LEFT JOIN oc_category c1 ON (cp.category_id = c1.category_id) LEFT JOIN oc_category c2 ON (cp.path_id = c2.category_id) LEFT JOIN oc_category_description cd1 ON (cp.path_id = cd1.category_id) LEFT JOIN oc_category_description cd2 ON (cp.category_id = cd2.category_id) LEFT JOIN oc_mobikul_category mc ON (cp.category_id = mc.category_id) LEFT JOIN oc_category_to_store c2s ON (c1.category_id = c2s.category_id) WHERE c1.status=1 AND c1.parent_id='0' AND cd1.language_id = '1' AND cd2.language_id = '1 AND c1.status = '1' GROUP BY cp.category_id in /home/smesoftc/happypaws.ph/opencart/system/library/db/mysqli.php:49
+Stack trace:
+#0 /home/smesoftc/happypaws.ph/opencart/system/library/db.php(45): DB\MySQLi->query()
+#1 /home/smesoftc/happypaws.ph/opencart/catalog/model/wkrestapi/catalog.php(4047): DB->query()
+#2 /home/smesoftc/happypaws.ph/storage3/modification/system/engine/loader.php(259): ModelWkrestapiCatalog->getCategories()
+#3 /home/smesoftc/happypaws.ph/opencart/system/engine/proxy.php(47): Loader->{closure}()
+#4 /home/smesoftc/happypaws.ph/opencart/catalog/controller/api/wkrestapi/common.php(1256): Proxy->__call()
+#5 /home/smesoftc/happypaws.ph/opencart/catalog/controller/api/wkrestapi/common.php(309): ControllerApiWkrestapiCommon->getCategoriesArray()
+#6 /home/smesoftc/happypaws.ph/storage3/modification/system/engine/action.php(79): ControllerApiWkrestapiCommon->homepage()
+#7 /home/smesoftc/happypaws.ph/opencart/catalog/controller/startup/router.php(25): Action->execute()
+#8 /home/smesoftc/happypaws.ph/storage3/modification/system/engine/action.php(79): ControllerStartupRouter->index()
+#9 /home/smesoftc/happypaws.ph/storage3/modification/system/engine/router.php(72): Action->execute()
+#10 /home/smesoftc/happypaws.ph/storage3/modification/system/engine/router.php(61): Router->execute()
+#11 /home/smesoftc/happypaws.ph/opencart/system/framework.php(169): Router->dispatch()
+#12 /home/smesoftc/happypaws.ph/opencart/system/startup.php(104): require_once('/home/smesoftc/...')
+#13 /home/smesoftc/happypaws.ph/opencart/index.php(20): start()
+#14 {main}
+  thrown in /home/smesoftc/happypaws.ph/opencart/system/library/db/mysqli.php on line 49
+[18-Dec-2024 14:39:22 Asia/Manila] PHP Warning:  Undefined variable $Ah in /home/smesoftc/happypaws.ph/opencart/wk_adminer.php on line 1787
+[18-Dec-2024 14:39:22 Asia/Manila] PHP Warning:  Undefined variable $Ah in /home/smesoftc/happypaws.ph/opencart/wk_adminer.php on line 1787
+[18-Dec-2024 14:39:22 Asia/Manila] PHP Warning:  Undefined variable $Ah in /home/smesoftc/happypaws.ph/opencart/wk_adminer.php on line 1787
+[18-Dec-2024 14:39:22 Asia/Manila] PHP Warning:  Undefined variable $Ah in /home/smesoftc/happypaws.ph/opencart/wk_adminer.php on line 1787
+[18-Dec-2024 14:39:22 Asia/Manila] PHP Warning:  Undefined variable $Ah in /home/smesoftc/happypaws.ph/opencart/wk_adminer.php on line 1787
+[18-Dec-2024 14:39:22 Asia/Manila] PHP Warning:  Undefined variable $Ah in /home/smesoftc/happypaws.ph/opencart/wk_adminer.php on line 1787
+[18-Dec-2024 14:39:22 Asia/Manila] PHP Warning:  Undefined variable $Ah in /home/smesoftc/happypaws.ph/opencart/wk_adminer.php on line 1787
+[18-Dec-2024 14:39:22 Asia/Manila] PHP Warning:  Undefined variable $Ah in /home/smesoftc/happypaws.ph/opencart/wk_adminer.php on line 1787
+[18-Dec-2024 14:39:22 Asia/Manila] PHP Warning:  Undefined variable $Ah in /home/smesoftc/happypaws.ph/opencart/wk_adminer.php on line 1787
+[18-Dec-2024 14:39:22 Asia/Manila] PHP Warning:  Undefined variable $Ah in /home/smesoftc/happypaws.ph/opencart/wk_adminer.php on line 1787
+[18-Dec-2024 14:39:22 Asia/Manila] PHP Warning:  Undefined variable $Ah in /home/smesoftc/happypaws.ph/opencart/wk_adminer.php on line 1787
+[18-Dec-2024 14:39:22 Asia/Manila] PHP Warning:  Undefined variable $Ah in /home/smesoftc/happypaws.ph/opencart/wk_adminer.php on line 1787
+[18-Dec-2024 14:39:22 Asia/Manila] PHP Warning:  Undefined variable $Ah in /home/smesoftc/happypaws.ph/opencart/wk_adminer.php on line 1787
+[18-Dec-2024 14:39:22 Asia/Manila] PHP Warning:  Undefined variable $Ah in /home/smesoftc/happypaws.ph/opencart/wk_adminer.php on line 1787
+[18-Dec-2024 14:39:22 Asia/Manila] PHP Warning:  Undefined variable $Ah in /home/smesoftc/happypaws.ph/opencart/wk_adminer.php on line 1787
+[18-Dec-2024 14:39:22 Asia/Manila] PHP Warning:  Undefined variable $Ah in /home/smesoftc/happypaws.ph/opencart/wk_adminer.php on line 1787
+[18-Dec-2024 14:39:22 Asia/Manila] PHP Warning:  Undefined variable $Ah in /home/smesoftc/happypaws.ph/opencart/wk_adminer.php on line 1787
+[18-Dec-2024 14:39:22 Asia/Manila] PHP Warning:  Undefined variable $Ah in /home/smesoftc/happypaws.ph/opencart/wk_adminer.php on line 1787
+[18-Dec-2024 14:39:22 Asia/Manila] PHP Warning:  Undefined variable $Ah in /home/smesoftc/happypaws.ph/opencart/wk_adminer.php on line 1787
+[18-Dec-2024 14:39:22 Asia/Manila] PHP Warning:  Undefined variable $Ah in /home/smesoftc/happypaws.ph/opencart/wk_adminer.php on line 1787
+[18-Dec-2024 14:39:22 Asia/Manila] PHP Warning:  Undefined variable $Ah in /home/smesoftc/happypaws.ph/opencart/wk_adminer.php on line 1787
+[18-Dec-2024 14:39:22 Asia/Manila] PHP Warning:  Undefined variable $Ah in /home/smesoftc/happypaws.ph/opencart/wk_adminer.php on line 1787
+[18-Dec-2024 14:39:22 Asia/Manila] PHP Warning:  Undefined variable $Ah in /home/smesoftc/happypaws.ph/opencart/wk_adminer.php on line 1787
+[18-Dec-2024 14:39:22 Asia/Manila] PHP Warning:  Undefined variable $Ah in /home/smesoftc/happypaws.ph/opencart/wk_adminer.php on line 1787
+[18-Dec-2024 14:39:22 Asia/Manila] PHP Warning:  Undefined variable $Ah in /home/smesoftc/happypaws.ph/opencart/wk_adminer.php on line 1787
+[18-Dec-2024 14:39:22 Asia/Manila] PHP Warning:  Undefined variable $Ah in /home/smesoftc/happypaws.ph/opencart/wk_adminer.php on line 1787
+[18-Dec-2024 14:39:22 Asia/Manila] PHP Warning:  Undefined variable $Ah in /home/smesoftc/happypaws.ph/opencart/wk_adminer.php on line 1787
+[18-Dec-2024 14:39:22 Asia/Manila] PHP Warning:  Undefined variable $Ah in /home/smesoftc/happypaws.ph/opencart/wk_adminer.php on line 1787
+[18-Dec-2024 14:39:22 Asia/Manila] PHP Warning:  Undefined variable $Ah in /home/smesoftc/happypaws.ph/opencart/wk_adminer.php on line 1787
+[18-Dec-2024 14:39:22 Asia/Manila] PHP Warning:  Undefined variable $Ah in /home/smesoftc/happypaws.ph/opencart/wk_adminer.php on line 1787
+[18-Dec-2024 14:39:22 Asia/Manila] PHP Warning:  Undefined variable $Ah in /home/smesoftc/happypaws.ph/opencart/wk_adminer.php on line 1787
+[18-Dec-2024 14:39:22 Asia/Manila] PHP Warning:  Undefined variable $Ah in /home/smesoftc/happypaws.ph/opencart/wk_adminer.php on line 1787
+[18-Dec-2024 14:39:22 Asia/Manila] PHP Warning:  Undefined variable $Ah in /home/smesoftc/happypaws.ph/opencart/wk_adminer.php on line 1787
+[18-Dec-2024 14:39:22 Asia/Manila] PHP Warning:  Undefined variable $Ah in /home/smesoftc/happypaws.ph/opencart/wk_adminer.php on line 1787
+[18-Dec-2024 14:39:22 Asia/Manila] PHP Warning:  Undefined variable $Ah in /home/smesoftc/happypaws.ph/opencart/wk_adminer.php on line 1787
+[18-Dec-2024 14:39:22 Asia/Manila] PHP Warning:  Undefined variable $Ah in /home/smesoftc/happypaws.ph/opencart/wk_adminer.php on line 1787
+[18-Dec-2024 14:39:22 Asia/Manila] PHP Warning:  Undefined variable $Ah in /home/smesoftc/happypaws.ph/opencart/wk_adminer.php on line 1787
+[18-Dec-2024 14:39:22 Asia/Manila] PHP Warning:  Undefined variable $Ah in /home/smesoftc/happypaws.ph/opencart/wk_adminer.php on line 1787
+[18-Dec-2024 14:39:22 Asia/Manila] PHP Warning:  Undefined variable $Ah in /home/smesoftc/happypaws.ph/opencart/wk_adminer.php on line 1787
+[18-Dec-2024 14:39:22 Asia/Manila] PHP Warning:  Undefined variable $Ah in /home/smesoftc/happypaws.ph/opencart/wk_adminer.php on line 1787
+[18-Dec-2024 14:39:22 Asia/Manila] PHP Warning:  Undefined variable $Ah in /home/smesoftc/happypaws.ph/opencart/wk_adminer.php on line 1787
+[18-Dec-2024 14:39:22 Asia/Manila] PHP Warning:  Undefined variable $Ah in /home/smesoftc/happypaws.ph/opencart/wk_adminer.php on line 1787
+[18-Dec-2024 14:39:22 Asia/Manila] PHP Warning:  Undefined variable $Ah in /home/smesoftc/happypaws.ph/opencart/wk_adminer.php on line 1787
+[18-Dec-2024 14:39:22 Asia/Manila] PHP Warning:  Undefined variable $Ah in /home/smesoftc/happypaws.ph/opencart/wk_adminer.php on line 1787
+[18-Dec-2024 14:39:22 Asia/Manila] PHP Warning:  Undefined variable $Ah in /home/smesoftc/happypaws.ph/opencart/wk_adminer.php on line 1787
+[18-Dec-2024 14:39:22 Asia/Manila] PHP Warning:  Undefined variable $Ah in /home/smesoftc/happypaws.ph/opencart/wk_adminer.php on line 1787
+[18-Dec-2024 14:39:22 Asia/Manila] PHP Warning:  Undefined variable $Ah in /home/smesoftc/happypaws.ph/opencart/wk_adminer.php on line 1787
+[18-Dec-2024 14:39:22 Asia/Manila] PHP Warning:  Undefined variable $Ah in /home/smesoftc/happypaws.ph/opencart/wk_adminer.php on line 1787
+[18-Dec-2024 14:39:22 Asia/Manila] PHP Warning:  Undefined variable $Ah in /home/smesoftc/happypaws.ph/opencart/wk_adminer.php on line 1787
+[18-Dec-2024 14:39:22 Asia/Manila] PHP Warning:  Undefined variable $Ah in /home/smesoftc/happypaws.ph/opencart/wk_adminer.php on line 1787
+[18-Dec-2024 14:39:22 Asia/Manila] PHP Warning:  Undefined variable $Ah in /home/smesoftc/happypaws.ph/opencart/wk_adminer.php on line 1787
+[18-Dec-2024 14:39:22 Asia/Manila] PHP Warning:  Undefined variable $Ah in /home/smesoftc/happypaws.ph/opencart/wk_adminer.php on line 1787
+[18-Dec-2024 14:39:22 Asia/Manila] PHP Warning:  Undefined variable $Ah in /home/smesoftc/happypaws.ph/opencart/wk_adminer.php on line 1787
+[18-Dec-2024 14:39:22 Asia/Manila] PHP Warning:  Undefined variable $Ah in /home/smesoftc/happypaws.ph/opencart/wk_adminer.php on line 1787
+[18-Dec-2024 14:39:22 Asia/Manila] PHP Warning:  Undefined variable $Ah in /home/smesoftc/happypaws.ph/opencart/wk_adminer.php on line 1787
+[18-Dec-2024 14:39:22 Asia/Manila] PHP Warning:  Undefined variable $Ah in /home/smesoftc/happypaws.ph/opencart/wk_adminer.php on line 1787
+[18-Dec-2024 14:39:22 Asia/Manila] PHP Warning:  Undefined variable $Ah in /home/smesoftc/happypaws.ph/opencart/wk_adminer.php on line 1787
+[18-Dec-2024 14:39:22 Asia/Manila] PHP Warning:  Undefined variable $Ah in /home/smesoftc/happypaws.ph/opencart/wk_adminer.php on line 1787
+[18-Dec-2024 14:39:22 Asia/Manila] PHP Warning:  Undefined variable $Ah in /home/smesoftc/happypaws.ph/opencart/wk_adminer.php on line 1787
+[18-Dec-2024 14:39:22 Asia/Manila] PHP Warning:  Undefined variable $Ah in /home/smesoftc/happypaws.ph/opencart/wk_adminer.php on line 1787
+[18-Dec-2024 14:39:22 Asia/Manila] PHP Warning:  Undefined variable $Ah in /home/smesoftc/happypaws.ph/opencart/wk_adminer.php on line 1787
+[18-Dec-2024 14:39:22 Asia/Manila] PHP Warning:  Undefined variable $Ah in /home/smesoftc/happypaws.ph/opencart/wk_adminer.php on line 1787
+[18-Dec-2024 14:39:22 Asia/Manila] PHP Warning:  Undefined variable $Ah in /home/smesoftc/happypaws.ph/opencart/wk_adminer.php on line 1787
+[18-Dec-2024 14:39:22 Asia/Manila] PHP Warning:  Undefined variable $Ah in /home/smesoftc/happypaws.ph/opencart/wk_adminer.php on line 1787
+[18-Dec-2024 14:39:22 Asia/Manila] PHP Warning:  Undefined variable $Ah in /home/smesoftc/happypaws.ph/opencart/wk_adminer.php on line 1787
+[18-Dec-2024 14:39:22 Asia/Manila] PHP Warning:  Undefined variable $Ah in /home/smesoftc/happypaws.ph/opencart/wk_adminer.php on line 1787
+[18-Dec-2024 14:39:22 Asia/Manila] PHP Warning:  Undefined variable $Ah in /home/smesoftc/happypaws.ph/opencart/wk_adminer.php on line 1787
+[18-Dec-2024 14:39:22 Asia/Manila] PHP Warning:  Undefined variable $Ah in /home/smesoftc/happypaws.ph/opencart/wk_adminer.php on line 1787
+[18-Dec-2024 14:39:22 Asia/Manila] PHP Warning:  Undefined variable $Ah in /home/smesoftc/happypaws.ph/opencart/wk_adminer.php on line 1787
+[18-Dec-2024 14:39:22 Asia/Manila] PHP Warning:  Undefined variable $Ah in /home/smesoftc/happypaws.ph/opencart/wk_adminer.php on line 1787
+[18-Dec-2024 14:39:22 Asia/Manila] PHP Warning:  Undefined variable $Ah in /home/smesoftc/happypaws.ph/opencart/wk_adminer.php on line 1787
+[18-Dec-2024 14:39:22 Asia/Manila] PHP Warning:  Undefined variable $Ah in /home/smesoftc/happypaws.ph/opencart/wk_adminer.php on line 1787
+[18-Dec-2024 14:39:22 Asia/Manila] PHP Warning:  Undefined variable $Ah in /home/smesoftc/happypaws.ph/opencart/wk_adminer.php on line 1787
+[18-Dec-2024 14:39:22 Asia/Manila] PHP Warning:  Undefined variable $Ah in /home/smesoftc/happypaws.ph/opencart/wk_adminer.php on line 1787
+[18-Dec-2024 14:39:22 Asia/Manila] PHP Warning:  Undefined variable $Ah in /home/smesoftc/happypaws.ph/opencart/wk_adminer.php on line 1787
+[18-Dec-2024 14:39:22 Asia/Manila] PHP Warning:  Undefined variable $Ah in /home/smesoftc/happypaws.ph/opencart/wk_adminer.php on line 1787
+[18-Dec-2024 14:39:22 Asia/Manila] PHP Warning:  Undefined variable $Ah in /home/smesoftc/happypaws.ph/opencart/wk_adminer.php on line 1787
+[18-Dec-2024 14:39:22 Asia/Manila] PHP Warning:  Undefined variable $Ah in /home/smesoftc/happypaws.ph/opencart/wk_adminer.php on line 1787
+[18-Dec-2024 14:39:22 Asia/Manila] PHP Warning:  Undefined variable $Ah in /home/smesoftc/happypaws.ph/opencart/wk_adminer.php on line 1787
+[18-Dec-2024 14:39:22 Asia/Manila] PHP Warning:  Undefined variable $Ah in /home/smesoftc/happypaws.ph/opencart/wk_adminer.php on line 1787
+[18-Dec-2024 14:39:22 Asia/Manila] PHP Warning:  Undefined variable $Ah in /home/smesoftc/happypaws.ph/opencart/wk_adminer.php on line 1787
+[18-Dec-2024 14:39:22 Asia/Manila] PHP Warning:  Undefined variable $Ah in /home/smesoftc/happypaws.ph/opencart/wk_adminer.php on line 1787
+[18-Dec-2024 14:39:22 Asia/Manila] PHP Warning:  Undefined variable $Ah in /home/smesoftc/happypaws.ph/opencart/wk_adminer.php on line 1787
+[18-Dec-2024 14:39:22 Asia/Manila] PHP Warning:  Undefined variable $Ah in /home/smesoftc/happypaws.ph/opencart/wk_adminer.php on line 1787
+[18-Dec-2024 14:39:22 Asia/Manila] PHP Warning:  Undefined variable $Ah in /home/smesoftc/happypaws.ph/opencart/wk_adminer.php on line 1787
+[18-Dec-2024 14:39:22 Asia/Manila] PHP Warning:  Undefined variable $Ah in /home/smesoftc/happypaws.ph/opencart/wk_adminer.php on line 1787
+[18-Dec-2024 14:39:22 Asia/Manila] PHP Warning:  Undefined variable $Ah in /home/smesoftc/happypaws.ph/opencart/wk_adminer.php on line 1787
+[18-Dec-2024 14:39:22 Asia/Manila] PHP Warning:  Undefined variable $Ah in /home/smesoftc/happypaws.ph/opencart/wk_adminer.php on line 1787
+[18-Dec-2024 14:39:22 Asia/Manila] PHP Warning:  Undefined variable $Ah in /home/smesoftc/happypaws.ph/opencart/wk_adminer.php on line 1787
+[18-Dec-2024 14:39:22 Asia/Manila] PHP Warning:  Undefined variable $Ah in /home/smesoftc/happypaws.ph/opencart/wk_adminer.php on line 1787
+[18-Dec-2024 14:39:22 Asia/Manila] PHP Warning:  Undefined variable $Ah in /home/smesoftc/happypaws.ph/opencart/wk_adminer.php on line 1787
+[18-Dec-2024 14:39:22 Asia/Manila] PHP Warning:  Undefined variable $Ah in /home/smesoftc/happypaws.ph/opencart/wk_adminer.php on line 1787
+[18-Dec-2024 14:39:22 Asia/Manila] PHP Warning:  Undefined variable $Ah in /home/smesoftc/happypaws.ph/opencart/wk_adminer.php on line 1787
+[18-Dec-2024 14:39:22 Asia/Manila] PHP Warning:  Undefined variable $Ah in /home/smesoftc/happypaws.ph/opencart/wk_adminer.php on line 1787
+[18-Dec-2024 14:39:22 Asia/Manila] PHP Warning:  Undefined variable $Ah in /home/smesoftc/happypaws.ph/opencart/wk_adminer.php on line 1787
+[18-Dec-2024 14:39:22 Asia/Manila] PHP Warning:  Undefined variable $Ah in /home/smesoftc/happypaws.ph/opencart/wk_adminer.php on line 1787
+[18-Dec-2024 14:39:22 Asia/Manila] PHP Warning:  Undefined variable $Ah in /home/smesoftc/happypaws.ph/opencart/wk_adminer.php on line 1787
+[18-Dec-2024 14:39:22 Asia/Manila] PHP Warning:  Undefined variable $Ah in /home/smesoftc/happypaws.ph/opencart/wk_adminer.php on line 1787
+[18-Dec-2024 14:39:22 Asia/Manila] PHP Warning:  Undefined variable $Ah in /home/smesoftc/happypaws.ph/opencart/wk_adminer.php on line 1787
+[18-Dec-2024 14:39:22 Asia/Manila] PHP Warning:  Undefined variable $Ah in /home/smesoftc/happypaws.ph/opencart/wk_adminer.php on line 1787
+[18-Dec-2024 14:39:22 Asia/Manila] PHP Warning:  Undefined variable $Ah in /home/smesoftc/happypaws.ph/opencart/wk_adminer.php on line 1787
+[18-Dec-2024 14:39:22 Asia/Manila] PHP Warning:  Undefined variable $Ah in /home/smesoftc/happypaws.ph/opencart/wk_adminer.php on line 1787
+[18-Dec-2024 14:39:22 Asia/Manila] PHP Warning:  Undefined variable $Ah in /home/smesoftc/happypaws.ph/opencart/wk_adminer.php on line 1787
+[18-Dec-2024 14:39:22 Asia/Manila] PHP Warning:  Undefined variable $Ah in /home/smesoftc/happypaws.ph/opencart/wk_adminer.php on line 1787
+[18-Dec-2024 14:39:22 Asia/Manila] PHP Warning:  Undefined variable $Ah in /home/smesoftc/happypaws.ph/opencart/wk_adminer.php on line 1787
+[18-Dec-2024 14:39:22 Asia/Manila] PHP Warning:  Undefined variable $Ah in /home/smesoftc/happypaws.ph/opencart/wk_adminer.php on line 1787
+[18-Dec-2024 14:39:22 Asia/Manila] PHP Warning:  Undefined variable $Ah in /home/smesoftc/happypaws.ph/opencart/wk_adminer.php on line 1787
+[18-Dec-2024 14:39:22 Asia/Manila] PHP Warning:  Undefined variable $Ah in /home/smesoftc/happypaws.ph/opencart/wk_adminer.php on line 1787
+[18-Dec-2024 14:39:22 Asia/Manila] PHP Warning:  Undefined variable $Ah in /home/smesoftc/happypaws.ph/opencart/wk_adminer.php on line 1787
+[18-Dec-2024 14:39:22 Asia/Manila] PHP Warning:  Undefined variable $Ah in /home/smesoftc/happypaws.ph/opencart/wk_adminer.php on line 1787
+[18-Dec-2024 14:39:22 Asia/Manila] PHP Warning:  Undefined variable $Ah in /home/smesoftc/happypaws.ph/opencart/wk_adminer.php on line 1787
+[18-Dec-2024 14:39:22 Asia/Manila] PHP Warning:  Undefined variable $Ah in /home/smesoftc/happypaws.ph/opencart/wk_adminer.php on line 1787
+[18-Dec-2024 14:39:22 Asia/Manila] PHP Warning:  Undefined variable $Ah in /home/smesoftc/happypaws.ph/opencart/wk_adminer.php on line 1787
+[18-Dec-2024 14:39:22 Asia/Manila] PHP Warning:  Undefined variable $Ah in /home/smesoftc/happypaws.ph/opencart/wk_adminer.php on line 1787
+[18-Dec-2024 14:39:22 Asia/Manila] PHP Warning:  Undefined variable $Ah in /home/smesoftc/happypaws.ph/opencart/wk_adminer.php on line 1787
+[18-Dec-2024 14:39:22 Asia/Manila] PHP Warning:  Undefined variable $Ah in /home/smesoftc/happypaws.ph/opencart/wk_adminer.php on line 1787
+[18-Dec-2024 14:39:22 Asia/Manila] PHP Warning:  Undefined variable $Ah in /home/smesoftc/happypaws.ph/opencart/wk_adminer.php on line 1787
+[18-Dec-2024 14:39:22 Asia/Manila] PHP Warning:  Undefined variable $Ah in /home/smesoftc/happypaws.ph/opencart/wk_adminer.php on line 1787
+[18-Dec-2024 15:20:54 Asia/Manila] PHP Warning:  Undefined variable $Ah in /home/smesoftc/happypaws.ph/opencart/wk_adminer.php on line 1787
+[18-Dec-2024 15:20:54 Asia/Manila] PHP Warning:  Undefined variable $Ah in /home/smesoftc/happypaws.ph/opencart/wk_adminer.php on line 1787
+[18-Dec-2024 15:20:54 Asia/Manila] PHP Warning:  Undefined variable $Ah in /home/smesoftc/happypaws.ph/opencart/wk_adminer.php on line 1787
+[18-Dec-2024 15:20:54 Asia/Manila] PHP Warning:  Undefined variable $Ah in /home/smesoftc/happypaws.ph/opencart/wk_adminer.php on line 1787
+[18-Dec-2024 15:20:54 Asia/Manila] PHP Warning:  Undefined variable $Ah in /home/smesoftc/happypaws.ph/opencart/wk_adminer.php on line 1787
+[18-Dec-2024 15:20:54 Asia/Manila] PHP Warning:  Undefined variable $Ah in /home/smesoftc/happypaws.ph/opencart/wk_adminer.php on line 1787
+[18-Dec-2024 15:20:54 Asia/Manila] PHP Warning:  Undefined variable $Ah in /home/smesoftc/happypaws.ph/opencart/wk_adminer.php on line 1787
+[18-Dec-2024 15:20:54 Asia/Manila] PHP Warning:  Undefined variable $Ah in /home/smesoftc/happypaws.ph/opencart/wk_adminer.php on line 1787
+[18-Dec-2024 15:20:54 Asia/Manila] PHP Warning:  Undefined variable $Ah in /home/smesoftc/happypaws.ph/opencart/wk_adminer.php on line 1787
+[18-Dec-2024 15:20:54 Asia/Manila] PHP Warning:  Undefined variable $Ah in /home/smesoftc/happypaws.ph/opencart/wk_adminer.php on line 1787
+[18-Dec-2024 15:20:54 Asia/Manila] PHP Warning:  Undefined variable $Ah in /home/smesoftc/happypaws.ph/opencart/wk_adminer.php on line 1787
+[18-Dec-2024 15:20:54 Asia/Manila] PHP Warning:  Undefined variable $Ah in /home/smesoftc/happypaws.ph/opencart/wk_adminer.php on line 1787
+[18-Dec-2024 15:20:54 Asia/Manila] PHP Warning:  Undefined variable $Ah in /home/smesoftc/happypaws.ph/opencart/wk_adminer.php on line 1787
+[18-Dec-2024 15:20:54 Asia/Manila] PHP Warning:  Undefined variable $Ah in /home/smesoftc/happypaws.ph/opencart/wk_adminer.php on line 1787
+[18-Dec-2024 15:20:54 Asia/Manila] PHP Warning:  Undefined variable $Ah in /home/smesoftc/happypaws.ph/opencart/wk_adminer.php on line 1787
+[18-Dec-2024 15:20:54 Asia/Manila] PHP Warning:  Undefined variable $Ah in /home/smesoftc/happypaws.ph/opencart/wk_adminer.php on line 1787
+[18-Dec-2024 15:20:54 Asia/Manila] PHP Warning:  Undefined variable $Ah in /home/smesoftc/happypaws.ph/opencart/wk_adminer.php on line 1787
+[18-Dec-2024 15:20:54 Asia/Manila] PHP Warning:  Undefined variable $Ah in /home/smesoftc/happypaws.ph/opencart/wk_adminer.php on line 1787
+[18-Dec-2024 15:20:54 Asia/Manila] PHP Warning:  Undefined variable $Ah in /home/smesoftc/happypaws.ph/opencart/wk_adminer.php on line 1787
+[18-Dec-2024 15:20:54 Asia/Manila] PHP Warning:  Undefined variable $Ah in /home/smesoftc/happypaws.ph/opencart/wk_adminer.php on line 1787
+[18-Dec-2024 15:20:54 Asia/Manila] PHP Warning:  Undefined variable $Ah in /home/smesoftc/happypaws.ph/opencart/wk_adminer.php on line 1787
+[18-Dec-2024 15:20:54 Asia/Manila] PHP Warning:  Undefined variable $Ah in /home/smesoftc/happypaws.ph/opencart/wk_adminer.php on line 1787
+[18-Dec-2024 15:20:54 Asia/Manila] PHP Warning:  Undefined variable $Ah in /home/smesoftc/happypaws.ph/opencart/wk_adminer.php on line 1787
+[18-Dec-2024 15:20:54 Asia/Manila] PHP Warning:  Undefined variable $Ah in /home/smesoftc/happypaws.ph/opencart/wk_adminer.php on line 1787
+[18-Dec-2024 15:20:54 Asia/Manila] PHP Warning:  Undefined variable $Ah in /home/smesoftc/happypaws.ph/opencart/wk_adminer.php on line 1787
+[18-Dec-2024 15:20:54 Asia/Manila] PHP Warning:  Undefined variable $Ah in /home/smesoftc/happypaws.ph/opencart/wk_adminer.php on line 1787
+[18-Dec-2024 15:20:54 Asia/Manila] PHP Warning:  Undefined variable $Ah in /home/smesoftc/happypaws.ph/opencart/wk_adminer.php on line 1787
+[18-Dec-2024 15:20:54 Asia/Manila] PHP Warning:  Undefined variable $Ah in /home/smesoftc/happypaws.ph/opencart/wk_adminer.php on line 1787
+[18-Dec-2024 15:20:54 Asia/Manila] PHP Warning:  Undefined variable $Ah in /home/smesoftc/happypaws.ph/opencart/wk_adminer.php on line 1787
+[18-Dec-2024 15:20:54 Asia/Manila] PHP Warning:  Undefined variable $Ah in /home/smesoftc/happypaws.ph/opencart/wk_adminer.php on line 1787
+[18-Dec-2024 15:20:54 Asia/Manila] PHP Warning:  Undefined variable $Ah in /home/smesoftc/happypaws.ph/opencart/wk_adminer.php on line 1787
+[18-Dec-2024 15:20:54 Asia/Manila] PHP Warning:  Undefined variable $Ah in /home/smesoftc/happypaws.ph/opencart/wk_adminer.php on line 1787
+[18-Dec-2024 15:20:54 Asia/Manila] PHP Warning:  Undefined variable $Ah in /home/smesoftc/happypaws.ph/opencart/wk_adminer.php on line 1787
+[18-Dec-2024 15:20:54 Asia/Manila] PHP Warning:  Undefined variable $Ah in /home/smesoftc/happypaws.ph/opencart/wk_adminer.php on line 1787
+[18-Dec-2024 15:20:54 Asia/Manila] PHP Warning:  Undefined variable $Ah in /home/smesoftc/happypaws.ph/opencart/wk_adminer.php on line 1787
+[18-Dec-2024 15:20:54 Asia/Manila] PHP Warning:  Undefined variable $Ah in /home/smesoftc/happypaws.ph/opencart/wk_adminer.php on line 1787
+[18-Dec-2024 15:20:54 Asia/Manila] PHP Warning:  Undefined variable $Ah in /home/smesoftc/happypaws.ph/opencart/wk_adminer.php on line 1787
+[18-Dec-2024 15:20:54 Asia/Manila] PHP Warning:  Undefined variable $Ah in /home/smesoftc/happypaws.ph/opencart/wk_adminer.php on line 1787
+[18-Dec-2024 15:20:54 Asia/Manila] PHP Warning:  Undefined variable $Ah in /home/smesoftc/happypaws.ph/opencart/wk_adminer.php on line 1787
+[18-Dec-2024 15:20:54 Asia/Manila] PHP Warning:  Undefined variable $Ah in /home/smesoftc/happypaws.ph/opencart/wk_adminer.php on line 1787
+[18-Dec-2024 15:20:54 Asia/Manila] PHP Warning:  Undefined variable $Ah in /home/smesoftc/happypaws.ph/opencart/wk_adminer.php on line 1787
+[18-Dec-2024 15:20:54 Asia/Manila] PHP Warning:  Undefined variable $Ah in /home/smesoftc/happypaws.ph/opencart/wk_adminer.php on line 1787
+[18-Dec-2024 15:20:54 Asia/Manila] PHP Warning:  Undefined variable $Ah in /home/smesoftc/happypaws.ph/opencart/wk_adminer.php on line 1787
+[18-Dec-2024 15:20:54 Asia/Manila] PHP Warning:  Undefined variable $Ah in /home/smesoftc/happypaws.ph/opencart/wk_adminer.php on line 1787
+[18-Dec-2024 15:20:54 Asia/Manila] PHP Warning:  Undefined variable $Ah in /home/smesoftc/happypaws.ph/opencart/wk_adminer.php on line 1787
+[18-Dec-2024 15:20:54 Asia/Manila] PHP Warning:  Undefined variable $Ah in /home/smesoftc/happypaws.ph/opencart/wk_adminer.php on line 1787
+[18-Dec-2024 15:20:54 Asia/Manila] PHP Warning:  Undefined variable $Ah in /home/smesoftc/happypaws.ph/opencart/wk_adminer.php on line 1787
+[18-Dec-2024 15:20:54 Asia/Manila] PHP Warning:  Undefined variable $Ah in /home/smesoftc/happypaws.ph/opencart/wk_adminer.php on line 1787
+[18-Dec-2024 15:20:54 Asia/Manila] PHP Warning:  Undefined variable $Ah in /home/smesoftc/happypaws.ph/opencart/wk_adminer.php on line 1787
+[18-Dec-2024 15:20:54 Asia/Manila] PHP Warning:  Undefined variable $Ah in /home/smesoftc/happypaws.ph/opencart/wk_adminer.php on line 1787
+[18-Dec-2024 15:20:54 Asia/Manila] PHP Warning:  Undefined variable $Ah in /home/smesoftc/happypaws.ph/opencart/wk_adminer.php on line 1787
+[18-Dec-2024 15:20:54 Asia/Manila] PHP Warning:  Undefined variable $Ah in /home/smesoftc/happypaws.ph/opencart/wk_adminer.php on line 1787
+[18-Dec-2024 15:20:54 Asia/Manila] PHP Warning:  Undefined variable $Ah in /home/smesoftc/happypaws.ph/opencart/wk_adminer.php on line 1787
+[18-Dec-2024 15:20:54 Asia/Manila] PHP Warning:  Undefined variable $Ah in /home/smesoftc/happypaws.ph/opencart/wk_adminer.php on line 1787
+[18-Dec-2024 15:20:54 Asia/Manila] PHP Warning:  Undefined variable $Ah in /home/smesoftc/happypaws.ph/opencart/wk_adminer.php on line 1787
+[18-Dec-2024 15:20:54 Asia/Manila] PHP Warning:  Undefined variable $Ah in /home/smesoftc/happypaws.ph/opencart/wk_adminer.php on line 1787
+[18-Dec-2024 15:20:54 Asia/Manila] PHP Warning:  Undefined variable $Ah in /home/smesoftc/happypaws.ph/opencart/wk_adminer.php on line 1787
+[18-Dec-2024 15:20:54 Asia/Manila] PHP Warning:  Undefined variable $Ah in /home/smesoftc/happypaws.ph/opencart/wk_adminer.php on line 1787
+[18-Dec-2024 15:20:54 Asia/Manila] PHP Warning:  Undefined variable $Ah in /home/smesoftc/happypaws.ph/opencart/wk_adminer.php on line 1787
+[18-Dec-2024 15:20:54 Asia/Manila] PHP Warning:  Undefined variable $Ah in /home/smesoftc/happypaws.ph/opencart/wk_adminer.php on line 1787
+[18-Dec-2024 15:20:54 Asia/Manila] PHP Warning:  Undefined variable $Ah in /home/smesoftc/happypaws.ph/opencart/wk_adminer.php on line 1787
+[18-Dec-2024 15:20:54 Asia/Manila] PHP Warning:  Undefined variable $Ah in /home/smesoftc/happypaws.ph/opencart/wk_adminer.php on line 1787
+[18-Dec-2024 15:20:54 Asia/Manila] PHP Warning:  Undefined variable $Ah in /home/smesoftc/happypaws.ph/opencart/wk_adminer.php on line 1787
+[18-Dec-2024 15:20:54 Asia/Manila] PHP Warning:  Undefined variable $Ah in /home/smesoftc/happypaws.ph/opencart/wk_adminer.php on line 1787
+[18-Dec-2024 15:20:54 Asia/Manila] PHP Warning:  Undefined variable $Ah in /home/smesoftc/happypaws.ph/opencart/wk_adminer.php on line 1787
+[18-Dec-2024 15:20:54 Asia/Manila] PHP Warning:  Undefined variable $Ah in /home/smesoftc/happypaws.ph/opencart/wk_adminer.php on line 1787
+[18-Dec-2024 15:20:54 Asia/Manila] PHP Warning:  Undefined variable $Ah in /home/smesoftc/happypaws.ph/opencart/wk_adminer.php on line 1787
+[18-Dec-2024 15:20:54 Asia/Manila] PHP Warning:  Undefined variable $Ah in /home/smesoftc/happypaws.ph/opencart/wk_adminer.php on line 1787
+[18-Dec-2024 15:20:54 Asia/Manila] PHP Warning:  Undefined variable $Ah in /home/smesoftc/happypaws.ph/opencart/wk_adminer.php on line 1787
+[18-Dec-2024 15:20:54 Asia/Manila] PHP Warning:  Undefined variable $Ah in /home/smesoftc/happypaws.ph/opencart/wk_adminer.php on line 1787
+[18-Dec-2024 15:20:54 Asia/Manila] PHP Warning:  Undefined variable $Ah in /home/smesoftc/happypaws.ph/opencart/wk_adminer.php on line 1787
+[18-Dec-2024 15:20:54 Asia/Manila] PHP Warning:  Undefined variable $Ah in /home/smesoftc/happypaws.ph/opencart/wk_adminer.php on line 1787
+[18-Dec-2024 15:20:54 Asia/Manila] PHP Warning:  Undefined variable $Ah in /home/smesoftc/happypaws.ph/opencart/wk_adminer.php on line 1787
+[18-Dec-2024 15:20:54 Asia/Manila] PHP Warning:  Undefined variable $Ah in /home/smesoftc/happypaws.ph/opencart/wk_adminer.php on line 1787
+[18-Dec-2024 15:20:54 Asia/Manila] PHP Warning:  Undefined variable $Ah in /home/smesoftc/happypaws.ph/opencart/wk_adminer.php on line 1787
+[18-Dec-2024 15:20:54 Asia/Manila] PHP Warning:  Undefined variable $Ah in /home/smesoftc/happypaws.ph/opencart/wk_adminer.php on line 1787
+[18-Dec-2024 15:20:54 Asia/Manila] PHP Warning:  Undefined variable $Ah in /home/smesoftc/happypaws.ph/opencart/wk_adminer.php on line 1787
+[18-Dec-2024 15:20:54 Asia/Manila] PHP Warning:  Undefined variable $Ah in /home/smesoftc/happypaws.ph/opencart/wk_adminer.php on line 1787
+[18-Dec-2024 15:20:54 Asia/Manila] PHP Warning:  Undefined variable $Ah in /home/smesoftc/happypaws.ph/opencart/wk_adminer.php on line 1787
+[18-Dec-2024 15:20:54 Asia/Manila] PHP Warning:  Undefined variable $Ah in /home/smesoftc/happypaws.ph/opencart/wk_adminer.php on line 1787
+[18-Dec-2024 15:20:54 Asia/Manila] PHP Warning:  Undefined variable $Ah in /home/smesoftc/happypaws.ph/opencart/wk_adminer.php on line 1787
+[18-Dec-2024 15:20:54 Asia/Manila] PHP Warning:  Undefined variable $Ah in /home/smesoftc/happypaws.ph/opencart/wk_adminer.php on line 1787
+[18-Dec-2024 15:20:54 Asia/Manila] PHP Warning:  Undefined variable $Ah in /home/smesoftc/happypaws.ph/opencart/wk_adminer.php on line 1787
+[18-Dec-2024 15:20:54 Asia/Manila] PHP Warning:  Undefined variable $Ah in /home/smesoftc/happypaws.ph/opencart/wk_adminer.php on line 1787
+[18-Dec-2024 15:20:54 Asia/Manila] PHP Warning:  Undefined variable $Ah in /home/smesoftc/happypaws.ph/opencart/wk_adminer.php on line 1787
+[18-Dec-2024 15:20:54 Asia/Manila] PHP Warning:  Undefined variable $Ah in /home/smesoftc/happypaws.ph/opencart/wk_adminer.php on line 1787
+[18-Dec-2024 15:20:54 Asia/Manila] PHP Warning:  Undefined variable $Ah in /home/smesoftc/happypaws.ph/opencart/wk_adminer.php on line 1787
+[18-Dec-2024 15:20:54 Asia/Manila] PHP Warning:  Undefined variable $Ah in /home/smesoftc/happypaws.ph/opencart/wk_adminer.php on line 1787
+[18-Dec-2024 15:20:54 Asia/Manila] PHP Warning:  Undefined variable $Ah in /home/smesoftc/happypaws.ph/opencart/wk_adminer.php on line 1787
+[18-Dec-2024 15:20:54 Asia/Manila] PHP Warning:  Undefined variable $Ah in /home/smesoftc/happypaws.ph/opencart/wk_adminer.php on line 1787
+[18-Dec-2024 15:20:54 Asia/Manila] PHP Warning:  Undefined variable $Ah in /home/smesoftc/happypaws.ph/opencart/wk_adminer.php on line 1787
+[18-Dec-2024 15:20:54 Asia/Manila] PHP Warning:  Undefined variable $Ah in /home/smesoftc/happypaws.ph/opencart/wk_adminer.php on line 1787
+[18-Dec-2024 15:20:54 Asia/Manila] PHP Warning:  Undefined variable $Ah in /home/smesoftc/happypaws.ph/opencart/wk_adminer.php on line 1787
+[18-Dec-2024 15:20:54 Asia/Manila] PHP Warning:  Undefined variable $Ah in /home/smesoftc/happypaws.ph/opencart/wk_adminer.php on line 1787
+[18-Dec-2024 15:20:54 Asia/Manila] PHP Warning:  Undefined variable $Ah in /home/smesoftc/happypaws.ph/opencart/wk_adminer.php on line 1787
+[18-Dec-2024 15:20:54 Asia/Manila] PHP Warning:  Undefined variable $Ah in /home/smesoftc/happypaws.ph/opencart/wk_adminer.php on line 1787
+[18-Dec-2024 15:20:54 Asia/Manila] PHP Warning:  Undefined variable $Ah in /home/smesoftc/happypaws.ph/opencart/wk_adminer.php on line 1787
+[18-Dec-2024 15:20:54 Asia/Manila] PHP Warning:  Undefined variable $Ah in /home/smesoftc/happypaws.ph/opencart/wk_adminer.php on line 1787
+[18-Dec-2024 15:20:54 Asia/Manila] PHP Warning:  Undefined variable $Ah in /home/smesoftc/happypaws.ph/opencart/wk_adminer.php on line 1787
+[18-Dec-2024 15:20:54 Asia/Manila] PHP Warning:  Undefined variable $Ah in /home/smesoftc/happypaws.ph/opencart/wk_adminer.php on line 1787
+[18-Dec-2024 15:20:54 Asia/Manila] PHP Warning:  Undefined variable $Ah in /home/smesoftc/happypaws.ph/opencart/wk_adminer.php on line 1787
+[18-Dec-2024 15:20:54 Asia/Manila] PHP Warning:  Undefined variable $Ah in /home/smesoftc/happypaws.ph/opencart/wk_adminer.php on line 1787
+[18-Dec-2024 15:20:54 Asia/Manila] PHP Warning:  Undefined variable $Ah in /home/smesoftc/happypaws.ph/opencart/wk_adminer.php on line 1787
+[18-Dec-2024 15:20:54 Asia/Manila] PHP Warning:  Undefined variable $Ah in /home/smesoftc/happypaws.ph/opencart/wk_adminer.php on line 1787
+[18-Dec-2024 15:20:54 Asia/Manila] PHP Warning:  Undefined variable $Ah in /home/smesoftc/happypaws.ph/opencart/wk_adminer.php on line 1787
+[18-Dec-2024 15:20:54 Asia/Manila] PHP Warning:  Undefined variable $Ah in /home/smesoftc/happypaws.ph/opencart/wk_adminer.php on line 1787
+[18-Dec-2024 15:20:54 Asia/Manila] PHP Warning:  Undefined variable $Ah in /home/smesoftc/happypaws.ph/opencart/wk_adminer.php on line 1787
+[18-Dec-2024 15:20:54 Asia/Manila] PHP Warning:  Undefined variable $Ah in /home/smesoftc/happypaws.ph/opencart/wk_adminer.php on line 1787
+[18-Dec-2024 15:20:54 Asia/Manila] PHP Warning:  Undefined variable $Ah in /home/smesoftc/happypaws.ph/opencart/wk_adminer.php on line 1787
+[18-Dec-2024 15:20:54 Asia/Manila] PHP Warning:  Undefined variable $Ah in /home/smesoftc/happypaws.ph/opencart/wk_adminer.php on line 1787
+[18-Dec-2024 15:20:54 Asia/Manila] PHP Warning:  Undefined variable $Ah in /home/smesoftc/happypaws.ph/opencart/wk_adminer.php on line 1787
+[18-Dec-2024 15:20:54 Asia/Manila] PHP Warning:  Undefined variable $Ah in /home/smesoftc/happypaws.ph/opencart/wk_adminer.php on line 1787
+[18-Dec-2024 15:20:54 Asia/Manila] PHP Warning:  Undefined variable $Ah in /home/smesoftc/happypaws.ph/opencart/wk_adminer.php on line 1787
+[18-Dec-2024 15:20:54 Asia/Manila] PHP Warning:  Undefined variable $Ah in /home/smesoftc/happypaws.ph/opencart/wk_adminer.php on line 1787
+[18-Dec-2024 15:20:54 Asia/Manila] PHP Warning:  Undefined variable $Ah in /home/smesoftc/happypaws.ph/opencart/wk_adminer.php on line 1787
+[18-Dec-2024 15:20:54 Asia/Manila] PHP Warning:  Undefined variable $Ah in /home/smesoftc/happypaws.ph/opencart/wk_adminer.php on line 1787
+[18-Dec-2024 15:20:54 Asia/Manila] PHP Warning:  Undefined variable $Ah in /home/smesoftc/happypaws.ph/opencart/wk_adminer.php on line 1787
+[18-Dec-2024 15:20:54 Asia/Manila] PHP Warning:  Undefined variable $Ah in /home/smesoftc/happypaws.ph/opencart/wk_adminer.php on line 1787
+[19-Dec-2024 12:06:41 Asia/Hong_Kong] PHP Fatal error:  Uncaught Exception: Error: Deadlock found when trying to get lock; try restarting transaction<br />Error No: 1213<br />UPDATE oc_cart SET session_id = '85249094a967040ded20703773' WHERE api_id = '0' AND customer_id = '104' in /home/smesoftc/happypaws.ph/opencart/system/library/db/mysqli.php:49
+Stack trace:
+#0 /home/smesoftc/happypaws.ph/opencart/system/library/db.php(45): DB\MySQLi->query()
+#1 /home/smesoftc/happypaws.ph/storage3/modification/system/library/cart/cart.php(25): DB->query()
+#2 /home/smesoftc/happypaws.ph/storage3/modification/catalog/controller/startup/startup.php(235): Cart\Cart->__construct()
+#3 /home/smesoftc/happypaws.ph/storage3/modification/system/engine/action.php(79): ControllerStartupStartup->index()
+#4 /home/smesoftc/happypaws.ph/storage3/modification/system/engine/router.php(72): Action->execute()
+#5 /home/smesoftc/happypaws.ph/storage3/modification/system/engine/router.php(51): Router->execute()
+#6 /home/smesoftc/happypaws.ph/opencart/system/framework.php(169): Router->dispatch()
+#7 /home/smesoftc/happypaws.ph/opencart/system/startup.php(104): require_once('/home/smesoftc/...')
+#8 /home/smesoftc/happypaws.ph/opencart/index.php(20): start()
+#9 {main}
+  thrown in /home/smesoftc/happypaws.ph/opencart/system/library/db/mysqli.php on line 49
+[19-Dec-2024 14:16:30 Asia/Hong_Kong] PHP Parse error:  syntax error, unexpected variable "$this" in /home/smesoftc/happypaws.ph/opencart/catalog/controller/api/customer.php on line 4
+[23-Dec-2024 16:14:20 Asia/Hong_Kong] PHP Fatal error:  Uncaught Exception: Error: E-Mail to required! in /home/smesoftc/happypaws.ph/opencart/system/library/mail.php:119
+Stack trace:
+#0 /home/smesoftc/happypaws.ph/storage3/modification/catalog/model/account/customerpartner.php(1828): Mail->send()
+#1 /home/smesoftc/happypaws.ph/storage3/modification/system/engine/loader.php(259): ModelAccountCustomerpartner->addOrderHistory()
+#2 /home/smesoftc/happypaws.ph/opencart/system/engine/proxy.php(47): Loader->{closure}()
+#3 /home/smesoftc/happypaws.ph/opencart/catalog/controller/account/customerpartner/orderinfo.php(495): Proxy->__call()
+#4 /home/smesoftc/happypaws.ph/opencart/catalog/controller/account/customerpartner/orderinfo.php(464): ControllerAccountCustomerpartnerOrderinfo->changeOrderStatus()
+#5 /home/smesoftc/happypaws.ph/storage3/modification/system/engine/action.php(79): ControllerAccountCustomerpartnerOrderinfo->history()
+#6 /home/smesoftc/happypaws.ph/storage3/modification/system/engine/loader.php(48): Action->execute()
+#7 /home/smesoftc/happypaws.ph/opencart/catalog/controller/api/wkrestapi/marketplace.php(2240): Loader->controller()
+#8 /home/smesoftc/happypaws.ph/storage3/modification/system/engine/action.php(79): ControllerApiWkrestapiMarketplace->addHistory()
+#9 /home/smesoftc/happypaws.ph/opencart/catalog/controller/startup/router.php(25): Action->execute()
+#10 /home/smesoftc/happypaws.ph/storage3/modification/system/engine/action.php(79): ControllerStartupRouter->index()
+#11 /home/smesoftc/happypaws.ph/storage3/modification/system/engine/router.php(72): Action->execute()
+#12 /home/smesoftc/happypaws.ph/storage3/modification/system/engine/router.php(61): Router->execute()
+#13 /home/smesoftc/happypaws.ph/opencart/system/framework.php(169): Router->dispatch()
+#14 /home/smesoftc/happypaws.ph/opencart/system/startup.php(104): require_once('/home/smesoftc/...')
+#15 /home/smesoftc/happypaws.ph/opencart/index.php(20): start()
+#16 {main}
+  thrown in /home/smesoftc/happypaws.ph/opencart/system/library/mail.php on line 119
+[23-Dec-2024 16:15:37 Asia/Hong_Kong] PHP Fatal error:  Uncaught Exception: Error: E-Mail to required! in /home/smesoftc/happypaws.ph/opencart/system/library/mail.php:119
+Stack trace:
+#0 /home/smesoftc/happypaws.ph/storage3/modification/catalog/model/account/customerpartner.php(1828): Mail->send()
+#1 /home/smesoftc/happypaws.ph/storage3/modification/system/engine/loader.php(259): ModelAccountCustomerpartner->addOrderHistory()
+#2 /home/smesoftc/happypaws.ph/opencart/system/engine/proxy.php(47): Loader->{closure}()
+#3 /home/smesoftc/happypaws.ph/opencart/catalog/controller/account/customerpartner/orderinfo.php(495): Proxy->__call()
+#4 /home/smesoftc/happypaws.ph/opencart/catalog/controller/account/customerpartner/orderinfo.php(464): ControllerAccountCustomerpartnerOrderinfo->changeOrderStatus()
+#5 /home/smesoftc/happypaws.ph/storage3/modification/system/engine/action.php(79): ControllerAccountCustomerpartnerOrderinfo->history()
+#6 /home/smesoftc/happypaws.ph/storage3/modification/system/engine/loader.php(48): Action->execute()
+#7 /home/smesoftc/happypaws.ph/opencart/catalog/controller/api/wkrestapi/marketplace.php(2240): Loader->controller()
+#8 /home/smesoftc/happypaws.ph/storage3/modification/system/engine/action.php(79): ControllerApiWkrestapiMarketplace->addHistory()
+#9 /home/smesoftc/happypaws.ph/opencart/catalog/controller/startup/router.php(25): Action->execute()
+#10 /home/smesoftc/happypaws.ph/storage3/modification/system/engine/action.php(79): ControllerStartupRouter->index()
+#11 /home/smesoftc/happypaws.ph/storage3/modification/system/engine/router.php(72): Action->execute()
+#12 /home/smesoftc/happypaws.ph/storage3/modification/system/engine/router.php(61): Router->execute()
+#13 /home/smesoftc/happypaws.ph/opencart/system/framework.php(169): Router->dispatch()
+#14 /home/smesoftc/happypaws.ph/opencart/system/startup.php(104): require_once('/home/smesoftc/...')
+#15 /home/smesoftc/happypaws.ph/opencart/index.php(20): start()
+#16 {main}
+  thrown in /home/smesoftc/happypaws.ph/opencart/system/library/mail.php on line 119
+[26-Dec-2024 14:46:24 Asia/Hong_Kong] PHP Fatal error:  Uncaught Exception: Error: E-Mail to required! in /home/smesoftc/happypaws.ph/opencart/system/library/mail.php:119
+Stack trace:
+#0 /home/smesoftc/happypaws.ph/storage3/modification/catalog/model/account/customerpartner.php(1828): Mail->send()
+#1 /home/smesoftc/happypaws.ph/storage3/modification/system/engine/loader.php(259): ModelAccountCustomerpartner->addOrderHistory()
+#2 /home/smesoftc/happypaws.ph/opencart/system/engine/proxy.php(47): Loader->{closure}()
+#3 /home/smesoftc/happypaws.ph/opencart/catalog/controller/account/customerpartner/orderinfo.php(495): Proxy->__call()
+#4 /home/smesoftc/happypaws.ph/opencart/catalog/controller/account/customerpartner/orderinfo.php(464): ControllerAccountCustomerpartnerOrderinfo->changeOrderStatus()
+#5 /home/smesoftc/happypaws.ph/storage3/modification/system/engine/action.php(79): ControllerAccountCustomerpartnerOrderinfo->history()
+#6 /home/smesoftc/happypaws.ph/storage3/modification/system/engine/loader.php(48): Action->execute()
+#7 /home/smesoftc/happypaws.ph/opencart/catalog/controller/api/wkrestapi/marketplace.php(2240): Loader->controller()
+#8 /home/smesoftc/happypaws.ph/storage3/modification/system/engine/action.php(79): ControllerApiWkrestapiMarketplace->addHistory()
+#9 /home/smesoftc/happypaws.ph/opencart/catalog/controller/startup/router.php(25): Action->execute()
+#10 /home/smesoftc/happypaws.ph/storage3/modification/system/engine/action.php(79): ControllerStartupRouter->index()
+#11 /home/smesoftc/happypaws.ph/storage3/modification/system/engine/router.php(72): Action->execute()
+#12 /home/smesoftc/happypaws.ph/storage3/modification/system/engine/router.php(61): Router->execute()
+#13 /home/smesoftc/happypaws.ph/opencart/system/framework.php(169): Router->dispatch()
+#14 /home/smesoftc/happypaws.ph/opencart/system/startup.php(104): require_once('/home/smesoftc/...')
+#15 /home/smesoftc/happypaws.ph/opencart/index.php(20): start()
+#16 {main}
+  thrown in /home/smesoftc/happypaws.ph/opencart/system/library/mail.php on line 119
+[26-Dec-2024 14:51:42 Asia/Hong_Kong] PHP Fatal error:  Uncaught Exception: Error: E-Mail to required! in /home/smesoftc/happypaws.ph/opencart/system/library/mail.php:119
+Stack trace:
+#0 /home/smesoftc/happypaws.ph/storage3/modification/catalog/model/account/customerpartner.php(1828): Mail->send()
+#1 /home/smesoftc/happypaws.ph/storage3/modification/system/engine/loader.php(259): ModelAccountCustomerpartner->addOrderHistory()
+#2 /home/smesoftc/happypaws.ph/opencart/system/engine/proxy.php(47): Loader->{closure}()
+#3 /home/smesoftc/happypaws.ph/opencart/catalog/controller/account/customerpartner/orderinfo.php(495): Proxy->__call()
+#4 /home/smesoftc/happypaws.ph/opencart/catalog/controller/account/customerpartner/orderinfo.php(464): ControllerAccountCustomerpartnerOrderinfo->changeOrderStatus()
+#5 /home/smesoftc/happypaws.ph/storage3/modification/system/engine/action.php(79): ControllerAccountCustomerpartnerOrderinfo->history()
+#6 /home/smesoftc/happypaws.ph/storage3/modification/system/engine/loader.php(48): Action->execute()
+#7 /home/smesoftc/happypaws.ph/opencart/catalog/controller/api/wkrestapi/marketplace.php(2243): Loader->controller()
+#8 /home/smesoftc/happypaws.ph/storage3/modification/system/engine/action.php(79): ControllerApiWkrestapiMarketplace->addHistory()
+#9 /home/smesoftc/happypaws.ph/opencart/catalog/controller/startup/router.php(25): Action->execute()
+#10 /home/smesoftc/happypaws.ph/storage3/modification/system/engine/action.php(79): ControllerStartupRouter->index()
+#11 /home/smesoftc/happypaws.ph/storage3/modification/system/engine/router.php(72): Action->execute()
+#12 /home/smesoftc/happypaws.ph/storage3/modification/system/engine/router.php(61): Router->execute()
+#13 /home/smesoftc/happypaws.ph/opencart/system/framework.php(169): Router->dispatch()
+#14 /home/smesoftc/happypaws.ph/opencart/system/startup.php(104): require_once('/home/smesoftc/...')
+#15 /home/smesoftc/happypaws.ph/opencart/index.php(20): start()
+#16 {main}
+  thrown in /home/smesoftc/happypaws.ph/opencart/system/library/mail.php on line 119
+[26-Dec-2024 14:53:30 Asia/Hong_Kong] PHP Parse error:  Unclosed '[' in /home/smesoftc/happypaws.ph/opencart/catalog/controller/api/wkrestapi/marketplace.php on line 2682
+[26-Dec-2024 15:00:14 Asia/Hong_Kong] PHP Fatal error:  Uncaught Exception: Error: E-Mail to required! in /home/smesoftc/happypaws.ph/opencart/system/library/mail.php:119
+Stack trace:
+#0 /home/smesoftc/happypaws.ph/storage3/modification/catalog/model/account/customerpartner.php(1828): Mail->send()
+#1 /home/smesoftc/happypaws.ph/storage3/modification/system/engine/loader.php(259): ModelAccountCustomerpartner->addOrderHistory()
+#2 /home/smesoftc/happypaws.ph/opencart/system/engine/proxy.php(47): Loader->{closure}()
+#3 /home/smesoftc/happypaws.ph/opencart/catalog/controller/account/customerpartner/orderinfo.php(502): Proxy->__call()
+#4 /home/smesoftc/happypaws.ph/opencart/catalog/controller/account/customerpartner/orderinfo.php(471): ControllerAccountCustomerpartnerOrderinfo->changeOrderStatus()
+#5 /home/smesoftc/happypaws.ph/storage3/modification/system/engine/action.php(79): ControllerAccountCustomerpartnerOrderinfo->history()
+#6 /home/smesoftc/happypaws.ph/storage3/modification/system/engine/loader.php(48): Action->execute()
+#7 /home/smesoftc/happypaws.ph/opencart/catalog/controller/api/wkrestapi/marketplace.php(2247): Loader->controller()
+#8 /home/smesoftc/happypaws.ph/storage3/modification/system/engine/action.php(79): ControllerApiWkrestapiMarketplace->addHistory()
+#9 /home/smesoftc/happypaws.ph/opencart/catalog/controller/startup/router.php(25): Action->execute()
+#10 /home/smesoftc/happypaws.ph/storage3/modification/system/engine/action.php(79): ControllerStartupRouter->index()
+#11 /home/smesoftc/happypaws.ph/storage3/modification/system/engine/router.php(72): Action->execute()
+#12 /home/smesoftc/happypaws.ph/storage3/modification/system/engine/router.php(61): Router->execute()
+#13 /home/smesoftc/happypaws.ph/opencart/system/framework.php(169): Router->dispatch()
+#14 /home/smesoftc/happypaws.ph/opencart/system/startup.php(104): require_once('/home/smesoftc/...')
+#15 /home/smesoftc/happypaws.ph/opencart/index.php(20): start()
+#16 {main}
+  thrown in /home/smesoftc/happypaws.ph/opencart/system/library/mail.php on line 119
+[26-Dec-2024 15:06:14 Asia/Hong_Kong] PHP Fatal error:  Uncaught Error: Class "Controlleraccountcustomerpartnerorderinfo" not found in /home/smesoftc/happypaws.ph/storage3/modification/system/engine/action.php:71
+Stack trace:
+#0 /home/smesoftc/happypaws.ph/storage3/modification/system/engine/loader.php(48): Action->execute()
+#1 /home/smesoftc/happypaws.ph/opencart/catalog/controller/api/wkrestapi/marketplace.php(2247): Loader->controller()
+#2 /home/smesoftc/happypaws.ph/storage3/modification/system/engine/action.php(79): ControllerApiWkrestapiMarketplace->addHistory()
+#3 /home/smesoftc/happypaws.ph/opencart/catalog/controller/startup/router.php(25): Action->execute()
+#4 /home/smesoftc/happypaws.ph/storage3/modification/system/engine/action.php(79): ControllerStartupRouter->index()
+#5 /home/smesoftc/happypaws.ph/storage3/modification/system/engine/router.php(72): Action->execute()
+#6 /home/smesoftc/happypaws.ph/storage3/modification/system/engine/router.php(61): Router->execute()
+#7 /home/smesoftc/happypaws.ph/opencart/system/framework.php(169): Router->dispatch()
+#8 /home/smesoftc/happypaws.ph/opencart/system/startup.php(104): require_once('/home/smesoftc/...')
+#9 /home/smesoftc/happypaws.ph/opencart/index.php(20): start()
+#10 {main}
+  thrown in /home/smesoftc/happypaws.ph/storage3/modification/system/engine/action.php on line 71
+[26-Dec-2024 15:10:27 Asia/Hong_Kong] PHP Fatal error:  Uncaught Exception: Error: E-Mail to required! in /home/smesoftc/happypaws.ph/opencart/system/library/mail.php:119
+Stack trace:
+#0 /home/smesoftc/happypaws.ph/storage3/modification/catalog/model/account/customerpartner.php(1828): Mail->send()
+#1 /home/smesoftc/happypaws.ph/storage3/modification/system/engine/loader.php(259): ModelAccountCustomerpartner->addOrderHistory()
+#2 /home/smesoftc/happypaws.ph/opencart/system/engine/proxy.php(47): Loader->{closure}()
+#3 /home/smesoftc/happypaws.ph/opencart/catalog/controller/account/customerpartner/orderinfo.php(504): Proxy->__call()
+#4 /home/smesoftc/happypaws.ph/opencart/catalog/controller/account/customerpartner/orderinfo.php(472): ControllerAccountCustomerpartnerOrderinfo->changeOrderStatus()
+#5 /home/smesoftc/happypaws.ph/storage3/modification/system/engine/action.php(79): ControllerAccountCustomerpartnerOrderinfo->history()
+#6 /home/smesoftc/happypaws.ph/storage3/modification/system/engine/loader.php(48): Action->execute()
+#7 /home/smesoftc/happypaws.ph/opencart/catalog/controller/api/wkrestapi/marketplace.php(2247): Loader->controller()
+#8 /home/smesoftc/happypaws.ph/storage3/modification/system/engine/action.php(79): ControllerApiWkrestapiMarketplace->addHistory()
+#9 /home/smesoftc/happypaws.ph/opencart/catalog/controller/startup/router.php(25): Action->execute()
+#10 /home/smesoftc/happypaws.ph/storage3/modification/system/engine/action.php(79): ControllerStartupRouter->index()
+#11 /home/smesoftc/happypaws.ph/storage3/modification/system/engine/router.php(72): Action->execute()
+#12 /home/smesoftc/happypaws.ph/storage3/modification/system/engine/router.php(61): Router->execute()
+#13 /home/smesoftc/happypaws.ph/opencart/system/framework.php(169): Router->dispatch()
+#14 /home/smesoftc/happypaws.ph/opencart/system/startup.php(104): require_once('/home/smesoftc/...')
+#15 /home/smesoftc/happypaws.ph/opencart/index.php(20): start()
+#16 {main}
+  thrown in /home/smesoftc/happypaws.ph/opencart/system/library/mail.php on line 119
+[26-Dec-2024 15:18:52 Asia/Hong_Kong] PHP Fatal error:  Uncaught Exception: Error: E-Mail to required! in /home/smesoftc/happypaws.ph/opencart/system/library/mail.php:119
+Stack trace:
+#0 /home/smesoftc/happypaws.ph/storage3/modification/catalog/model/account/customerpartner.php(1828): Mail->send()
+#1 /home/smesoftc/happypaws.ph/storage3/modification/system/engine/loader.php(259): ModelAccountCustomerpartner->addOrderHistory()
+#2 /home/smesoftc/happypaws.ph/opencart/system/engine/proxy.php(47): Loader->{closure}()
+#3 /home/smesoftc/happypaws.ph/opencart/catalog/controller/account/customerpartner/orderinfo.php(504): Proxy->__call()
+#4 /home/smesoftc/happypaws.ph/opencart/catalog/controller/account/customerpartner/orderinfo.php(472): ControllerAccountCustomerpartnerOrderinfo->changeOrderStatus()
+#5 /home/smesoftc/happypaws.ph/storage3/modification/system/engine/action.php(79): ControllerAccountCustomerpartnerOrderinfo->history()
+#6 /home/smesoftc/happypaws.ph/storage3/modification/system/engine/loader.php(48): Action->execute()
+#7 /home/smesoftc/happypaws.ph/opencart/catalog/controller/api/wkrestapi/marketplace.php(2247): Loader->controller()
+#8 /home/smesoftc/happypaws.ph/storage3/modification/system/engine/action.php(79): ControllerApiWkrestapiMarketplace->addHistory()
+#9 /home/smesoftc/happypaws.ph/opencart/catalog/controller/startup/router.php(25): Action->execute()
+#10 /home/smesoftc/happypaws.ph/storage3/modification/system/engine/action.php(79): ControllerStartupRouter->index()
+#11 /home/smesoftc/happypaws.ph/storage3/modification/system/engine/router.php(72): Action->execute()
+#12 /home/smesoftc/happypaws.ph/storage3/modification/system/engine/router.php(61): Router->execute()
+#13 /home/smesoftc/happypaws.ph/opencart/system/framework.php(169): Router->dispatch()
+#14 /home/smesoftc/happypaws.ph/opencart/system/startup.php(104): require_once('/home/smesoftc/...')
+#15 /home/smesoftc/happypaws.ph/opencart/index.php(20): start()
+#16 {main}
+  thrown in /home/smesoftc/happypaws.ph/opencart/system/library/mail.php on line 119
+[26-Dec-2024 15:18:58 Asia/Hong_Kong] PHP Fatal error:  Uncaught Exception: Error: E-Mail to required! in /home/smesoftc/happypaws.ph/opencart/system/library/mail.php:119
+Stack trace:
+#0 /home/smesoftc/happypaws.ph/storage3/modification/catalog/model/account/customerpartner.php(1828): Mail->send()
+#1 /home/smesoftc/happypaws.ph/storage3/modification/system/engine/loader.php(259): ModelAccountCustomerpartner->addOrderHistory()
+#2 /home/smesoftc/happypaws.ph/opencart/system/engine/proxy.php(47): Loader->{closure}()
+#3 /home/smesoftc/happypaws.ph/opencart/catalog/controller/account/customerpartner/orderinfo.php(504): Proxy->__call()
+#4 /home/smesoftc/happypaws.ph/opencart/catalog/controller/account/customerpartner/orderinfo.php(472): ControllerAccountCustomerpartnerOrderinfo->changeOrderStatus()
+#5 /home/smesoftc/happypaws.ph/storage3/modification/system/engine/action.php(79): ControllerAccountCustomerpartnerOrderinfo->history()
+#6 /home/smesoftc/happypaws.ph/storage3/modification/system/engine/loader.php(48): Action->execute()
+#7 /home/smesoftc/happypaws.ph/opencart/catalog/controller/api/wkrestapi/marketplace.php(2247): Loader->controller()
+#8 /home/smesoftc/happypaws.ph/storage3/modification/system/engine/action.php(79): ControllerApiWkrestapiMarketplace->addHistory()
+#9 /home/smesoftc/happypaws.ph/opencart/catalog/controller/startup/router.php(25): Action->execute()
+#10 /home/smesoftc/happypaws.ph/storage3/modification/system/engine/action.php(79): ControllerStartupRouter->index()
+#11 /home/smesoftc/happypaws.ph/storage3/modification/system/engine/router.php(72): Action->execute()
+#12 /home/smesoftc/happypaws.ph/storage3/modification/system/engine/router.php(61): Router->execute()
+#13 /home/smesoftc/happypaws.ph/opencart/system/framework.php(169): Router->dispatch()
+#14 /home/smesoftc/happypaws.ph/opencart/system/startup.php(104): require_once('/home/smesoftc/...')
+#15 /home/smesoftc/happypaws.ph/opencart/index.php(20): start()
+#16 {main}
+  thrown in /home/smesoftc/happypaws.ph/opencart/system/library/mail.php on line 119
+[26-Dec-2024 15:19:05 Asia/Hong_Kong] PHP Fatal error:  Uncaught Exception: Error: E-Mail to required! in /home/smesoftc/happypaws.ph/opencart/system/library/mail.php:119
+Stack trace:
+#0 /home/smesoftc/happypaws.ph/storage3/modification/catalog/model/account/customerpartner.php(1828): Mail->send()
+#1 /home/smesoftc/happypaws.ph/storage3/modification/system/engine/loader.php(259): ModelAccountCustomerpartner->addOrderHistory()
+#2 /home/smesoftc/happypaws.ph/opencart/system/engine/proxy.php(47): Loader->{closure}()
+#3 /home/smesoftc/happypaws.ph/opencart/catalog/controller/account/customerpartner/orderinfo.php(504): Proxy->__call()
+#4 /home/smesoftc/happypaws.ph/opencart/catalog/controller/account/customerpartner/orderinfo.php(472): ControllerAccountCustomerpartnerOrderinfo->changeOrderStatus()
+#5 /home/smesoftc/happypaws.ph/storage3/modification/system/engine/action.php(79): ControllerAccountCustomerpartnerOrderinfo->history()
+#6 /home/smesoftc/happypaws.ph/storage3/modification/system/engine/loader.php(48): Action->execute()
+#7 /home/smesoftc/happypaws.ph/opencart/catalog/controller/api/wkrestapi/marketplace.php(2247): Loader->controller()
+#8 /home/smesoftc/happypaws.ph/storage3/modification/system/engine/action.php(79): ControllerApiWkrestapiMarketplace->addHistory()
+#9 /home/smesoftc/happypaws.ph/opencart/catalog/controller/startup/router.php(25): Action->execute()
+#10 /home/smesoftc/happypaws.ph/storage3/modification/system/engine/action.php(79): ControllerStartupRouter->index()
+#11 /home/smesoftc/happypaws.ph/storage3/modification/system/engine/router.php(72): Action->execute()
+#12 /home/smesoftc/happypaws.ph/storage3/modification/system/engine/router.php(61): Router->execute()
+#13 /home/smesoftc/happypaws.ph/opencart/system/framework.php(169): Router->dispatch()
+#14 /home/smesoftc/happypaws.ph/opencart/system/startup.php(104): require_once('/home/smesoftc/...')
+#15 /home/smesoftc/happypaws.ph/opencart/index.php(20): start()
+#16 {main}
+  thrown in /home/smesoftc/happypaws.ph/opencart/system/library/mail.php on line 119
+[26-Dec-2024 15:20:08 Asia/Hong_Kong] PHP Fatal error:  Uncaught Exception: Error: E-Mail to required! in /home/smesoftc/happypaws.ph/opencart/system/library/mail.php:119
+Stack trace:
+#0 /home/smesoftc/happypaws.ph/storage3/modification/catalog/model/account/customerpartner.php(1828): Mail->send()
+#1 /home/smesoftc/happypaws.ph/storage3/modification/system/engine/loader.php(259): ModelAccountCustomerpartner->addOrderHistory()
+#2 /home/smesoftc/happypaws.ph/opencart/system/engine/proxy.php(47): Loader->{closure}()
+#3 /home/smesoftc/happypaws.ph/opencart/catalog/controller/account/customerpartner/orderinfo.php(504): Proxy->__call()
+#4 /home/smesoftc/happypaws.ph/opencart/catalog/controller/account/customerpartner/orderinfo.php(472): ControllerAccountCustomerpartnerOrderinfo->changeOrderStatus()
+#5 /home/smesoftc/happypaws.ph/storage3/modification/system/engine/action.php(79): ControllerAccountCustomerpartnerOrderinfo->history()
+#6 /home/smesoftc/happypaws.ph/storage3/modification/system/engine/loader.php(48): Action->execute()
+#7 /home/smesoftc/happypaws.ph/opencart/catalog/controller/api/wkrestapi/marketplace.php(2247): Loader->controller()
+#8 /home/smesoftc/happypaws.ph/storage3/modification/system/engine/action.php(79): ControllerApiWkrestapiMarketplace->addHistory()
+#9 /home/smesoftc/happypaws.ph/opencart/catalog/controller/startup/router.php(25): Action->execute()
+#10 /home/smesoftc/happypaws.ph/storage3/modification/system/engine/action.php(79): ControllerStartupRouter->index()
+#11 /home/smesoftc/happypaws.ph/storage3/modification/system/engine/router.php(72): Action->execute()
+#12 /home/smesoftc/happypaws.ph/storage3/modification/system/engine/router.php(61): Router->execute()
+#13 /home/smesoftc/happypaws.ph/opencart/system/framework.php(169): Router->dispatch()
+#14 /home/smesoftc/happypaws.ph/opencart/system/startup.php(104): require_once('/home/smesoftc/...')
+#15 /home/smesoftc/happypaws.ph/opencart/index.php(20): start()
+#16 {main}
+  thrown in /home/smesoftc/happypaws.ph/opencart/system/library/mail.php on line 119
+[26-Dec-2024 15:20:10 Asia/Hong_Kong] PHP Fatal error:  Uncaught Exception: Error: E-Mail to required! in /home/smesoftc/happypaws.ph/opencart/system/library/mail.php:119
+Stack trace:
+#0 /home/smesoftc/happypaws.ph/storage3/modification/catalog/model/account/customerpartner.php(1828): Mail->send()
+#1 /home/smesoftc/happypaws.ph/storage3/modification/system/engine/loader.php(259): ModelAccountCustomerpartner->addOrderHistory()
+#2 /home/smesoftc/happypaws.ph/opencart/system/engine/proxy.php(47): Loader->{closure}()
+#3 /home/smesoftc/happypaws.ph/opencart/catalog/controller/account/customerpartner/orderinfo.php(504): Proxy->__call()
+#4 /home/smesoftc/happypaws.ph/opencart/catalog/controller/account/customerpartner/orderinfo.php(472): ControllerAccountCustomerpartnerOrderinfo->changeOrderStatus()
+#5 /home/smesoftc/happypaws.ph/storage3/modification/system/engine/action.php(79): ControllerAccountCustomerpartnerOrderinfo->history()
+#6 /home/smesoftc/happypaws.ph/storage3/modification/system/engine/loader.php(48): Action->execute()
+#7 /home/smesoftc/happypaws.ph/opencart/catalog/controller/api/wkrestapi/marketplace.php(2247): Loader->controller()
+#8 /home/smesoftc/happypaws.ph/storage3/modification/system/engine/action.php(79): ControllerApiWkrestapiMarketplace->addHistory()
+#9 /home/smesoftc/happypaws.ph/opencart/catalog/controller/startup/router.php(25): Action->execute()
+#10 /home/smesoftc/happypaws.ph/storage3/modification/system/engine/action.php(79): ControllerStartupRouter->index()
+#11 /home/smesoftc/happypaws.ph/storage3/modification/system/engine/router.php(72): Action->execute()
+#12 /home/smesoftc/happypaws.ph/storage3/modification/system/engine/router.php(61): Router->execute()
+#13 /home/smesoftc/happypaws.ph/opencart/system/framework.php(169): Router->dispatch()
+#14 /home/smesoftc/happypaws.ph/opencart/system/startup.php(104): require_once('/home/smesoftc/...')
+#15 /home/smesoftc/happypaws.ph/opencart/index.php(20): start()
+#16 {main}
+  thrown in /home/smesoftc/happypaws.ph/opencart/system/library/mail.php on line 119
+[26-Dec-2024 15:47:29 Asia/Hong_Kong] PHP Fatal error:  Uncaught Exception: Error: E-Mail to required! in /home/smesoftc/happypaws.ph/opencart/system/library/mail.php:119
+Stack trace:
+#0 /home/smesoftc/happypaws.ph/storage3/modification/catalog/model/account/customerpartner.php(1828): Mail->send()
+#1 /home/smesoftc/happypaws.ph/storage3/modification/system/engine/loader.php(259): ModelAccountCustomerpartner->addOrderHistory()
+#2 /home/smesoftc/happypaws.ph/opencart/system/engine/proxy.php(47): Loader->{closure}()
+#3 /home/smesoftc/happypaws.ph/opencart/catalog/controller/account/customerpartner/orderinfo.php(504): Proxy->__call()
+#4 /home/smesoftc/happypaws.ph/opencart/catalog/controller/account/customerpartner/orderinfo.php(472): ControllerAccountCustomerpartnerOrderinfo->changeOrderStatus()
+#5 /home/smesoftc/happypaws.ph/storage3/modification/system/engine/action.php(79): ControllerAccountCustomerpartnerOrderinfo->history()
+#6 /home/smesoftc/happypaws.ph/storage3/modification/system/engine/loader.php(48): Action->execute()
+#7 /home/smesoftc/happypaws.ph/opencart/catalog/controller/api/wkrestapi/marketplace.php(2247): Loader->controller()
+#8 /home/smesoftc/happypaws.ph/storage3/modification/system/engine/action.php(79): ControllerApiWkrestapiMarketplace->addHistory()
+#9 /home/smesoftc/happypaws.ph/opencart/catalog/controller/startup/router.php(25): Action->execute()
+#10 /home/smesoftc/happypaws.ph/storage3/modification/system/engine/action.php(79): ControllerStartupRouter->index()
+#11 /home/smesoftc/happypaws.ph/storage3/modification/system/engine/router.php(72): Action->execute()
+#12 /home/smesoftc/happypaws.ph/storage3/modification/system/engine/router.php(61): Router->execute()
+#13 /home/smesoftc/happypaws.ph/opencart/system/framework.php(169): Router->dispatch()
+#14 /home/smesoftc/happypaws.ph/opencart/system/startup.php(104): require_once('/home/smesoftc/...')
+#15 /home/smesoftc/happypaws.ph/opencart/index.php(20): start()
+#16 {main}
+  thrown in /home/smesoftc/happypaws.ph/opencart/system/library/mail.php on line 119
+[26-Dec-2024 15:51:37 Asia/Hong_Kong] PHP Fatal error:  Uncaught Exception: Error: E-Mail to required! in /home/smesoftc/happypaws.ph/opencart/system/library/mail.php:119
+Stack trace:
+#0 /home/smesoftc/happypaws.ph/storage3/modification/catalog/model/account/customerpartner.php(1828): Mail->send()
+#1 /home/smesoftc/happypaws.ph/storage3/modification/system/engine/loader.php(259): ModelAccountCustomerpartner->addOrderHistory()
+#2 /home/smesoftc/happypaws.ph/opencart/system/engine/proxy.php(47): Loader->{closure}()
+#3 /home/smesoftc/happypaws.ph/opencart/catalog/controller/account/customerpartner/orderinfo.php(504): Proxy->__call()
+#4 /home/smesoftc/happypaws.ph/opencart/catalog/controller/account/customerpartner/orderinfo.php(472): ControllerAccountCustomerpartnerOrderinfo->changeOrderStatus()
+#5 /home/smesoftc/happypaws.ph/storage3/modification/system/engine/action.php(79): ControllerAccountCustomerpartnerOrderinfo->history()
+#6 /home/smesoftc/happypaws.ph/storage3/modification/system/engine/loader.php(48): Action->execute()
+#7 /home/smesoftc/happypaws.ph/opencart/catalog/controller/api/wkrestapi/marketplace.php(2247): Loader->controller()
+#8 /home/smesoftc/happypaws.ph/storage3/modification/system/engine/action.php(79): ControllerApiWkrestapiMarketplace->addHistory()
+#9 /home/smesoftc/happypaws.ph/opencart/catalog/controller/startup/router.php(25): Action->execute()
+#10 /home/smesoftc/happypaws.ph/storage3/modification/system/engine/action.php(79): ControllerStartupRouter->index()
+#11 /home/smesoftc/happypaws.ph/storage3/modification/system/engine/router.php(72): Action->execute()
+#12 /home/smesoftc/happypaws.ph/storage3/modification/system/engine/router.php(61): Router->execute()
+#13 /home/smesoftc/happypaws.ph/opencart/system/framework.php(169): Router->dispatch()
+#14 /home/smesoftc/happypaws.ph/opencart/system/startup.php(104): require_once('/home/smesoftc/...')
+#15 /home/smesoftc/happypaws.ph/opencart/index.php(20): start()
+#16 {main}
+  thrown in /home/smesoftc/happypaws.ph/opencart/system/library/mail.php on line 119
+[26-Dec-2024 15:56:20 Asia/Hong_Kong] PHP Fatal error:  Uncaught Exception: Error: E-Mail to required! in /home/smesoftc/happypaws.ph/opencart/system/library/mail.php:119
+Stack trace:
+#0 /home/smesoftc/happypaws.ph/storage3/modification/catalog/model/account/customerpartner.php(1828): Mail->send()
+#1 /home/smesoftc/happypaws.ph/storage3/modification/system/engine/loader.php(259): ModelAccountCustomerpartner->addOrderHistory()
+#2 /home/smesoftc/happypaws.ph/opencart/system/engine/proxy.php(47): Loader->{closure}()
+#3 /home/smesoftc/happypaws.ph/opencart/catalog/controller/account/customerpartner/orderinfo.php(503): Proxy->__call()
+#4 /home/smesoftc/happypaws.ph/opencart/catalog/controller/account/customerpartner/orderinfo.php(472): ControllerAccountCustomerpartnerOrderinfo->changeOrderStatus()
+#5 /home/smesoftc/happypaws.ph/storage3/modification/system/engine/action.php(79): ControllerAccountCustomerpartnerOrderinfo->history()
+#6 /home/smesoftc/happypaws.ph/storage3/modification/system/engine/loader.php(48): Action->execute()
+#7 /home/smesoftc/happypaws.ph/opencart/catalog/controller/api/wkrestapi/marketplace.php(2247): Loader->controller()
+#8 /home/smesoftc/happypaws.ph/storage3/modification/system/engine/action.php(79): ControllerApiWkrestapiMarketplace->addHistory()
+#9 /home/smesoftc/happypaws.ph/opencart/catalog/controller/startup/router.php(25): Action->execute()
+#10 /home/smesoftc/happypaws.ph/storage3/modification/system/engine/action.php(79): ControllerStartupRouter->index()
+#11 /home/smesoftc/happypaws.ph/storage3/modification/system/engine/router.php(72): Action->execute()
+#12 /home/smesoftc/happypaws.ph/storage3/modification/system/engine/router.php(61): Router->execute()
+#13 /home/smesoftc/happypaws.ph/opencart/system/framework.php(169): Router->dispatch()
+#14 /home/smesoftc/happypaws.ph/opencart/system/startup.php(104): require_once('/home/smesoftc/...')
+#15 /home/smesoftc/happypaws.ph/opencart/index.php(20): start()
+#16 {main}
+  thrown in /home/smesoftc/happypaws.ph/opencart/system/library/mail.php on line 119
+[26-Dec-2024 16:10:32 Asia/Hong_Kong] PHP Fatal error:  Uncaught Exception: Error: E-Mail to required! in /home/smesoftc/happypaws.ph/opencart/system/library/mail.php:119
+Stack trace:
+#0 /home/smesoftc/happypaws.ph/storage3/modification/catalog/model/account/customerpartner.php(1828): Mail->send()
+#1 /home/smesoftc/happypaws.ph/storage3/modification/system/engine/loader.php(259): ModelAccountCustomerpartner->addOrderHistory()
+#2 /home/smesoftc/happypaws.ph/opencart/system/engine/proxy.php(47): Loader->{closure}()
+#3 /home/smesoftc/happypaws.ph/opencart/catalog/controller/account/customerpartner/orderinfo.php(502): Proxy->__call()
+#4 /home/smesoftc/happypaws.ph/opencart/catalog/controller/account/customerpartner/orderinfo.php(472): ControllerAccountCustomerpartnerOrderinfo->changeOrderStatus()
+#5 /home/smesoftc/happypaws.ph/storage3/modification/system/engine/action.php(79): ControllerAccountCustomerpartnerOrderinfo->history()
+#6 /home/smesoftc/happypaws.ph/storage3/modification/system/engine/loader.php(48): Action->execute()
+#7 /home/smesoftc/happypaws.ph/opencart/catalog/controller/api/wkrestapi/marketplace.php(2247): Loader->controller()
+#8 /home/smesoftc/happypaws.ph/storage3/modification/system/engine/action.php(79): ControllerApiWkrestapiMarketplace->addHistory()
+#9 /home/smesoftc/happypaws.ph/opencart/catalog/controller/startup/router.php(25): Action->execute()
+#10 /home/smesoftc/happypaws.ph/storage3/modification/system/engine/action.php(79): ControllerStartupRouter->index()
+#11 /home/smesoftc/happypaws.ph/storage3/modification/system/engine/router.php(72): Action->execute()
+#12 /home/smesoftc/happypaws.ph/storage3/modification/system/engine/router.php(61): Router->execute()
+#13 /home/smesoftc/happypaws.ph/opencart/system/framework.php(169): Router->dispatch()
+#14 /home/smesoftc/happypaws.ph/opencart/system/startup.php(104): require_once('/home/smesoftc/...')
+#15 /home/smesoftc/happypaws.ph/opencart/index.php(20): start()
+#16 {main}
+  thrown in /home/smesoftc/happypaws.ph/opencart/system/library/mail.php on line 119
+[26-Dec-2024 18:02:39 Asia/Hong_Kong] PHP Fatal error:  Uncaught Exception: Error: E-Mail to required! in /home/smesoftc/happypaws.ph/opencart/system/library/mail.php:119
+Stack trace:
+#0 /home/smesoftc/happypaws.ph/storage3/modification/catalog/model/account/customerpartner.php(1828): Mail->send()
+#1 /home/smesoftc/happypaws.ph/storage3/modification/system/engine/loader.php(259): ModelAccountCustomerpartner->addOrderHistory()
+#2 /home/smesoftc/happypaws.ph/opencart/system/engine/proxy.php(47): Loader->{closure}()
+#3 /home/smesoftc/happypaws.ph/opencart/catalog/controller/account/customerpartner/orderinfo.php(502): Proxy->__call()
+#4 /home/smesoftc/happypaws.ph/opencart/catalog/controller/account/customerpartner/orderinfo.php(472): ControllerAccountCustomerpartnerOrderinfo->changeOrderStatus()
+#5 /home/smesoftc/happypaws.ph/storage3/modification/system/engine/action.php(79): ControllerAccountCustomerpartnerOrderinfo->history()
+#6 /home/smesoftc/happypaws.ph/storage3/modification/system/engine/loader.php(48): Action->execute()
+#7 /home/smesoftc/happypaws.ph/opencart/catalog/controller/api/wkrestapi/marketplace.php(2247): Loader->controller()
+#8 /home/smesoftc/happypaws.ph/storage3/modification/system/engine/action.php(79): ControllerApiWkrestapiMarketplace->addHistory()
+#9 /home/smesoftc/happypaws.ph/opencart/catalog/controller/startup/router.php(25): Action->execute()
+#10 /home/smesoftc/happypaws.ph/storage3/modification/system/engine/action.php(79): ControllerStartupRouter->index()
+#11 /home/smesoftc/happypaws.ph/storage3/modification/system/engine/router.php(72): Action->execute()
+#12 /home/smesoftc/happypaws.ph/storage3/modification/system/engine/router.php(61): Router->execute()
+#13 /home/smesoftc/happypaws.ph/opencart/system/framework.php(169): Router->dispatch()
+#14 /home/smesoftc/happypaws.ph/opencart/system/startup.php(104): require_once('/home/smesoftc/...')
+#15 /home/smesoftc/happypaws.ph/opencart/index.php(20): start()
+#16 {main}
+  thrown in /home/smesoftc/happypaws.ph/opencart/system/library/mail.php on line 119
+[26-Dec-2024 18:03:21 Asia/Hong_Kong] PHP Fatal error:  Uncaught Exception: Error: E-Mail sender required! in /home/smesoftc/happypaws.ph/opencart/system/library/mail.php:127
+Stack trace:
+#0 /home/smesoftc/happypaws.ph/storage3/modification/catalog/model/account/customerpartner.php(2037): Mail->send()
+#1 /home/smesoftc/happypaws.ph/storage3/modification/system/engine/loader.php(259): ModelAccountCustomerpartner->addOrderHistory()
+#2 /home/smesoftc/happypaws.ph/opencart/system/engine/proxy.php(47): Loader->{closure}()
+#3 /home/smesoftc/happypaws.ph/opencart/catalog/controller/account/customerpartner/orderinfo.php(502): Proxy->__call()
+#4 /home/smesoftc/happypaws.ph/opencart/catalog/controller/account/customerpartner/orderinfo.php(472): ControllerAccountCustomerpartnerOrderinfo->changeOrderStatus()
+#5 /home/smesoftc/happypaws.ph/storage3/modification/system/engine/action.php(79): ControllerAccountCustomerpartnerOrderinfo->history()
+#6 /home/smesoftc/happypaws.ph/storage3/modification/system/engine/loader.php(48): Action->execute()
+#7 /home/smesoftc/happypaws.ph/opencart/catalog/controller/api/wkrestapi/marketplace.php(2247): Loader->controller()
+#8 /home/smesoftc/happypaws.ph/storage3/modification/system/engine/action.php(79): ControllerApiWkrestapiMarketplace->addHistory()
+#9 /home/smesoftc/happypaws.ph/opencart/catalog/controller/startup/router.php(25): Action->execute()
+#10 /home/smesoftc/happypaws.ph/storage3/modification/system/engine/action.php(79): ControllerStartupRouter->index()
+#11 /home/smesoftc/happypaws.ph/storage3/modification/system/engine/router.php(72): Action->execute()
+#12 /home/smesoftc/happypaws.ph/storage3/modification/system/engine/router.php(61): Router->execute()
+#13 /home/smesoftc/happypaws.ph/opencart/system/framework.php(169): Router->dispatch()
+#14 /home/smesoftc/happypaws.ph/opencart/system/startup.php(104): require_once('/home/smesoftc/...')
+#15 /home/smesoftc/happypaws.ph/opencart/index.php(20): start()
+#16 {main}
+  thrown in /home/smesoftc/happypaws.ph/opencart/system/library/mail.php on line 127
+[26-Dec-2024 18:06:06 Asia/Hong_Kong] PHP Fatal error:  Uncaught Exception: Error: E-Mail sender required! in /home/smesoftc/happypaws.ph/opencart/system/library/mail.php:127
+Stack trace:
+#0 /home/smesoftc/happypaws.ph/storage3/modification/catalog/model/account/customerpartner.php(2037): Mail->send()
+#1 /home/smesoftc/happypaws.ph/storage3/modification/system/engine/loader.php(259): ModelAccountCustomerpartner->addOrderHistory()
+#2 /home/smesoftc/happypaws.ph/opencart/system/engine/proxy.php(47): Loader->{closure}()
+#3 /home/smesoftc/happypaws.ph/opencart/catalog/controller/account/customerpartner/orderinfo.php(502): Proxy->__call()
+#4 /home/smesoftc/happypaws.ph/opencart/catalog/controller/account/customerpartner/orderinfo.php(472): ControllerAccountCustomerpartnerOrderinfo->changeOrderStatus()
+#5 /home/smesoftc/happypaws.ph/storage3/modification/system/engine/action.php(79): ControllerAccountCustomerpartnerOrderinfo->history()
+#6 /home/smesoftc/happypaws.ph/storage3/modification/system/engine/loader.php(48): Action->execute()
+#7 /home/smesoftc/happypaws.ph/opencart/catalog/controller/api/wkrestapi/marketplace.php(2247): Loader->controller()
+#8 /home/smesoftc/happypaws.ph/storage3/modification/system/engine/action.php(79): ControllerApiWkrestapiMarketplace->addHistory()
+#9 /home/smesoftc/happypaws.ph/opencart/catalog/controller/startup/router.php(25): Action->execute()
+#10 /home/smesoftc/happypaws.ph/storage3/modification/system/engine/action.php(79): ControllerStartupRouter->index()
+#11 /home/smesoftc/happypaws.ph/storage3/modification/system/engine/router.php(72): Action->execute()
+#12 /home/smesoftc/happypaws.ph/storage3/modification/system/engine/router.php(61): Router->execute()
+#13 /home/smesoftc/happypaws.ph/opencart/system/framework.php(169): Router->dispatch()
+#14 /home/smesoftc/happypaws.ph/opencart/system/startup.php(104): require_once('/home/smesoftc/...')
+#15 /home/smesoftc/happypaws.ph/opencart/index.php(20): start()
+#16 {main}
+  thrown in /home/smesoftc/happypaws.ph/opencart/system/library/mail.php on line 127
+[26-Dec-2024 18:07:20 Asia/Hong_Kong] PHP Fatal error:  Uncaught Exception: Error: E-Mail sender required! in /home/smesoftc/happypaws.ph/opencart/system/library/mail.php:127
+Stack trace:
+#0 /home/smesoftc/happypaws.ph/storage3/modification/catalog/model/account/customerpartner.php(2037): Mail->send()
+#1 /home/smesoftc/happypaws.ph/storage3/modification/system/engine/loader.php(259): ModelAccountCustomerpartner->addOrderHistory()
+#2 /home/smesoftc/happypaws.ph/opencart/system/engine/proxy.php(47): Loader->{closure}()
+#3 /home/smesoftc/happypaws.ph/opencart/catalog/controller/account/customerpartner/orderinfo.php(502): Proxy->__call()
+#4 /home/smesoftc/happypaws.ph/opencart/catalog/controller/account/customerpartner/orderinfo.php(472): ControllerAccountCustomerpartnerOrderinfo->changeOrderStatus()
+#5 /home/smesoftc/happypaws.ph/storage3/modification/system/engine/action.php(79): ControllerAccountCustomerpartnerOrderinfo->history()
+#6 /home/smesoftc/happypaws.ph/storage3/modification/system/engine/loader.php(48): Action->execute()
+#7 /home/smesoftc/happypaws.ph/opencart/catalog/controller/api/wkrestapi/marketplace.php(2247): Loader->controller()
+#8 /home/smesoftc/happypaws.ph/storage3/modification/system/engine/action.php(79): ControllerApiWkrestapiMarketplace->addHistory()
+#9 /home/smesoftc/happypaws.ph/opencart/catalog/controller/startup/router.php(25): Action->execute()
+#10 /home/smesoftc/happypaws.ph/storage3/modification/system/engine/action.php(79): ControllerStartupRouter->index()
+#11 /home/smesoftc/happypaws.ph/storage3/modification/system/engine/router.php(72): Action->execute()
+#12 /home/smesoftc/happypaws.ph/storage3/modification/system/engine/router.php(61): Router->execute()
+#13 /home/smesoftc/happypaws.ph/opencart/system/framework.php(169): Router->dispatch()
+#14 /home/smesoftc/happypaws.ph/opencart/system/startup.php(104): require_once('/home/smesoftc/...')
+#15 /home/smesoftc/happypaws.ph/opencart/index.php(20): start()
+#16 {main}
+  thrown in /home/smesoftc/happypaws.ph/opencart/system/library/mail.php on line 127
+[26-Dec-2024 18:07:30 Asia/Hong_Kong] PHP Fatal error:  Uncaught Exception: Error: E-Mail sender required! in /home/smesoftc/happypaws.ph/opencart/system/library/mail.php:127
+Stack trace:
+#0 /home/smesoftc/happypaws.ph/storage3/modification/catalog/model/account/customerpartner.php(2037): Mail->send()
+#1 /home/smesoftc/happypaws.ph/storage3/modification/system/engine/loader.php(259): ModelAccountCustomerpartner->addOrderHistory()
+#2 /home/smesoftc/happypaws.ph/opencart/system/engine/proxy.php(47): Loader->{closure}()
+#3 /home/smesoftc/happypaws.ph/opencart/catalog/controller/account/customerpartner/orderinfo.php(502): Proxy->__call()
+#4 /home/smesoftc/happypaws.ph/opencart/catalog/controller/account/customerpartner/orderinfo.php(472): ControllerAccountCustomerpartnerOrderinfo->changeOrderStatus()
+#5 /home/smesoftc/happypaws.ph/storage3/modification/system/engine/action.php(79): ControllerAccountCustomerpartnerOrderinfo->history()
+#6 /home/smesoftc/happypaws.ph/storage3/modification/system/engine/loader.php(48): Action->execute()
+#7 /home/smesoftc/happypaws.ph/opencart/catalog/controller/api/wkrestapi/marketplace.php(2247): Loader->controller()
+#8 /home/smesoftc/happypaws.ph/storage3/modification/system/engine/action.php(79): ControllerApiWkrestapiMarketplace->addHistory()
+#9 /home/smesoftc/happypaws.ph/opencart/catalog/controller/startup/router.php(25): Action->execute()
+#10 /home/smesoftc/happypaws.ph/storage3/modification/system/engine/action.php(79): ControllerStartupRouter->index()
+#11 /home/smesoftc/happypaws.ph/storage3/modification/system/engine/router.php(72): Action->execute()
+#12 /home/smesoftc/happypaws.ph/storage3/modification/system/engine/router.php(61): Router->execute()
+#13 /home/smesoftc/happypaws.ph/opencart/system/framework.php(169): Router->dispatch()
+#14 /home/smesoftc/happypaws.ph/opencart/system/startup.php(104): require_once('/home/smesoftc/...')
+#15 /home/smesoftc/happypaws.ph/opencart/index.php(20): start()
+#16 {main}
+  thrown in /home/smesoftc/happypaws.ph/opencart/system/library/mail.php on line 127
+[26-Dec-2024 23:49:15 Asia/Hong_Kong] PHP Fatal error:  Uncaught Error: Call to a member function log() on null in /home/smesoftc/happypaws.ph/opencart/catalog/controller/api/wkrestapi/customer.php:3527
+Stack trace:
+#0 /home/smesoftc/happypaws.ph/storage3/modification/system/engine/action.php(79): ControllerApiWkrestapiCustomer->addReturnData()
+#1 /home/smesoftc/happypaws.ph/opencart/catalog/controller/startup/router.php(25): Action->execute()
+#2 /home/smesoftc/happypaws.ph/storage3/modification/system/engine/action.php(79): ControllerStartupRouter->index()
+#3 /home/smesoftc/happypaws.ph/storage3/modification/system/engine/router.php(72): Action->execute()
+#4 /home/smesoftc/happypaws.ph/storage3/modification/system/engine/router.php(61): Router->execute()
+#5 /home/smesoftc/happypaws.ph/opencart/system/framework.php(169): Router->dispatch()
+#6 /home/smesoftc/happypaws.ph/opencart/system/startup.php(104): require_once('/home/smesoftc/...')
+#7 /home/smesoftc/happypaws.ph/opencart/index.php(20): start()
+#8 {main}
+  thrown in /home/smesoftc/happypaws.ph/opencart/catalog/controller/api/wkrestapi/customer.php on line 3527
+[26-Dec-2024 23:49:22 Asia/Hong_Kong] PHP Fatal error:  Uncaught Error: Call to a member function log() on null in /home/smesoftc/happypaws.ph/opencart/catalog/controller/api/wkrestapi/customer.php:3527
+Stack trace:
+#0 /home/smesoftc/happypaws.ph/storage3/modification/system/engine/action.php(79): ControllerApiWkrestapiCustomer->addReturnData()
+#1 /home/smesoftc/happypaws.ph/opencart/catalog/controller/startup/router.php(25): Action->execute()
+#2 /home/smesoftc/happypaws.ph/storage3/modification/system/engine/action.php(79): ControllerStartupRouter->index()
+#3 /home/smesoftc/happypaws.ph/storage3/modification/system/engine/router.php(72): Action->execute()
+#4 /home/smesoftc/happypaws.ph/storage3/modification/system/engine/router.php(61): Router->execute()
+#5 /home/smesoftc/happypaws.ph/opencart/system/framework.php(169): Router->dispatch()
+#6 /home/smesoftc/happypaws.ph/opencart/system/startup.php(104): require_once('/home/smesoftc/...')
+#7 /home/smesoftc/happypaws.ph/opencart/index.php(20): start()
+#8 {main}
+  thrown in /home/smesoftc/happypaws.ph/opencart/catalog/controller/api/wkrestapi/customer.php on line 3527
+[26-Dec-2024 23:52:03 Asia/Hong_Kong] PHP Fatal error:  Uncaught Error: Call to a member function log() on null in /home/smesoftc/happypaws.ph/opencart/catalog/controller/api/wkrestapi/customer.php:3527
+Stack trace:
+#0 /home/smesoftc/happypaws.ph/storage3/modification/system/engine/action.php(79): ControllerApiWkrestapiCustomer->addReturnData()
+#1 /home/smesoftc/happypaws.ph/opencart/catalog/controller/startup/router.php(25): Action->execute()
+#2 /home/smesoftc/happypaws.ph/storage3/modification/system/engine/action.php(79): ControllerStartupRouter->index()
+#3 /home/smesoftc/happypaws.ph/storage3/modification/system/engine/router.php(72): Action->execute()
+#4 /home/smesoftc/happypaws.ph/storage3/modification/system/engine/router.php(61): Router->execute()
+#5 /home/smesoftc/happypaws.ph/opencart/system/framework.php(169): Router->dispatch()
+#6 /home/smesoftc/happypaws.ph/opencart/system/startup.php(104): require_once('/home/smesoftc/...')
+#7 /home/smesoftc/happypaws.ph/opencart/index.php(20): start()
+#8 {main}
+  thrown in /home/smesoftc/happypaws.ph/opencart/catalog/controller/api/wkrestapi/customer.php on line 3527
+[26-Dec-2024 23:52:17 Asia/Hong_Kong] PHP Fatal error:  Uncaught Error: Call to a member function log() on null in /home/smesoftc/happypaws.ph/opencart/catalog/controller/api/wkrestapi/customer.php:3527
+Stack trace:
+#0 /home/smesoftc/happypaws.ph/storage3/modification/system/engine/action.php(79): ControllerApiWkrestapiCustomer->addReturnData()
+#1 /home/smesoftc/happypaws.ph/opencart/catalog/controller/startup/router.php(25): Action->execute()
+#2 /home/smesoftc/happypaws.ph/storage3/modification/system/engine/action.php(79): ControllerStartupRouter->index()
+#3 /home/smesoftc/happypaws.ph/storage3/modification/system/engine/router.php(72): Action->execute()
+#4 /home/smesoftc/happypaws.ph/storage3/modification/system/engine/router.php(61): Router->execute()
+#5 /home/smesoftc/happypaws.ph/opencart/system/framework.php(169): Router->dispatch()
+#6 /home/smesoftc/happypaws.ph/opencart/system/startup.php(104): require_once('/home/smesoftc/...')
+#7 /home/smesoftc/happypaws.ph/opencart/index.php(20): start()
+#8 {main}
+  thrown in /home/smesoftc/happypaws.ph/opencart/catalog/controller/api/wkrestapi/customer.php on line 3527
+[26-Dec-2024 23:53:17 Asia/Hong_Kong] PHP Fatal error:  Uncaught Error: Call to a member function log() on null in /home/smesoftc/happypaws.ph/opencart/catalog/controller/api/wkrestapi/customer.php:3527
+Stack trace:
+#0 /home/smesoftc/happypaws.ph/storage3/modification/system/engine/action.php(79): ControllerApiWkrestapiCustomer->addReturnData()
+#1 /home/smesoftc/happypaws.ph/opencart/catalog/controller/startup/router.php(25): Action->execute()
+#2 /home/smesoftc/happypaws.ph/storage3/modification/system/engine/action.php(79): ControllerStartupRouter->index()
+#3 /home/smesoftc/happypaws.ph/storage3/modification/system/engine/router.php(72): Action->execute()
+#4 /home/smesoftc/happypaws.ph/storage3/modification/system/engine/router.php(61): Router->execute()
+#5 /home/smesoftc/happypaws.ph/opencart/system/framework.php(169): Router->dispatch()
+#6 /home/smesoftc/happypaws.ph/opencart/system/startup.php(104): require_once('/home/smesoftc/...')
+#7 /home/smesoftc/happypaws.ph/opencart/index.php(20): start()
+#8 {main}
+  thrown in /home/smesoftc/happypaws.ph/opencart/catalog/controller/api/wkrestapi/customer.php on line 3527
+[26-Dec-2024 23:57:43 Asia/Hong_Kong] PHP Parse error:  syntax error, unexpected string content "error" in /home/smesoftc/happypaws.ph/opencart/catalog/controller/api/wkrestapi/customer.php on line 762
+[03-Jan-2025 11:28:53 Asia/Hong_Kong] PHP Fatal error:  Uncaught Exception: Error: Deadlock found when trying to get lock; try restarting transaction<br />Error No: 1213<br />UPDATE oc_cart SET session_id = '6cdc50d5c579bba9bdb79b5add' WHERE api_id = '0' AND customer_id = '117' in /home/smesoftc/happypaws.ph/opencart/system/library/db/mysqli.php:49
+Stack trace:
+#0 /home/smesoftc/happypaws.ph/opencart/system/library/db.php(45): DB\MySQLi->query()
+#1 /home/smesoftc/happypaws.ph/storage3/modification/system/library/cart/cart.php(25): DB->query()
+#2 /home/smesoftc/happypaws.ph/storage3/modification/catalog/controller/startup/startup.php(235): Cart\Cart->__construct()
+#3 /home/smesoftc/happypaws.ph/storage3/modification/system/engine/action.php(79): ControllerStartupStartup->index()
+#4 /home/smesoftc/happypaws.ph/storage3/modification/system/engine/router.php(72): Action->execute()
+#5 /home/smesoftc/happypaws.ph/storage3/modification/system/engine/router.php(51): Router->execute()
+#6 /home/smesoftc/happypaws.ph/opencart/system/framework.php(169): Router->dispatch()
+#7 /home/smesoftc/happypaws.ph/opencart/system/startup.php(104): require_once('/home/smesoftc/...')
+#8 /home/smesoftc/happypaws.ph/opencart/index.php(20): start()
+#9 {main}
+  thrown in /home/smesoftc/happypaws.ph/opencart/system/library/db/mysqli.php on line 49
+[03-Jan-2025 20:10:33 Asia/Hong_Kong] PHP Fatal error:  Uncaught Exception: Error: You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near ', '','03-01-2525-08:01:33_scaled_XRecorder_30122024_131917.jpg', NOW())' at line 1<br />Error No: 1064<br />INSERT INTO oc_mobikul_customer_image (customer_id, image, banner, date_added) VALUES(, '','03-01-2525-08:01:33_scaled_XRecorder_30122024_131917.jpg', NOW()) in /home/smesoftc/happypaws.ph/opencart/system/library/db/mysqli.php:49
+Stack trace:
+#0 /home/smesoftc/happypaws.ph/opencart/system/library/db.php(45): DB\MySQLi->query()
+#1 /home/smesoftc/happypaws.ph/opencart/catalog/controller/api/wkrestapi/customer.php(3785): DB->query()
+#2 /home/smesoftc/happypaws.ph/storage3/modification/system/engine/action.php(79): ControllerApiWkrestapiCustomer->addUserProfile()
+#3 /home/smesoftc/happypaws.ph/opencart/catalog/controller/startup/router.php(25): Action->execute()
+#4 /home/smesoftc/happypaws.ph/storage3/modification/system/engine/action.php(79): ControllerStartupRouter->index()
+#5 /home/smesoftc/happypaws.ph/storage3/modification/system/engine/router.php(72): Action->execute()
+#6 /home/smesoftc/happypaws.ph/storage3/modification/system/engine/router.php(61): Router->execute()
+#7 /home/smesoftc/happypaws.ph/opencart/system/framework.php(169): Router->dispatch()
+#8 /home/smesoftc/happypaws.ph/opencart/system/startup.php(104): require_once('/home/smesoftc/...')
+#9 /home/smesoftc/happypaws.ph/opencart/index.php(20): start()
+#10 {main}
+  thrown in /home/smesoftc/happypaws.ph/opencart/system/library/db/mysqli.php on line 49
+[03-Jan-2025 20:10:49 Asia/Hong_Kong] PHP Fatal error:  Uncaught Exception: Error: You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near ', '','03-01-2525-08:01:49_scaled_XRecorder_31122024_102239.jpg', NOW())' at line 1<br />Error No: 1064<br />INSERT INTO oc_mobikul_customer_image (customer_id, image, banner, date_added) VALUES(, '','03-01-2525-08:01:49_scaled_XRecorder_31122024_102239.jpg', NOW()) in /home/smesoftc/happypaws.ph/opencart/system/library/db/mysqli.php:49
+Stack trace:
+#0 /home/smesoftc/happypaws.ph/opencart/system/library/db.php(45): DB\MySQLi->query()
+#1 /home/smesoftc/happypaws.ph/opencart/catalog/controller/api/wkrestapi/customer.php(3785): DB->query()
+#2 /home/smesoftc/happypaws.ph/storage3/modification/system/engine/action.php(79): ControllerApiWkrestapiCustomer->addUserProfile()
+#3 /home/smesoftc/happypaws.ph/opencart/catalog/controller/startup/router.php(25): Action->execute()
+#4 /home/smesoftc/happypaws.ph/storage3/modification/system/engine/action.php(79): ControllerStartupRouter->index()
+#5 /home/smesoftc/happypaws.ph/storage3/modification/system/engine/router.php(72): Action->execute()
+#6 /home/smesoftc/happypaws.ph/storage3/modification/system/engine/router.php(61): Router->execute()
+#7 /home/smesoftc/happypaws.ph/opencart/system/framework.php(169): Router->dispatch()
+#8 /home/smesoftc/happypaws.ph/opencart/system/startup.php(104): require_once('/home/smesoftc/...')
+#9 /home/smesoftc/happypaws.ph/opencart/index.php(20): start()
+#10 {main}
+  thrown in /home/smesoftc/happypaws.ph/opencart/system/library/db/mysqli.php on line 49
+[15-Jan-2025 17:59:39 Asia/Hong_Kong] PHP Fatal error:  Uncaught ValueError: fread(): Argument #2 ($length) must be greater than 0 in /home/smesoftc/happypaws.ph/opencart/system/library/cache/file.php:32
+Stack trace:
+#0 /home/smesoftc/happypaws.ph/opencart/system/library/cache/file.php(32): fread()
+#1 /home/smesoftc/happypaws.ph/opencart/system/library/cache.php(41): Cache\File->get()
+#2 /home/smesoftc/happypaws.ph/opencart/catalog/model/setting/store.php(4): Cache->get()
+#3 /home/smesoftc/happypaws.ph/storage3/modification/system/engine/loader.php(259): ModelSettingStore->getStores()
+#4 /home/smesoftc/happypaws.ph/opencart/system/engine/proxy.php(47): Loader->{closure}()
+#5 /home/smesoftc/happypaws.ph/opencart/catalog/controller/account/customerpartner/addproduct.php(657): Proxy->__call()
+#6 /home/smesoftc/happypaws.ph/storage3/modification/system/engine/action.php(79): ControllerAccountCustomerpartnerAddproduct->index()
+#7 /home/smesoftc/happypaws.ph/opencart/catalog/controller/startup/router.php(25): Action->execute()
+#8 /home/smesoftc/happypaws.ph/storage3/modification/system/engine/action.php(79): ControllerStartupRouter->index()
+#9 /home/smesoftc/happypaws.ph/storage3/modification/system/engine/router.php(72): Action->execute()
+#10 /home/smesoftc/happypaws.ph/storage3/modification/system/engine/router.php(61): Router->execute()
+#11 /home/smesoftc/happypaws.ph/opencart/system/framework.php(169): Router->dispatch()
+#12 /home/smesoftc/happypaws.ph/opencart/system/startup.php(104): require_once('/home/smesoftc/...')
+#13 /home/smesoftc/happypaws.ph/opencart/index.php(20): start()
+#14 {main}
+  thrown in /home/smesoftc/happypaws.ph/opencart/system/library/cache/file.php on line 32
+[15-Jan-2025 17:59:39 Asia/Hong_Kong] PHP Fatal error:  Uncaught ValueError: fread(): Argument #2 ($length) must be greater than 0 in /home/smesoftc/happypaws.ph/opencart/system/library/cache/file.php:32
+Stack trace:
+#0 /home/smesoftc/happypaws.ph/opencart/system/library/cache/file.php(32): fread()
+#1 /home/smesoftc/happypaws.ph/opencart/system/library/cache.php(41): Cache\File->get()
+#2 /home/smesoftc/happypaws.ph/opencart/catalog/model/setting/store.php(4): Cache->get()
+#3 /home/smesoftc/happypaws.ph/storage3/modification/system/engine/loader.php(259): ModelSettingStore->getStores()
+#4 /home/smesoftc/happypaws.ph/opencart/system/engine/proxy.php(47): Loader->{closure}()
+#5 /home/smesoftc/happypaws.ph/opencart/catalog/controller/account/customerpartner/addproduct.php(657): Proxy->__call()
+#6 /home/smesoftc/happypaws.ph/storage3/modification/system/engine/action.php(79): ControllerAccountCustomerpartnerAddproduct->index()
+#7 /home/smesoftc/happypaws.ph/opencart/catalog/controller/startup/router.php(25): Action->execute()
+#8 /home/smesoftc/happypaws.ph/storage3/modification/system/engine/action.php(79): ControllerStartupRouter->index()
+#9 /home/smesoftc/happypaws.ph/storage3/modification/system/engine/router.php(72): Action->execute()
+#10 /home/smesoftc/happypaws.ph/storage3/modification/system/engine/router.php(61): Router->execute()
+#11 /home/smesoftc/happypaws.ph/opencart/system/framework.php(169): Router->dispatch()
+#12 /home/smesoftc/happypaws.ph/opencart/system/startup.php(104): require_once('/home/smesoftc/...')
+#13 /home/smesoftc/happypaws.ph/opencart/index.php(20): start()
+#14 {main}
+  thrown in /home/smesoftc/happypaws.ph/opencart/system/library/cache/file.php on line 32
+[16-Jan-2025 14:24:39 Asia/Hong_Kong] PHP Parse error:  syntax error, unexpected variable "$this" in /home/smesoftc/happypaws.ph/opencart/catalog/controller/api/customer.php on line 4
+[16-Jan-2025 14:24:44 Asia/Hong_Kong] PHP Parse error:  syntax error, unexpected variable "$this" in /home/smesoftc/happypaws.ph/opencart/catalog/controller/api/customer.php on line 4
+[16-Jan-2025 14:24:47 Asia/Hong_Kong] PHP Parse error:  syntax error, unexpected variable "$this" in /home/smesoftc/happypaws.ph/opencart/catalog/controller/api/customer.php on line 4
+[16-Jan-2025 14:31:52 Asia/Hong_Kong] PHP Parse error:  syntax error, unexpected variable "$this" in /home/smesoftc/happypaws.ph/opencart/catalog/controller/api/customer.php on line 4
+[16-Jan-2025 14:32:03 Asia/Hong_Kong] PHP Parse error:  syntax error, unexpected variable "$this" in /home/smesoftc/happypaws.ph/opencart/catalog/controller/api/customer.php on line 4
+[16-Jan-2025 14:40:58 Asia/Hong_Kong] PHP Parse error:  syntax error, unexpected variable "$this" in /home/smesoftc/happypaws.ph/opencart/catalog/controller/api/customer.php on line 4
+[16-Jan-2025 15:56:50 Asia/Manila] PHP Warning:  Undefined variable $Ah in /home/smesoftc/happypaws.ph/opencart/wk_adminer.php on line 1787
+[16-Jan-2025 15:56:50 Asia/Manila] PHP Warning:  Undefined variable $Ah in /home/smesoftc/happypaws.ph/opencart/wk_adminer.php on line 1787
+[16-Jan-2025 15:56:50 Asia/Manila] PHP Warning:  Undefined variable $Ah in /home/smesoftc/happypaws.ph/opencart/wk_adminer.php on line 1787
+[16-Jan-2025 15:56:50 Asia/Manila] PHP Warning:  Undefined variable $Ah in /home/smesoftc/happypaws.ph/opencart/wk_adminer.php on line 1787
+[16-Jan-2025 15:56:50 Asia/Manila] PHP Warning:  Undefined variable $Ah in /home/smesoftc/happypaws.ph/opencart/wk_adminer.php on line 1787
+[16-Jan-2025 15:56:50 Asia/Manila] PHP Warning:  Undefined variable $Ah in /home/smesoftc/happypaws.ph/opencart/wk_adminer.php on line 1787
+[16-Jan-2025 15:56:50 Asia/Manila] PHP Warning:  Undefined variable $Ah in /home/smesoftc/happypaws.ph/opencart/wk_adminer.php on line 1787
+[16-Jan-2025 15:56:50 Asia/Manila] PHP Warning:  Undefined variable $Ah in /home/smesoftc/happypaws.ph/opencart/wk_adminer.php on line 1787
+[16-Jan-2025 15:56:50 Asia/Manila] PHP Warning:  Undefined variable $Ah in /home/smesoftc/happypaws.ph/opencart/wk_adminer.php on line 1787
+[16-Jan-2025 15:56:50 Asia/Manila] PHP Warning:  Undefined variable $Ah in /home/smesoftc/happypaws.ph/opencart/wk_adminer.php on line 1787
+[16-Jan-2025 15:56:50 Asia/Manila] PHP Warning:  Undefined variable $Ah in /home/smesoftc/happypaws.ph/opencart/wk_adminer.php on line 1787
+[16-Jan-2025 15:56:50 Asia/Manila] PHP Warning:  Undefined variable $Ah in /home/smesoftc/happypaws.ph/opencart/wk_adminer.php on line 1787
+[16-Jan-2025 15:56:50 Asia/Manila] PHP Warning:  Undefined variable $Ah in /home/smesoftc/happypaws.ph/opencart/wk_adminer.php on line 1787
+[16-Jan-2025 15:56:50 Asia/Manila] PHP Warning:  Undefined variable $Ah in /home/smesoftc/happypaws.ph/opencart/wk_adminer.php on line 1787
+[16-Jan-2025 15:56:50 Asia/Manila] PHP Warning:  Undefined variable $Ah in /home/smesoftc/happypaws.ph/opencart/wk_adminer.php on line 1787
+[16-Jan-2025 15:56:50 Asia/Manila] PHP Warning:  Undefined variable $Ah in /home/smesoftc/happypaws.ph/opencart/wk_adminer.php on line 1787
+[16-Jan-2025 15:56:50 Asia/Manila] PHP Warning:  Undefined variable $Ah in /home/smesoftc/happypaws.ph/opencart/wk_adminer.php on line 1787
+[16-Jan-2025 15:56:50 Asia/Manila] PHP Warning:  Undefined variable $Ah in /home/smesoftc/happypaws.ph/opencart/wk_adminer.php on line 1787
+[16-Jan-2025 15:56:50 Asia/Manila] PHP Warning:  Undefined variable $Ah in /home/smesoftc/happypaws.ph/opencart/wk_adminer.php on line 1787
+[16-Jan-2025 15:56:50 Asia/Manila] PHP Warning:  Undefined variable $Ah in /home/smesoftc/happypaws.ph/opencart/wk_adminer.php on line 1787
+[16-Jan-2025 15:56:50 Asia/Manila] PHP Warning:  Undefined variable $Ah in /home/smesoftc/happypaws.ph/opencart/wk_adminer.php on line 1787
+[16-Jan-2025 15:56:50 Asia/Manila] PHP Warning:  Undefined variable $Ah in /home/smesoftc/happypaws.ph/opencart/wk_adminer.php on line 1787
+[16-Jan-2025 15:56:50 Asia/Manila] PHP Warning:  Undefined variable $Ah in /home/smesoftc/happypaws.ph/opencart/wk_adminer.php on line 1787
+[16-Jan-2025 15:56:50 Asia/Manila] PHP Warning:  Undefined variable $Ah in /home/smesoftc/happypaws.ph/opencart/wk_adminer.php on line 1787
+[16-Jan-2025 15:56:50 Asia/Manila] PHP Warning:  Undefined variable $Ah in /home/smesoftc/happypaws.ph/opencart/wk_adminer.php on line 1787
+[16-Jan-2025 15:56:50 Asia/Manila] PHP Warning:  Undefined variable $Ah in /home/smesoftc/happypaws.ph/opencart/wk_adminer.php on line 1787
+[16-Jan-2025 15:56:50 Asia/Manila] PHP Warning:  Undefined variable $Ah in /home/smesoftc/happypaws.ph/opencart/wk_adminer.php on line 1787
+[16-Jan-2025 15:56:50 Asia/Manila] PHP Warning:  Undefined variable $Ah in /home/smesoftc/happypaws.ph/opencart/wk_adminer.php on line 1787
+[16-Jan-2025 15:56:50 Asia/Manila] PHP Warning:  Undefined variable $Ah in /home/smesoftc/happypaws.ph/opencart/wk_adminer.php on line 1787
+[16-Jan-2025 15:56:50 Asia/Manila] PHP Warning:  Undefined variable $Ah in /home/smesoftc/happypaws.ph/opencart/wk_adminer.php on line 1787
+[16-Jan-2025 15:56:50 Asia/Manila] PHP Warning:  Undefined variable $Ah in /home/smesoftc/happypaws.ph/opencart/wk_adminer.php on line 1787
+[16-Jan-2025 15:56:50 Asia/Manila] PHP Warning:  Undefined variable $Ah in /home/smesoftc/happypaws.ph/opencart/wk_adminer.php on line 1787
+[16-Jan-2025 15:56:50 Asia/Manila] PHP Warning:  Undefined variable $Ah in /home/smesoftc/happypaws.ph/opencart/wk_adminer.php on line 1787
+[16-Jan-2025 15:56:50 Asia/Manila] PHP Warning:  Undefined variable $Ah in /home/smesoftc/happypaws.ph/opencart/wk_adminer.php on line 1787
+[16-Jan-2025 15:56:50 Asia/Manila] PHP Warning:  Undefined variable $Ah in /home/smesoftc/happypaws.ph/opencart/wk_adminer.php on line 1787
+[16-Jan-2025 15:56:50 Asia/Manila] PHP Warning:  Undefined variable $Ah in /home/smesoftc/happypaws.ph/opencart/wk_adminer.php on line 1787
+[16-Jan-2025 15:56:50 Asia/Manila] PHP Warning:  Undefined variable $Ah in /home/smesoftc/happypaws.ph/opencart/wk_adminer.php on line 1787
+[16-Jan-2025 15:56:50 Asia/Manila] PHP Warning:  Undefined variable $Ah in /home/smesoftc/happypaws.ph/opencart/wk_adminer.php on line 1787
+[16-Jan-2025 15:56:50 Asia/Manila] PHP Warning:  Undefined variable $Ah in /home/smesoftc/happypaws.ph/opencart/wk_adminer.php on line 1787
+[16-Jan-2025 15:56:50 Asia/Manila] PHP Warning:  Undefined variable $Ah in /home/smesoftc/happypaws.ph/opencart/wk_adminer.php on line 1787
+[16-Jan-2025 15:56:50 Asia/Manila] PHP Warning:  Undefined variable $Ah in /home/smesoftc/happypaws.ph/opencart/wk_adminer.php on line 1787
+[16-Jan-2025 15:56:50 Asia/Manila] PHP Warning:  Undefined variable $Ah in /home/smesoftc/happypaws.ph/opencart/wk_adminer.php on line 1787
+[16-Jan-2025 15:56:50 Asia/Manila] PHP Warning:  Undefined variable $Ah in /home/smesoftc/happypaws.ph/opencart/wk_adminer.php on line 1787
+[16-Jan-2025 15:56:50 Asia/Manila] PHP Warning:  Undefined variable $Ah in /home/smesoftc/happypaws.ph/opencart/wk_adminer.php on line 1787
+[16-Jan-2025 15:56:50 Asia/Manila] PHP Warning:  Undefined variable $Ah in /home/smesoftc/happypaws.ph/opencart/wk_adminer.php on line 1787
+[16-Jan-2025 15:56:50 Asia/Manila] PHP Warning:  Undefined variable $Ah in /home/smesoftc/happypaws.ph/opencart/wk_adminer.php on line 1787
+[16-Jan-2025 15:56:50 Asia/Manila] PHP Warning:  Undefined variable $Ah in /home/smesoftc/happypaws.ph/opencart/wk_adminer.php on line 1787
+[16-Jan-2025 15:56:50 Asia/Manila] PHP Warning:  Undefined variable $Ah in /home/smesoftc/happypaws.ph/opencart/wk_adminer.php on line 1787
+[16-Jan-2025 15:56:50 Asia/Manila] PHP Warning:  Undefined variable $Ah in /home/smesoftc/happypaws.ph/opencart/wk_adminer.php on line 1787
+[16-Jan-2025 15:56:50 Asia/Manila] PHP Warning:  Undefined variable $Ah in /home/smesoftc/happypaws.ph/opencart/wk_adminer.php on line 1787
+[16-Jan-2025 15:56:50 Asia/Manila] PHP Warning:  Undefined variable $Ah in /home/smesoftc/happypaws.ph/opencart/wk_adminer.php on line 1787
+[16-Jan-2025 15:56:50 Asia/Manila] PHP Warning:  Undefined variable $Ah in /home/smesoftc/happypaws.ph/opencart/wk_adminer.php on line 1787
+[16-Jan-2025 15:56:50 Asia/Manila] PHP Warning:  Undefined variable $Ah in /home/smesoftc/happypaws.ph/opencart/wk_adminer.php on line 1787
+[16-Jan-2025 15:56:50 Asia/Manila] PHP Warning:  Undefined variable $Ah in /home/smesoftc/happypaws.ph/opencart/wk_adminer.php on line 1787
+[16-Jan-2025 15:56:50 Asia/Manila] PHP Warning:  Undefined variable $Ah in /home/smesoftc/happypaws.ph/opencart/wk_adminer.php on line 1787
+[16-Jan-2025 15:56:50 Asia/Manila] PHP Warning:  Undefined variable $Ah in /home/smesoftc/happypaws.ph/opencart/wk_adminer.php on line 1787
+[16-Jan-2025 15:56:50 Asia/Manila] PHP Warning:  Undefined variable $Ah in /home/smesoftc/happypaws.ph/opencart/wk_adminer.php on line 1787
+[16-Jan-2025 15:56:50 Asia/Manila] PHP Warning:  Undefined variable $Ah in /home/smesoftc/happypaws.ph/opencart/wk_adminer.php on line 1787
+[16-Jan-2025 15:56:50 Asia/Manila] PHP Warning:  Undefined variable $Ah in /home/smesoftc/happypaws.ph/opencart/wk_adminer.php on line 1787
+[16-Jan-2025 15:56:50 Asia/Manila] PHP Warning:  Undefined variable $Ah in /home/smesoftc/happypaws.ph/opencart/wk_adminer.php on line 1787
+[16-Jan-2025 15:56:50 Asia/Manila] PHP Warning:  Undefined variable $Ah in /home/smesoftc/happypaws.ph/opencart/wk_adminer.php on line 1787
+[16-Jan-2025 15:56:50 Asia/Manila] PHP Warning:  Undefined variable $Ah in /home/smesoftc/happypaws.ph/opencart/wk_adminer.php on line 1787
+[16-Jan-2025 15:56:50 Asia/Manila] PHP Warning:  Undefined variable $Ah in /home/smesoftc/happypaws.ph/opencart/wk_adminer.php on line 1787
+[16-Jan-2025 15:56:50 Asia/Manila] PHP Warning:  Undefined variable $Ah in /home/smesoftc/happypaws.ph/opencart/wk_adminer.php on line 1787
+[16-Jan-2025 15:56:50 Asia/Manila] PHP Warning:  Undefined variable $Ah in /home/smesoftc/happypaws.ph/opencart/wk_adminer.php on line 1787
+[16-Jan-2025 15:56:50 Asia/Manila] PHP Warning:  Undefined variable $Ah in /home/smesoftc/happypaws.ph/opencart/wk_adminer.php on line 1787
+[16-Jan-2025 15:56:50 Asia/Manila] PHP Warning:  Undefined variable $Ah in /home/smesoftc/happypaws.ph/opencart/wk_adminer.php on line 1787
+[16-Jan-2025 15:56:50 Asia/Manila] PHP Warning:  Undefined variable $Ah in /home/smesoftc/happypaws.ph/opencart/wk_adminer.php on line 1787
+[16-Jan-2025 15:56:50 Asia/Manila] PHP Warning:  Undefined variable $Ah in /home/smesoftc/happypaws.ph/opencart/wk_adminer.php on line 1787
+[16-Jan-2025 15:56:50 Asia/Manila] PHP Warning:  Undefined variable $Ah in /home/smesoftc/happypaws.ph/opencart/wk_adminer.php on line 1787
+[16-Jan-2025 15:56:50 Asia/Manila] PHP Warning:  Undefined variable $Ah in /home/smesoftc/happypaws.ph/opencart/wk_adminer.php on line 1787
+[16-Jan-2025 15:56:50 Asia/Manila] PHP Warning:  Undefined variable $Ah in /home/smesoftc/happypaws.ph/opencart/wk_adminer.php on line 1787
+[16-Jan-2025 15:56:50 Asia/Manila] PHP Warning:  Undefined variable $Ah in /home/smesoftc/happypaws.ph/opencart/wk_adminer.php on line 1787
+[16-Jan-2025 15:56:50 Asia/Manila] PHP Warning:  Undefined variable $Ah in /home/smesoftc/happypaws.ph/opencart/wk_adminer.php on line 1787
+[16-Jan-2025 15:56:50 Asia/Manila] PHP Warning:  Undefined variable $Ah in /home/smesoftc/happypaws.ph/opencart/wk_adminer.php on line 1787
+[16-Jan-2025 15:56:50 Asia/Manila] PHP Warning:  Undefined variable $Ah in /home/smesoftc/happypaws.ph/opencart/wk_adminer.php on line 1787
+[16-Jan-2025 15:56:50 Asia/Manila] PHP Warning:  Undefined variable $Ah in /home/smesoftc/happypaws.ph/opencart/wk_adminer.php on line 1787
+[16-Jan-2025 15:56:50 Asia/Manila] PHP Warning:  Undefined variable $Ah in /home/smesoftc/happypaws.ph/opencart/wk_adminer.php on line 1787
+[16-Jan-2025 15:56:50 Asia/Manila] PHP Warning:  Undefined variable $Ah in /home/smesoftc/happypaws.ph/opencart/wk_adminer.php on line 1787
+[16-Jan-2025 15:56:50 Asia/Manila] PHP Warning:  Undefined variable $Ah in /home/smesoftc/happypaws.ph/opencart/wk_adminer.php on line 1787
+[16-Jan-2025 15:56:50 Asia/Manila] PHP Warning:  Undefined variable $Ah in /home/smesoftc/happypaws.ph/opencart/wk_adminer.php on line 1787
+[16-Jan-2025 15:56:50 Asia/Manila] PHP Warning:  Undefined variable $Ah in /home/smesoftc/happypaws.ph/opencart/wk_adminer.php on line 1787
+[16-Jan-2025 15:56:50 Asia/Manila] PHP Warning:  Undefined variable $Ah in /home/smesoftc/happypaws.ph/opencart/wk_adminer.php on line 1787
+[16-Jan-2025 15:56:50 Asia/Manila] PHP Warning:  Undefined variable $Ah in /home/smesoftc/happypaws.ph/opencart/wk_adminer.php on line 1787
+[16-Jan-2025 15:56:50 Asia/Manila] PHP Warning:  Undefined variable $Ah in /home/smesoftc/happypaws.ph/opencart/wk_adminer.php on line 1787
+[16-Jan-2025 15:56:50 Asia/Manila] PHP Warning:  Undefined variable $Ah in /home/smesoftc/happypaws.ph/opencart/wk_adminer.php on line 1787
+[16-Jan-2025 15:56:50 Asia/Manila] PHP Warning:  Undefined variable $Ah in /home/smesoftc/happypaws.ph/opencart/wk_adminer.php on line 1787
+[16-Jan-2025 15:56:50 Asia/Manila] PHP Warning:  Undefined variable $Ah in /home/smesoftc/happypaws.ph/opencart/wk_adminer.php on line 1787
+[16-Jan-2025 15:56:50 Asia/Manila] PHP Warning:  Undefined variable $Ah in /home/smesoftc/happypaws.ph/opencart/wk_adminer.php on line 1787
+[16-Jan-2025 15:56:50 Asia/Manila] PHP Warning:  Undefined variable $Ah in /home/smesoftc/happypaws.ph/opencart/wk_adminer.php on line 1787
+[16-Jan-2025 15:56:50 Asia/Manila] PHP Warning:  Undefined variable $Ah in /home/smesoftc/happypaws.ph/opencart/wk_adminer.php on line 1787
+[16-Jan-2025 15:56:50 Asia/Manila] PHP Warning:  Undefined variable $Ah in /home/smesoftc/happypaws.ph/opencart/wk_adminer.php on line 1787
+[16-Jan-2025 15:56:50 Asia/Manila] PHP Warning:  Undefined variable $Ah in /home/smesoftc/happypaws.ph/opencart/wk_adminer.php on line 1787
+[16-Jan-2025 15:56:50 Asia/Manila] PHP Warning:  Undefined variable $Ah in /home/smesoftc/happypaws.ph/opencart/wk_adminer.php on line 1787
+[16-Jan-2025 15:56:50 Asia/Manila] PHP Warning:  Undefined variable $Ah in /home/smesoftc/happypaws.ph/opencart/wk_adminer.php on line 1787
+[16-Jan-2025 15:56:50 Asia/Manila] PHP Warning:  Undefined variable $Ah in /home/smesoftc/happypaws.ph/opencart/wk_adminer.php on line 1787
+[16-Jan-2025 15:56:50 Asia/Manila] PHP Warning:  Undefined variable $Ah in /home/smesoftc/happypaws.ph/opencart/wk_adminer.php on line 1787
+[16-Jan-2025 15:56:50 Asia/Manila] PHP Warning:  Undefined variable $Ah in /home/smesoftc/happypaws.ph/opencart/wk_adminer.php on line 1787
+[16-Jan-2025 15:56:50 Asia/Manila] PHP Warning:  Undefined variable $Ah in /home/smesoftc/happypaws.ph/opencart/wk_adminer.php on line 1787
+[16-Jan-2025 15:56:50 Asia/Manila] PHP Warning:  Undefined variable $Ah in /home/smesoftc/happypaws.ph/opencart/wk_adminer.php on line 1787
+[16-Jan-2025 15:56:50 Asia/Manila] PHP Warning:  Undefined variable $Ah in /home/smesoftc/happypaws.ph/opencart/wk_adminer.php on line 1787
+[16-Jan-2025 15:56:50 Asia/Manila] PHP Warning:  Undefined variable $Ah in /home/smesoftc/happypaws.ph/opencart/wk_adminer.php on line 1787
+[16-Jan-2025 15:56:50 Asia/Manila] PHP Warning:  Undefined variable $Ah in /home/smesoftc/happypaws.ph/opencart/wk_adminer.php on line 1787
+[16-Jan-2025 15:56:50 Asia/Manila] PHP Warning:  Undefined variable $Ah in /home/smesoftc/happypaws.ph/opencart/wk_adminer.php on line 1787
+[16-Jan-2025 15:56:50 Asia/Manila] PHP Warning:  Undefined variable $Ah in /home/smesoftc/happypaws.ph/opencart/wk_adminer.php on line 1787
+[16-Jan-2025 15:56:50 Asia/Manila] PHP Warning:  Undefined variable $Ah in /home/smesoftc/happypaws.ph/opencart/wk_adminer.php on line 1787
+[16-Jan-2025 15:56:50 Asia/Manila] PHP Warning:  Undefined variable $Ah in /home/smesoftc/happypaws.ph/opencart/wk_adminer.php on line 1787
+[16-Jan-2025 15:56:50 Asia/Manila] PHP Warning:  Undefined variable $Ah in /home/smesoftc/happypaws.ph/opencart/wk_adminer.php on line 1787
+[16-Jan-2025 15:56:50 Asia/Manila] PHP Warning:  Undefined variable $Ah in /home/smesoftc/happypaws.ph/opencart/wk_adminer.php on line 1787
+[16-Jan-2025 15:56:50 Asia/Manila] PHP Warning:  Undefined variable $Ah in /home/smesoftc/happypaws.ph/opencart/wk_adminer.php on line 1787
+[16-Jan-2025 15:56:50 Asia/Manila] PHP Warning:  Undefined variable $Ah in /home/smesoftc/happypaws.ph/opencart/wk_adminer.php on line 1787
+[16-Jan-2025 15:56:50 Asia/Manila] PHP Warning:  Undefined variable $Ah in /home/smesoftc/happypaws.ph/opencart/wk_adminer.php on line 1787
+[16-Jan-2025 15:56:50 Asia/Manila] PHP Warning:  Undefined variable $Ah in /home/smesoftc/happypaws.ph/opencart/wk_adminer.php on line 1787
+[16-Jan-2025 15:56:50 Asia/Manila] PHP Warning:  Undefined variable $Ah in /home/smesoftc/happypaws.ph/opencart/wk_adminer.php on line 1787
+[16-Jan-2025 15:56:50 Asia/Manila] PHP Warning:  Undefined variable $Ah in /home/smesoftc/happypaws.ph/opencart/wk_adminer.php on line 1787
+[16-Jan-2025 15:56:50 Asia/Manila] PHP Warning:  Undefined variable $Ah in /home/smesoftc/happypaws.ph/opencart/wk_adminer.php on line 1787
+[16-Jan-2025 15:56:50 Asia/Manila] PHP Warning:  Undefined variable $Ah in /home/smesoftc/happypaws.ph/opencart/wk_adminer.php on line 1787
+[16-Jan-2025 15:56:50 Asia/Manila] PHP Warning:  Undefined variable $Ah in /home/smesoftc/happypaws.ph/opencart/wk_adminer.php on line 1787
+[16-Jan-2025 15:56:50 Asia/Manila] PHP Warning:  Undefined variable $Ah in /home/smesoftc/happypaws.ph/opencart/wk_adminer.php on line 1787
+[16-Jan-2025 15:56:50 Asia/Manila] PHP Warning:  Undefined variable $Ah in /home/smesoftc/happypaws.ph/opencart/wk_adminer.php on line 1787
+[16-Jan-2025 15:56:50 Asia/Manila] PHP Warning:  Undefined variable $Ah in /home/smesoftc/happypaws.ph/opencart/wk_adminer.php on line 1787
+[16-Jan-2025 15:56:50 Asia/Manila] PHP Warning:  Undefined variable $Ah in /home/smesoftc/happypaws.ph/opencart/wk_adminer.php on line 1787
+[16-Jan-2025 15:56:50 Asia/Manila] PHP Warning:  Undefined variable $Ah in /home/smesoftc/happypaws.ph/opencart/wk_adminer.php on line 1787
+[16-Jan-2025 15:56:50 Asia/Manila] PHP Warning:  Undefined variable $Ah in /home/smesoftc/happypaws.ph/opencart/wk_adminer.php on line 1787
+[16-Jan-2025 15:56:50 Asia/Manila] PHP Warning:  Undefined variable $Ah in /home/smesoftc/happypaws.ph/opencart/wk_adminer.php on line 1787
+[16-Jan-2025 15:56:50 Asia/Manila] PHP Warning:  Undefined variable $Ah in /home/smesoftc/happypaws.ph/opencart/wk_adminer.php on line 1787
+[16-Jan-2025 15:56:50 Asia/Manila] PHP Warning:  Undefined variable $Ah in /home/smesoftc/happypaws.ph/opencart/wk_adminer.php on line 1787
+[16-Jan-2025 15:56:50 Asia/Manila] PHP Warning:  Undefined variable $Ah in /home/smesoftc/happypaws.ph/opencart/wk_adminer.php on line 1787
+[16-Jan-2025 15:56:50 Asia/Manila] PHP Warning:  Undefined variable $Ah in /home/smesoftc/happypaws.ph/opencart/wk_adminer.php on line 1787
+[16-Jan-2025 15:56:50 Asia/Manila] PHP Warning:  Undefined variable $Ah in /home/smesoftc/happypaws.ph/opencart/wk_adminer.php on line 1787
+[16-Jan-2025 15:56:50 Asia/Manila] PHP Warning:  Undefined variable $Ah in /home/smesoftc/happypaws.ph/opencart/wk_adminer.php on line 1787
+[16-Jan-2025 15:56:50 Asia/Manila] PHP Warning:  Undefined variable $Ah in /home/smesoftc/happypaws.ph/opencart/wk_adminer.php on line 1787
+[17-Jan-2025 13:23:50 Asia/Hong_Kong] PHP Parse error:  syntax error, unexpected variable "$this" in /home/smesoftc/happypaws.ph/opencart/catalog/controller/api/customer.php on line 4
+[17-Jan-2025 13:56:42 Asia/Hong_Kong] PHP Parse error:  syntax error, unexpected variable "$this" in /home/smesoftc/happypaws.ph/opencart/catalog/controller/api/customer.php on line 4
+[17-Jan-2025 13:56:46 Asia/Hong_Kong] PHP Parse error:  syntax error, unexpected variable "$this" in /home/smesoftc/happypaws.ph/opencart/catalog/controller/api/customer.php on line 4
+[17-Jan-2025 14:06:16 Asia/Hong_Kong] PHP Parse error:  syntax error, unexpected variable "$this" in /home/smesoftc/happypaws.ph/opencart/catalog/controller/api/customer.php on line 4
+[17-Jan-2025 14:06:23 Asia/Hong_Kong] PHP Parse error:  syntax error, unexpected variable "$this" in /home/smesoftc/happypaws.ph/opencart/catalog/controller/api/customer.php on line 4
+[17-Jan-2025 14:06:52 Asia/Hong_Kong] PHP Parse error:  syntax error, unexpected variable "$this" in /home/smesoftc/happypaws.ph/opencart/catalog/controller/api/customer.php on line 4
+[17-Jan-2025 14:26:40 Asia/Hong_Kong] PHP Parse error:  syntax error, unexpected variable "$this" in /home/smesoftc/happypaws.ph/opencart/catalog/controller/api/customer.php on line 4
+[17-Jan-2025 14:26:53 Asia/Hong_Kong] PHP Parse error:  syntax error, unexpected variable "$this" in /home/smesoftc/happypaws.ph/opencart/catalog/controller/api/customer.php on line 4
+[20-Jan-2025 07:00:33 UTC] PHP Fatal error:  Uncaught Exception: Error: Could not make a database link using smesoftc_ocart3x0x3x9@localhost! in /home/smesoftc/happypaws.ph/opencart/system/library/db/mysqli.php:20
+Stack trace:
+#0 /home/smesoftc/happypaws.ph/opencart/system/library/db.php(31): DB\MySQLi->__construct()
+#1 /home/smesoftc/happypaws.ph/opencart/system/framework.php(80): DB->__construct()
+#2 /home/smesoftc/happypaws.ph/opencart/system/startup.php(104): require_once('/home/smesoftc/...')
+#3 /home/smesoftc/happypaws.ph/opencart/index.php(20): start()
+#4 {main}
+  thrown in /home/smesoftc/happypaws.ph/opencart/system/library/db/mysqli.php on line 20
+[20-Jan-2025 07:00:33 UTC] PHP Fatal error:  Uncaught Exception: Error: Could not make a database link using smesoftc_ocart3x0x3x9@localhost! in /home/smesoftc/happypaws.ph/opencart/system/library/db/mysqli.php:20
+Stack trace:
+#0 /home/smesoftc/happypaws.ph/opencart/system/library/db.php(31): DB\MySQLi->__construct()
+#1 /home/smesoftc/happypaws.ph/opencart/system/framework.php(80): DB->__construct()
+#2 /home/smesoftc/happypaws.ph/opencart/system/startup.php(104): require_once('/home/smesoftc/...')
+#3 /home/smesoftc/happypaws.ph/opencart/index.php(20): start()
+#4 {main}
+  thrown in /home/smesoftc/happypaws.ph/opencart/system/library/db/mysqli.php on line 20
+[21-Jan-2025 15:54:47 Asia/Hong_Kong] PHP Fatal error:  Uncaught Exception: Error: Deadlock found when trying to get lock; try restarting transaction<br />Error No: 1213<br />DELETE FROM oc_cart WHERE (api_id > '0' OR customer_id = '0') AND date_added < DATE_SUB(NOW(), INTERVAL 1 HOUR) in /home/smesoftc/happypaws.ph/opencart/system/library/db/mysqli.php:49
+Stack trace:
+#0 /home/smesoftc/happypaws.ph/opencart/system/library/db.php(45): DB\MySQLi->query()
+#1 /home/smesoftc/happypaws.ph/storage3/modification/system/library/cart/cart.php(21): DB->query()
+#2 /home/smesoftc/happypaws.ph/storage3/modification/catalog/controller/startup/startup.php(235): Cart\Cart->__construct()
+#3 /home/smesoftc/happypaws.ph/storage3/modification/system/engine/action.php(79): ControllerStartupStartup->index()
+#4 /home/smesoftc/happypaws.ph/storage3/modification/system/engine/router.php(72): Action->execute()
+#5 /home/smesoftc/happypaws.ph/storage3/modification/system/engine/router.php(51): Router->execute()
+#6 /home/smesoftc/happypaws.ph/opencart/system/framework.php(169): Router->dispatch()
+#7 /home/smesoftc/happypaws.ph/opencart/system/startup.php(104): require_once('/home/smesoftc/...')
+#8 /home/smesoftc/happypaws.ph/opencart/index.php(20): start()
+#9 {main}
+  thrown in /home/smesoftc/happypaws.ph/opencart/system/library/db/mysqli.php on line 49
+[21-Jan-2025 17:31:51 Asia/Hong_Kong] PHP Fatal error:  Uncaught Exception: Error: Deadlock found when trying to get lock; try restarting transaction<br />Error No: 1213<br />DELETE FROM oc_cart WHERE (api_id > '0' OR customer_id = '0') AND date_added < DATE_SUB(NOW(), INTERVAL 1 HOUR) in /home/smesoftc/happypaws.ph/opencart/system/library/db/mysqli.php:49
+Stack trace:
+#0 /home/smesoftc/happypaws.ph/opencart/system/library/db.php(45): DB\MySQLi->query()
+#1 /home/smesoftc/happypaws.ph/storage3/modification/system/library/cart/cart.php(21): DB->query()
+#2 /home/smesoftc/happypaws.ph/storage3/modification/catalog/controller/startup/startup.php(235): Cart\Cart->__construct()
+#3 /home/smesoftc/happypaws.ph/storage3/modification/system/engine/action.php(79): ControllerStartupStartup->index()
+#4 /home/smesoftc/happypaws.ph/storage3/modification/system/engine/router.php(72): Action->execute()
+#5 /home/smesoftc/happypaws.ph/storage3/modification/system/engine/router.php(51): Router->execute()
+#6 /home/smesoftc/happypaws.ph/opencart/system/framework.php(169): Router->dispatch()
+#7 /home/smesoftc/happypaws.ph/opencart/system/startup.php(104): require_once('/home/smesoftc/...')
+#8 /home/smesoftc/happypaws.ph/opencart/index.php(20): start()
+#9 {main}
+  thrown in /home/smesoftc/happypaws.ph/opencart/system/library/db/mysqli.php on line 49
+[21-Jan-2025 17:31:51 Asia/Hong_Kong] PHP Fatal error:  Uncaught Exception: Error: Deadlock found when trying to get lock; try restarting transaction<br />Error No: 1213<br />DELETE FROM oc_cart WHERE (api_id > '0' OR customer_id = '0') AND date_added < DATE_SUB(NOW(), INTERVAL 1 HOUR) in /home/smesoftc/happypaws.ph/opencart/system/library/db/mysqli.php:49
+Stack trace:
+#0 /home/smesoftc/happypaws.ph/opencart/system/library/db.php(45): DB\MySQLi->query()
+#1 /home/smesoftc/happypaws.ph/storage3/modification/system/library/cart/cart.php(21): DB->query()
+#2 /home/smesoftc/happypaws.ph/storage3/modification/catalog/controller/startup/startup.php(235): Cart\Cart->__construct()
+#3 /home/smesoftc/happypaws.ph/storage3/modification/system/engine/action.php(79): ControllerStartupStartup->index()
+#4 /home/smesoftc/happypaws.ph/storage3/modification/system/engine/router.php(72): Action->execute()
+#5 /home/smesoftc/happypaws.ph/storage3/modification/system/engine/router.php(51): Router->execute()
+#6 /home/smesoftc/happypaws.ph/opencart/system/framework.php(169): Router->dispatch()
+#7 /home/smesoftc/happypaws.ph/opencart/system/startup.php(104): require_once('/home/smesoftc/...')
+#8 /home/smesoftc/happypaws.ph/opencart/index.php(20): start()
+#9 {main}
+  thrown in /home/smesoftc/happypaws.ph/opencart/system/library/db/mysqli.php on line 49
+[26-Mar-2025 08:08:16 UTC] PHP Fatal error:  Uncaught Exception: Error: Could not make a database link using smesoftc_ocart3x0x3x9@localhost! in /home/smesoftc/happypaws.ph/store/system/library/db/mysqli.php:20
+Stack trace:
+#0 /home/smesoftc/happypaws.ph/store/system/library/db.php(31): DB\MySQLi->__construct()
+#1 /home/smesoftc/happypaws.ph/store/system/framework.php(80): DB->__construct()
+#2 /home/smesoftc/happypaws.ph/store/system/startup.php(104): require_once('/home/smesoftc/...')
+#3 /home/smesoftc/happypaws.ph/store/index.php(20): start()
+#4 {main}
+  thrown in /home/smesoftc/happypaws.ph/store/system/library/db/mysqli.php on line 20
+[26-Mar-2025 08:08:20 UTC] PHP Fatal error:  Uncaught Exception: Error: Could not make a database link using smesoftc_ocart3x0x3x9@localhost! in /home/smesoftc/happypaws.ph/store/system/library/db/mysqli.php:20
+Stack trace:
+#0 /home/smesoftc/happypaws.ph/store/system/library/db.php(31): DB\MySQLi->__construct()
+#1 /home/smesoftc/happypaws.ph/store/system/framework.php(80): DB->__construct()
+#2 /home/smesoftc/happypaws.ph/store/system/startup.php(104): require_once('/home/smesoftc/...')
+#3 /home/smesoftc/happypaws.ph/store/index.php(20): start()
+#4 {main}
+  thrown in /home/smesoftc/happypaws.ph/store/system/library/db/mysqli.php on line 20
+[26-Mar-2025 08:08:21 UTC] PHP Fatal error:  Uncaught Exception: Error: Could not make a database link using smesoftc_ocart3x0x3x9@localhost! in /home/smesoftc/happypaws.ph/store/system/library/db/mysqli.php:20
+Stack trace:
+#0 /home/smesoftc/happypaws.ph/store/system/library/db.php(31): DB\MySQLi->__construct()
+#1 /home/smesoftc/happypaws.ph/store/system/framework.php(80): DB->__construct()
+#2 /home/smesoftc/happypaws.ph/store/system/startup.php(104): require_once('/home/smesoftc/...')
+#3 /home/smesoftc/happypaws.ph/store/index.php(20): start()
+#4 {main}
+  thrown in /home/smesoftc/happypaws.ph/store/system/library/db/mysqli.php on line 20
+[26-Mar-2025 08:10:45 UTC] PHP Fatal error:  Uncaught Exception: Error: Could not make a database link using smesoftc_ocart3x0x3x9@localhost! in /home/smesoftc/happypaws.ph/store/system/library/db/mysqli.php:20
+Stack trace:
+#0 /home/smesoftc/happypaws.ph/store/system/library/db.php(31): DB\MySQLi->__construct()
+#1 /home/smesoftc/happypaws.ph/store/system/framework.php(80): DB->__construct()
+#2 /home/smesoftc/happypaws.ph/store/system/startup.php(104): require_once('/home/smesoftc/...')
+#3 /home/smesoftc/happypaws.ph/store/index.php(20): start()
+#4 {main}
+  thrown in /home/smesoftc/happypaws.ph/store/system/library/db/mysqli.php on line 20
+[26-Mar-2025 08:12:28 UTC] PHP Fatal error:  Uncaught Exception: Error: Could not make a database link using smesoftc_ocart3x0x3x9@localhost! in /home/smesoftc/happypaws.ph/store/system/library/db/mysqli.php:20
+Stack trace:
+#0 /home/smesoftc/happypaws.ph/store/system/library/db.php(31): DB\MySQLi->__construct()
+#1 /home/smesoftc/happypaws.ph/store/system/framework.php(80): DB->__construct()
+#2 /home/smesoftc/happypaws.ph/store/system/startup.php(104): require_once('/home/smesoftc/...')
+#3 /home/smesoftc/happypaws.ph/store/index.php(20): start()
+#4 {main}
+  thrown in /home/smesoftc/happypaws.ph/store/system/library/db/mysqli.php on line 20
+[26-Mar-2025 08:16:45 UTC] PHP Fatal error:  Uncaught Exception: Error: Could not make a database link using smesoftc_ocart3x0x3x9@localhost! in /home/smesoftc/happypaws.ph/store/system/library/db/mysqli.php:20
+Stack trace:
+#0 /home/smesoftc/happypaws.ph/store/system/library/db.php(31): DB\MySQLi->__construct()
+#1 /home/smesoftc/happypaws.ph/store/system/framework.php(80): DB->__construct()
+#2 /home/smesoftc/happypaws.ph/store/system/startup.php(104): require_once('/home/smesoftc/...')
+#3 /home/smesoftc/happypaws.ph/store/index.php(20): start()
+#4 {main}
+  thrown in /home/smesoftc/happypaws.ph/store/system/library/db/mysqli.php on line 20
+[26-Mar-2025 08:18:19 UTC] PHP Fatal error:  Uncaught Exception: Error: Could not make a database link using smesoftc_ocart3x0x3x9@localhost! in /home/smesoftc/happypaws.ph/store/system/library/db/mysqli.php:20
+Stack trace:
+#0 /home/smesoftc/happypaws.ph/store/system/library/db.php(31): DB\MySQLi->__construct()
+#1 /home/smesoftc/happypaws.ph/store/system/framework.php(80): DB->__construct()
+#2 /home/smesoftc/happypaws.ph/store/system/startup.php(104): require_once('/home/smesoftc/...')
+#3 /home/smesoftc/happypaws.ph/store/index.php(20): start()
+#4 {main}
+  thrown in /home/smesoftc/happypaws.ph/store/system/library/db/mysqli.php on line 20
+[26-Mar-2025 08:18:21 UTC] PHP Fatal error:  Uncaught Exception: Error: Could not make a database link using smesoftc_ocart3x0x3x9@localhost! in /home/smesoftc/happypaws.ph/store/system/library/db/mysqli.php:20
+Stack trace:
+#0 /home/smesoftc/happypaws.ph/store/system/library/db.php(31): DB\MySQLi->__construct()
+#1 /home/smesoftc/happypaws.ph/store/system/framework.php(80): DB->__construct()
+#2 /home/smesoftc/happypaws.ph/store/system/startup.php(104): require_once('/home/smesoftc/...')
+#3 /home/smesoftc/happypaws.ph/store/index.php(20): start()
+#4 {main}
+  thrown in /home/smesoftc/happypaws.ph/store/system/library/db/mysqli.php on line 20
+[26-Mar-2025 08:19:23 UTC] PHP Fatal error:  Uncaught Exception: Error: Could not make a database link using smesoftc_ocart3x0x3x9@localhost! in /home/smesoftc/happypaws.ph/store/system/library/db/mysqli.php:20
+Stack trace:
+#0 /home/smesoftc/happypaws.ph/store/system/library/db.php(31): DB\MySQLi->__construct()
+#1 /home/smesoftc/happypaws.ph/store/system/framework.php(80): DB->__construct()
+#2 /home/smesoftc/happypaws.ph/store/system/startup.php(104): require_once('/home/smesoftc/...')
+#3 /home/smesoftc/happypaws.ph/store/index.php(20): start()
+#4 {main}
+  thrown in /home/smesoftc/happypaws.ph/store/system/library/db/mysqli.php on line 20
+[26-Mar-2025 08:48:41 UTC] PHP Fatal error:  Uncaught Exception: Error: Could not make a database link using smesoftc_ocart3x0x3x9@localhost! in /home/smesoftc/happypaws.ph/store/system/library/db/mysqli.php:20
+Stack trace:
+#0 /home/smesoftc/happypaws.ph/store/system/library/db.php(31): DB\MySQLi->__construct()
+#1 /home/smesoftc/happypaws.ph/store/system/framework.php(80): DB->__construct()
+#2 /home/smesoftc/happypaws.ph/store/system/startup.php(104): require_once('/home/smesoftc/...')
+#3 /home/smesoftc/happypaws.ph/store/index.php(20): start()
+#4 {main}
+  thrown in /home/smesoftc/happypaws.ph/store/system/library/db/mysqli.php on line 20
+[26-Mar-2025 16:48:45 Asia/Manila] PHP Warning:  Undefined variable $e0H2n in /home/smesoftc/happypaws.ph/store/test.php on line 2
+[26-Mar-2025 16:48:45 Asia/Manila] PHP Warning:  mysqli::__construct(): (28000/1045): Access denied for user 'smesoftc_ocart3x0x3x9'@'localhost' (using password: YES) in /home/smesoftc/happypaws.ph/store/test.php on line 2
+[26-Mar-2025 16:53:27 Asia/Manila] PHP Warning:  mysqli::__construct(): (42000/1044): Access denied for user 'smesoftc_ocart3x0x3x9'@'localhost' to database 'smesoftc_ocart3x0x3x9' in /home/smesoftc/happypaws.ph/store/test.php on line 2
+[26-Mar-2025 09:25:18 UTC] PHP Fatal error:  Uncaught Exception: Error: Could not make a database link using smesoftc_ocart3x0x3x9@localhost! in /home/smesoftc/happypaws.ph/store/system/library/db/mysqli.php:20
+Stack trace:
+#0 /home/smesoftc/happypaws.ph/store/system/library/db.php(31): DB\MySQLi->__construct()
+#1 /home/smesoftc/happypaws.ph/store/system/framework.php(80): DB->__construct()
+#2 /home/smesoftc/happypaws.ph/store/system/startup.php(104): require_once('/home/smesoftc/...')
+#3 /home/smesoftc/happypaws.ph/store/index.php(20): start()
+#4 {main}
+  thrown in /home/smesoftc/happypaws.ph/store/system/library/db/mysqli.php on line 20
+[26-Mar-2025 09:25:20 UTC] PHP Fatal error:  Uncaught Exception: Error: Could not make a database link using smesoftc_ocart3x0x3x9@localhost! in /home/smesoftc/happypaws.ph/store/system/library/db/mysqli.php:20
+Stack trace:
+#0 /home/smesoftc/happypaws.ph/store/system/library/db.php(31): DB\MySQLi->__construct()
+#1 /home/smesoftc/happypaws.ph/store/system/framework.php(80): DB->__construct()
+#2 /home/smesoftc/happypaws.ph/store/system/startup.php(104): require_once('/home/smesoftc/...')
+#3 /home/smesoftc/happypaws.ph/store/index.php(20): start()
+#4 {main}
+  thrown in /home/smesoftc/happypaws.ph/store/system/library/db/mysqli.php on line 20
+[26-Mar-2025 09:25:23 UTC] PHP Fatal error:  Uncaught Exception: Error: Could not make a database link using smesoftc_ocart3x0x3x9@localhost! in /home/smesoftc/happypaws.ph/store/system/library/db/mysqli.php:20
+Stack trace:
+#0 /home/smesoftc/happypaws.ph/store/system/library/db.php(31): DB\MySQLi->__construct()
+#1 /home/smesoftc/happypaws.ph/store/system/framework.php(80): DB->__construct()
+#2 /home/smesoftc/happypaws.ph/store/system/startup.php(104): require_once('/home/smesoftc/...')
+#3 /home/smesoftc/happypaws.ph/store/index.php(20): start()
+#4 {main}
+  thrown in /home/smesoftc/happypaws.ph/store/system/library/db/mysqli.php on line 20
+[26-Mar-2025 09:25:23 UTC] PHP Fatal error:  Uncaught Exception: Error: Could not make a database link using smesoftc_ocart3x0x3x9@localhost! in /home/smesoftc/happypaws.ph/store/system/library/db/mysqli.php:20
+Stack trace:
+#0 /home/smesoftc/happypaws.ph/store/system/library/db.php(31): DB\MySQLi->__construct()
+#1 /home/smesoftc/happypaws.ph/store/system/framework.php(80): DB->__construct()
+#2 /home/smesoftc/happypaws.ph/store/system/startup.php(104): require_once('/home/smesoftc/...')
+#3 /home/smesoftc/happypaws.ph/store/index.php(20): start()
+#4 {main}
+  thrown in /home/smesoftc/happypaws.ph/store/system/library/db/mysqli.php on line 20
+[26-Mar-2025 17:26:26 Asia/Manila] PHP Warning:  require_once(/home/smesoftc/happypaws.ph/stores/system/startup.php): Failed to open stream: No such file or directory in /home/smesoftc/happypaws.ph/store/index.php on line 18
+[26-Mar-2025 17:26:26 Asia/Manila] PHP Fatal error:  Uncaught Error: Failed opening required '/home/smesoftc/happypaws.ph/stores/system/startup.php' (include_path='.:/opt/alt/php80/usr/share/pear:/opt/alt/php80/usr/share/php:/usr/share/pear:/usr/share/php') in /home/smesoftc/happypaws.ph/store/index.php:18
+Stack trace:
+#0 {main}
+  thrown in /home/smesoftc/happypaws.ph/store/index.php on line 18
+[26-Mar-2025 17:26:28 Asia/Manila] PHP Warning:  require_once(/home/smesoftc/happypaws.ph/stores/system/startup.php): Failed to open stream: No such file or directory in /home/smesoftc/happypaws.ph/store/index.php on line 18
+[26-Mar-2025 17:26:28 Asia/Manila] PHP Fatal error:  Uncaught Error: Failed opening required '/home/smesoftc/happypaws.ph/stores/system/startup.php' (include_path='.:/opt/alt/php80/usr/share/pear:/opt/alt/php80/usr/share/php:/usr/share/pear:/usr/share/php') in /home/smesoftc/happypaws.ph/store/index.php:18
+Stack trace:
+#0 {main}
+  thrown in /home/smesoftc/happypaws.ph/store/index.php on line 18
+[26-Mar-2025 17:26:29 Asia/Manila] PHP Warning:  require_once(/home/smesoftc/happypaws.ph/stores/system/startup.php): Failed to open stream: No such file or directory in /home/smesoftc/happypaws.ph/store/index.php on line 18
+[26-Mar-2025 17:26:29 Asia/Manila] PHP Fatal error:  Uncaught Error: Failed opening required '/home/smesoftc/happypaws.ph/stores/system/startup.php' (include_path='.:/opt/alt/php80/usr/share/pear:/opt/alt/php80/usr/share/php:/usr/share/pear:/usr/share/php') in /home/smesoftc/happypaws.ph/store/index.php:18
+Stack trace:
+#0 {main}
+  thrown in /home/smesoftc/happypaws.ph/store/index.php on line 18
+[26-Mar-2025 09:26:47 UTC] PHP Fatal error:  Uncaught Exception: Error: Could not make a database link using smesoftc_ocart3x0x3x9@localhost! in /home/smesoftc/happypaws.ph/store/system/library/db/mysqli.php:20
+Stack trace:
+#0 /home/smesoftc/happypaws.ph/store/system/library/db.php(31): DB\MySQLi->__construct()
+#1 /home/smesoftc/happypaws.ph/store/system/framework.php(80): DB->__construct()
+#2 /home/smesoftc/happypaws.ph/store/system/startup.php(104): require_once('/home/smesoftc/...')
+#3 /home/smesoftc/happypaws.ph/store/index.php(20): start()
+#4 {main}
+  thrown in /home/smesoftc/happypaws.ph/store/system/library/db/mysqli.php on line 20
+[26-Mar-2025 09:26:48 UTC] PHP Fatal error:  Uncaught Exception: Error: Could not make a database link using smesoftc_ocart3x0x3x9@localhost! in /home/smesoftc/happypaws.ph/store/system/library/db/mysqli.php:20
+Stack trace:
+#0 /home/smesoftc/happypaws.ph/store/system/library/db.php(31): DB\MySQLi->__construct()
+#1 /home/smesoftc/happypaws.ph/store/system/framework.php(80): DB->__construct()
+#2 /home/smesoftc/happypaws.ph/store/system/startup.php(104): require_once('/home/smesoftc/...')
+#3 /home/smesoftc/happypaws.ph/store/index.php(20): start()
+#4 {main}
+  thrown in /home/smesoftc/happypaws.ph/store/system/library/db/mysqli.php on line 20
+[04-Apr-2025 11:10:05 Asia/Manila] PHP Fatal error:  Uncaught Twig\Error\SyntaxError: Unexpected token "end of statement block" of value "" in "__string_template__1c9156303299ef6456aae3cf899b2322a7a1daa3ddddb7a8b5dca29373ad1f93" at line 177. in /home/smesoftc/happypaws.ph/store/storage/vendor/twig/twig/src/ExpressionParser.php:284
+Stack trace:
+#0 /home/smesoftc/happypaws.ph/store/storage/vendor/twig/twig/src/ExpressionParser.php(177): Twig\ExpressionParser->parsePrimaryExpression()
+#1 /home/smesoftc/happypaws.ph/store/storage/vendor/twig/twig/src/ExpressionParser.php(72): Twig\ExpressionParser->getPrimary()
+#2 /home/smesoftc/happypaws.ph/store/storage/vendor/twig/twig/src/ExpressionParser.php(85): Twig\ExpressionParser->parseExpression()
+#3 /home/smesoftc/happypaws.ph/store/storage/vendor/twig/twig/src/TokenParser/IfTokenParser.php(38): Twig\ExpressionParser->parseExpression()
+#4 /home/smesoftc/happypaws.ph/store/storage/vendor/twig/twig/src/Parser.php(170): Twig\TokenParser\IfTokenParser->parse()
+#5 /home/smesoftc/happypaws.ph/store/storage/vendor/twig/twig/src/TokenParser/IfTokenParser.php(41): Twig\Parser->subparse()
+#6 /home/smesoftc/happypaws.ph/store/storage/vendor/twig/twig/src/Parser.php(170): Twig\TokenParser\IfTokenParser->parse()
+#7 /home/smesoftc/happypaws.ph/store/storage/vendor/twig/twig/src/TokenParser/ForTokenParser.php(42): Twig\Parser->subparse()
+#8 /home/smesoftc/happypaws.ph/store/storage/vendor/twig/twig/src/Parser.php(170): Twig\TokenParser\ForTokenParser->parse()
+#9 /home/smesoftc/happypaws.ph/store/storage/vendor/twig/twig/src/TokenParser/IfTokenParser.php(41): Twig\Parser->subparse()
+#10 /home/smesoftc/happypaws.ph/store/storage/vendor/twig/twig/src/Parser.php(170): Twig\TokenParser\IfTokenParser->parse()
+#11 /home/smesoftc/happypaws.ph/store/storage/vendor/twig/twig/src/Parser.php(83): Twig\Parser->subparse()
+#12 /home/smesoftc/happypaws.ph/store/storage/vendor/twig/twig/src/Environment.php(491): Twig\Parser->parse()
+#13 /home/smesoftc/happypaws.ph/store/storage/vendor/twig/twig/src/Environment.php(519): Twig\Environment->parse()
+#14 /home/smesoftc/happypaws.ph/store/storage/vendor/twig/twig/src/Environment.php(351): Twig\Environment->compileSource()
+#15 /home/smesoftc/happypaws.ph/store/storage/vendor/twig/twig/src/Environment.php(402): Twig\Environment->loadTemplate()
+#16 /home/smesoftc/happypaws.ph/store/storage/modification/system/library/template/twig.php(66): Twig\Environment->createTemplate()
+#17 /home/smesoftc/happypaws.ph/store/storage/modification/system/library/template.php(57): Template\Twig->render()
+#18 /home/smesoftc/happypaws.ph/store/storage/modification/system/engine/loader.php(134): Template->render()
+#19 /home/smesoftc/happypaws.ph/store/storage/modification/catalog/controller/account/account.php(228): Loader->view()
+#20 /home/smesoftc/happypaws.ph/store/storage/modification/system/engine/action.php(79): ControllerAccountAccount->index()
+#21 /home/smesoftc/happypaws.ph/store/catalog/controller/startup/router.php(25): Action->execute()
+#22 /home/smesoftc/happypaws.ph/store/storage/modification/system/engine/action.php(79): ControllerStartupRouter->index()
+#23 /home/smesoftc/happypaws.ph/store/storage/modification/system/engine/router.php(72): Action->execute()
+#24 /home/smesoftc/happypaws.ph/store/storage/modification/system/engine/router.php(61): Router->execute()
+#25 /home/smesoftc/happypaws.ph/store/system/framework.php(169): Router->dispatch()
+#26 /home/smesoftc/happypaws.ph/store/system/startup.php(104): require_once('/home/smesoftc/...')
+#27 /home/smesoftc/happypaws.ph/store/index.php(20): start()
+#28 {main}
+  thrown in /home/smesoftc/happypaws.ph/store/storage/vendor/twig/twig/src/ExpressionParser.php on line 284
+[04-Apr-2025 11:10:07 Asia/Manila] PHP Fatal error:  Uncaught Twig\Error\SyntaxError: Unexpected token "end of statement block" of value "" in "__string_template__1c9156303299ef6456aae3cf899b2322a7a1daa3ddddb7a8b5dca29373ad1f93" at line 177. in /home/smesoftc/happypaws.ph/store/storage/vendor/twig/twig/src/ExpressionParser.php:284
+Stack trace:
+#0 /home/smesoftc/happypaws.ph/store/storage/vendor/twig/twig/src/ExpressionParser.php(177): Twig\ExpressionParser->parsePrimaryExpression()
+#1 /home/smesoftc/happypaws.ph/store/storage/vendor/twig/twig/src/ExpressionParser.php(72): Twig\ExpressionParser->getPrimary()
+#2 /home/smesoftc/happypaws.ph/store/storage/vendor/twig/twig/src/ExpressionParser.php(85): Twig\ExpressionParser->parseExpression()
+#3 /home/smesoftc/happypaws.ph/store/storage/vendor/twig/twig/src/TokenParser/IfTokenParser.php(38): Twig\ExpressionParser->parseExpression()
+#4 /home/smesoftc/happypaws.ph/store/storage/vendor/twig/twig/src/Parser.php(170): Twig\TokenParser\IfTokenParser->parse()
+#5 /home/smesoftc/happypaws.ph/store/storage/vendor/twig/twig/src/TokenParser/IfTokenParser.php(41): Twig\Parser->subparse()
+#6 /home/smesoftc/happypaws.ph/store/storage/vendor/twig/twig/src/Parser.php(170): Twig\TokenParser\IfTokenParser->parse()
+#7 /home/smesoftc/happypaws.ph/store/storage/vendor/twig/twig/src/TokenParser/ForTokenParser.php(42): Twig\Parser->subparse()
+#8 /home/smesoftc/happypaws.ph/store/storage/vendor/twig/twig/src/Parser.php(170): Twig\TokenParser\ForTokenParser->parse()
+#9 /home/smesoftc/happypaws.ph/store/storage/vendor/twig/twig/src/TokenParser/IfTokenParser.php(41): Twig\Parser->subparse()
+#10 /home/smesoftc/happypaws.ph/store/storage/vendor/twig/twig/src/Parser.php(170): Twig\TokenParser\IfTokenParser->parse()
+#11 /home/smesoftc/happypaws.ph/store/storage/vendor/twig/twig/src/Parser.php(83): Twig\Parser->subparse()
+#12 /home/smesoftc/happypaws.ph/store/storage/vendor/twig/twig/src/Environment.php(491): Twig\Parser->parse()
+#13 /home/smesoftc/happypaws.ph/store/storage/vendor/twig/twig/src/Environment.php(519): Twig\Environment->parse()
+#14 /home/smesoftc/happypaws.ph/store/storage/vendor/twig/twig/src/Environment.php(351): Twig\Environment->compileSource()
+#15 /home/smesoftc/happypaws.ph/store/storage/vendor/twig/twig/src/Environment.php(402): Twig\Environment->loadTemplate()
+#16 /home/smesoftc/happypaws.ph/store/storage/modification/system/library/template/twig.php(66): Twig\Environment->createTemplate()
+#17 /home/smesoftc/happypaws.ph/store/storage/modification/system/library/template.php(57): Template\Twig->render()
+#18 /home/smesoftc/happypaws.ph/store/storage/modification/system/engine/loader.php(134): Template->render()
+#19 /home/smesoftc/happypaws.ph/store/storage/modification/catalog/controller/account/account.php(228): Loader->view()
+#20 /home/smesoftc/happypaws.ph/store/storage/modification/system/engine/action.php(79): ControllerAccountAccount->index()
+#21 /home/smesoftc/happypaws.ph/store/catalog/controller/startup/router.php(25): Action->execute()
+#22 /home/smesoftc/happypaws.ph/store/storage/modification/system/engine/action.php(79): ControllerStartupRouter->index()
+#23 /home/smesoftc/happypaws.ph/store/storage/modification/system/engine/router.php(72): Action->execute()
+#24 /home/smesoftc/happypaws.ph/store/storage/modification/system/engine/router.php(61): Router->execute()
+#25 /home/smesoftc/happypaws.ph/store/system/framework.php(169): Router->dispatch()
+#26 /home/smesoftc/happypaws.ph/store/system/startup.php(104): require_once('/home/smesoftc/...')
+#27 /home/smesoftc/happypaws.ph/store/index.php(20): start()
+#28 {main}
+  thrown in /home/smesoftc/happypaws.ph/store/storage/vendor/twig/twig/src/ExpressionParser.php on line 284
+[04-Apr-2025 11:10:09 Asia/Manila] PHP Fatal error:  Uncaught Twig\Error\SyntaxError: Unexpected token "end of statement block" of value "" in "__string_template__1c9156303299ef6456aae3cf899b2322a7a1daa3ddddb7a8b5dca29373ad1f93" at line 177. in /home/smesoftc/happypaws.ph/store/storage/vendor/twig/twig/src/ExpressionParser.php:284
+Stack trace:
+#0 /home/smesoftc/happypaws.ph/store/storage/vendor/twig/twig/src/ExpressionParser.php(177): Twig\ExpressionParser->parsePrimaryExpression()
+#1 /home/smesoftc/happypaws.ph/store/storage/vendor/twig/twig/src/ExpressionParser.php(72): Twig\ExpressionParser->getPrimary()
+#2 /home/smesoftc/happypaws.ph/store/storage/vendor/twig/twig/src/ExpressionParser.php(85): Twig\ExpressionParser->parseExpression()
+#3 /home/smesoftc/happypaws.ph/store/storage/vendor/twig/twig/src/TokenParser/IfTokenParser.php(38): Twig\ExpressionParser->parseExpression()
+#4 /home/smesoftc/happypaws.ph/store/storage/vendor/twig/twig/src/Parser.php(170): Twig\TokenParser\IfTokenParser->parse()
+#5 /home/smesoftc/happypaws.ph/store/storage/vendor/twig/twig/src/TokenParser/IfTokenParser.php(41): Twig\Parser->subparse()
+#6 /home/smesoftc/happypaws.ph/store/storage/vendor/twig/twig/src/Parser.php(170): Twig\TokenParser\IfTokenParser->parse()
+#7 /home/smesoftc/happypaws.ph/store/storage/vendor/twig/twig/src/TokenParser/ForTokenParser.php(42): Twig\Parser->subparse()
+#8 /home/smesoftc/happypaws.ph/store/storage/vendor/twig/twig/src/Parser.php(170): Twig\TokenParser\ForTokenParser->parse()
+#9 /home/smesoftc/happypaws.ph/store/storage/vendor/twig/twig/src/TokenParser/IfTokenParser.php(41): Twig\Parser->subparse()
+#10 /home/smesoftc/happypaws.ph/store/storage/vendor/twig/twig/src/Parser.php(170): Twig\TokenParser\IfTokenParser->parse()
+#11 /home/smesoftc/happypaws.ph/store/storage/vendor/twig/twig/src/Parser.php(83): Twig\Parser->subparse()
+#12 /home/smesoftc/happypaws.ph/store/storage/vendor/twig/twig/src/Environment.php(491): Twig\Parser->parse()
+#13 /home/smesoftc/happypaws.ph/store/storage/vendor/twig/twig/src/Environment.php(519): Twig\Environment->parse()
+#14 /home/smesoftc/happypaws.ph/store/storage/vendor/twig/twig/src/Environment.php(351): Twig\Environment->compileSource()
+#15 /home/smesoftc/happypaws.ph/store/storage/vendor/twig/twig/src/Environment.php(402): Twig\Environment->loadTemplate()
+#16 /home/smesoftc/happypaws.ph/store/storage/modification/system/library/template/twig.php(66): Twig\Environment->createTemplate()
+#17 /home/smesoftc/happypaws.ph/store/storage/modification/system/library/template.php(57): Template\Twig->render()
+#18 /home/smesoftc/happypaws.ph/store/storage/modification/system/engine/loader.php(134): Template->render()
+#19 /home/smesoftc/happypaws.ph/store/storage/modification/catalog/controller/account/account.php(228): Loader->view()
+#20 /home/smesoftc/happypaws.ph/store/storage/modification/system/engine/action.php(79): ControllerAccountAccount->index()
+#21 /home/smesoftc/happypaws.ph/store/catalog/controller/startup/router.php(25): Action->execute()
+#22 /home/smesoftc/happypaws.ph/store/storage/modification/system/engine/action.php(79): ControllerStartupRouter->index()
+#23 /home/smesoftc/happypaws.ph/store/storage/modification/system/engine/router.php(72): Action->execute()
+#24 /home/smesoftc/happypaws.ph/store/storage/modification/system/engine/router.php(61): Router->execute()
+#25 /home/smesoftc/happypaws.ph/store/system/framework.php(169): Router->dispatch()
+#26 /home/smesoftc/happypaws.ph/store/system/startup.php(104): require_once('/home/smesoftc/...')
+#27 /home/smesoftc/happypaws.ph/store/index.php(20): start()
+#28 {main}
+  thrown in /home/smesoftc/happypaws.ph/store/storage/vendor/twig/twig/src/ExpressionParser.php on line 284
+[04-Apr-2025 11:10:32 Asia/Manila] PHP Fatal error:  Uncaught Twig\Error\SyntaxError: Unexpected token "end of statement block" of value "" in "__string_template__797013523329cb1aaaa7ba7dfe51bfcb65977cbefb9ac805244f1523af08e5ce" at line 177. in /home/smesoftc/happypaws.ph/store/storage/vendor/twig/twig/src/ExpressionParser.php:284
+Stack trace:
+#0 /home/smesoftc/happypaws.ph/store/storage/vendor/twig/twig/src/ExpressionParser.php(177): Twig\ExpressionParser->parsePrimaryExpression()
+#1 /home/smesoftc/happypaws.ph/store/storage/vendor/twig/twig/src/ExpressionParser.php(72): Twig\ExpressionParser->getPrimary()
+#2 /home/smesoftc/happypaws.ph/store/storage/vendor/twig/twig/src/ExpressionParser.php(85): Twig\ExpressionParser->parseExpression()
+#3 /home/smesoftc/happypaws.ph/store/storage/vendor/twig/twig/src/TokenParser/IfTokenParser.php(38): Twig\ExpressionParser->parseExpression()
+#4 /home/smesoftc/happypaws.ph/store/storage/vendor/twig/twig/src/Parser.php(170): Twig\TokenParser\IfTokenParser->parse()
+#5 /home/smesoftc/happypaws.ph/store/storage/vendor/twig/twig/src/TokenParser/IfTokenParser.php(41): Twig\Parser->subparse()
+#6 /home/smesoftc/happypaws.ph/store/storage/vendor/twig/twig/src/Parser.php(170): Twig\TokenParser\IfTokenParser->parse()
+#7 /home/smesoftc/happypaws.ph/store/storage/vendor/twig/twig/src/TokenParser/ForTokenParser.php(42): Twig\Parser->subparse()
+#8 /home/smesoftc/happypaws.ph/store/storage/vendor/twig/twig/src/Parser.php(170): Twig\TokenParser\ForTokenParser->parse()
+#9 /home/smesoftc/happypaws.ph/store/storage/vendor/twig/twig/src/TokenParser/IfTokenParser.php(41): Twig\Parser->subparse()
+#10 /home/smesoftc/happypaws.ph/store/storage/vendor/twig/twig/src/Parser.php(170): Twig\TokenParser\IfTokenParser->parse()
+#11 /home/smesoftc/happypaws.ph/store/storage/vendor/twig/twig/src/Parser.php(83): Twig\Parser->subparse()
+#12 /home/smesoftc/happypaws.ph/store/storage/vendor/twig/twig/src/Environment.php(491): Twig\Parser->parse()
+#13 /home/smesoftc/happypaws.ph/store/storage/vendor/twig/twig/src/Environment.php(519): Twig\Environment->parse()
+#14 /home/smesoftc/happypaws.ph/store/storage/vendor/twig/twig/src/Environment.php(351): Twig\Environment->compileSource()
+#15 /home/smesoftc/happypaws.ph/store/storage/vendor/twig/twig/src/Environment.php(402): Twig\Environment->loadTemplate()
+#16 /home/smesoftc/happypaws.ph/store/storage/modification/system/library/template/twig.php(66): Twig\Environment->createTemplate()
+#17 /home/smesoftc/happypaws.ph/store/storage/modification/system/library/template.php(57): Template\Twig->render()
+#18 /home/smesoftc/happypaws.ph/store/storage/modification/system/engine/loader.php(134): Template->render()
+#19 /home/smesoftc/happypaws.ph/store/storage/modification/catalog/controller/account/account.php(228): Loader->view()
+#20 /home/smesoftc/happypaws.ph/store/storage/modification/system/engine/action.php(79): ControllerAccountAccount->index()
+#21 /home/smesoftc/happypaws.ph/store/catalog/controller/startup/router.php(25): Action->execute()
+#22 /home/smesoftc/happypaws.ph/store/storage/modification/system/engine/action.php(79): ControllerStartupRouter->index()
+#23 /home/smesoftc/happypaws.ph/store/storage/modification/system/engine/router.php(72): Action->execute()
+#24 /home/smesoftc/happypaws.ph/store/storage/modification/system/engine/router.php(61): Router->execute()
+#25 /home/smesoftc/happypaws.ph/store/system/framework.php(169): Router->dispatch()
+#26 /home/smesoftc/happypaws.ph/store/system/startup.php(104): require_once('/home/smesoftc/...')
+#27 /home/smesoftc/happypaws.ph/store/index.php(20): start()
+#28 {main}
+  thrown in /home/smesoftc/happypaws.ph/store/storage/vendor/twig/twig/src/ExpressionParser.php on line 284
+[04-Apr-2025 11:10:34 Asia/Manila] PHP Fatal error:  Uncaught Twig\Error\SyntaxError: Unexpected token "end of statement block" of value "" in "__string_template__797013523329cb1aaaa7ba7dfe51bfcb65977cbefb9ac805244f1523af08e5ce" at line 177. in /home/smesoftc/happypaws.ph/store/storage/vendor/twig/twig/src/ExpressionParser.php:284
+Stack trace:
+#0 /home/smesoftc/happypaws.ph/store/storage/vendor/twig/twig/src/ExpressionParser.php(177): Twig\ExpressionParser->parsePrimaryExpression()
+#1 /home/smesoftc/happypaws.ph/store/storage/vendor/twig/twig/src/ExpressionParser.php(72): Twig\ExpressionParser->getPrimary()
+#2 /home/smesoftc/happypaws.ph/store/storage/vendor/twig/twig/src/ExpressionParser.php(85): Twig\ExpressionParser->parseExpression()
+#3 /home/smesoftc/happypaws.ph/store/storage/vendor/twig/twig/src/TokenParser/IfTokenParser.php(38): Twig\ExpressionParser->parseExpression()
+#4 /home/smesoftc/happypaws.ph/store/storage/vendor/twig/twig/src/Parser.php(170): Twig\TokenParser\IfTokenParser->parse()
+#5 /home/smesoftc/happypaws.ph/store/storage/vendor/twig/twig/src/TokenParser/IfTokenParser.php(41): Twig\Parser->subparse()
+#6 /home/smesoftc/happypaws.ph/store/storage/vendor/twig/twig/src/Parser.php(170): Twig\TokenParser\IfTokenParser->parse()
+#7 /home/smesoftc/happypaws.ph/store/storage/vendor/twig/twig/src/TokenParser/ForTokenParser.php(42): Twig\Parser->subparse()
+#8 /home/smesoftc/happypaws.ph/store/storage/vendor/twig/twig/src/Parser.php(170): Twig\TokenParser\ForTokenParser->parse()
+#9 /home/smesoftc/happypaws.ph/store/storage/vendor/twig/twig/src/TokenParser/IfTokenParser.php(41): Twig\Parser->subparse()
+#10 /home/smesoftc/happypaws.ph/store/storage/vendor/twig/twig/src/Parser.php(170): Twig\TokenParser\IfTokenParser->parse()
+#11 /home/smesoftc/happypaws.ph/store/storage/vendor/twig/twig/src/Parser.php(83): Twig\Parser->subparse()
+#12 /home/smesoftc/happypaws.ph/store/storage/vendor/twig/twig/src/Environment.php(491): Twig\Parser->parse()
+#13 /home/smesoftc/happypaws.ph/store/storage/vendor/twig/twig/src/Environment.php(519): Twig\Environment->parse()
+#14 /home/smesoftc/happypaws.ph/store/storage/vendor/twig/twig/src/Environment.php(351): Twig\Environment->compileSource()
+#15 /home/smesoftc/happypaws.ph/store/storage/vendor/twig/twig/src/Environment.php(402): Twig\Environment->loadTemplate()
+#16 /home/smesoftc/happypaws.ph/store/storage/modification/system/library/template/twig.php(66): Twig\Environment->createTemplate()
+#17 /home/smesoftc/happypaws.ph/store/storage/modification/system/library/template.php(57): Template\Twig->render()
+#18 /home/smesoftc/happypaws.ph/store/storage/modification/system/engine/loader.php(134): Template->render()
+#19 /home/smesoftc/happypaws.ph/store/storage/modification/catalog/controller/account/account.php(228): Loader->view()
+#20 /home/smesoftc/happypaws.ph/store/storage/modification/system/engine/action.php(79): ControllerAccountAccount->index()
+#21 /home/smesoftc/happypaws.ph/store/catalog/controller/startup/router.php(25): Action->execute()
+#22 /home/smesoftc/happypaws.ph/store/storage/modification/system/engine/action.php(79): ControllerStartupRouter->index()
+#23 /home/smesoftc/happypaws.ph/store/storage/modification/system/engine/router.php(72): Action->execute()
+#24 /home/smesoftc/happypaws.ph/store/storage/modification/system/engine/router.php(61): Router->execute()
+#25 /home/smesoftc/happypaws.ph/store/system/framework.php(169): Router->dispatch()
+#26 /home/smesoftc/happypaws.ph/store/system/startup.php(104): require_once('/home/smesoftc/...')
+#27 /home/smesoftc/happypaws.ph/store/index.php(20): start()
+#28 {main}
+  thrown in /home/smesoftc/happypaws.ph/store/storage/vendor/twig/twig/src/ExpressionParser.php on line 284
+[04-Apr-2025 11:10:42 Asia/Manila] PHP Fatal error:  Uncaught Twig\Error\SyntaxError: Unexpected token "end of statement block" of value "" in "__string_template__797013523329cb1aaaa7ba7dfe51bfcb65977cbefb9ac805244f1523af08e5ce" at line 177. in /home/smesoftc/happypaws.ph/store/storage/vendor/twig/twig/src/ExpressionParser.php:284
+Stack trace:
+#0 /home/smesoftc/happypaws.ph/store/storage/vendor/twig/twig/src/ExpressionParser.php(177): Twig\ExpressionParser->parsePrimaryExpression()
+#1 /home/smesoftc/happypaws.ph/store/storage/vendor/twig/twig/src/ExpressionParser.php(72): Twig\ExpressionParser->getPrimary()
+#2 /home/smesoftc/happypaws.ph/store/storage/vendor/twig/twig/src/ExpressionParser.php(85): Twig\ExpressionParser->parseExpression()
+#3 /home/smesoftc/happypaws.ph/store/storage/vendor/twig/twig/src/TokenParser/IfTokenParser.php(38): Twig\ExpressionParser->parseExpression()
+#4 /home/smesoftc/happypaws.ph/store/storage/vendor/twig/twig/src/Parser.php(170): Twig\TokenParser\IfTokenParser->parse()
+#5 /home/smesoftc/happypaws.ph/store/storage/vendor/twig/twig/src/TokenParser/IfTokenParser.php(41): Twig\Parser->subparse()
+#6 /home/smesoftc/happypaws.ph/store/storage/vendor/twig/twig/src/Parser.php(170): Twig\TokenParser\IfTokenParser->parse()
+#7 /home/smesoftc/happypaws.ph/store/storage/vendor/twig/twig/src/TokenParser/ForTokenParser.php(42): Twig\Parser->subparse()
+#8 /home/smesoftc/happypaws.ph/store/storage/vendor/twig/twig/src/Parser.php(170): Twig\TokenParser\ForTokenParser->parse()
+#9 /home/smesoftc/happypaws.ph/store/storage/vendor/twig/twig/src/TokenParser/IfTokenParser.php(41): Twig\Parser->subparse()
+#10 /home/smesoftc/happypaws.ph/store/storage/vendor/twig/twig/src/Parser.php(170): Twig\TokenParser\IfTokenParser->parse()
+#11 /home/smesoftc/happypaws.ph/store/storage/vendor/twig/twig/src/Parser.php(83): Twig\Parser->subparse()
+#12 /home/smesoftc/happypaws.ph/store/storage/vendor/twig/twig/src/Environment.php(491): Twig\Parser->parse()
+#13 /home/smesoftc/happypaws.ph/store/storage/vendor/twig/twig/src/Environment.php(519): Twig\Environment->parse()
+#14 /home/smesoftc/happypaws.ph/store/storage/vendor/twig/twig/src/Environment.php(351): Twig\Environment->compileSource()
+#15 /home/smesoftc/happypaws.ph/store/storage/vendor/twig/twig/src/Environment.php(402): Twig\Environment->loadTemplate()
+#16 /home/smesoftc/happypaws.ph/store/storage/modification/system/library/template/twig.php(66): Twig\Environment->createTemplate()
+#17 /home/smesoftc/happypaws.ph/store/storage/modification/system/library/template.php(57): Template\Twig->render()
+#18 /home/smesoftc/happypaws.ph/store/storage/modification/system/engine/loader.php(134): Template->render()
+#19 /home/smesoftc/happypaws.ph/store/storage/modification/catalog/controller/account/account.php(228): Loader->view()
+#20 /home/smesoftc/happypaws.ph/store/storage/modification/system/engine/action.php(79): ControllerAccountAccount->index()
+#21 /home/smesoftc/happypaws.ph/store/catalog/controller/startup/router.php(25): Action->execute()
+#22 /home/smesoftc/happypaws.ph/store/storage/modification/system/engine/action.php(79): ControllerStartupRouter->index()
+#23 /home/smesoftc/happypaws.ph/store/storage/modification/system/engine/router.php(72): Action->execute()
+#24 /home/smesoftc/happypaws.ph/store/storage/modification/system/engine/router.php(61): Router->execute()
+#25 /home/smesoftc/happypaws.ph/store/system/framework.php(169): Router->dispatch()
+#26 /home/smesoftc/happypaws.ph/store/system/startup.php(104): require_once('/home/smesoftc/...')
+#27 /home/smesoftc/happypaws.ph/store/index.php(20): start()
+#28 {main}
+  thrown in /home/smesoftc/happypaws.ph/store/storage/vendor/twig/twig/src/ExpressionParser.php on line 284

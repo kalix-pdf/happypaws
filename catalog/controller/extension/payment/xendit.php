@@ -1,0 +1,108 @@
+<?php
+class ControllerExtensionPaymentXendit extends Controller {
+    public function index() 
+    {
+        return $this->load->view('extension/payment/xendit');
+    }
+    public function confirm() {
+    $api_key = 'xnd_development_6A6zlkIT7VN0Pvyekf3SDMJoQGUxsNMU4CFaHU0fKJcQKRyFhzaq2EyDuauGm'; 
+    $this->load->model('checkout/order');
+
+    $totals = array();
+    $total_data = array(
+        'totals' => &$totals,
+    );
+    foreach ($totals as $key => $value) {
+        $sort_order[$key] = $value['sort_order'];
+    }
+
+    $order_data['totals'] = $totals;
+
+    foreach ($this->cart->getProducts() as $product) {
+				$option_data = array();
+
+				foreach ($product['option'] as $option) {
+					$option_data[] = array(
+						'product_option_id'       => $option['product_option_id'],
+						'product_option_value_id' => $option['product_option_value_id'],
+						'option_id'               => $option['option_id'],
+						'option_value_id'         => $option['option_value_id'],
+						'name'                    => $option['name'],
+						'value'                   => $option['value'],
+						'type'                    => $option['type']
+					);
+				}
+
+				$order_data['products'][] = array(
+					'product_id' => $product['product_id'],
+					'name'       => $product['name'],
+					'model'      => $product['model'],
+					'option'     => $option_data,
+					'download'   => $product['download'],
+					'quantity'   => $product['quantity'],
+					'subtract'   => $product['subtract'],
+					'price'      => $product['price'],
+					'total'      => $product['total'],
+					'tax'        => $this->tax->getTax($product['price'], $product['tax_class_id']),
+					'reward'     => $product['reward']
+				);
+
+            }
+           
+            $data = [
+                'external_id' => 'https://checkout-staging.xendit.co/od/payment-hp',
+                'amount' => $product['total'] + 39, 
+                'items' => [
+                    [
+                        'name' => $product['name'],
+                        'quantity' => $product['quantity'],
+                        'price' => $product['total'] + 39,
+                        // 'url' => 'https://yourcompany.com/example_item'
+                    ]
+                ]
+            ];
+
+    // Initialize cURL session
+    $ch = curl_init();
+
+    // Set cURL options
+    curl_setopt($ch, CURLOPT_URL, 'https://api.xendit.co/v2/invoices');
+    curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+    curl_setopt($ch, CURLOPT_POST, true);
+    curl_setopt($ch, CURLOPT_POSTFIELDS, json_encode($data));
+    curl_setopt($ch, CURLOPT_HTTPHEADER, [
+        'Content-Type: application/json',
+        'Authorization: Basic ' . base64_encode($api_key . ':') 
+    ]);
+
+    $response = curl_exec($ch);
+
+    // Check for errors
+    if (curl_errno($ch)) {
+        echo 'Error: ' . curl_error($ch);
+        curl_close($ch);
+        return;
+    }
+    $response_data = json_decode($response, true);
+
+    // Check if the response contains the invoice URL
+    if (isset($response_data['invoice_url'])) {
+        $this->response->addHeader('Content-Type: application/json');
+        $this->response->setOutput(json_encode([
+            'redirect' => $response_data['invoice_url']
+        ]));
+    } else {
+        echo '<pre>';
+        echo "Raw Response:\n";
+        print_r($response);
+        echo "\nDecoded Response:\n";
+        print_r($response_data);
+        echo '</pre>';
+    }
+    
+
+    // Close cURL session
+    curl_close($ch);
+
+	}
+}

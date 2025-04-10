@@ -1,0 +1,203 @@
+{% if module_marketplace_status and marketplace_becomepartnerregistration %}
+
+<fieldset>
+  <legend>{{ text_register_becomePartner }}</legend>
+  <div class="form-group">
+    <label class="col-sm-2 control-label">Be a MeowChant!</label>
+    <div class="col-sm-10">
+      {% if tobecomepartner %}
+      <label class="radio-inline">
+        <input type="radio" name="tobecomepartner" value="1" checked="checked" />
+        {{ text_yes }}</label>
+      <label class="radio-inline">
+        <input type="radio" name="tobecomepartner" value="0" />
+        {{ text_no }}</label>
+      {% else %}
+      <label class="radio-inline">
+        <input type="radio" name="tobecomepartner" value="1" />
+        {{ text_yes }}</label>
+      <label class="radio-inline">
+        <input type="radio" name="tobecomepartner" value="0" checked="checked" />
+        {{ text_no }}</label>
+      {% endif %}
+    </div>
+  </div>
+
+  <div class="form-group required hide" id="fg-shoppartner">
+    <label class="col-sm-2 control-label" for="input-shop">{{ text_shop_name }}</label>
+    <div class="col-sm-10">
+      <div class="input-group">
+        <span class="input-group-addon"><i class="fa fa-search"></i></span>
+        <input type="text" name="shoppartner" value="{{ shoppartner }}" placeholder="{{ text_shop_name }}" id="input-shop" class="form-control" />
+        
+      </div>
+      
+      <!--<li style="line-height: 2"><a href="https://docs.google.com/forms/d/e/1FAIpQLSdKV53yIaBZAuyvwEmYHPWGxx7OFKkg0Z92MprbO7CUJ_SCIw/viewform" target="_blank">UPLOAD YOUR DOCUMENTS HERE</a>
+      </li>-->
+      {% if error_shoppartner %}
+        <div class="text-danger">{{ error_shoppartner }}</div>
+      {% endif %}
+      {% if error_shoppartner %}
+      <div class="text-danger">{{ error_shoppartner }}</div>
+      {% endif %}
+    </div><br> <br>
+    <legend class="fs-5 mt-4">Upload your documents here:</legend> 
+    <label class="col-sm-2 control-label">BIR 2303/TIN:</label>
+    <div class="col-sm-10 mt-3">
+        <div class="input-group">
+          <input type="file" name="birfile" value="birfile" id="birfile" class="form-control mt-3">
+        </div>
+    </div>
+    
+    <label class="col-sm-2 control-label">DTI: </label>
+    <div class="col-sm-10 mt-3">
+        <div class="input-group">
+          <input type="file" name="dtifile" value="dtifile" id="dtifile" class="form-control">
+        </div>
+    </div>
+    <label class="col-sm-2 control-label">Mayor's Permit: </label>
+    <div class="col-sm-10 mt-3">
+        <div class="input-group mt-3">
+          <input type="file" name="mayorfile" value="mayorfile" id="mayorfile" class="form-control">
+        </div>
+    </div>
+    <label class="col-sm-2 control-label">Valid Government Issued I.D: </label>
+    <div class="col-sm-10 mt-3">
+        <div class="input-group mt-3">
+          <input type="file" name="validid" value="validid" id="validid" class="form-control">
+        </div>
+    </div>
+    {# 2303/TIN
+    mayors Permit
+    valid govt issued id #}
+    
+  </div>
+
+</fieldset>
+
+<script>
+
+  {% if tobecomepartner %}
+    $('#fg-shoppartner').removeClass('hide');
+  {% endif %}
+
+  $('input[name=\'tobecomepartner\']').on('change', function() {
+    if ($(this).val() == 1) {
+      $('#fg-shoppartner').removeClass('hide');
+    } else {
+      $('#fg-shoppartner').addClass('hide');
+    }
+  });
+
+    $( "#input-shop" ).change(function() {
+      thisshop = this;
+      shop = $(thisshop).val();
+
+      if(shop){
+
+        jQuery(thisshop).prev().html('<i class="fa fa-spinner fa-spin"></i>');
+
+        $.ajax({
+               type: 'POST',
+               data: ({shop: shop}),
+               dataType: 'json',
+               url: 'index.php?route=customerpartner/sell/wkmpregistation',
+               success: function(data){
+
+                  if(data['success']){
+                    jQuery(thisshop).prev().html('<span data-toggle="tooltip" class="text-success" title="{{ text_avaiable }}"><i class="fa fa-thumbs-o-up"></i></span>');
+                  }else if(data['error']){
+                    jQuery(thisshop).prev().html('<span data-toggle="tooltip" class="text-danger" title="{{ text_no_avaiable }}"><i class="fa fa-thumbs-o-down"></i></span>');
+                  }
+
+                }
+            });
+      }
+    });
+    
+
+    //handle file upload
+  $('#birfile, #dtifile, #mayorfile, #validid').change(function () {
+    var formData = new FormData();
+    var birFile = $('#birfile')[0].files[0];
+    var dtiFile = $('#dtifile')[0].files[0];
+    var mayorFile = $('#mayorfile')[0].files[0];
+    var validIdFile = $('#validid')[0].files[0];
+
+    if (!birFile || !dtiFile) {
+        alert("BIR, DTI, Mayor's Permit, and Valid ID files are required.");
+        return;
+    }
+
+    formData.append('birfile', birFile);
+    formData.append('dtifile', dtiFile);
+    formData.append('mayorfile', mayorFile);
+    formData.append('validid', validIdFile);
+
+    $.ajax({
+        type: 'POST',
+        url: 'index.php?route=customerpartner/sell/wkmpregistration1',
+        data: formData,
+        contentType: false,
+        processData: false,
+        dataType: 'json',
+        beforeSend: function () {
+            $('.file-upload-feedback').html('<i class="fa fa-spinner fa-spin"></i> Uploading...');
+        },
+        success: function (response) {
+            $('.file-upload-feedback').html(''); // Clear all messages
+
+            if (response.success) {
+                $.each(response.success, function (key, message) {
+                    $('#' + key).prev().append(
+                        '<span class="text-success"><i class="fa fa-thumbs-up"></i> ' + message + '</span><br>'
+                    );
+                });
+            }
+
+            if (response.error) {
+                $.each(response.error, function (key, message) {
+                    $('#' + key).prev().append(
+                        '<span class="text-danger"><i class="fa fa-exclamation-triangle"></i> ' + message + '</span><br>'
+                    );
+                });
+
+                if (response.error.files) {
+                    alert(response.error.files);
+                }
+            }
+        }
+    });
+});
+
+
+    {# $('#birfile').change(function () {
+    var fileInput = this;
+
+    if (fileInput.files.length > 0) {
+        var formData = new FormData();
+        formData.append('birfile', fileInput.files[0]); 
+
+        $.ajax({
+            type: 'POST',
+            url: 'index.php?route=customerpartner/sell/wkmpregistation1',
+            data: formData,
+            contentType: false,
+            processData: false,
+            dataType: 'json',
+            beforeSend: function () {
+                $(fileInput).prev().html('<i class="fa fa-spinner fa-spin"></i> Uploading...');
+            },
+            success: function (response) {
+                if (response.success) {
+                    $(fileInput).prev().html('<span class="text-success"><i class="fa fa-thumbs-up"></i> ' + response.success + '</span>');
+                } else {
+                    $(fileInput).prev().html('<span class="text-danger"><i class="fa fa-exclamation-triangle"></i> ' + response.error + '</span>');
+                }
+            }
+        });
+    }
+}); #}
+
+</script>
+{% endif %}
