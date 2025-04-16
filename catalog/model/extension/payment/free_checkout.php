@@ -1,6 +1,6 @@
 <?php
 class ModelExtensionPaymentFreeCheckout extends Model {
-	public function getMethod($address, $total) {
+	public function getMethod($total) {
 		$this->load->language('extension/payment/free_checkout');
 
 		if ($total <= 0.00) {

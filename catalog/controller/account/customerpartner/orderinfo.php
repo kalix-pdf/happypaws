@@ -24,6 +24,7 @@ class ControllerAccountCustomerpartnerOrderinfo extends Controller
 			}
 		}
 
+		
 		$this->load->model('account/customerpartner');
 
 		$data['chkIsPartner'] = $this->model_account_customerpartner->chkIsPartner();
@@ -36,6 +37,16 @@ class ControllerAccountCustomerpartnerOrderinfo extends Controller
 		} else {
 			$order_id = 0;
 		}
+
+		$query = $this->db->query("SELECT flash_inv FROM `" . DB_PREFIX . "customerpartner_to_order` WHERE order_id = '" . (int)$order_id . "'");
+		$labelFile = $query->row['flash_inv'];
+
+		if ($labelFile) {
+			$data['download_label_link'] = HTTP_SERVER . "inv.php?file=" . urlencode($labelFile);
+		} else {
+			$data['download_label_link'] = '';
+		}
+
 
 		if (($this->request->server['REQUEST_METHOD'] == 'POST')) {
 

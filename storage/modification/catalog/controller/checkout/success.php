@@ -3,42 +3,6 @@ class ControllerCheckoutSuccess extends Controller {
 	public function index() {
 		$this->load->language('checkout/success');
 
-		//load order model. Custom//
-		// $this->load->model('checkout/order');
-		
-		// $order_data = $this->model_checkout_order->getOrder($order_id);
-		// $products = $this->model_checkout_order->getOrderProducts($order_id);
-
-		// $data['flash_order'] = array(
-		// 	"order_no" => isset($order_data['order_id']) ? $order_data['order_id'] : '',
-		// 	"recipient" => array(
-		// 		"name" => trim($order_data['firstname'] . ' ' . $order_data['lastname']),
-		// 		"Mobile Number" => isset($order_data['telephone']) ? $order_data['telephone'] : '',
-		// 		"address" => isset($order_data['shipping_address_1']) ? $order_data['shipping_address_1'] : '',
-		// 		"postcode" => isset($order_data['shipping_postcode']) ? $order_data['shipping_postcode'] : '',
-		// 		"city" => isset($order_data['shipping_city']) ? $order_data['shipping_city'] : '',
-		// 		"country" => isset($order_data['shipping_country']) ? $order_data['shipping_country'] : '',
-		// 	),
-		// );
-		
-		// $data['products'] = array(); // Ensure it's an array
-		
-		// if (!empty($products)) {
-		// 	foreach ($products as $product) {
-		// 		$data['products'][] = array(
-		// 			'name'     => $product['name'],
-		// 			'quantity' => $product['quantity'],
-		// 			'price'    => $this->currency->format(
-		// 				$product['price'],
-		// 				$order_data['currency_code'],
-		// 				$order_data['currency_value']
-		// 			)
-		// 		);
-		// 	}
-		// }
-		
-		
-
 		if (isset($this->session->data['order_id'])) {
 
         if ($this->config->get('module_marketplace_status') && $this->config->get('module_wk_crosssell_crosssell_status')) {

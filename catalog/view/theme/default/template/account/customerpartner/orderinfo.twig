@@ -48,14 +48,21 @@
           {% if (order_status_by_order in order_status) %}
             {% if order_status['name'] == 'Pending' %}
               <a href="" class="btn btn-danger pull-right">Decline</a>
-              <a href="index.php?route=extension/flashexpress_api&order_id={{ order_id }}" class="btn btn-primary pull-right m-3">Accept</a>
-            {% endif %}
+              <button type="button" 
+                      class="btn btn-primary pull-right m-3 accept-order-btn" 
+                      data-order-id="{{ order_id }}">
+                  Accept
+              </button>
+              {% endif %}
             {% if order_status['name'] == 'Canceled' %}
               <div class="alert alert-info alert-dismissible">
               <i class="fa fa-exclamation-circle"></i> Your buyer canceled their order  
               </div>
             {% endif %}
             {% if order_status['name'] == 'Processing' %}
+              {% if download_label_link %}
+                  <a href="{{ download_label_link }}" target="_blank" class="btn btn-primary">Download Label</a>
+              {% endif %}
               <div class="alert alert-info alert-dismissible">
               <i class="fa fa-exclamation-circle"></i> Please prepare the parcel and wait for the courier to pick it up  
               </div>
@@ -400,6 +407,37 @@ $('#button-history').on('click', function() {
     change_order_status(order_id,order_status_id,product_ids,comment);
 });
 </script>
+{# accept order #}
+
+<script type="text/javascript">
+  $(document).ready(function () {
+    $('.accept-order-btn').on('click', function (e) {
+      e.preventDefault();
+
+      var orderId = $(this).data('order-id');
+
+      $.ajax({
+        url: 'index.php?route=extension/flashexpress_api&order_id=' + orderId,
+        type: 'GET',
+        dataType: 'json',
+        success: function (response) {
+          if (response.success) {
+            alert('Order accepted successfully!');
+            // Optionally update UI here
+            location.reload();
+          } else {
+            alert('Error: ' + (response.error || 'Unknown error'));
+          }
+        },
+        error: function (xhr, status, error) {
+          alert('AJAX Error: ' + error);
+        }
+      });
+    });
+  });
+</script>
+
+
 <style type="text/css">
   .order-info-buttons{
     background-color: blue;

@@ -1,4 +1,4 @@
-{% if not redirect %}
+
 <div class="table-responsive">
   <table class="table table-bordered table-hover">
     <thead>
@@ -35,7 +35,7 @@
     {% endfor %}
       </tbody>
     
-    <tfoot>
+    {# <tfoot>
     
     {% for total in totals %}
     <tr>
@@ -43,13 +43,8 @@
       <td class="text-right">{{ total.text }}</td>
     </tr>
     {% endfor %}
-      </tfoot>
+      </tfoot> #}
     
   </table>
 </div>
 {{ payment }}
-{% else %} 
-<script type="text/javascript"><!--
-location = '{{ redirect }}';
-//--></script> 
-{% endif %} 

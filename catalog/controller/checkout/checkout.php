@@ -1,6 +1,16 @@
 <?php
 class ControllerCheckoutCheckout extends Controller {
 	public function index() {
+
+		if (!$this->customer->isLogged()) {
+			$this->response->redirect($this->url->link('account/login'));			
+		}
+
+		$this->load->model('account/customerpartner');
+		$this->load->model('customerpartner/master');
+		$this->load->model('tool/image');
+		$this->load->model('tool/upload');
+		
 		// Validate cart has products and has stock.
 		if ((!$this->cart->hasProducts() && empty($this->session->data['vouchers'])) || (!$this->cart->hasStock() && !$this->config->get('config_stock_checkout'))) {
 			$this->response->redirect($this->url->link('checkout/cart'));
@@ -22,6 +32,37 @@ class ControllerCheckoutCheckout extends Controller {
 				$this->response->redirect($this->url->link('checkout/cart'));
 			}
 		}
+
+		foreach ($this->cart->getProducts() as $product) {
+
+			$option_data = array();
+			$data['images'][] = $this->model_tool_image->resize($product['image'], 150, 150);
+
+			foreach ($product['option'] as $option) {
+				$option_data[] = array(
+					'product_option_id'       => $option['product_option_id'],
+					'product_option_value_id' => $option['product_option_value_id'],
+					'option_id'               => $option['option_id'],
+					'option_value_id'         => $option['option_value_id'],
+					'name'                    => $option['name'],
+					'value'                   => $option['value'],
+					'type'                    => $option['type']
+				);
+			}
+
+			$check_seller = $this->model_account_customerpartner->getProductSellerDetails($product['product_id']);
+			$partner = $this->model_customerpartner_master->getProfile($check_seller['customer_id']);  
+
+			$data['product_info'][] = array(
+				'name' => $product['name'],
+				'quantity' => $product['quantity'],
+				'store' => $partner['companyname'],
+				'seller_id' => $partner['customer_id'],
+				'product_id' => $product['product_id']
+			);
+		}
+
+		
 
 		$this->load->language('checkout/checkout');
 
@@ -84,6 +125,11 @@ class ControllerCheckoutCheckout extends Controller {
 		}
 
 		$data['shipping_required'] = $this->cart->hasShipping();
+		$data['shipping_method'] = $this->load->controller('checkout/shipping_method');
+		$data['order_summary'] = $this->load->controller('checkout/confirm');
+		$data['shipping_add'] = $this->load->controller('checkout/shipping_address');
+		$data['payment_method'] = $this->load->controller('checkout/payment_method');
+		$data['payment_details'] = $this->load->controller('checkout/payment_details');
 
 		$data['column_left'] = $this->load->controller('common/column_left');
 		$data['column_right'] = $this->load->controller('common/column_right');
@@ -95,54 +141,4 @@ class ControllerCheckoutCheckout extends Controller {
 		$this->response->setOutput($this->load->view('checkout/checkout', $data));
 	}
 
-	public function country() {
-		$json = array();
-
-		$this->load->model('localisation/country');
-
-		$country_info = $this->model_localisation_country->getCountry($this->request->get['country_id']);
-
-		if ($country_info) {
-			$this->load->model('localisation/zone');
-
-			$json = array(
-				'country_id'        => $country_info['country_id'],
-				'name'              => $country_info['name'],
-				'iso_code_2'        => $country_info['iso_code_2'],
-				'iso_code_3'        => $country_info['iso_code_3'],
-				'address_format'    => $country_info['address_format'],
-				'postcode_required' => $country_info['postcode_required'],
-				'zone'              => $this->model_localisation_zone->getZonesByCountryId($this->request->get['country_id']),
-				'status'            => $country_info['status']
-			);
-		}
-
-		$this->response->addHeader('Content-Type: application/json');
-		$this->response->setOutput(json_encode($json));
-	}
-
-	public function customfield() {
-		$json = array();
-
-		$this->load->model('account/custom_field');
-
-		// Customer Group
-		if (isset($this->request->get['customer_group_id']) && is_array($this->config->get('config_customer_group_display')) && in_array($this->request->get['customer_group_id'], $this->config->get('config_customer_group_display'))) {
-			$customer_group_id = $this->request->get['customer_group_id'];
-		} else {
-			$customer_group_id = $this->config->get('config_customer_group_id');
-		}
-
-		$custom_fields = $this->model_account_custom_field->getCustomFields($customer_group_id);
-
-		foreach ($custom_fields as $custom_field) {
-			$json[] = array(
-				'custom_field_id' => $custom_field['custom_field_id'],
-				'required'        => $custom_field['required']
-			);
-		}
-
-		$this->response->addHeader('Content-Type: application/json');
-		$this->response->setOutput(json_encode($json));
-	}
 }

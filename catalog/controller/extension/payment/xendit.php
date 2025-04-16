@@ -2,9 +2,7 @@
 class ControllerExtensionPaymentXendit extends Controller {
     public function index() 
     {
-        return $this->load->view('extension/payment/xendit');
-    }
-    public function confirm() {
+    
     $api_key = 'xnd_development_6A6zlkIT7VN0Pvyekf3SDMJoQGUxsNMU4CFaHU0fKJcQKRyFhzaq2EyDuauGm'; 
     $this->load->model('checkout/order');
 
@@ -85,12 +83,14 @@ class ControllerExtensionPaymentXendit extends Controller {
     }
     $response_data = json_decode($response, true);
 
-    // Check if the response contains the invoice URL
     if (isset($response_data['invoice_url'])) {
-        $this->response->addHeader('Content-Type: application/json');
-        $this->response->setOutput(json_encode([
-            'redirect' => $response_data['invoice_url']
-        ]));
+        $this->response->redirect($response_data['invoice_url']);
+
+        //for ajax use
+        // $this->response->addHeader('Content-Type: application/json');
+        // $this->response->setOutput(json_encode([
+        //     'redirect' => $response_data['invoice_url']
+        // ]));
     } else {
         echo '<pre>';
         echo "Raw Response:\n";

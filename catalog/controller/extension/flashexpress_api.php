@@ -5,7 +5,9 @@
     define("conUrl", "https://open-api-tra.flashexpress.ph/open/v3/orders");
     define("warehouses", "https://open-api-tra.flashexpress.ph/open/v1/warehouses");
 
+    define("preprintUrl", "https://open-api-tra.flashexpress.ph/open/v1/orders/{pno}/pre_print"); //the {pno} is from api:orders
     define("queryUrl", "https://open-api-tra.flashexpress.ph/open/v1/orders/{pno}/routes");
+    define("downloadDir", DIR_APPLICATION. "controller/account/customerpartner/download_inv/");
 
     define("cancelOrder", "https://open-api-tra.flashexpress.ph/open/v1/orders/{pno}/cancel");
 
@@ -60,11 +62,79 @@ class ControllerExtensionFlashExpressAPI extends Controller {
 		
 		$responseText = curl_exec ( $curl );
 		if (curl_errno ( $curl )) {
-				echo 'Errno' . curl_error ( $curl );
+				return curl_error($curl);
 		}
 		curl_close ( $curl );
 		return $responseText;
 	}
+
+    //DOWNLOADS INV
+    function postRequestAndDownload($url, $postData, $saveDir)
+	{
+		$curl = curl_init ();
+		$header[] = "Content-type: application/x-www-form-urlencoded";
+		$header[] = "Accept: application/json";
+		$header[] = "Accept-Language: th";
+		curl_setopt ( $curl, CURLOPT_URL, $url );
+		curl_setopt ( $curl, CURLOPT_SSL_VERIFYPEER, false ); // SSL certificate
+		curl_setopt ( $curl, CURLOPT_SSL_VERIFYHOST, false );
+		curl_setopt ( $curl, CURLOPT_HEADER, 1 );
+		curl_setopt ( $curl, CURLOPT_HTTPHEADER, $header );
+		curl_setopt ( $curl, CURLOPT_RETURNTRANSFER, 1 );
+		curl_setopt ( $curl, CURLOPT_POST, true ); // post
+		curl_setopt ( $curl, CURLOPT_POSTFIELDS, $postData ); // post data
+		curl_setopt ( $curl, CURLOPT_TIMEOUT, 10 );
+		curl_setopt ( $curl, CURLINFO_HEADER_OUT, true);
+		
+		$responseText = curl_exec ( $curl );
+		if (curl_errno ( $curl )) 
+		{
+			return curl_error ( $curl );
+		}
+		curl_close ( $curl );
+
+
+		list($headers, $body) = explode("\r\n\r\n", $responseText, 2);
+		//1) process header
+		$header_arr = array();
+		$header_tmp = explode("\n", $headers);
+		foreach($header_tmp as $header_value) 
+		{
+			$pos = strpos($header_value, ":");
+			$k = trim(substr($header_value, 0, $pos));
+			$v = trim(substr($header_value, $pos+1));
+			if(!empty($k))
+				$header_arr[$k] = $v;
+		}
+		$file_name = $header_arr['Content-Disposition'];
+		$file_type = $header_arr['Content-Type'];
+		$file_save_name = substr($file_name, strrpos($file_name, "=")+1);
+
+		//2) process body
+		$file_content = $body;
+		$filename  = $saveDir . $file_save_name;
+		if(is_writable($saveDir)) 
+		{
+			if(!$handle  =  fopen($filename, 'w')) 
+			{
+         			return  "cannot open  $filename \n" ;
+         			
+			}
+     		if(fwrite($handle,  $file_content) ===  FALSE)
+			{
+				return  "cannot write file  $filename\n" ;
+        		
+			}
+    			// echo  "write $filename success\n" ;
+			fclose($handle);
+			return $filename;
+		} 
+		else 
+		{
+			return  "file $filename not writable\n" ;
+		}
+		// return false;
+	}	
 
 	public function changetoRate($order_id)
     {
@@ -106,7 +176,7 @@ class ControllerExtensionFlashExpressAPI extends Controller {
         
 		$responseStr = $this->postRequest(conUrl, $post_str);
         $responseArray = json_decode($responseStr, true); 
-        print_r($responseArray);
+        // print_r($responseArray);
         $pno = $responseArray['data']['pno'];
 		return [$responseArray, $pno];
     }
@@ -195,9 +265,7 @@ class ControllerExtensionFlashExpressAPI extends Controller {
             exit('Failed to cancel order: ' . json_encode($apiResponse));
         }
         
-    }
-    
-    
+    }    
     public function acceptOrder($order_id, $parcelNumber) {
        // $json = array();
         $this->load->model('account/customerpartner');
@@ -210,25 +278,35 @@ class ControllerExtensionFlashExpressAPI extends Controller {
 
     }
 
-    public function index() {
-        if (!isset($this->request->get['order_id'])) {
-            echo "Order ID is missing!";
-            return;
-        }
+    //DOWNLOADS
+    function queryPrePrint($parcelNo)
+	{
+		$parcelNo = trim($parcelNo);
+		$paramArr = array(
+			"mchId" => merchantID,
+			"nonceStr" => time(),
+		);
+		$post_str = $this->buildRequestParam($paramArr);
+		$url = str_replace("{pno}", $parcelNo, preprintUrl);
+		$responseStr = $this->postRequestAndDownload($url, $post_str, downloadDir);
 
+        return basename($responseStr);
+	}
+
+    public function index() {
+        $this->response->addHeader('Content-Type: application/json');
+        $json = [];
+
+        if (isset($this->request->get['order_id'])) {
+            $json['success'] = 'Flash Express order accepted';
+           
+            $order_id = (int) $this->request->get['order_id'];
+        
         $this->load->model('catalog/product');
         $this->load->model('checkout/order');
         $this->load->model('localisation/zone');
         $this->load->model('account/customerpartner');
         $this->load->model('customerpartner/master');
-
-        $order_id = (int) $this->request->get['order_id'];
-        echo "Flash Express Order ID: " . $order_id;
-        echo '<pre>';
-        echo 'Flash Express order';
-        echo '</pre>';
-
-        //$this->acceptOrder($order_id);
 
         $order_info = $this->model_checkout_order->getOrder($order_id);
         $products = $this->model_checkout_order->getOrderProducts($order_id);
@@ -286,7 +364,7 @@ class ControllerExtensionFlashExpressAPI extends Controller {
                 (int) $quantity_weight += $weight; //1 prod = 20g; total_weight = 20g, 2prods = 40g
             } 
             
-            echo '<pre>'; print_r($quantity_weight); echo '</pre>';
+            // echo '<pre>'; print_r($quantity_weight); echo '</pre>';
 
             // if (count($extracted_weight) > 1)
             // {
@@ -360,7 +438,8 @@ class ControllerExtensionFlashExpressAPI extends Controller {
             "srcDetailAddress" => $partner['address_1'],
 
             "dstName" => $order_info['firstname'] . ' ' . $order_info['lastname'],
-            "dstPhone" => (int) $order_info['telephone'],
+            "dstPhone" => 123456789102,
+            // "dstPhone" => (int) $order_info['telephone'],
             "dstProvinceName" => $order_info['shipping_zone'],
             "dstCityName" => $order_info['shipping_city'],
             "dstPostalCode" => (int) $order_info['shipping_postcode'],
@@ -368,7 +447,7 @@ class ControllerExtensionFlashExpressAPI extends Controller {
 // ($total_weight == 0) ? $default_weight :
             "articleCategory" => $category_id_mapped,
             "weight" =>  $total_weight,
-            "codEnabled" => ($order_info['payment_method'] == 'Cash On Delivery') ? 1 : 0,
+            "codEnabled" => ($order_info['payment_method'] == 'cod' || $order_info['payment_method'] == 'Cash On Delivery') ? 1 : 0,
             "codAmount" => $total_in_cents,
             "insured" => "0",
             "length" => $total_length,
@@ -385,22 +464,34 @@ class ControllerExtensionFlashExpressAPI extends Controller {
         //print_r($this->Warehouse( $warehouse_arr));
         list($apiResponse, $parcelNumber) = $this->CreateOrder($order_data);
         $jsonObj = $this->queryParcel($parcelNumber);
+        // print_r($apiResponse);
+        // print_r($this->acceptOrder($order_id, $parcelNumber));
+        $this->acceptOrder($order_id, $parcelNumber);
+        $download_inv = $this->queryPrePrint($parcelNumber);
 
-        print_r($this->acceptOrder($order_id, $parcelNumber));
-        //print_r($apiResponse);
+        $this->db->query("UPDATE `" . DB_PREFIX . "customerpartner_to_order` SET flash_inv = '" . $this->db->escape($download_inv) . "' WHERE order_id = '" . (int)$order_id . "'");
 
-        echo '<pre>';
-        var_dump($jsonObj);
-        echo '</pre>';
+        //for debugging
+        // echo '<pre>';
+        // var_dump($jsonObj);
+        // echo '</pre>';
 
-        echo '<pre>';
-        print_r($order_data);
-        echo '</pre>';
-        // $data['order_data'] = json_encode($order_data, JSON_PRETTY_PRINT); 
-        // $this->response->setOutput($this->load->view('common/flashexpress_fetchdata', $data));
+        // echo '<pre>';
+        // print_r($order_data);
+        // echo '</pre>';
+        $json['success'] = 'Order accepted';    
+    }
+    else {
+        $json['error'] = 'Missing order ID';
+    }
+        $this->response->setOutput(json_encode($json));
     }
 
 }
+
+// $data['order_data'] = json_encode($order_data, JSON_PRETTY_PRINT); 
+        // $this->response->setOutput($this->load->view('common/flashexpress_fetchdata', $data));
+    
  // foreach ($products as $product)
         // {
         //     $order_data['items'] = array(

@@ -3,7 +3,7 @@ class ControllerCheckoutPaymentMethod extends Controller {
 	public function index() {
 		$this->load->language('checkout/checkout');
 
-		if (isset($this->session->data['payment_address'])) {
+		
 			// Totals
 			$totals = array();
 			$taxes = $this->cart->getTaxes();
@@ -50,7 +50,7 @@ class ControllerCheckoutPaymentMethod extends Controller {
 				if ($this->config->get('payment_' . $result['code'] . '_status')) {
 					$this->load->model('extension/payment/' . $result['code']);
 
-					$method = $this->{'model_extension_payment_' . $result['code']}->getMethod($this->session->data['payment_address'], $total);
+					$method = $this->{'model_extension_payment_' . $result['code']}->getMethod($total);
 
 					if ($method) {
 						if ($recurring) {
@@ -73,7 +73,7 @@ class ControllerCheckoutPaymentMethod extends Controller {
 			array_multisort($sort_order, SORT_ASC, $method_data);
 
 			$this->session->data['payment_methods'] = $method_data;
-		}
+
 
 		if (empty($this->session->data['payment_methods'])) {
 			$data['error_warning'] = sprintf($this->language->get('error_no_payment'), $this->url->link('information/contact'));
@@ -121,7 +121,7 @@ class ControllerCheckoutPaymentMethod extends Controller {
 			$data['agree'] = '';
 		}
 
-		$this->response->setOutput($this->load->view('checkout/payment_method', $data));
+		return $this->load->view('checkout/payment_method', $data);
 	}
 
 	public function save() {

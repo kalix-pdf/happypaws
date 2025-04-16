@@ -1,0 +1,14 @@
+{% for product in products %}
+    <h4>{{ product.name }} x{{ product.quantity }} - <strong>{{ product.total }}</strong></h4>
+    {% for shipping_method in shipping_methods %}
+    {% if not shipping_method.error %}
+    {% for quote in shipping_method.quote %}
+        <h4>{{ quote.title }} - <strong>{{ quote.text }}</strong></h4>
+    {% endfor %}
+    {% else %}
+    <div class="alert alert-danger alert-dismissible">{{ shipping_method.error }}</div>
+    {% endif %}
+    {% endfor %}
+     <h4>SubTotal - <strong>{{ grand_total }}</strong></h4>
+     <h4>Total - <strong>{{ grand_total }}</strong></h4>
+{% endfor %}

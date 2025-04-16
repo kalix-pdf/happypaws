@@ -124,7 +124,7 @@ class ControllerAccountAccount extends Controller {
 				'products'   => ($product_total + $voucher_total),
 				'total'      => $this->currency->format($result['total'], $result['currency_code'], $result['currency_value']),
 				);
-			
+			// print_r($data);
 			$products = $this->model_account_order->getOrderProducts($result['order_id']);
 			
 			foreach($products as $product)
@@ -147,40 +147,49 @@ class ControllerAccountAccount extends Controller {
     			if ($order['status'] == 'Processing') 
     			{
     				$trackingResponse = $this->load->controller('extension/trackorder/index', $order['tracking']);
-    				if (is_array($trackingResponse) && isset($trackingResponse['data']['pno'])) 
-    				{
-    					foreach ($trackingResponse['data']['routes'] as $index => $route) {
-                            if ($route['state'] == 1) {
-                                $this->model_account_customerpartner->changetoPickup($trackingResponse['data']['pno']);
-                            }
-                              
-                        }
-    				} 	//extension/trackorder&tracking=P6125TFBXZZ
-    			}
+					if (!empty($trackingResponse['data']['routes'])) 
+					{
+						if (is_array($trackingResponse) && isset($trackingResponse['data']['pno'])) 
+						{
+							foreach ($trackingResponse['data']['routes'] as $index => $route) {
+								if ($route['state'] == 1) {
+									$this->model_account_customerpartner->changetoPickup($trackingResponse['data']['pno']);
+								}
+								
+							}
+						} 	//extension/trackorder&tracking=P6125TFBXZZ
+					}
+				}
     			if ($order['status'] == 'Picked-up') 
     			{
     			    $trackingResponse = $this->load->controller('extension/trackorder/index', $order['tracking']);
-    				if (is_array($trackingResponse) && isset($trackingResponse['data']['pno'])) 
-    				{
-    					foreach ($trackingResponse['data']['routes'] as $index => $route) {
-                            if ($index == 1 && $route['state'] == 3) {
-                                $this->model_account_customerpartner->changetoInTransit($trackingResponse['data']['pno']);
-								$this->logTrackingUpdate($trackingResponse['data']['pno'], 'Your parcel has been picked-up by our logistics partner');
+    				if (!empty($trackingResponse['data']['routes'])) 
+					{
+						if (is_array($trackingResponse) && isset($trackingResponse['data']['pno'])) 
+						{
+							foreach ($trackingResponse['data']['routes'] as $index => $route) {
+								if ($index == 1 && $route['state'] == 3) {
+									$this->model_account_customerpartner->changetoInTransit($trackingResponse['data']['pno']);
+									$this->logTrackingUpdate($trackingResponse['data']['pno'], 'Your parcel has been picked-up by our logistics partner');
+								}
+								
 							}
-                              
-                        }
-    				} 	
+						} 	
+					}
     			}
     			if ($order['status'] == 'In Transit') 
     			{
     			    $trackingResponse = $this->load->controller('extension/trackorder/index', $order['tracking']);
-    				if (is_array($trackingResponse) && isset($trackingResponse['data']['pno'])) 
-    				{
-    					if ($trackingResponse['data']['stateText'] == 'Delivered') {
-    					    $this->model_account_customerpartner->changetoDelivered($trackingResponse['data']['pno']);
-							$this->logTrackingUpdate($trackingResponse['data']['pno'], 'In transit');
-						}
-    				} 	
+    				if (!empty($trackingResponse['data']['routes']))
+					{
+						if (is_array($trackingResponse) && isset($trackingResponse['data']['pno'])) 
+						{
+							if ($trackingResponse['data']['stateText'] == 'Delivered') {
+								$this->model_account_customerpartner->changetoDelivered($trackingResponse['data']['pno']);
+								$this->logTrackingUpdate($trackingResponse['data']['pno'], 'In transit');
+							}
+						} 	
+					}
     			}
     		}
 		}

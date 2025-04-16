@@ -3,32 +3,6 @@ class ControllerCheckoutConfirm extends Controller {
 	public function index() {
 		$redirect = '';
 
-		if ($this->cart->hasShipping()) {
-			// Validate if shipping address has been set.
-			if (!isset($this->session->data['shipping_address'])) {
-				$redirect = $this->url->link('checkout/checkout', '', true);
-			}
-
-			// Validate if shipping method has been set.
-			if (!isset($this->session->data['shipping_method'])) {
-				$redirect = $this->url->link('checkout/checkout', '', true);
-			}
-		} else {
-			unset($this->session->data['shipping_address']);
-			unset($this->session->data['shipping_method']);
-			unset($this->session->data['shipping_methods']);
-		}
-
-		// Validate if payment address has been set.
-		if (!isset($this->session->data['payment_address'])) {
-			$redirect = $this->url->link('checkout/checkout', '', true);
-		}
-
-		// Validate if payment method has been set.
-		if (!isset($this->session->data['payment_method'])) {
-			$redirect = $this->url->link('checkout/checkout', '', true);
-		}
-
 		// Validate cart has products and has stock.
 		if ((!$this->cart->hasProducts() && empty($this->session->data['vouchers'])) || (!$this->cart->hasStock() && !$this->config->get('config_stock_checkout'))) {
 			$redirect = $this->url->link('checkout/cart');
@@ -53,7 +27,6 @@ class ControllerCheckoutConfirm extends Controller {
 			}
 		}
 
-		if (!$redirect) {
 			$order_data = array();
 
 			$totals = array();
@@ -134,32 +107,6 @@ class ControllerCheckoutConfirm extends Controller {
 				$order_data['email'] = $this->session->data['guest']['email'];
 				$order_data['telephone'] = $this->session->data['guest']['telephone'];
 				$order_data['custom_field'] = $this->session->data['guest']['custom_field'];
-			}
-
-			$order_data['payment_firstname'] = $this->session->data['payment_address']['firstname'];
-			$order_data['payment_lastname'] = $this->session->data['payment_address']['lastname'];
-			$order_data['payment_company'] = $this->session->data['payment_address']['company'];
-			$order_data['payment_address_1'] = $this->session->data['payment_address']['address_1'];
-			$order_data['payment_address_2'] = $this->session->data['payment_address']['address_2'];
-			$order_data['payment_city'] = $this->session->data['payment_address']['city'];
-			$order_data['payment_postcode'] = $this->session->data['payment_address']['postcode'];
-			$order_data['payment_zone'] = $this->session->data['payment_address']['zone'];
-			$order_data['payment_zone_id'] = $this->session->data['payment_address']['zone_id'];
-			$order_data['payment_country'] = $this->session->data['payment_address']['country'];
-			$order_data['payment_country_id'] = $this->session->data['payment_address']['country_id'];
-			$order_data['payment_address_format'] = $this->session->data['payment_address']['address_format'];
-			$order_data['payment_custom_field'] = (isset($this->session->data['payment_address']['custom_field']) ? $this->session->data['payment_address']['custom_field'] : array());
-
-			if (isset($this->session->data['payment_method']['title'])) {
-				$order_data['payment_method'] = $this->session->data['payment_method']['title'];
-			} else {
-				$order_data['payment_method'] = '';
-			}
-
-			if (isset($this->session->data['payment_method']['code'])) {
-				$order_data['payment_code'] = $this->session->data['payment_method']['code'];
-			} else {
-				$order_data['payment_code'] = '';
 			}
 
 			if ($this->cart->hasShipping()) {
@@ -257,7 +204,7 @@ class ControllerCheckoutConfirm extends Controller {
 				}
 			}
 
-			$order_data['comment'] = $this->session->data['comment'];
+			// $order_data['comment'] = $this->session->data['comment'];
 			$order_data['total'] = $total_data['total'];
 
 			if (isset($this->request->cookie['tracking'])) {
@@ -321,10 +268,7 @@ class ControllerCheckoutConfirm extends Controller {
 
 			$this->load->model('checkout/order');
 
-			$this->session->data['order_id'] = $this->model_checkout_order->addOrder($order_data);
-
-			//dito pre
-			$this->load->controller('extension/flashexpress_api/sendOrderToFlashExpress', );
+			// $this->session->data['order_id'] = $this->model_checkout_order->addOrder($order_data);
 
 
 			$this->load->model('tool/upload');
@@ -411,11 +355,6 @@ class ControllerCheckoutConfirm extends Controller {
 				);
 			}
 
-			$data['payment'] = $this->load->controller('extension/payment/' . $this->session->data['payment_method']['code']);
-		} else {
-			$data['redirect'] = $redirect;
-		}
-
-		$this->response->setOutput($this->load->view('checkout/confirm', $data));
+		return $this->load->view('checkout/confirm', $data);
 	}
 }

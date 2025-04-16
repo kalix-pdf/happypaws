@@ -22,9 +22,9 @@ class ControllerCustomerDisplay extends Controller {
                 $data['files'] = $files;    
                 $data['companyname'] = $companyname;
 
-                // echo "<pre>";
-                // print_r($data);
-                // echo "<pre>";
+                echo "<pre>";
+                print_r($data);
+                echo "<pre>";
 
                 $this->response->setOutput($this->load->view('customerpartner/documents/uploaded_documents', $data));
             }

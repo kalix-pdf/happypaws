@@ -2,7 +2,6 @@
 <div class="alert alert-warning alert-dismissible"><i class="fa fa-exclamation-circle"></i> {{ error_warning }}</div>
 {% endif %}
 {% if shipping_methods %}
-<p>{{ text_shipping_method }}</p>
 {% for shipping_method in shipping_methods %}
 <p><strong>{{ shipping_method.title }}</strong></p>
 {% if not shipping_method.error %}
@@ -82,12 +81,4 @@
 {% endif %}
 {% endfor %}
 {% endif %}
-<p><strong>{{ text_comments }}</strong></p>
-<p>
-  <textarea name="comment" rows="8" class="form-control">{{ comment }}</textarea>
-</p>
-<div class="buttons">
-  <div class="pull-right">
-    <input type="button" value="{{ button_continue }}" id="button-shipping-method" data-loading-text="{{ text_loading }}" class="btn btn-primary" />
-  </div>
 </div>
