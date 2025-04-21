@@ -241,6 +241,44 @@ class ControllerExtensionFlashExpressAPI extends Controller {
         $this->changetoCancelFromPending($order_id);
     }
 
+    public function sendCancelOrderMailToSeller() {
+        $this->load->model('checkout/order');
+        $this->load->model('account/customerpartner');
+        $this->load->model('customerpartner/mail');
+        $order_id = 130;
+
+        $order_info = $this->model_checkout_order->getOrder($order_id);
+        $products = $this->model_checkout_order->getOrderProducts($order_id);
+
+        if ($order_info) {
+            foreach ($products as $index => $product) 
+            {   
+                $check_seller = $this->model_account_customerpartner->getProductSellerDetails($product['product_id']);
+                $partner = $this->model_customerpartner_master->getProfile($check_seller['customer_id']);  
+                
+                $seller_email = $this->model_account_customerpartner->getsellerEmail($partner['customer_id']);
+        
+                $data = array(
+                    'order_id' => $order_id,
+                    'seller_id' => $partner['customer_id'],
+                    'customer_id' => $order_info['customer_id'],
+                    'mail_id' => 'custom_order_cancel_mail',
+                    'mail_from' => $order_info['email'],
+                    'mail_to' => $seller_email,
+                );  
+        
+                $values = array(
+                    'order_id' => $order_id,
+                    'customer_name' => $order_info['firstname'] . ' ' . $order_info['lastname'],
+                    'reason' => 'Customer cancelled the order.', // Optional: customize or pass from form
+                );
+        
+                $this->model_customerpartner_mail->mail($data, $values);
+            }
+        }
+    }
+    
+
     public function cancelOrder() {
         if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
             http_response_code(405); 
@@ -255,11 +293,11 @@ class ControllerExtensionFlashExpressAPI extends Controller {
         $parcel_number = $this->request->post['parcel_number'];
     
         $apiResponse = $this->cancelOrderParcel($parcel_number);
-        print_r($apiResponse);
 
         if ($apiResponse['code'] === 1032)
         {
             $this->changeToCancelOrder($parcel_number);
+            $this->sendCancelOrderMailToSeller();
         } else {
             http_response_code(500);
             exit('Failed to cancel order: ' . json_encode($apiResponse));

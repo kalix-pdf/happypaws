@@ -2,6 +2,13 @@
 {% for review in reviews %}
 <table class="table table-striped table-bordered">
   <tr>
+      <td>{% if review.attachment %}
+        <a href="image/{{ review.attachment }}" target="_blank">
+          <img src="image/{{ review.attachment }}" style="max-width: 250px;"></a>
+      {% endif %}
+      </td>
+  </tr>
+  <tr>
     <td style="width: 50%;"><strong>{{ review.author }}</strong></td>
     <td class="text-right">{{ review.date_added }}</td>
   </tr>
