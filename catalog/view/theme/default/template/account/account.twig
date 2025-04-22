@@ -107,7 +107,9 @@
                 </tr>
                 {% endfor %}
               <td class="text-right">   
-                <button id="cancelOrderBtn" data-tracking="{{order.tracking}}" class="btn btn-danger text-right">Cancel Order</button>
+                <button  data-tracking="{{order.tracking}}"
+                  data-order-id="{{ order.order_id }}" 
+                 class="btn btn-danger text-right cancelOrderBtn">Cancel Order</button>
               </td>
               </tbody>
             </table>
@@ -171,6 +173,9 @@
               {% if order.status == 'Delivered' %}
                 <td class="text-right">
                     <button id="RcvdOrderBtn" data-tracking="{{order.order_id}}" class="btn btn-primary text-right">Order Received</button>
+                </td>
+                <td class="text-right">
+                    <button id="ReFundBtn" data-tracking="{{order.order_id}}" class="btn btn-danger text-right">Refund/Return</button>
                 </td>
               {% endif %}
               </tbody>
@@ -265,6 +270,7 @@
     </div>
 {% endif %}
 
+
       <h2>{{ text_my_account }}</h2>
       <ul class="list-unstyled">
         <li><a href="{{ edit }}">{{ text_edit }}</a></li>
@@ -313,14 +319,20 @@
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script>
 $(document).ready(function() {
-    $("#cancelOrderBtn").on("click", function() {
+    $(".cancelOrderBtn").on("click", function() {
         var button = $(this);
         var trackingNumber = button.data("tracking");
+        var orderId = button.data("order-id");
+
+        console.log("Tracking:", trackingNumber, "Order ID:", orderId); // For debugging
 
         $.ajax({
             url: "index.php?route=extension/flashexpress_api/cancelOrder",
             type: "POST",
-            data: { parcel_number: trackingNumber },
+            data: {
+                parcel_number: trackingNumber,
+                order_id: orderId
+            },
             beforeSend: function() {
                 button.prop("disabled", true).text("Cancelling...");
             },
@@ -328,11 +340,11 @@ $(document).ready(function() {
                 alert("Success!");
                 location.reload();
             },
-            error: function() {
-                alert("Failed to cancel the order. Please try again.");
+            error: function(xhr) {
+                alert("Error: " + xhr.responseText);
             },
             complete: function() {
-                button.prop("disabled", true).text("Cancel Order");
+                button.prop("disabled", false).text("Cancel Order");
             }
         });
     });
@@ -363,6 +375,51 @@ $(document).ready(function() {
         });
     });
 });
+  
+
+{# $(document).ready(function() {
+    $("#RcvdOrderBtn").on("click", function() {
+        var button = $(this);
+        var orderID = button.data("tracking");
+
+        // Ask user to confirm and rate
+        var rating = prompt("Rate your order from 1 to 5 stars (5 = best):");
+        
+        if (rating === null) {
+            // User cancelled
+            return;
+        }
+
+        rating = parseInt(rating);
+        if (isNaN(rating) || rating < 1 || rating > 5) {
+            alert("Invalid rating. Please enter a number from 1 to 5.");
+            return;
+        }
+
+        var comment = prompt("Optional: Leave a comment about your order (or leave blank):");
+
+        $.ajax({
+            url: "index.php?route=extension/flashexpress_api/toRate",
+            type: "POST",
+            data: {
+                order_ID: orderID,
+                rating: rating,
+                comment: comment
+            },
+            beforeSend: function() {
+                button.prop("disabled", true).text("Submitting...");
+            },
+            success: function(response) {
+                alert("Thanks for your feedback!");
+                location.reload();
+            },
+            error: function() {
+                alert("Failed to submit rating. Please try again.");
+                button.prop("disabled", false).text("Order Received");
+            }
+        });
+    });
+}); #}
 
 $(document).ready(function() {
     $("#RcvdOrderBtn").on("click", function() {
@@ -389,4 +446,5 @@ $(document).ready(function() {
         });
     });
 });
+
 </script>

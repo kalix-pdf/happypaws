@@ -701,9 +701,11 @@ class ControllerProductProduct extends Controller {
 				'author'     => $result['author'],
 				'text'       => nl2br($result['text']),
 				'rating'     => (int)$result['rating'],
-				'date_added' => date($this->language->get('date_format_short'), strtotime($result['date_added']))
+				'date_added' => date($this->language->get('date_format_short'), strtotime($result['date_added'])),
+				'attachment' => $result['attachment']
 			);
 		}
+		// $data['upload_url'] = HTTP_CATALOG . 'image/';
 
 		$pagination = new Pagination();
 		$pagination->total = $review_total;
@@ -725,11 +727,43 @@ class ControllerProductProduct extends Controller {
 
 		if (isset($this->request->get['product_id']) && $this->request->get['product_id']) {
 			if ($this->request->server['REQUEST_METHOD'] == 'POST') {
-				if ((utf8_strlen($this->request->post['name']) < 3) || (utf8_strlen($this->request->post['name']) > 25)) {
-					$json['error'] = $this->language->get('error_name');
-				}
+				if (isset($this->request->post['is_anonymous']) && $this->request->post['is_anonymous']) {
+					$reviewer_name = 'Anonymous';
+				} else {
+					$reviewer_name = $this->customer->getFirstName(); 
+				}				
 
-				if ((utf8_strlen($this->request->post['text']) < 25) || (utf8_strlen($this->request->post['text']) > 1000)) {
+				if (!empty($this->request->files['attachment']['name'])) {
+					$file = $this->request->files['attachment'];
+					$filename = basename(html_entity_decode($file['name'], ENT_QUOTES, 'UTF-8'));
+					$ext = pathinfo($filename, PATHINFO_EXTENSION);
+					$allowed = ['jpg', 'jpeg', 'png', 'mp4'];
+					$maxSizeMB = 10;
+					$maxSizeBytes = $maxSizeMB * 1024 * 1024; 
+				
+					if (!in_array(strtolower($ext), $allowed)) {
+						$json['error'] = 'Invalid file type! Only JPG, JPEG, PNG, or MP4 are allowed.';
+					}
+				
+					if ($file['size'] > $maxSizeBytes) {
+						$json['error'] = 'File too large! Max allowed size is ' . $maxSizeMB . ' MB.';
+					}
+				
+					// Upload if no error
+					if (!isset($json['error'])) {
+						$new_filename = md5(mt_rand()) . '.' . $ext;
+						move_uploaded_file($file['tmp_name'], DIR_IMAGE . $new_filename);
+						$this->request->post['attachment'] = $new_filename;
+					}
+				} else {
+					$json['error'] = 'No File Uploaded!';	
+				}
+				
+				// if ((utf8_strlen($this->request->post['name']) < 3) || (utf8_strlen($this->request->post['name']) > 25)) {
+				// 	$json['error'] = $this->language->get('error_name');
+				// }
+
+				if ((utf8_strlen($this->request->post['text']) < 5) || (utf8_strlen($this->request->post['text']) > 1000)) {
 					$json['error'] = $this->language->get('error_text');
 				}
 			
@@ -749,7 +783,8 @@ class ControllerProductProduct extends Controller {
 				if (!isset($json['error'])) {
 					$this->load->model('catalog/review');
 
-					$this->model_catalog_review->addReview($this->request->get['product_id'], $this->request->post);
+					$this->model_catalog_review->addReview($this->request->get['product_id'], 
+							$this->request->post, $this->request->post['attachment']);
 
 					$json['success'] = $this->language->get('text_success');
 				}

@@ -65,21 +65,38 @@
             {% endif %}
             {% if review_status %}
             <div class="tab-pane" id="tab-review">
-              <form class="form-horizontal" id="form-review">
+              <form class="form-horizontal" enctype="multipart/form-data" id="form-review" method="post">
                 <div id="review"></div>
                 <h2>{{ text_write }}</h2>
                 {% if review_guest %}
-                <div class="form-group required">
+                <div class="form-group">
+                  <label>Display Name:</label><br />
+                  <div class="form-check">
+                    <input class="form-check-input" type="radio" name="is_anonymous" id="show_name" value="0" checked>
+                    <label class="form-check-label" for="show_name">Show my name</label>
+                  </div>
+                  <div class="form-check">
+                    <input class="form-check-input" type="radio" name="is_anonymous" id="anonymous" value="1">
+                    <label class="form-check-label" for="anonymous">Post as Anonymous</label>
+                  </div>
+                </div>
+                {# <div class="form-group required">
                   <div class="col-sm-12">
                     <label class="control-label" for="input-name">{{ entry_name }}</label>
                     <input type="text" name="name" value="{{ customer_name }}" id="input-name" class="form-control" />
                   </div>
+                </div> #}
+                {# ADD ATTACHMENT #}
+                <div class="form-group">
+                  <label for="input-attachment">Attach a file</label>
+                  <input type="file" name="attachment" id="input-attachment" class="form-control" />
                 </div>
+
                 <div class="form-group required">
                   <div class="col-sm-12">
                     <label class="control-label" for="input-review">{{ entry_review }}</label>
                     <textarea name="text" rows="5" id="input-review" class="form-control"></textarea>
-                    <div class="help-block">{{ text_note }}</div>
+                    {# <div class="help-block">{{ text_note }}</div> #}
                   </div>
                 </div>
                 <div class="form-group required">
@@ -503,12 +520,19 @@ $('#review').delegate('.pagination a', 'click', function(e) {
 
 $('#review').load('index.php?route=product/product/review&product_id={{ product_id }}');
 
-$('#button-review').on('click', function() {
+$('#button-review').on('click', function(e) {
+	e.preventDefault();
+
+	var form = document.getElementById('form-review');
+	var formData = new FormData(form);
+
 	$.ajax({
 		url: 'index.php?route=product/product/write&product_id={{ product_id }}',
 		type: 'post',
 		dataType: 'json',
-		data: $("#form-review").serialize(),
+		data: formData,
+		contentType: false,
+		processData: false,
 		beforeSend: function() {
 			$('#button-review').button('loading');
 		},
@@ -525,13 +549,12 @@ $('#button-review').on('click', function() {
 			if (json['success']) {
 				$('#review').after('<div class="alert alert-success alert-dismissible"><i class="fa fa-check-circle"></i> ' + json['success'] + '</div>');
 
-				$('input[name=\'name\']').val('');
-				$('textarea[name=\'text\']').val('');
-				$('input[name=\'rating\']:checked').prop('checked', false);
+				$('#form-review')[0].reset(); // Clear all form fields including file input
 			}
 		}
 	});
 });
+
 
 $(document).ready(function() {
 	$('.thumbnails').magnificPopup({

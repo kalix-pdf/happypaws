@@ -141,6 +141,13 @@ class ControllerCheckoutPlaceOrder extends Controller {
 				)
 			);		
 
+			$order_status_id = 1;
+			$this->session->data['order_id'] =  $this->model_checkout_order->addOrder($order_data);
+			
+			$order_info = $this->model_checkout_order->getOrder($this->session->data['order_id']);
+	
+			$this->model_account_customerpartnerorder->customerpartner($order_info, $order_status_id, '', $order_status_id);
+		
 			if ($payment_method == 'xendit') {
 				$this->response->redirect($this->url->link('extension/payment/xendit'));
 			} 
@@ -148,10 +155,5 @@ class ControllerCheckoutPlaceOrder extends Controller {
 				$this->response->redirect($this->url->link('checkout/success'));	
 			} 
 		} 
-		$order_status_id = 1;
-		$order_id = $this->model_checkout_order->addOrder($order_data);
-		$order_info = $this->model_checkout_order->getOrder($order_id);
-
-		$this->model_account_customerpartnerorder->customerpartner($order_info, $order_status_id, '', $order_status_id);
-		}
+	}
 }

@@ -11,6 +11,11 @@
 
     define("cancelOrder", "https://open-api-tra.flashexpress.ph/open/v1/orders/{pno}/cancel");
 
+    require_once(DIR_SYSTEM . '../vendor/autoload.php');
+
+    use PHPMailer\PHPMailer\PHPMailer;
+    use PHPMailer\PHPMailer\Exception;
+
 use Symfony\Component\Validator\Constraints\Length;
 class ControllerExtensionFlashExpressAPI extends Controller {
     
@@ -241,25 +246,75 @@ class ControllerExtensionFlashExpressAPI extends Controller {
         $this->changetoCancelFromPending($order_id);
     }
 
+    public function sendCancelOrderMailToSeller($order_id) {
+        $this->load->model('checkout/order');
+        $this->load->model('account/customerpartner');
+        $this->load->model('customerpartner/master');
+
+        $order_info = $this->model_checkout_order->getOrder($order_id);
+        $products = $this->model_checkout_order->getOrderProducts($order_id);
+
+        foreach ($products as $index => $product) 
+        {
+            $check_seller = $this->model_account_customerpartner->getProductSellerDetails($product['product_id']);
+            $partner = $this->model_customerpartner_master->getProfile($check_seller['customer_id']);  
+            
+            $mail = new PHPMailer(true);
+            $data = array(
+                "seller email" => $partner['email'],
+                "customer email" => $order_info['email']
+            );
+
+            try {
+                $mail->isSMTP();
+                $mail->Host       = 'smtp.gmail.com';  // SMTP server
+                $mail->SMTPAuth   = true;
+                $mail->Username   = 'kalixjake523@gmail.com';   // SMTP username
+                $mail->Password   = 'genu tzxj snlt rtbg';     // SMTP password (App password)
+                $mail->SMTPSecure = 'tls';
+                $mail->Port       = 587;
+
+                // Recipients
+                $mail->setFrom('kalixjake523@gmail.com', 'HappyPaws PH Cancel Order');
+                $mail->addAddress($partner['email']);
+
+                // Content
+                $mail->isHTML(true);
+                $mail->Subject = 'Cancel Order';
+                $mail->Body    = "Customer " . $order_info['firstname'] . ' ' . $order_info['lastname']
+                             . ' has <b> Canceled </b> their Order <br> 
+                             Order ID: <b>' . $order_info['order_id'] . ' </b> <br>' .
+                             'Product Name: <b>' . $product['name'] . '</b> <br>' .
+                             'Quantity: <b>' . $product['quantity'] . '</b>';
+                // Send email
+                $mail->send();
+                $this->log->write("message was sent");
+            } catch (Exception $e) {
+                $this->log->write("Email could not be sent. Mailer Error: {$mail->ErrorInfo}");
+            }
+        }
+    }    
+
     public function cancelOrder() {
         if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
             http_response_code(405); 
             exit('Invalid request method');
         }
     
-        if (!isset($this->request->post['parcel_number'])) {
+        if (!isset($this->request->post['parcel_number']) || !isset($this->request->post['order_id'])) {
             http_response_code(400); 
-            exit('Missing parcel number');
+            exit('Missing parcel number or order ID');
         }
     
         $parcel_number = $this->request->post['parcel_number'];
+        $order_id = (int)$this->request->post['order_id'];
     
         $apiResponse = $this->cancelOrderParcel($parcel_number);
-        print_r($apiResponse);
 
         if ($apiResponse['code'] === 1032)
         {
             $this->changeToCancelOrder($parcel_number);
+            $this->sendCancelOrderMailToSeller($order_id);
         } else {
             http_response_code(500);
             exit('Failed to cancel order: ' . json_encode($apiResponse));
