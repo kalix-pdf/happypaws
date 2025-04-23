@@ -230,22 +230,6 @@ class ControllerExtensionFlashExpressAPI extends Controller {
         $this->model_account_customerpartner->changetocancelFromPendingStatus($order_id, $cancel_order);
     }
 
-    public function cancelOrderFromPending()
-    {
-        if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
-            http_response_code(405); 
-            exit('Invalid request method');
-        }
-    
-        if (!isset($this->request->post['order_ID'])) {
-            http_response_code(400); 
-            exit('Missing Order ID!');
-        }
-
-        $order_id = $this->request->post['order_ID'];
-        $this->changetoCancelFromPending($order_id);
-    }
-
     public function sendCancelOrderMailToSeller($order_id) {
         $this->load->model('checkout/order');
         $this->load->model('account/customerpartner');
@@ -274,11 +258,9 @@ class ControllerExtensionFlashExpressAPI extends Controller {
                 $mail->SMTPSecure = 'tls';
                 $mail->Port       = 587;
 
-                // Recipients
-                $mail->setFrom('kalixjake523@gmail.com', 'HappyPaws PH Cancel Order');
+                $mail->setFrom('hapipaws.ph@gmail.com', 'HappyPaws PH');
                 $mail->addAddress($partner['email']);
 
-                // Content
                 $mail->isHTML(true);
                 $mail->Subject = 'Cancel Order';
                 $mail->Body    = "Customer " . $order_info['firstname'] . ' ' . $order_info['lastname']
@@ -286,7 +268,7 @@ class ControllerExtensionFlashExpressAPI extends Controller {
                              Order ID: <b>' . $order_info['order_id'] . ' </b> <br>' .
                              'Product Name: <b>' . $product['name'] . '</b> <br>' .
                              'Quantity: <b>' . $product['quantity'] . '</b>';
-                // Send email
+            
                 $mail->send();
                 $this->log->write("message was sent");
             } catch (Exception $e) {
@@ -294,6 +276,23 @@ class ControllerExtensionFlashExpressAPI extends Controller {
             }
         }
     }    
+
+    public function cancelOrderFromPending()
+    {
+        if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
+            http_response_code(405); 
+            exit('Invalid request method');
+        }
+    
+        if (!isset($this->request->post['order_ID'])) {
+            http_response_code(400); 
+            exit('Missing Order ID!');
+        }
+
+        $order_id = $this->request->post['order_ID'];
+        $this->changetoCancelFromPending($order_id);
+        $this->sendCancelOrderMailToSeller($order_id);
+    }
 
     public function cancelOrder() {
         if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
@@ -310,7 +309,7 @@ class ControllerExtensionFlashExpressAPI extends Controller {
         $order_id = (int)$this->request->post['order_id'];
     
         $apiResponse = $this->cancelOrderParcel($parcel_number);
-
+        // $this->log->write($apiResponse);
         if ($apiResponse['code'] === 1032)
         {
             $this->changeToCancelOrder($parcel_number);
@@ -322,15 +321,16 @@ class ControllerExtensionFlashExpressAPI extends Controller {
         
     }    
     public function acceptOrder($order_id, $parcelNumber) {
-       // $json = array();
         $this->load->model('account/customerpartner');
         $accepted_order_id = 2;
 
         $this->model_account_customerpartner->addsellerorderproductstatus($order_id, $accepted_order_id, $parcelNumber);
-        //$getWholeOrderStatus = $this->model_account_customerpartner->getOrderStatus($order_id);
+        $this->load->controller('extension/mailtoseller', [
+            'order_id' => $order_id,
+            'order_status_id' => $accepted_order_id
+        ]);
 
         return $parcelNumber; 
-
     }
 
     //DOWNLOADS

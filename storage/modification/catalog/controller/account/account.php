@@ -179,14 +179,20 @@ class ControllerAccountAccount extends Controller {
     			}
     			if ($order['status'] == 'In Transit') 
     			{
+					$this->logTrackingUpdate($trackingResponse['data']['pno'], 'In transit');
     			    $trackingResponse = $this->load->controller('extension/trackorder/index', $order['tracking']);
     				if (!empty($trackingResponse['data']['routes']))
 					{
 						if (is_array($trackingResponse) && isset($trackingResponse['data']['pno'])) 
 						{
+							$accepted_order_id = 19;
 							if ($trackingResponse['data']['stateText'] == 'Delivered') {
 								$this->model_account_customerpartner->changetoDelivered($trackingResponse['data']['pno']);
-								$this->logTrackingUpdate($trackingResponse['data']['pno'], 'In transit');
+								$this->load->controller('extension/mailtoseller', [
+									'order_id' => $result['order_id'],
+									'order_status_id' => $accepted_order_id
+								]);
+								$this->logTrackingUpdate($trackingResponse['data']['pno'], 'Delivered');
 							}
 						} 	
 					}
