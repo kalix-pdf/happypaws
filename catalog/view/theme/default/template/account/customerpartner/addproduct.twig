@@ -746,8 +746,9 @@
               {# SUBSCRIPTION TYPE HERE #}
               <div class="tab-pane" id="tab-ppd">
                 <h1>You choose Piso per day per product type of subscription</h1>
-                <labe>Choose how many days your product will be displayed
-                <select class="form-control required">
+                <div class="text-danger">{{ warning_subs }}</div>
+                <label>Choose how many days your product will be displayed
+                <select class="form-control required" id="subs" name="subs">
                   <option>
                   Choose how many days
                   </option>

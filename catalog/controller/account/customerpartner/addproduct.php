@@ -219,6 +219,12 @@ class ControllerAccountCustomerpartnerAddproduct extends Controller
 			$data['error_height'] = '';
 		}
 
+		if (isset($this->error['warning_subs'])) {
+			$data['warning_subs'] = $this->error['warning_subs'];
+		} else {
+			$data['warning_subs'] = '';
+		}
+
 		if (isset($this->error['weight'])){
 			$data['error_weight'] = $this->error['weight'];
 		} else {
@@ -649,6 +655,14 @@ class ControllerAccountCustomerpartnerAddproduct extends Controller
 			$data['height'] = $product_info['height'];
 		} else {
 			$data['height'] = '';
+		}
+
+		if (isset($this->request->post['subs'])) {
+			$data['subs'] = $this->request->post['subs'];
+		} elseif (!empty($product_info)) {
+			$data['subs'] = $product_info['subs'];
+		} else {
+			$data['subs'] = '';
 		}
 
 		$this->load->model('mp_localisation/length_class');
@@ -1188,6 +1202,24 @@ class ControllerAccountCustomerpartnerAddproduct extends Controller
 				$this->error['height'] = "Height must be between 1 and 99 cm!";
 			}
 		}
+
+		//SUBS TYPE HERE
+
+		if (isset($this->request->post['subs'])) {
+			$days = (int)$this->request->post['subs'];
+		
+			if ($days <= 0) {
+				$this->error['warning_subs'] = $this->language->get('Subscription is required!');
+			}
+		
+			if (!in_array($days, [1, 5, 10, 15, 20, 25, 30])) {
+				$this->error['warning_subs'] = $this->language->get('subscription is required!!');
+			} else {
+				$this->response->redirect($this->url->link('extension/payment/xendit'));
+			}
+		} else {
+			$this->error['warning_subs'] = $this->language->get('error subscription');
+		}		
 		
 
 		if (isset($this->request->post['price']) && (!is_numeric($this->request->post['price']) || $this->request->post['price'] < 0) && (isset($this->request->post['quantity']) && !is_numeric($this->request->post['quantity']) || $this->request->post['quantity'] < 0)) {

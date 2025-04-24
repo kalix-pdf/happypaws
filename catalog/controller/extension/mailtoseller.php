@@ -26,11 +26,7 @@ class ControllerExtensionMailtoseller extends Controller {
             $partner = $this->model_customerpartner_master->getProfile($check_seller['customer_id']);  
             
             $mail = new PHPMailer(true);
-            // $data = array(
-            //     "seller email" => $partner['email'],
-            //     "customer email" => $order_info['email']
-            // ); $this->log->write($data);
-
+            
             try {
                 $mail->isSMTP();
                 $mail->Host       = 'smtp.gmail.com';  // SMTP server
@@ -44,7 +40,6 @@ class ControllerExtensionMailtoseller extends Controller {
                     $mail->setFrom('hapipaws.ph@gmail.com', 'HappyPaws PH');
                     $mail->addAddress($partner['email']);
 
-                    // $link = $this->url->link('account/customerpartner/orderinfo', 'order_id=' . $order_info['order_id']);
                     $mail->isHTML(true);
                     $mail->Subject = 'Order Placed';
                     $mail->Body = "Customer " . $order_info['firstname'] . ' ' . $order_info['lastname']
@@ -52,7 +47,7 @@ class ControllerExtensionMailtoseller extends Controller {
                             Order ID: <b>' . $order_info['order_id'] . '</b><br>'
                             . 'Product Name: <b>' . $product['name'] . '</b><br>'
                             . 'Quantity: <b>' . $product['quantity'] . '</b><br>';
-                            // . 'Link: <a href="'. $link .'">View Order</a>';
+
                 }
                 if ($order_status_id = 2) {
                     $mail->setFrom('hapipaws.ph@gmail.com', 'HappyPaws PH');
@@ -65,7 +60,7 @@ class ControllerExtensionMailtoseller extends Controller {
                 }
                 if ($order_status_id = 19) {
                     $mail->setFrom('hapipaws.ph@gmail.com', 'HappyPaws PH');
-                    $mail->addAddress($order_info['email']);
+                    $mail->addAddress('aisat.aringo221155@gmail.com');
                     $mail->Subject = 'Your order has been delivered';
                     $mail->Body    = 'You parcel has been delivered by our logistics partner <br> 
                             Order ID: <b>' . $order_info['order_id'] . ' </b> <br>' .

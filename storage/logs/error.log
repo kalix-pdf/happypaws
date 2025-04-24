@@ -1,3 +1,15 @@
 2025-04-23 17:06:05 - message was sent
 2025-04-23 17:38:26 - Email was sent
 2025-04-23 17:38:26 - 123
+2025-04-24 20:39:49 - PHP Warning:  Undefined variable $trackingResponse in D:\xampp\htdocs\store\storage\modification\catalog\controller\account\account.php on line 182
+2025-04-24 20:39:49 - PHP Warning:  Trying to access array offset on value of type null in D:\xampp\htdocs\store\storage\modification\catalog\controller\account\account.php on line 182
+2025-04-24 20:39:49 - PHP Warning:  Trying to access array offset on value of type null in D:\xampp\htdocs\store\storage\modification\catalog\controller\account\account.php on line 182
+2025-04-24 20:39:56 - Email was sent
+2025-04-24 22:22:31 - PHP Warning:  Undefined variable $product in D:\xampp\htdocs\store\catalog\controller\extension\payment\xendit.php on line 52
+2025-04-24 22:22:31 - PHP Warning:  Trying to access array offset on value of type null in D:\xampp\htdocs\store\catalog\controller\extension\payment\xendit.php on line 52
+2025-04-24 22:22:31 - PHP Warning:  Undefined variable $product in D:\xampp\htdocs\store\catalog\controller\extension\payment\xendit.php on line 55
+2025-04-24 22:22:31 - PHP Warning:  Trying to access array offset on value of type null in D:\xampp\htdocs\store\catalog\controller\extension\payment\xendit.php on line 55
+2025-04-24 22:22:31 - PHP Warning:  Undefined variable $product in D:\xampp\htdocs\store\catalog\controller\extension\payment\xendit.php on line 56
+2025-04-24 22:22:31 - PHP Warning:  Trying to access array offset on value of type null in D:\xampp\htdocs\store\catalog\controller\extension\payment\xendit.php on line 56
+2025-04-24 22:22:31 - PHP Warning:  Undefined variable $product in D:\xampp\htdocs\store\catalog\controller\extension\payment\xendit.php on line 57
+2025-04-24 22:22:31 - PHP Warning:  Trying to access array offset on value of type null in D:\xampp\htdocs\store\catalog\controller\extension\payment\xendit.php on line 57
