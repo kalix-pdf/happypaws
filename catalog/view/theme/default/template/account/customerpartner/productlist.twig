@@ -146,7 +146,10 @@
 
                 <td class="text-right">{{ column_sold }}</td>
                 <td class="text-right">{{ column_earned }}</td>
-                <td class="text-right">{{ column_action }}</td>
+                <td class="text-right">Subscription type</td>
+                <td class="text-right">Duration</td>
+                <td class="text-right">Date Added</td>
+                {# <td class="text-right">{{ column_action }}</td> #}
               </tr>
             </thead>
             <tbody>
@@ -225,7 +228,7 @@
                 </td>
 
                 <!-- membership codes starts here -->
-                <td class="text-right">
+                {# <td class="text-right">
                   {% if (module_wk_seller_group_status is defined) %}
                   <div class="btn-group">
                     {% if (product['action']) %}
@@ -271,7 +274,7 @@
                     {% if (not product['status']) %}
                         <a href="{{ product['productPreviewLink'] }}" target="_blank" class="btn btn-info"><span data-toggle="tooltip" title="{{ text_product_preview }}"><i class="fa fa-television"></i></span></a>
                     {% endif %}
-                </td>
+                </td> #}
                  <!-- membership codes ends here -->
               </tr>
               {% endfor %}
@@ -280,6 +283,27 @@
                 <td class="text-center" colspan="10">{{ text_no_results }}</td>
               </tr>
               {% endif %}
+              {% if subscriptions %}
+                {% for subscription in subscriptions %}
+                  <tr>
+                      <td class="text-center">{{ subscription.subscription_id }}</td>
+                      <td class="text-center">
+                          {% if subscription.subs_type == 1 %}
+                              Piso Per Day
+                          {% elseif subscription.subs_type == 2 %}
+                              Piso Per Month
+                          {% else %}
+                              Unknown
+                          {% endif %}
+                      </td>
+                      <td class="text-center">{{ subscription.duration }}</td>
+                      <td>{{ subscription.date_added }}</td>
+                  </tr>
+                {% endfor %}
+            {% else %}
+                <p>No subscription found for this product.</p>
+            {% endif %}
+
             </tbody>
           </table>
         </div>

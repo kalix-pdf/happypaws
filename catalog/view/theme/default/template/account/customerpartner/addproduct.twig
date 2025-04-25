@@ -745,33 +745,63 @@
 
               {# SUBSCRIPTION TYPE HERE #}
               <div class="tab-pane" id="tab-ppd">
-                <h1>You choose Piso per day per product type of subscription</h1>
+                <h3>You choose Piso per day per product type of subscription</h3>
                 <div class="text-danger">{{ warning_subs }}</div>
                 <label>Choose how many days your product will be displayed
-                <select class="form-control required" id="subs" name="subs">
-                  <option>
+                <select class="form-control required" id="subs" name="subs_ppd">
+                  <option value="">
                   Choose how many days
                   </option>
-                  <option>
+                  <option value="1">
                   1 minute
                   </option>
-                  <option>
+                  <option value="5">
                   5 days
                   </option>
-                  <option>
+                  <option value="10">
                   10 days
                   </option>
-                  <option>
+                  <option value="15">
                   15 days
                   </option>
-                  <option>
+                  <option value="20">
                   20 days
                   </option>
-                  <option>
+                  <option value="25">
                   25 days
                   </option>
-                  <option>
+                  <option value="30">
                   30 days
+                  </option>
+                </select>
+              </label>
+              </div>
+
+              <div class="tab-pane" id="tab-ppm">
+                <h3>You choose Piso per product per month type of subscription</h3>
+                <div class="text-danger">{{ warning_subs }}</div>
+                <label>Choose how many Months your product will be displayed
+                <select class="form-control required" id="subs" name="subs_ppm">
+                  <option value="">
+                  Choose how many Months
+                  </option>
+                  <option value="1">
+                  1 Month
+                  </option>
+                  <option value="2">
+                  2 Months
+                  </option>
+                  <option value="3">
+                  3 Months
+                  </option>
+                  <option value="4">
+                  4 Months
+                  </option>
+                  <option value="5">
+                  5 Months
+                  </option>
+                  <option value="6">
+                  6 Months
                   </option>
                 </select>
               </label>

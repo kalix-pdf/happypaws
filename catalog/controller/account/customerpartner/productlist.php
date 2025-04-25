@@ -233,6 +233,8 @@ class ControllerAccountCustomerpartnerProductlist extends Controller
 				);
 			}
 
+			$data['subscriptions'] = $this->model_account_customerpartner->getSubscriptionByProductId($result['product_id']);
+			$this->log->write($data['subscriptions']);
 			// membership codes ends here
 
 			if ($result['image'] && file_exists(DIR_IMAGE . $result['image'])) {

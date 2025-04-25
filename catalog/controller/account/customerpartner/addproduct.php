@@ -96,6 +96,12 @@ class ControllerAccountCustomerpartnerAddproduct extends Controller
 		$this->document->addStyle('catalog/view/javascript/jquery/datetimepicker/bootstrap-datetimepicker.min.css');
 		$this->document->addStyle('catalog/view/theme/default/stylesheet/MP/sell.css');
 
+		///Subscription type here!!!
+		$this->load->model('customerpartner/master');
+		$seller_id = $this->customer->getId();
+		$sbstype = $this->model_customerpartner_master->getSubscriptionType($seller_id);
+		$data['sbsType'] = $sbstype;
+		
 		if (($this->request->server['REQUEST_METHOD'] == 'POST') and $this->validateForm()) {
 			if ($this->config->get('module_wk_seller_group_status')) {
 				if ($this->membershipData && isset($this->membershipData['remain']) && isset($isMember['membershipType'])) {
@@ -111,20 +117,37 @@ class ControllerAccountCustomerpartnerAddproduct extends Controller
 			// echo "<pre>"; print_r($this->request->post);die();
 
 			if (isset($this->request->post['clone']) && $this->request->post['clone']) {
-				$this->model_account_customerpartner->addProduct($this->request->post);
+				$product_id = $this->model_account_customerpartner->addProduct($this->request->post);
+				$this->log->write("prod: ", (int)$product_id);	
 			} else if (!isset($this->request->get['product_id'])) {
-				$this->model_account_customerpartner->addProduct($this->request->post);
+				$product_id = $this->model_account_customerpartner->addProduct($this->request->post);
 				$this->session->data['success'] = $this->language->get('text_success');
 			} else {
+				$product_id = (int)$this->request->get['product_id'];
 				$this->model_account_customerpartner->editProduct($this->request->post);
 				$this->session->data['success'] = $this->language->get('text_success_update');
 			}
+
+			if (isset($this->request->post['subs_ppd']) || isset($this->request->post['subs_ppm'])) {		
+				if ($sbstype == 1 && isset($this->request->post['subs_ppd'])) {
+					$days = (int)$this->request->post['subs_ppd'];
+					$amount = $days;
+				} 
+				if ($sbstype == 2 && isset($this->request->post['subs_ppm'])) {
+					$days = (int)$this->request->post['subs_ppm'];
+					$amount = $days * 30;
+				} 
+				if (!empty($amount)) {
+					$this->model_customerpartner_master->addSubscription($sbstype, $product_id, $amount);
+				}
+			} 
 
 			if (isset($this->request->get['topsearch']) && $this->request->get['topsearch']) {
 				$this->response->redirect($this->url->link('account/customerpartner/topsearch', '', true));
 			} else {
 				$this->response->redirect($this->url->link('account/customerpartner/productlist', '', true));
 			}
+			
 		}
 
 		$data['entry_image'] = ' <span data-toggle="tooltip" title="' . $this->config->get('marketplace_imageex') . '">' . $this->language->get('entry_image') . '</span>';
@@ -657,12 +680,17 @@ class ControllerAccountCustomerpartnerAddproduct extends Controller
 			$data['height'] = '';
 		}
 
-		if (isset($this->request->post['subs'])) {
-			$data['subs'] = $this->request->post['subs'];
-		} elseif (!empty($product_info)) {
-			$data['subs'] = $product_info['subs'];
+		if (isset($this->request->post['subs_ppm'])) {
+			$data['subs_ppm'] = $this->request->post['subs_ppm'];
+		}  else {
+			$data['subs_ppm'] = '';
+		}
+
+
+		if (isset($this->request->post['subs_ppd'])) {
+			$data['subs_ppd'] = $this->request->post['subs_ppd'];
 		} else {
-			$data['subs'] = '';
+			$data['subs_ppd'] = '';
 		}
 
 		$this->load->model('mp_localisation/length_class');
@@ -1042,13 +1070,7 @@ class ControllerAccountCustomerpartnerAddproduct extends Controller
 		}
 		// membership codes ends here
 
-
-		///Subscription type here!!!
-		$this->load->model('customerpartner/master');
-		$seller_id = $this->customer->getId();
-		$data['sbsType'] = $this->model_customerpartner_master->getSubscriptionType($seller_id);
-
-
+		
 		$data['column_left'] = $this->load->controller('common/column_left');
 		$data['column_right'] = $this->load->controller('common/column_right');
 		$data['content_top'] = $this->load->controller('common/content_top');
@@ -1099,6 +1121,7 @@ class ControllerAccountCustomerpartnerAddproduct extends Controller
 	}
 	protected function validateForm()
 	{
+		$this->load->model('customerpartner/master');
 
 		if (isset($this->request->get['topsearch']) && $this->request->get['topsearch']) {
 			if (isset($this->request->post['product_special_tab']) && $this->request->post['product_special_tab']) {
@@ -1204,21 +1227,39 @@ class ControllerAccountCustomerpartnerAddproduct extends Controller
 		}
 
 		//SUBS TYPE HERE
-
-		if (isset($this->request->post['subs'])) {
-			$days = (int)$this->request->post['subs'];
+		if (isset($this->request->post['subs_ppd']) || isset($this->request->post['subs_ppm'])) {
+			$this->load->model('customerpartner/master');
+			$seller_id = $this->customer->getId();
+			// $product_id = isset($this->request->get['product_id']);
+			$sbstype = $this->model_customerpartner_master->getSubscriptionType($seller_id);
 		
-			if ($days <= 0) {
-				$this->error['warning_subs'] = $this->language->get('Subscription is required!');
-			}
-		
-			if (!in_array($days, [1, 5, 10, 15, 20, 25, 30])) {
-				$this->error['warning_subs'] = $this->language->get('subscription is required!!');
+			if ($sbstype == 1 && isset($this->request->post['subs_ppd'])) {
+				$days = (int)$this->request->post['subs_ppd'];
+				$valid_days = [1, 5, 10, 15, 20, 25, 30];
+				// $amount = $days;
+			} elseif ($sbstype == 2 && isset($this->request->post['subs_ppm'])) {
+				$days = (int)$this->request->post['subs_ppm'];
+				$valid_days = [1, 2, 3, 4, 5, 6];
+				// $amount = $days * 30;
 			} else {
-				$this->response->redirect($this->url->link('extension/payment/xendit'));
+				$days = 0;
+				$valid_days = [];
 			}
+		
+			if ($days <= 0 || !in_array($days, $valid_days)) {
+				$this->error['warning_subs'] = $this->language->get('error_subscription_required');
+			}
+			// else {
+			// 	$this->model_customerpartner_master->addSubscription($sbstype, (int)$product_id, $amount);
+			// 	// 	$this->response->redirect(
+			// // 		$this->url->link(
+			// // 			'extension/payment/xendit/subscription',
+			// // 			'sbs_type=' . $sbstype . '&days=' . $amount
+			// // 		)
+			// // 	);
+			// }
 		} else {
-			$this->error['warning_subs'] = $this->language->get('error subscription');
+			$this->error['warning_subs'] = $this->language->get('error_subscription_missing');
 		}		
 		
 
@@ -1373,6 +1414,7 @@ class ControllerAccountCustomerpartnerAddproduct extends Controller
 
 			if (isset($this->request->get['product_id'])) {
 				$this->request->get['product_id'] = (int)$this->request->get['product_id'];
+				$this->log->write($this->request->get['product_id']);
 			}
 
 			if (isset($this->request->get['product_id']) && !$this->model_account_customerpartner->chkSellerProductAccess($this->request->get['product_id'])) {

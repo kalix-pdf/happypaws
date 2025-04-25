@@ -104,14 +104,18 @@ class ModelAccountCustomerpartner extends Model
 				}
 			}
 		} else {
-			$result = $this->db->query("SELECT customerDefaultNoOfListing, customerDefaultListingDuration FROM " . DB_PREFIX . "seller_group_customer WHERE customer_id = '" . (int)$this->customer->getId() . "' ")->row;
-			if ($result && isset($result['customerDefaultNoOfListing']) && $result['customerDefaultNoOfListing']) {
-				$customerDefaultNoOfListing = $result['customerDefaultNoOfListing'] - 1;
-				$this->getListingCommission((int)$this->customer->getId(), (int)$value['category_id']);
-				$this->db->query("UPDATE " . DB_PREFIX . "seller_group_customer SET customerDefaultNoOfListing = '" . $customerDefaultNoOfListing . "' WHERE customer_id = '" . (int)$this->customer->getId() . "' ");
-				return true;
-			} else {
-				return false;
+			// MAY BINAGO AKO DITO HERE
+			foreach ($category as $key => $value) {
+
+				$result = $this->db->query("SELECT customerDefaultNoOfListing, customerDefaultListingDuration FROM " . DB_PREFIX . "seller_group_customer WHERE customer_id = '" . (int)$this->customer->getId() . "' ")->row;
+				if ($result && isset($result['customerDefaultNoOfListing']) && $result['customerDefaultNoOfListing']) {
+					$customerDefaultNoOfListing = $result['customerDefaultNoOfListing'] - 1;
+					$this->getListingCommission((int)$this->customer->getId(), (int)$value['category_id']);
+					$this->db->query("UPDATE " . DB_PREFIX . "seller_group_customer SET customerDefaultNoOfListing = '" . $customerDefaultNoOfListing . "' WHERE customer_id = '" . (int)$this->customer->getId() . "' ");
+					return true;
+				} else {
+					return false;
+				}
 			}
 		}
 	}
@@ -740,6 +744,12 @@ class ModelAccountCustomerpartner extends Model
 			$this->model_customerpartner_mail->mail($mailData, $values);
 
 		return $product_id;
+	}
+
+	public function getSubscriptionByProductId($product_id)
+	{
+		$query = $this->db->query("SELECT * FROM `product_subscription` WHERE `product_id` = '" . (int)$product_id . "'");
+    	return $query->rows;
 	}
 
 	/**

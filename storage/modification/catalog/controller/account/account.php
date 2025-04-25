@@ -179,9 +179,9 @@ class ControllerAccountAccount extends Controller {
     			}
     			if ($order['status'] == 'In Transit') 
     			{
-					$this->logTrackingUpdate($trackingResponse['data']['pno'], 'In transit');
-    			    $trackingResponse = $this->load->controller('extension/trackorder/index', $order['tracking']);
-    				if (!empty($trackingResponse['data']['routes']))
+					$trackingResponse = $this->load->controller('extension/trackorder/index', $order['tracking']);
+    				$this->logTrackingUpdate($trackingResponse['data']['pno'], 'In transit');
+					if (!empty($trackingResponse['data']['routes']))
 					{
 						if (is_array($trackingResponse) && isset($trackingResponse['data']['pno'])) 
 						{

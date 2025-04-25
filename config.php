@@ -6,10 +6,10 @@ define('HTTP_SERVER', 'http://localhost/store/');
 define('HTTPS_SERVER', 'http://localhost/store/');
 
 // DIR
-define('DIR_APPLICATION', 'D:/xampp/htdocs/store/catalog/');
-define('DIR_SYSTEM', 'D:/xampp/htdocs/store/system/');
-define('DIR_IMAGE', 'D:/xampp/htdocs/store/image/');
-define('DIR_STORAGE', 'D:/xampp/htdocs/store/storage/');
+define('DIR_APPLICATION', 'C:/xampp/htdocs/store/catalog/');
+define('DIR_SYSTEM', 'C:/xampp/htdocs/store/system/');
+define('DIR_IMAGE', 'C:/xampp/htdocs/store/image/');
+define('DIR_STORAGE', 'C:/xampp/htdocs/store/storage/');
 define('DIR_LANGUAGE', DIR_APPLICATION . 'language/');
 define('DIR_TEMPLATE', DIR_APPLICATION . 'view/theme/');
 define('DIR_CONFIG', DIR_SYSTEM . 'config/');
