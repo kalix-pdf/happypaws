@@ -114,7 +114,7 @@ class ControllerCheckoutPaymentMethod extends Controller {
 		} else {
 			$data['text_agree'] = '';
 		}
-
+		
 		if (isset($this->session->data['agree'])) {
 			$data['agree'] = $this->session->data['agree'];
 		} else {

@@ -9,9 +9,8 @@ class ModelExtensionPaymentXendit extends Model {
 			$status = false;
 		} elseif (!$this->config->get('payment_xendit_geo_zone_id')) {
 			$status = true;
-		} elseif ($query->num_rows) {
-			$status = true;
-		} else {
+		} 
+		 else {
 			$status = false;
 		}
 

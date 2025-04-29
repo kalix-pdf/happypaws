@@ -101,6 +101,7 @@
 
       <form action="{{ delete }}" method="post" enctype="multipart/form-data" id="form-product">
         <div class="table-responsive">
+          <h4 class="text-center">Your Products' duration will start after the Admin's Approval</h4>
           <table class="table table-bordered table-hover">
             <thead>
               <tr>
@@ -153,7 +154,7 @@
               </tr>
             </thead>
             <tbody>
-              {% if (products) %}
+              {% if (products) and subscriptions %}
               {% for product in products %}
               <tr>
                 <td style="text-align: center;">{% if (product['selected']) %}
@@ -226,7 +227,19 @@
                 <td class="text-right">
                   <span class="text-success">{{ product['totalearn'] }}</span>
                 </td>
-
+                  {% for subscription in subscriptions %}
+                      <td class="text-center">
+                          {% if subscription.subs_type == 1 %}
+                              Piso Per Day
+                          {% elseif subscription.subs_type == 2 %}
+                              Piso Per Month
+                          {% else %}
+                              Unknown
+                          {% endif %}
+                      </td>
+                        <td class="text-center">{{ subscription.duration }} Days</td>
+                        <td>{{ subscription.date_added }}</td>
+                  {% endfor %}
                 <!-- membership codes starts here -->
                 {# <td class="text-right">
                   {% if (module_wk_seller_group_status is defined) %}
@@ -283,27 +296,6 @@
                 <td class="text-center" colspan="10">{{ text_no_results }}</td>
               </tr>
               {% endif %}
-              {% if subscriptions %}
-                {% for subscription in subscriptions %}
-                  <tr>
-                      <td class="text-center">{{ subscription.subscription_id }}</td>
-                      <td class="text-center">
-                          {% if subscription.subs_type == 1 %}
-                              Piso Per Day
-                          {% elseif subscription.subs_type == 2 %}
-                              Piso Per Month
-                          {% else %}
-                              Unknown
-                          {% endif %}
-                      </td>
-                      <td class="text-center">{{ subscription.duration }}</td>
-                      <td>{{ subscription.date_added }}</td>
-                  </tr>
-                {% endfor %}
-            {% else %}
-                <p>No subscription found for this product.</p>
-            {% endif %}
-
             </tbody>
           </table>
         </div>

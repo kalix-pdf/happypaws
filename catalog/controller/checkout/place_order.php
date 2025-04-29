@@ -141,19 +141,22 @@ class ControllerCheckoutPlaceOrder extends Controller {
 				)
 			);		
 
-			$order_status_id = 1;
-			$this->session->data['order_id'] =  $this->model_checkout_order->addOrder($order_data);
+			// $order_status_id = 1;
+			// $this->session->data['order_id'] =  $this->model_checkout_order->addOrder($order_data);
 			
-			$order_info = $this->model_checkout_order->getOrder($this->session->data['order_id']);
+			// $order_info = $this->model_checkout_order->getOrder($this->session->data['order_id']);
 	
-			$this->model_account_customerpartnerorder->customerpartner($order_info, $order_status_id, '', $order_status_id);
-			$this->load->controller('extension/mailtoseller', [
-				'order_id' => $this->session->data['order_id'],
-				'order_status_id' => $order_status_id
-			]);
+			// $this->model_account_customerpartnerorder->customerpartner($order_info, $order_status_id, '', $order_status_id);
+			// $this->load->controller('extension/mailtoseller', [
+			// 	'order_id' => $this->session->data['order_id'],
+			// 	'order_status_id' => $order_status_id
+			// ]);
 			
 			if ($payment_method == 'xendit') {
 				$this->response->redirect($this->url->link('extension/payment/xendit'));
+			}
+			if ($payment_method == 'hitpay') {
+				$this->response->redirect($this->url->link('extension/payment/hitpay'));
 			} 
 			else {
 				$this->response->redirect($this->url->link('checkout/success'));	

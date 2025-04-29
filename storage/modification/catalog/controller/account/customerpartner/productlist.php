@@ -233,8 +233,7 @@ class ControllerAccountCustomerpartnerProductlist extends Controller
 				);
 			}
 
-			$data['subscriptions'] = $this->model_account_customerpartner->getSubscriptionByProductId($result['product_id']);
-			$this->log->write($data['subscriptions']);
+			// $this->log->write($data['subscriptions']);
 			// membership codes ends here
 
 			if ($result['image'] && file_exists(DIR_IMAGE . $result['image'])) {
@@ -376,6 +375,7 @@ class ControllerAccountCustomerpartnerProductlist extends Controller
 		if (isset($this->request->get['order'])) {
 			$url .= '&order=' . $this->request->get['order'];
 		}
+		$this->data['subscriptions'] = $this->model_account_customerpartner->getSubscriptionByProductId($result['product_id']);
 
 		$pagination = new Pagination();
 		$pagination->total = $product_total;
