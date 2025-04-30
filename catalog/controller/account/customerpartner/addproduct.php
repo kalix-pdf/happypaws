@@ -110,7 +110,6 @@ class ControllerAccountCustomerpartnerAddproduct extends Controller
 					$this->model_account_wk_membership_catalog->insertInPay($this->membershipData['remain'], $isMember['membershipType']);
 				}
 			}
-			
 			// for senitize
 			
 			$this->request->post = $this->htmlfilters();
@@ -141,12 +140,10 @@ class ControllerAccountCustomerpartnerAddproduct extends Controller
 					$this->model_customerpartner_master->addSubscription($sbstype, $product_id, $amount);
 				}
 			} 
-
-			if (isset($this->request->get['topsearch']) && $this->request->get['topsearch']) {
-				$this->response->redirect($this->url->link('account/customerpartner/topsearch', '', true));
-			} else {
-				$this->response->redirect($this->url->link('account/customerpartner/productlist', '', true));
-			}
+			$this->request->post['sort_order'] = 0;
+			$this->request->post['type'] = 'select';
+			$this->request->post['option_description'] = 'Variation';
+			$this->model_account_customerpartner->addOption($this->request->post);
 			
 		}
 
@@ -1112,7 +1109,7 @@ class ControllerAccountCustomerpartnerAddproduct extends Controller
 		foreach ($this->request->post['product_description'] as $language_id => $value) {
 			$this->request->post['product_description'][$language_id]['name'] = $this->model_customerpartner_htmlfilter->HTMLFilter(html_entity_decode($value['name']), '');
 			$this->request->post['product_description'][$language_id]['meta_title'] = $this->model_customerpartner_htmlfilter->HTMLFilter(html_entity_decode($value['meta_title']), '');
-			$this->request->post['product_description'][$language_id]['meta_description'] = $this->model_customerpartner_htmlfilter->HTMLFilter(html_entity_decode($value['meta_description']), '');
+			// $this->request->post['product_description'][$language_id]['meta_description'] = $this->model_customerpartner_htmlfilter->HTMLFilter(html_entity_decode($value['meta_description']), '');
 		}
 		if (isset($this->request->post['model'])) {
 			$this->request->post['model'] = $this->model_customerpartner_htmlfilter->HTMLFilter(html_entity_decode($this->request->post['model']), '');
@@ -1262,6 +1259,16 @@ class ControllerAccountCustomerpartnerAddproduct extends Controller
 			$this->error['warning_subs'] = $this->language->get('error_subscription_missing');
 		}		
 		
+		//custom-option
+		if (isset($this->request->post['option_value'])) {
+			foreach ($this->request->post['option_value'] as $option_value_id => $option_value) {
+				foreach ($option_value['option_value_description'] as $language_id => $option_value_description) {
+					if ((utf8_strlen($option_value_description['name']) < 1) || (utf8_strlen($option_value_description['name']) > 128)) {
+						$this->error['option_value'][$option_value_id][$language_id] = $this->language->get('error_option_value');
+					}
+				}
+			}
+		}
 
 		if (isset($this->request->post['price']) && (!is_numeric($this->request->post['price']) || $this->request->post['price'] < 0) && (isset($this->request->post['quantity']) && !is_numeric($this->request->post['quantity']) || $this->request->post['quantity'] < 0)) {
 			$this->error['warning'] = $this->language->get('error_price_quantity');

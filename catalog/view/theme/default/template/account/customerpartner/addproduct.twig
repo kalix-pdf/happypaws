@@ -130,6 +130,8 @@
               <li><a href="#tab-pricealert" data-toggle="tab">{{ tab_palert }}</a></li>
               {% endif %}
 
+              <li><a href="#tab-custom-option" data-toggle="tab">Option</a></li>
+
               {% if sbsType == 1 %}
                 <li><a href="#tab-ppd" data-toggle="tab">Piso Per Day Per Product</a></li>
               {% elseif sbsType == 2 %}
@@ -137,6 +139,7 @@
               {% elseif sbsType == 3 %}
                 <li><a href="#tab-cms" data-toggle="tab">Commission Type</a></li>
               {% endif %}
+
               <!--<li><a href="#tab-update-reason" data-toggle="tab">{#{{ tab_reason }}#}</a></li>-->
 
             </ul>
@@ -742,6 +745,191 @@
               </div>
               {% endif %}
 
+{# CUSTOM OPTION HERE! #}
+              <div class="tab-pane" id="tab-custom-option">
+                <fieldset>
+                  <legend>{{ text_value }}</legend>
+                  <table id="option-value" class="table table-striped table-bordered table-hover">
+                    <thead>
+                      <tr>
+                        <td class="text-left required">{{ entry_option_value }}</td>
+                        <td class="text-center">{{ entry_image }}</td>
+                        <td class="text-right">{{ entry_sort_order }}</td>
+                        <td></td>
+                      </tr>
+                    </thead>
+                    <tbody>
+                    
+                    {% set option_value_row = 0 %}
+                    {% for option_value in option_values %}
+                    <tr id="option-value-row{{ option_value_row }}">
+                      <td class="text-center"><input type="hidden" name="option_value[{{ option_value_row }}][option_value_id]" value="{{ option_value.option_value_id }}" />
+                        {% for language in languages %}
+                        <div class="input-group"><span class="input-group-addon"><img src="language/{{ language.code }}/{{ language.code }}.png" title="{{ language.name }}" /></span>
+                          <input type="text" name="option_value[{{ option_value_row }}][option_value_description][{{ language.language_id }}][name]" value="{{ option_value.option_value_description[language.language_id] ? option_value.option_value_description[language.language_id].name }}" placeholder="{{ entry_option_value }}" class="form-control" />
+                        </div>
+                        {% if error_option_value[option_value_row][language.language_id] %}
+                        <div class="text-danger">{{ error_option_value[option_value_row][language.language_id] }}</div>
+                        {% endif %}
+                        {% endfor %}</td>
+                      <td class="text-left"><a href="" id="thumb-image{{ option_value_row }}" data-toggle="image" class="img-thumbnail"><img src="{{ option_value.thumb }}" alt="" title="" data-placeholder="{{ placeholder }}" /></a>
+                        <input type="hidden" name="option_value[{{ option_value_row }}][image]" value="{{ option_value.image }}" id="input-image{{ option_value_row }}" /></td>
+                      <td class="text-right"><input type="text" name="option_value[{{ option_value_row }}][sort_order]" value="{{ option_value.sort_order }}" class="form-control" /></td>
+                      <td class="text-right"><button type="button" onclick="$('#option-value-row{{ option_value_row }}').remove();" data-toggle="tooltip" title="{{ button_remove }}" class="btn btn-danger"><i class="fa fa-minus-circle"></i></button></td>
+                    </tr>
+                    {% set option_value_row = option_value_row + 1 %}
+                    {% endfor %}
+                      </tbody>
+                    
+                    <tfoot>
+                      <tr>
+                        <td colspan="3"></td>
+                        <td class="text-right"><button type="button" onclick="addOptionValue();" data-toggle="tooltip" title="{{ button_option_value_add }}" class="btn btn-primary"><i class="fa fa-plus-circle"></i></button></td>
+                      </tr>
+                    </tfoot>
+                  </table>
+                  <table id="option-value{{ option_row }}" class="table table-striped table-bordered table-hover">
+                    <thead>
+                      <tr>
+                        <td class="text-right">{{ entry_quantity }}</td>
+                        <td class="text-left">{{ entry_subtract }}</td>
+                        <td class="text-right">{{ entry_price }}</td>
+                        <td class="text-right">{{ entry_option_points }}</td>
+                        <td class="text-right">{{ entry_weight }}</td>
+                        <td></td>
+                      </tr>
+                    </thead>
+                    <tbody>
+                    <tr id="option-value-row{{ option_value_row }}">
+                                   
+
+                                      </select> <input type="hidden" name="product_option[{{ option_row }}][product_option_value][{{ option_value_row }}][product_option_value_id]" value="{{ product_option_value.product_option_value_id }}"/></td>
+                                    <td class="text-right"><input type="text" name="product_option[{{ option_row }}][product_option_value][{{ option_value_row }}][quantity]" value="{{ product_option_value.quantity }}" placeholder="{{ entry_quantity }}" class="form-control"/></td>
+                                    <td class="text-left"><select name="product_option[{{ option_row }}][product_option_value][{{ option_value_row }}][subtract]" class="form-control">
+
+
+                                        {% if product_option_value.subtract %}
+
+
+                                          <option value="1" selected="selected">{{ text_yes }}</option>
+                                          <option value="0">{{ text_no }}</option>
+
+
+                                        {% else %}
+
+
+                                          <option value="1">{{ text_yes }}</option>
+                                          <option value="0" selected="selected">{{ text_no }}</option>
+
+
+                                        {% endif %}
+
+
+                                      </select></td>
+                                    <td class="text-right"><select name="product_option[{{ option_row }}][product_option_value][{{ option_value_row }}][price_prefix]" class="form-control">
+
+
+                                        {% if product_option_value.price_prefix == '+' %}
+
+
+                                          <option value="+" selected="selected">+</option>
+
+
+                                        {% else %}
+
+
+                                          <option value="+">+</option>
+
+
+                                        {% endif %}
+                                        {% if product_option_value.price_prefix == '-' %}
+
+
+                                          <option value="-" selected="selected">-</option>
+
+
+                                        {% else %}
+
+
+                                          <option value="-">-</option>
+
+
+                                        {% endif %}
+
+
+                                      </select> <input type="text" name="product_option[{{ option_row }}][product_option_value][{{ option_value_row }}][price]" value="{{ product_option_value.price }}" placeholder="{{ entry_price }}" class="form-control"/></td>
+                                    <td class="text-right"><select name="product_option[{{ option_row }}][product_option_value][{{ option_value_row }}][points_prefix]" class="form-control">
+
+
+                                        {% if product_option_value.points_prefix == '+' %}
+
+
+                                          <option value="+" selected="selected">+</option>
+
+
+                                        {% else %}
+
+
+                                          <option value="+">+</option>
+
+
+                                        {% endif %}
+                                        {% if product_option_value.points_prefix == '-' %}
+
+
+                                          <option value="-" selected="selected">-</option>
+
+
+                                        {% else %}
+
+
+                                          <option value="-">-</option>
+
+
+                                        {% endif %}
+
+
+                                      </select> <input type="text" name="product_option[{{ option_row }}][product_option_value][{{ option_value_row }}][points]" value="{{ product_option_value.points }}" placeholder="{{ entry_points }}" class="form-control"/></td>
+                                    <td class="text-right"><select name="product_option[{{ option_row }}][product_option_value][{{ option_value_row }}][weight_prefix]" class="form-control">
+
+
+                                        {% if product_option_value.weight_prefix == '+' %}
+
+
+                                          <option value="+" selected="selected">+</option>
+
+
+                                        {% else %}
+
+
+                                          <option value="+">+</option>
+
+
+                                        {% endif %}
+                                        {% if product_option_value.weight_prefix == '-' %}
+
+
+                                          <option value="-" selected="selected">-</option>
+
+
+                                        {% else %}
+
+
+                                          <option value="-">-</option>
+
+
+                                        {% endif %}
+
+
+                                      </select> <input type="text" name="product_option[{{ option_row }}][product_option_value][{{ option_value_row }}][weight]" value="{{ product_option_value.weight }}" placeholder="{{ entry_weight }}" class="form-control"/></td>
+                                    <td class="text-right"><button type="button" onclick="$(this).tooltip('destroy');$('#option-value-row{{ option_value_row }}').remove();" data-toggle="tooltip" title="{{ button_remove }}" class="btn btn-danger"><i class="fa fa-minus-circle"></i></button></td>
+                                  </tr>
+                                  {% set option_value_row = option_value_row + 1 %}
+                                
+                    </tbody>
+                  </table>
+                </fieldset>
+              </div>
 
               {# SUBSCRIPTION TYPE HERE #}
               <div class="tab-pane" id="tab-ppd">
@@ -2927,6 +3115,30 @@
     }
 
   });
+
+// custom option
+var option_value_row = {{ option_value_row }};
+
+function addOptionValue() {
+	html  = '<tr id="option-value-row' + option_value_row + '">';
+    html += '  <td class="text-left"><input type="hidden" name="option_value[' + option_value_row + '][option_value_id]" value="" />';
+	{% for language in languages %}
+	html += '    <div class="input-group">';
+	html += '      <span class="input-group-addon"></span><input type="text" name="option_value[' + option_value_row + '][option_value_description][{{ language.language_id }}][name]" value="" placeholder="Variety Name" class="form-control" />';
+    html += '    </div>';
+	{% endfor %}
+	html += '  </td>';
+    html += '  <td class="text-center"><a href="" id="thumb-image' + option_value_row + '" data-toggle="image" class="img-thumbnail"><img src="{{ placeholder }}" alt="" title="" data-placeholder="{{ placeholder }}" /></a><input type="hidden" name="option_value[' + option_value_row + '][image]" value="" id="input-image' + option_value_row + '" /></td>';
+	html += '  <td class="text-right"><input type="text" name="option_value[' + option_value_row + '][sort_order]" value="" placeholder="{{ entry_sort_order }}" class="form-control" /></td>';
+	html += '  <td class="text-right"><button type="button" onclick="$(\'#option-value-row' + option_value_row + '\').remove();" data-toggle="tooltip" title="{{ button_remove }}" class="btn btn-danger"><i class="fa fa-minus-circle"></i></button></td>';
+	html += '</tr>';
+
+	$('#option-value tbody').append(html);
+
+	option_value_row++;
+}
+//-->
+
 </script>
 <style type="text/css">
   .imgoption {

@@ -1,1 +1,73 @@
-2025-04-29 15:35:51 - {"error":{"code":"forbidden","message":"This store is not yet verified to accept online orders. Please check again later."},"error_message":"This store is not yet verified to accept online orders. Please check again later."}
+2025-04-30 14:59:55 - PHP Warning:  foreach() argument must be of type array|object, string given in C:\xampp\htdocs\store\storage\modification\catalog\model\account\customerpartner.php on line 1055
+2025-04-30 15:12:40 - Array
+(
+    [0] => Array
+        (
+            [option_value_id] => 
+            [option_value_description] => Array
+                (
+                    [1] => Array
+                        (
+                            [name] => testoption
+                        )
+
+                )
+
+            [image] => 
+            [sort_order] => 0
+        )
+
+    [1] => Array
+        (
+            [option_value_id] => 
+            [option_value_description] => Array
+                (
+                    [1] => Array
+                        (
+                            [name] => testoptionn
+                        )
+
+                )
+
+            [image] => 
+            [sort_order] => 1
+        )
+
+)
+
+2025-04-30 16:03:27 - Array
+(
+    [0] => Array
+        (
+            [option_value_id] => 
+            [option_value_description] => Array
+                (
+                    [1] => Array
+                        (
+                            [name] => test
+                        )
+
+                )
+
+            [image] => 
+            [sort_order] => 0
+        )
+
+    [1] => Array
+        (
+            [option_value_id] => 
+            [option_value_description] => Array
+                (
+                    [1] => Array
+                        (
+                            [name] => test1
+                        )
+
+                )
+
+            [image] => 
+            [sort_order] => 1
+        )
+
+)
+

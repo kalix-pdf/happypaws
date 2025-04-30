@@ -1045,6 +1045,50 @@ class ModelAccountCustomerpartner extends Model
 		return $sql;
 	}
 
+	//CUSTOM OPTION!!
+	public function addOption($data)
+	{
+		$this->db->query("INSERT INTO `" . DB_PREFIX . "option` SET type = '" . $this->db->escape($data['type']) . "', sort_order = '" . (int)$data['sort_order'] . "'");
+
+		$option_id = $this->db->getLastId();
+		$product_id = $option_id;
+
+		// foreach ($data['option_description'] as $language_id => $value) {
+		// 	$this->db->query("INSERT INTO " . DB_PREFIX . "option_description SET option_id = '" . (int)$option_id . "', language_id = '" . (int)$language_id . "', name = '" . $this->db->escape($value['name']) . "'");
+		// }
+
+		if (isset($data['option_value'])) {
+			foreach ($data['option_value'] as $option_value) {
+				$this->db->query("INSERT INTO " . DB_PREFIX . "option_value SET option_id = '" . (int)$option_id . "', image = '" . $this->db->escape(html_entity_decode($option_value['image'], ENT_QUOTES, 'UTF-8')) . "', sort_order = '" . (int)$option_value['sort_order'] . "'");
+
+				$option_value_id = $this->db->getLastId();
+
+				foreach ($option_value['option_value_description'] as $language_id => $option_value_description) {
+					$this->db->query("INSERT INTO " . DB_PREFIX . "option_value_description SET option_value_id = '" . (int)$option_value_id . "', language_id = '" . (int)$language_id . "', option_id = '" . (int)$option_id . "', name = '" . $this->db->escape($option_value_description['name']) . "'");
+				}
+			}
+		}
+		$data['required'] = 1;
+
+				if ($data['type'] == 'select') {
+					if (isset($data['option_value'])) {
+						$this->db->query("INSERT INTO " . DB_PREFIX . "product_option SET product_id = '" . (int)$product_id . "', option_id = '" . (int)$option_id . "', required = '" . (int)$data['required'] . "'");
+
+						// $product_option_id = $this->db->getLastId();
+
+						// foreach ($data['option_value'] as $product_option_value) {
+						// 	$this->db->query("INSERT INTO " . DB_PREFIX . "product_option_value SET product_option_id = '" . (int)$product_option_id . "', product_id = '" . (int)$product_id . "', option_id = '" . (int)$option_id . "', 
+						// 		option_value_id = '" . (int)$data['option_value_id'] . "', quantity = '" . (int)$product_option_value['quantity'] . "', subtract = '" . (int)$product_option_value['subtract'] . "', 
+						// 		price = '" . (float)$product_option_value['price'] . "', price_prefix = '" . $this->db->escape($product_option_value['price_prefix']) . "', points = '" . (int)$product_option_value['points'] . "', 
+						// 		points_prefix = '" . $this->db->escape($product_option_value['points_prefix']) . "', weight = '" . (float)$product_option_value['weight'] . "', weight_prefix = '" . $this->db->escape($product_option_value['weight_prefix']) . "'");
+						// }
+					}
+				} else {
+					$this->db->query("INSERT INTO " . DB_PREFIX . "product_option SET product_id = '" . (int)$product_id . "', option_id = '" . (int)$option_id . "', value = '" . $this->db->escape($data['value']) . "', required = '" . (int)$data['required'] . "'");
+				}
+
+		return $option_id;
+	}
 
 	/**
 	 * [productAddUpdate to add the updated data to particular product]
@@ -1080,11 +1124,11 @@ class ModelAccountCustomerpartner extends Model
 
 			foreach ($data['product_description'] as $language_id => $value) {
 
-				if (!$value['meta_description'] && $this->config->get('marketplace_auto_generate_sku')) {
-					$value['meta_description'] = $value['name'];
-				}
+				// if (!$value['meta_description'] && $this->config->get('marketplace_auto_generate_sku')) {
+				// 	$value['meta_description'] = $value['name'];
+				// }
 
-				$this->db->query("INSERT INTO `" . DB_PREFIX . "product_description` SET product_id = '" . (int)$product_id . "', language_id = '" . (int)$language_id . "', name = '" . $this->db->escape($value['name']) . "', meta_title = '" . $this->db->escape($value['meta_title']) . "', meta_keyword = '" . $this->db->escape(htmlentities($htmlfilter->HTMLFilter(html_entity_decode($value['meta_keyword']), '', true))) . "', meta_description = '" . $this->db->escape(htmlentities($htmlfilter->HTMLFilter(html_entity_decode($value['meta_description']), '', true))) . "', description = '" . $this->db->escape($value['description']) . "', tag = '" . $this->db->escape($value['tag']) . "'");
+				$this->db->query("INSERT INTO `" . DB_PREFIX . "product_description` SET product_id = '" . (int)$product_id . "', language_id = '" . (int)$language_id . "', name = '" . $this->db->escape($value['name']) . "', meta_title = '" . $this->db->escape($value['meta_title']) . "', description = '" . $this->db->escape($value['description']) . "'");
 			}
 		}
 		// when we have reason indes set and has the some value in it.

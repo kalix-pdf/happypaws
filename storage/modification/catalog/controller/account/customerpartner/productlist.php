@@ -262,6 +262,8 @@ class ControllerAccountCustomerpartnerProductlist extends Controller
 			$results[$key]['action'] = $action;
 			$results[$key]['productLink'] = $this->url->link('product/product', 'product_id=' . $key, true);
 			$results[$key]['productPreviewLink'] = $this->url->link('product/product', 'product_id=' . $key . "&product_token=" . $this->session->data['product_token'], true);
+		
+			$this->data['subscriptions'] = $this->model_account_customerpartner->getSubscriptionByProductId($result['product_id']);
 		}
 
 		$this->data['products'] = $results;
@@ -375,7 +377,6 @@ class ControllerAccountCustomerpartnerProductlist extends Controller
 		if (isset($this->request->get['order'])) {
 			$url .= '&order=' . $this->request->get['order'];
 		}
-		$this->data['subscriptions'] = $this->model_account_customerpartner->getSubscriptionByProductId($result['product_id']);
 
 		$pagination = new Pagination();
 		$pagination->total = $product_total;
