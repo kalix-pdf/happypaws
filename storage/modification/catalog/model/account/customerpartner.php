@@ -743,6 +743,27 @@ class ModelAccountCustomerpartner extends Model
 		if ($this->config->get('marketplace_productaddemail'))
 			$this->model_customerpartner_mail->mail($mailData, $values);
 
+			//CUSTOMM OPTION
+		if (isset($data['product_option'])) {
+				$name     = $data['product_option'][0]['name'] ?? '';
+				$image    = $data['product_option'][1]['image'] ?? '';
+				$quantity = $data['product_option'][3]['quantity'] ?? 0;
+				$subtract = $data['product_option'][4]['subtract'] ?? 0;
+				$price    = $data['product_option'][5]['price'] ?? 0.00;
+				$weight   = $data['product_option'][6]['weight'] ?? 0.00;
+				$product_option_value_id = $data[2]['product_option_value_id'] ?? NULL;
+	
+				$this->db->query("INSERT INTO custom_product_option SET 
+					product_id = '" . (int)$product_id . "',
+					product_option_id = '" . (int)$product_option_value_id ."',
+					name = '" . $this->db->escape($name) . "',
+					image = '" . $this->db->escape($image) . "',
+					quantity = '" . (int)$quantity . "',
+					subtract = '" . (int)$subtract . "',
+					price = '" . (float)$price . "',
+					weight = '" . (float)$weight . "'");
+			}
+
 		return $product_id;
 	}
 
@@ -1048,48 +1069,28 @@ class ModelAccountCustomerpartner extends Model
 	//CUSTOM OPTION!!
 	public function addOption($data)
 	{
-		$this->db->query("INSERT INTO `" . DB_PREFIX . "option` SET type = '" . $this->db->escape($data['type']) . "', sort_order = '" . (int)$data['sort_order'] . "'");
+		$product_id = $this->db->getLastId();
 
-		$option_id = $this->db->getLastId();
-		$product_id = $option_id;
+		if (isset($data['product_option'])) {
+			$name     = $data['product_option'][0]['name'] ?? '';
+			$image    = $data['product_option'][1]['image'] ?? '';
+			$quantity = $data['product_option'][3]['quantity'] ?? 0;
+			$subtract = $data['product_option'][4]['subtract'] ?? 0;
+			$price    = $data['product_option'][5]['price'] ?? 0.00;
+			$weight   = $data['product_option'][6]['weight'] ?? 0.00;
+			$product_option_value_id = $data[2]['product_option_value_id'] ?? NULL;
 
-		// foreach ($data['option_description'] as $language_id => $value) {
-		// 	$this->db->query("INSERT INTO " . DB_PREFIX . "option_description SET option_id = '" . (int)$option_id . "', language_id = '" . (int)$language_id . "', name = '" . $this->db->escape($value['name']) . "'");
-		// }
-
-		if (isset($data['option_value'])) {
-			foreach ($data['option_value'] as $option_value) {
-				$this->db->query("INSERT INTO " . DB_PREFIX . "option_value SET option_id = '" . (int)$option_id . "', image = '" . $this->db->escape(html_entity_decode($option_value['image'], ENT_QUOTES, 'UTF-8')) . "', sort_order = '" . (int)$option_value['sort_order'] . "'");
-
-				$option_value_id = $this->db->getLastId();
-
-				foreach ($option_value['option_value_description'] as $language_id => $option_value_description) {
-					$this->db->query("INSERT INTO " . DB_PREFIX . "option_value_description SET option_value_id = '" . (int)$option_value_id . "', language_id = '" . (int)$language_id . "', option_id = '" . (int)$option_id . "', name = '" . $this->db->escape($option_value_description['name']) . "'");
-				}
-			}
+			$this->db->query("INSERT INTO custom_product_option SET 
+				product_id = '" . (int)$product_id . "',
+				product_option_id = '" . (int)$product_option_value_id ."',
+				name = '" . $this->db->escape($name) . "',
+				image = '" . $this->db->escape($image) . "',
+				quantity = '" . (int)$quantity . "',
+				subtract = '" . (int)$subtract . "',
+				price = '" . (float)$price . "',
+				weight = '" . (float)$weight . "'");
 		}
-		$data['required'] = 1;
-		$this->log->write($data['option_value']);
-
-				// if ($data['type'] == 'select') {
-				// 	if (isset($data['option_value'])) {
-				// 		$this->db->query("INSERT INTO " . DB_PREFIX . "product_option SET product_id = '" . (int)$product_id . "', option_id = '" . (int)$option_id . "', required = '" . (int)$data['required'] . "'");
-
-				// 		$product_option_id = $this->db->getLastId();
-
-				// 		foreach ($data['option_value'] as $product_option_value) {
-				// 			$this->db->query("INSERT INTO " . DB_PREFIX . "product_option_value SET product_option_id = '" . (int)$product_option_id . "', product_id = '" . (int)$product_id . "', option_id = '" . (int)$product_option['option_id'] . "', 
-				// 				option_value_id = '" . (int)$product_option_value['option_value_id'] . "', quantity = '" . (int)$product_option_value['quantity'] . "', subtract = '" . (int)$product_option_value['subtract'] . "', 
-				// 				price = '" . (float)$product_option_value['price'] . "', price_prefix = '" . $this->db->escape($product_option_value['price_prefix']) . "', points = '" . (int)$product_option_value['points'] . "', 
-				// 				points_prefix = '" . $this->db->escape($product_option_value['points_prefix']) . "', weight = '" . (float)$product_option_value['weight'] . "', weight_prefix = '" . $this->db->escape($product_option_value['weight_prefix']) . "'");
-				// 		}
-				// 	}
-				// } else {
-				// 	$this->db->query("INSERT INTO " . DB_PREFIX . "product_option SET product_id = '" . (int)$product_id . "', option_id = '" . (int)$option_id . "', value = '" . $this->db->escape($product_option['value']) . "', required = '" . (int)$product_option['required'] . "'");
-				// }
-
-
-		return $option_id;
+		
 	}
 
 	/**

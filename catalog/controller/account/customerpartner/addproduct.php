@@ -140,11 +140,9 @@ class ControllerAccountCustomerpartnerAddproduct extends Controller
 					$this->model_customerpartner_master->addSubscription($sbstype, $product_id, $amount);
 				}
 			} 
-			$this->request->post['sort_order'] = 0;
-			$this->request->post['type'] = 'select';
-			$this->request->post['option_description'] = 'Variation';
+			// $this->log->write($this->request->post['product_option']);
+ 
 			$this->model_account_customerpartner->addOption($this->request->post);
-			
 		}
 
 		$data['entry_image'] = ' <span data-toggle="tooltip" title="' . $this->config->get('marketplace_imageex') . '">' . $this->language->get('entry_image') . '</span>';
@@ -798,68 +796,68 @@ class ControllerAccountCustomerpartnerAddproduct extends Controller
 		}
 
 		// Options
-		if (isset($this->request->post['product_option'])) {
-			$product_options = $this->request->post['product_option'];
-		} elseif (isset($this->request->get['product_id'])) {
-			$product_options = $this->model_account_customerpartner->getProductOptions($this->request->get['product_id']);
-			if (!isset($product_info['product_id']) && !isset($this->request->get['product_id'])) {
-				$this->response->redirect($this->url->link('account/customerpartner/addproduct', '', true));
-			}
-		} else {
-			$product_options = array();
-		}
+		// if (isset($this->request->post['product_option'])) {
+		// 	$product_options = $this->request->post['product_option'];
+		// } elseif (isset($this->request->get['product_id'])) {
+		// 	$product_options = $this->model_account_customerpartner->getProductOptions($this->request->get['product_id']);
+		// 	if (!isset($product_info['product_id']) && !isset($this->request->get['product_id'])) {
+		// 		$this->response->redirect($this->url->link('account/customerpartner/addproduct', '', true));
+		// 	}
+		// } else {
+		// 	$product_options = array();
+		// }
 
-		$data['product_options'] = array();
+		// $data['product_options'] = array();
 
-		foreach ($product_options as $product_option) {
-			if ($product_option['type'] == 'select' || $product_option['type'] == 'radio' || $product_option['type'] == 'checkbox' || $product_option['type'] == 'image') {
-				$product_option_value_data = array();
-				if (!empty($product_option['product_option_value'])) {
-					foreach ($product_option['product_option_value'] as $product_option_value) {
-						$product_option_value_data[] = array(
-							'product_option_value_id' => $product_option_value['product_option_value_id'],
-							'option_value_id'         => $product_option_value['option_value_id'],
-							'quantity'                => $product_option_value['quantity'],
-							'subtract'                => $product_option_value['subtract'],
-							'price'                   => ($product_option_value['price']) ? number_format($this->currency->convert((float)$product_option_value['price'], $this->config->get('config_currency'), $this->session->data['currency']), 2, '.', '') : $product_option_value['price'],
-							'price_prefix'            => $product_option_value['price_prefix'],
-							'points'                  => $product_option_value['points'],
-							'points_prefix'           => $product_option_value['points_prefix'],
-							'weight'                  => $product_option_value['weight'],
-							'weight_prefix'           => $product_option_value['weight_prefix']
-						);
-					}
-				}
+		// foreach ($product_options as $product_option) {
+		// 	if ($product_option['type'] == 'select' || $product_option['type'] == 'radio' || $product_option['type'] == 'checkbox' || $product_option['type'] == 'image') {
+		// 		$product_option_value_data = array();
+		// 		if (!empty($product_option['product_option_value'])) {
+		// 			foreach ($product_option['product_option_value'] as $product_option_value) {
+		// 				$product_option_value_data[] = array(
+		// 					'product_option_value_id' => $product_option_value['product_option_value_id'],
+		// 					'option_value_id'         => $product_option_value['option_value_id'],
+		// 					'quantity'                => $product_option_value['quantity'],
+		// 					'subtract'                => $product_option_value['subtract'],
+		// 					'price'                   => ($product_option_value['price']) ? number_format($this->currency->convert((float)$product_option_value['price'], $this->config->get('config_currency'), $this->session->data['currency']), 2, '.', '') : $product_option_value['price'],
+		// 					'price_prefix'            => $product_option_value['price_prefix'],
+		// 					'points'                  => $product_option_value['points'],
+		// 					'points_prefix'           => $product_option_value['points_prefix'],
+		// 					'weight'                  => $product_option_value['weight'],
+		// 					'weight_prefix'           => $product_option_value['weight_prefix']
+		// 				);
+		// 			}
+		// 		}
 
-				$data['product_options'][] = array(
-					'product_option_id'    => $product_option['product_option_id'],
-					'product_option_value' => $product_option_value_data,
-					'option_id'            => $product_option['option_id'],
-					'name'                 => $product_option['name'],
-					'type'                 => $product_option['type'],
-					'required'             => $product_option['required']
-				);
-			} else {
-				$data['product_options'][] = array(
-					'product_option_id' => $product_option['product_option_id'],
-					'option_id'         => $product_option['option_id'],
-					'name'              => $product_option['name'],
-					'type'              => $product_option['type'],
-					'option_value'      => $product_option['option_value'],
-					'required'          => $product_option['required']
-				);
-			}
-		}
+		// 		$data['product_options'][] = array(
+		// 			'product_option_id'    => $product_option['product_option_id'],
+		// 			'product_option_value' => $product_option_value_data,
+		// 			'option_id'            => $product_option['option_id'],
+		// 			'name'                 => $product_option['name'],
+		// 			'type'                 => $product_option['type'],
+		// 			'required'             => $product_option['required']
+		// 		);
+		// 	} else {
+		// 		$data['product_options'][] = array(
+		// 			'product_option_id' => $product_option['product_option_id'],
+		// 			'option_id'         => $product_option['option_id'],
+		// 			'name'              => $product_option['name'],
+		// 			'type'              => $product_option['type'],
+		// 			'option_value'      => $product_option['option_value'],
+		// 			'required'          => $product_option['required']
+		// 		);
+		// 	}
+		// }
 
-		$data['option_values'] = array();
+		// $data['option_values'] = array();
 
-		foreach ($data['product_options'] as $product_option) {
-			if ($product_option['type'] == 'select' || $product_option['type'] == 'radio' || $product_option['type'] == 'checkbox' || $product_option['type'] == 'image') {
-				if (!isset($data['option_values'][$product_option['option_id']])) {
-					$data['option_values'][$product_option['option_id']] = $this->model_account_customerpartner->getOptionValues($product_option['option_id']);
-				}
-			}
-		}
+		// foreach ($data['product_options'] as $product_option) {
+		// 	if ($product_option['type'] == 'select' || $product_option['type'] == 'radio' || $product_option['type'] == 'checkbox' || $product_option['type'] == 'image') {
+		// 		if (!isset($data['option_values'][$product_option['option_id']])) {
+		// 			$data['option_values'][$product_option['option_id']] = $this->model_account_customerpartner->getOptionValues($product_option['option_id']);
+		// 		}
+		// 	}
+		// }
 
 		$data['customer_groups'] = $this->model_account_customerpartner->getCustomerGroups();
 
@@ -1260,15 +1258,7 @@ class ControllerAccountCustomerpartnerAddproduct extends Controller
 		}		
 		
 		//custom-option
-		if (isset($this->request->post['option_value'])) {
-			foreach ($this->request->post['option_value'] as $option_value_id => $option_value) {
-				foreach ($option_value['option_value_description'] as $language_id => $option_value_description) {
-					if ((utf8_strlen($option_value_description['name']) < 1) || (utf8_strlen($option_value_description['name']) > 128)) {
-						$this->error['option_value'][$option_value_id][$language_id] = $this->language->get('error_option_value');
-					}
-				}
-			}
-		}
+	
 
 		if (isset($this->request->post['price']) && (!is_numeric($this->request->post['price']) || $this->request->post['price'] < 0) && (isset($this->request->post['quantity']) && !is_numeric($this->request->post['quantity']) || $this->request->post['quantity'] < 0)) {
 			$this->error['warning'] = $this->language->get('error_price_quantity');

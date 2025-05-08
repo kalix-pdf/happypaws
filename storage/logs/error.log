@@ -1,73 +1,302 @@
-2025-04-30 14:59:55 - PHP Warning:  foreach() argument must be of type array|object, string given in C:\xampp\htdocs\store\storage\modification\catalog\model\account\customerpartner.php on line 1055
-2025-04-30 15:12:40 - Array
+2025-05-08 20:23:45 - Array
 (
-    [0] => Array
+    [product_description] => Array
         (
-            [option_value_id] => 
-            [option_value_description] => Array
+            [1] => Array
                 (
-                    [1] => Array
+                    [name] => testoption
+                    [description] => &lt;p&gt;testoption&lt;/p&gt;
+                    [meta_title] => testoption
+                )
+
+        )
+
+    [model] => testoption
+    [price] => 323
+    [prevPrice] => 0
+    [quantity] => 323
+    [image] => 
+    [length] => 1
+    [width] => 1
+    [height] => 1
+    [weight] => 11
+    [product_link_tab] => 1
+    [manufacturer] => 
+    [manufacturer_id] => 0
+    [product_category] => Array
+        (
+            [0] => 106
+        )
+
+    [filter] => 
+    [related] => 
+    [option_value] => Array
+        (
+            [0] => Array
+                (
+                    [option_value_id] => 
+                )
+
+            [1] => Array
+                (
+                    [option_value_description] => Array
                         (
-                            [name] => testoption
+                            [0] => Array
+                                (
+                                    [name] => red
+                                )
+
                         )
 
                 )
 
-            [image] => 
-            [sort_order] => 0
+            [2] => Array
+                (
+                    [image] => 
+                )
+
+        )
+
+    [product_option] => Array
+        (
+            [0] => Array
+                (
+                    [product_option_value] => Array
+                        (
+                            [0] => Array
+                                (
+                                    [product_option_value_id] => 
+                                )
+
+                        )
+
+                )
+
+            [1] => Array
+                (
+                    [product_option_value] => Array
+                        (
+                            [0] => Array
+                                (
+                                    [quantity] => 23
+                                )
+
+                        )
+
+                )
+
+            [2] => Array
+                (
+                    [product_option_value] => Array
+                        (
+                            [0] => Array
+                                (
+                                    [subtract] => 0
+                                )
+
+                        )
+
+                )
+
+            [3] => Array
+                (
+                    [product_option_value] => Array
+                        (
+                            [0] => Array
+                                (
+                                    [price] => 32
+                                )
+
+                        )
+
+                )
+
+            [4] => Array
+                (
+                    [product_option_value] => Array
+                        (
+                            [0] => Array
+                                (
+                                    [weight] => 
+                                )
+
+                        )
+
+                )
+
+        )
+
+    [subs_ppd] => 10
+    [subs_ppm] => 
+    [product_special_tab] => 1
+    [type] => select
+)
+
+2025-05-08 21:36:08 - Array
+(
+    [0] => Array
+        (
+            [name] => red
         )
 
     [1] => Array
         (
-            [option_value_id] => 
-            [option_value_description] => Array
-                (
-                    [1] => Array
-                        (
-                            [name] => testoptionn
-                        )
-
-                )
-
             [image] => 
-            [sort_order] => 1
+        )
+
+    [2] => Array
+        (
+            [product_option_value_id] => 
+        )
+
+    [3] => Array
+        (
+            [quantity] => 323
+        )
+
+    [4] => Array
+        (
+            [subtract] => 0
+        )
+
+    [5] => Array
+        (
+            [price] => 3
+        )
+
+    [6] => Array
+        (
+            [weight] => 
         )
 
 )
 
-2025-04-30 16:03:27 - Array
+2025-05-08 21:41:42 - Array
 (
     [0] => Array
         (
-            [option_value_id] => 
-            [option_value_description] => Array
-                (
-                    [1] => Array
-                        (
-                            [name] => test
-                        )
-
-                )
-
-            [image] => 
-            [sort_order] => 0
+            [name] => red
         )
 
     [1] => Array
         (
-            [option_value_id] => 
-            [option_value_description] => Array
-                (
-                    [1] => Array
-                        (
-                            [name] => test1
-                        )
-
-                )
-
             [image] => 
-            [sort_order] => 1
+        )
+
+    [2] => Array
+        (
+            [product_option_value_id] => 
+        )
+
+    [3] => Array
+        (
+            [quantity] => 323
+        )
+
+    [4] => Array
+        (
+            [subtract] => 1
+        )
+
+    [5] => Array
+        (
+            [price] => 323
+        )
+
+    [6] => Array
+        (
+            [weight] => 
         )
 
 )
 
+2025-05-08 21:43:13 - PHP Warning:  rmdir(D:/xampp/htdocs/store/storage/modification/admin/view/template): Permission denied in D:\xampp\htdocs\store\admin\controller\marketplace\modification.php on line 105
+2025-05-08 21:43:13 - PHP Warning:  unlink(D:/xampp/htdocs/store/storage/modification/admin/model/customer/customer.php): No such file or directory in D:\xampp\htdocs\store\admin\controller\marketplace\modification.php on line 101
+2025-05-08 21:43:13 - PHP Warning:  unlink(D:/xampp/htdocs/store/storage/modification/admin/model/catalog/product.php): No such file or directory in D:\xampp\htdocs\store\admin\controller\marketplace\modification.php on line 101
+2025-05-08 21:43:13 - PHP Warning:  rmdir(D:/xampp/htdocs/store/storage/modification/admin/model): No such file or directory in D:\xampp\htdocs\store\admin\controller\marketplace\modification.php on line 105
+2025-05-08 21:43:13 - PHP Warning:  rmdir(D:/xampp/htdocs/store/storage/modification/admin): No such file or directory in D:\xampp\htdocs\store\admin\controller\marketplace\modification.php on line 105
+2025-05-08 21:44:06 - Array
+(
+    [0] => Array
+        (
+            [name] => red
+        )
+
+    [1] => Array
+        (
+            [image] => 
+        )
+
+    [2] => Array
+        (
+            [product_option_value_id] => 
+        )
+
+    [3] => Array
+        (
+            [quantity] => 323
+        )
+
+    [4] => Array
+        (
+            [subtract] => 1
+        )
+
+    [5] => Array
+        (
+            [price] => 232
+        )
+
+    [6] => Array
+        (
+            [weight] => 
+        )
+
+)
+
+2025-05-08 21:46:33 - Array
+(
+    [0] => Array
+        (
+            [name] => red
+        )
+
+    [1] => Array
+        (
+            [image] => 
+        )
+
+    [2] => Array
+        (
+            [product_option_value_id] => 
+        )
+
+    [3] => Array
+        (
+            [quantity] => 323
+        )
+
+    [4] => Array
+        (
+            [subtract] => 1
+        )
+
+    [5] => Array
+        (
+            [price] => 32
+        )
+
+    [6] => Array
+        (
+            [weight] => 
+        )
+
+)
+
+2025-05-08 21:54:28 - PHP Warning:  unlink(D:/xampp/htdocs/store/storage/modification/catalog/view/theme/default/template/account/register.twig): No such file or directory in D:\xampp\htdocs\store\admin\controller\marketplace\modification.php on line 101
+2025-05-08 21:54:28 - PHP Warning:  unlink(D:/xampp/htdocs/store/storage/modification/catalog/language/en-gb/api/customer.php): Permission denied in D:\xampp\htdocs\store\admin\controller\marketplace\modification.php on line 101
+2025-05-08 21:54:28 - PHP Warning:  unlink(D:/xampp/htdocs/store/storage/modification/catalog/controller/product/special.php): No such file or directory in D:\xampp\htdocs\store\admin\controller\marketplace\modification.php on line 101
+2025-05-08 21:54:28 - PHP Warning:  unlink(D:/xampp/htdocs/store/storage/modification/admin/model/setting/extension.php): No such file or directory in D:\xampp\htdocs\store\admin\controller\marketplace\modification.php on line 101
+2025-05-08 21:54:28 - PHP Warning:  rmdir(D:/xampp/htdocs/store/storage/modification/admin/controller/marketplace): No such file or directory in D:\xampp\htdocs\store\admin\controller\marketplace\modification.php on line 105
+2025-05-08 21:54:28 - PHP Warning:  rmdir(D:/xampp/htdocs/store/storage/modification/admin/controller/catalog): No such file or directory in D:\xampp\htdocs\store\admin\controller\marketplace\modification.php on line 105
+2025-05-08 22:01:35 - PHP Warning:  mysqli::query(): (42S22/1054): Unknown column 'r.attachment' in 'field list' in D:\xampp\htdocs\store\system\library\db\mysqli.php on line 25

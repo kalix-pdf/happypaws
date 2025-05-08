@@ -2,15 +2,62 @@
 class ControllerExtensionPaymentHitPay extends Controller {
     public function index() 
     {
-                $api_key = 'live_eb43d1ccd7540e1e6ba0a67d3ac7d18ef06fda72aaf8badc7d4580f676351b68';
-                $api_url = 'https://api.hit-pay.com/v1/payment-requests';
+        $api_key = 'live_eb43d1ccd7540e1e6ba0a67d3ac7d18ef06fda72aaf8badc7d4580f676351b68';
+        $api_url = 'https://api.hit-pay.com/v1/payment-requests';
+
+        $this->load->model('account/customer');
+        $order_id = $this->session->data['order_id'];
+        $order_data = array();
+
+        if ($this->customer->isLogged()) {
+            $customer_info = $this->model_account_customer->getCustomer($this->customer->getId());
+
+            $order_data['customer_id'] = $this->customer->getId();
+            $order_data['customer_group_id'] = $customer_info['customer_group_id'];
+            $order_data['firstname'] = $customer_info['firstname'];
+            $order_data['lastname'] = $customer_info['lastname'];
+            $order_data['email'] = $customer_info['email'];
+            $order_data['telephone'] = $customer_info['telephone'];
+            $order_data['custom_field'] = json_decode($customer_info['custom_field'], true);
+        } 
+        foreach ($this->cart->getProducts() as $product) {
+				$option_data = array();
+
+				foreach ($product['option'] as $option) {
+					$option_data[] = array(
+						'product_option_id'       => $option['product_option_id'],
+						'product_option_value_id' => $option['product_option_value_id'],
+						'option_id'               => $option['option_id'],
+						'option_value_id'         => $option['option_value_id'],
+						'name'                    => $option['name'],
+						'value'                   => $option['value'],
+						'type'                    => $option['type']
+					);
+				}
+
+				$order_data['products'][] = array(
+					'product_id' => $product['product_id'],
+					'name'       => $product['name'],
+					'model'      => $product['model'],
+					'option'     => $option_data,
+					'download'   => $product['download'],
+					'quantity'   => $product['quantity'],
+					'subtract'   => $product['subtract'],
+					'price'      => $product['price'],
+					'total'      => $product['total'],
+					'tax'        => $this->tax->getTax($product['price'], $product['tax_class_id']),
+					'reward'     => $product['reward']
+				);
+
+            }
 
                 $params = array(
-                    'amount' => 100,
+                    'amount' => $product['total'] + 39,
                     'currency' => 'PHP',
-                    'email' => 'example@gmail.com',
-                    'name' => 'kalix',
-                    'reference_number' => 129,
+                    'email' => $order_data['email'],
+                    'name' => $order_data['firstname'],
+                    'phone' => $order_data['telephone'],
+                    'reference_number' => $order_id,
                     // 'redirect_url' => $this->url->link('checkout/success', '', true),
                     // 'webhook' => HTTPS_CATALOG . 'index.php?route=extension/payment/hitpay/webhook'
                 );
@@ -37,16 +84,32 @@ class ControllerExtensionPaymentHitPay extends Controller {
         
     }
 
-    // public function webhook() {
-    //     $input = file_get_contents('php://input');
-    //     $data = json_decode($input, true);
+    public function webhook() {
+        $json = file_get_contents('php://input');
+        $data = json_decode($json, true);
 
-    //     if (!empty($data['payment_request_id'])) {
-    //         $order_id = $data['reference_number'];
+        file_put_contents(DIR_LOGS . 'hitpay_webhook.log', print_r($data, true));
+    
+        http_response_code(200); 
+        echo 'Webhook received';
 
-    //         $this->load->model('checkout/order');
-    //         $this->model_checkout_order->addOrderHistory($order_id, $this->config->get('payment_hitpay_order_status_id'), 'Paid via HitPay');
-    //     }
-    // }
+        // if (isset($data['status']) && $data['status'] === 'completed' && isset($data['reference_number'])) {
+        //     $order_id = $data['reference_number']; 
+        //     $this->load->model('checkout/order');
+
+        //     $order_info = $this->model_checkout_order->getOrder($order_id);
+        //     if ($order_info) {
+        //         $this->model_checkout_order->addOrderHistory($order_id, $this->config->get('payment_hitpay_order_status_id'), 'Paid via HitPay');
+        //         http_response_code(200); 
+        //         echo 'Webhook received';
+        //     } else {
+        //         http_response_code(404);
+        //         echo 'Order not found';
+        //     }
+        // } else {
+        //     http_response_code(400);
+        //     echo 'Invalid webhook';
+        // }
+    }
 }
 ?>
