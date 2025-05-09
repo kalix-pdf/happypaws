@@ -746,63 +746,78 @@
               {% endif %}
 
 {# CUSTOM OPTION HERE! #}
-               <div class="tab-pane" id="tab-custom-option">
-                <fieldset>
-                  
-                  <table id="option-value{{ option_row }}" class="table table-striped table-bordered table-hover">
-                    <thead>
-                      <tr>
-                        <td class="text-left">{{ entry_option_value }}</td>
-                         <td class="text-center">{{ entry_image }}</td>
-                        <td class="text-right">{{ entry_quantity }}</td>
-                        <td class="text-left">{{ entry_subtract }}</td>
-                        <td class="text-right">{{ entry_price }}</td>
-                        <td class="text-right">{{ entry_weight }}</td>
-                        <td></td>
-                      </tr>
-                    </thead>
-                    <tbody>
-                    <tr id="option-value-row{{ option_value_row }}">
-                    <td class="text-center"><input type="hidden" name="option_value[{{ option_value_row }}][option_value_id]" value="{{ option_value.option_value_id }}" />
-                      <div class="input-group">
-                        <input type="text" name="product_option[{{ option_value_row }}][name]" value="{{ option_value.option_value_description[language.language_id] ? option_value.option_value_description[language.language_id].name }}" placeholder="{{ entry_option_value }}" class="form-control" />
-                      </div>
-                      {% if error_option_value[option_value_row][language.language_id] %}
-                      <div class="text-danger">{{ error_option_value[option_value_row][language.language_id] }}</div>
-                      {% endif %}
-                    <td class="text-left"><a href="" id="thumb-image{{ option_value_row }}" data-toggle="image" class="img-thumbnail">
-                    <img src="{{ placeholder }}" alt="" title="" data-placeholder="{{ placeholder }}" /></a>
-                      <input type="hidden" name="product_option[{{ option_value_row }}][image]" value="{{ option_value.image }}" id="input-image{{ option_value_row }}" /></td>
-                    </td>
-                     <input type="hidden" name="product_option[{{ option_row }}][product_option_value_id]" value="{{ product_option_value.product_option_value_id }}"/></td>
-                        <td class="text-right"><input type="text" name="product_option[{{ option_row }}][quantity]" value="{{ product_option_value.quantity }}" placeholder="{{ entry_quantity }}" class="form-control"/></td>
-                          <td class="text-left">
-                          <select name="product_option[{{ option_row }}][subtract]" class="form-control">
-                            {% if product_option_value.subtract %}
-                              <option value="1" selected="selected">{{ text_yes }}</option>
-                              <option value="0">{{ text_no }}</option>
-                              {% else %}
-                              <option value="1">{{ text_yes }}</option>
-                              <option value="0" selected="selected">{{ text_no }}</option>
-                              {% endif %}
-                          </select></td>
-                              <td class="text-right">
-                                <input type="text" name="product_option[{{ option_row }}][price]" value="{{ product_option_value.price }}" placeholder="{{ entry_price }}" class="form-control"/></td>
-                                <td class="text-right"><input type="text" name="product_option[{{ option_row }}][weight]" value="{{ product_option_value.weight }}" placeholder="{{ entry_weight }}" class="form-control"/></td>
-                                <td class="text-right"><button type="button" onclick="$(this).tooltip('destroy');$('#option-value-row{{ option_value_row }}').remove();" data-toggle="tooltip" title="{{ button_remove }}" class="btn btn-danger"><i class="fa fa-minus-circle"></i></button></td>
+               {% set option_row = 0 %}
+                {% set option_value_row = 0 %}
+                <div class="tab-pane" id="tab-custom-option">
+                  <fieldset>
+                    <table id="option-value-table{{ option_row }}" class="table table-striped table-bordered table-hover">
+                      <thead>
+                        <tr>
+                          <td class="text-left">Option Name</td>
+                          <td class="text-left">{{ entry_option_value }}</td>
+                          <td class="text-center">{{ entry_image }}</td>
+                          <td class="text-right">{{ entry_quantity }}</td>
+                          <td class="text-left">{{ entry_subtract }}</td>
+                          <td class="text-right">{{ entry_price }}</td>
+                          <td class="text-right">{{ entry_weight }}</td>
+                          <td></td>
                         </tr>
-                                  {% set option_value_row = option_value_row + 1 %}   
-                              <tfoot>
-                                <tr>
-                                  <td colspan="6"></td>
-                                  <td class="text-left"><button type="button" onclick="addOptionValue('{{ option_row }}');" data-toggle="tooltip" title="{{ button_option_value_add }}" class="btn btn-primary"><i class="fa fa-plus-circle"></i></button></td>
-                                </tr>
-                              </tfoot>                          
-                    </tbody>
-                    
-                  </table>
-                </fieldset>
-              </div>
+                      </thead>
+                      <tbody id="option-value-body{{ option_row }}">
+                        <tr id="option-value-row{{ option_value_row }}">
+                          <td class="text-center">
+                            <input type="hidden" name="product_option[{{ option_row }}][product_option_value][{{ option_value_row }}][product_option_value_id]" value="{{ product_option_value.product_option_value_id }}">
+                            <div class="input-group">
+                              <input type="text" name="product_option[{{ option_row }}][product_option_value][{{ option_value_row }}][name]" value="{{ option_value.option_value_description[language.language_id].name }}" placeholder="{{ entry_option_value }}" class="form-control">
+                            </div>
+                            {% if error_option_value[option_value_row][language.language_id] %}
+                            <div class="text-danger">{{ error_option_value[option_value_row][language.language_id] }}</div>
+                            {% endif %}
+                          </td>
+                          <td class="text-left">
+                            <a href="" id="thumb-image{{ option_value_row }}" data-toggle="image" class="img-thumbnail">
+                              <img src="{{ placeholder }}" alt="" title="" data-placeholder="{{ placeholder }}">
+                            </a>
+                            <input type="hidden" name="product_option[{{ option_row }}][product_option_value][{{ option_value_row }}][image]" value="{{ option_value.image }}" id="input-image{{ option_value_row }}">
+                          </td>
+                          <td class="text-right">
+                            <input type="text" name="product_option[{{ option_row }}][product_option_value][{{ option_value_row }}][quantity]" value="{{ product_option_value.quantity }}" placeholder="{{ entry_quantity }}" class="form-control">
+                          </td>
+                          <td class="text-left">
+                            <select name="product_option[{{ option_row }}][product_option_value][{{ option_value_row }}][subtract]" class="form-control">
+                              <option value="1" {% if product_option_value.subtract %}selected{% endif %}>{{ text_yes }}</option>
+                              <option value="0" {% if not product_option_value.subtract %}selected{% endif %}>{{ text_no }}</option>
+                            </select>
+                          </td>
+                          <td class="text-right">
+                            <input type="text" name="product_option[{{ option_row }}][product_option_value][{{ option_value_row }}][price]" value="{{ product_option_value.price }}" placeholder="{{ entry_price }}" class="form-control">
+                          </td>
+                          <td class="text-right">
+                            <input type="text" name="product_option[{{ option_row }}][product_option_value][{{ option_value_row }}][weight]" value="{{ product_option_value.weight }}" placeholder="{{ entry_weight }}" class="form-control">
+                          </td>
+                          <td class="text-right">
+                            <button type="button" onclick="$('#option-value-row{{ option_value_row }}').remove();" data-toggle="tooltip" title="{{ button_remove }}" class="btn btn-danger">
+                              <i class="fa fa-minus-circle"></i>
+                            </button>
+                          </td>
+                        </tr>
+                        {% set option_value_row = option_value_row + 1 %}
+                      </tbody>
+                      <tfoot>
+                        <tr>
+                          <td colspan="6"></td>
+                          <td class="text-left">
+                            <button type="button" onclick="addOptionValue({{ option_row }});" data-toggle="tooltip" title="{{ button_option_value_add }}" class="btn btn-primary">
+                              <i class="fa fa-plus-circle"></i>
+                            </button>
+                          </td>
+                        </tr>
+                      </tfoot>
+                    </table>
+                    {% set option_row = option_row + 1 %}
+                  </fieldset>
+                </div>
+
 
               {# SUBSCRIPTION TYPE HERE #}
               <div class="tab-pane" id="tab-ppd">
@@ -1190,7 +1205,7 @@
                               <tr>
                                 <td colspan="6"></td>
                                 <td class="text-left">
-                                  <button type="button" onclick="addOptionValue('{{ option_row }}');"
+                                  <button type="button" onclick="addOptionValuee('{{ option_row }}');"
                                     data-toggle="tooltip" title="{{ button_add_option_value }}"
                                     class="btn btn-primary"><i class="fa fa-plus-circle"></i></button>
                                 </td>
@@ -2610,7 +2625,7 @@
       }
     });
 
-    function _addOptions(item, id = '') {
+    {# function _addOptions(item, id = '') {
       html = '';
       html = '<div class="tab-pane categoryOption' + id + '" id="tab-option' + option_row + '">';
       html += ' <input type="hidden" name="product_option[' + option_row + '][product_option_id]" value="" />';
@@ -2732,55 +2747,7 @@
       });
 
       option_row++;
-    }
-    //
-    -->
-  </script>
-  <script type="text/javascript">
-    <!--
-    var option_value_row = {{ option_value_row }};
-
-
-    function addOptionValue(option_row) {
-      html = '<tbody id="option-value-row' + option_value_row + '">';
-      html += '<tr>';
-      html += '  <td class="text-left"><select name="product_option[' + option_row + '][product_option_value][' +
-        option_value_row + '][option_value_id]" style="min-width: 60px;" class="form-control">';
-      html += $('#option-values' + option_row).html();
-      html += '  </select><input type="hidden" name="product_option[' + option_row + '][product_option_value][' +
-        option_value_row + '][product_option_value_id]" value="" /></td>';
-      html += '  <td class="text-right"><input type="text" name="product_option[' + option_row + '][product_option_value][' + option_value_row + '][quantity]" value="" placeholder="{{ entry_quantity }}" class="form-control" /></td>';
-      html += '  <td class="text-left"><select name="product_option[' + option_row + '][product_option_value][' +
-        option_value_row + '][subtract]" class="form-control">';
-      html += '    <option value="1">{{ text_yes }}</option>';
-      html += '    <option value="0">{{ text_no }}</option>';
-      html += '  </select></td>';
-      html += '  <td class="text-right"><select name="product_option[' + option_row + '][product_option_value][' +
-        option_value_row + '][price_prefix]" class="form-control">';
-      html += '    <option value="+">+</option>';
-      html += '    <option value="-">-</option>';
-      html += '  </select>';
-      html += '  <input type="text" name="product_option[' + option_row + '][product_option_value][' + option_value_row + '][price]" value="" placeholder="{{ entry_price }}" class="form-control" /></td>';
-      html += '  <td class="text-right"><select name="product_option[' + option_row + '][product_option_value][' +
-        option_value_row + '][points_prefix]" class="form-control">';
-      html += '    <option value="+">+</option>';
-      html += '    <option value="-">-</option>';
-      html += '  </select>';
-      html += '  <input type="text" name="product_option[' + option_row + '][product_option_value][' + option_value_row + '][points]" value="" placeholder="{{ entry_points }}" class="form-control" /></td>';
-      html += '  <td class="text-right"><select name="product_option[' + option_row + '][product_option_value][' +
-        option_value_row + '][weight_prefix]" class="form-control">';
-      html += '    <option value="+">+</option>';
-      html += '    <option value="-">-</option>';
-      html += '  </select>';
-      html += '  <input type="text" name="product_option[' + option_row + '][product_option_value][' + option_value_row + '][weight]" value="" placeholder="{{ entry_weight }}" class="form-control" /></td>';
-      html += '  <td class="text-left"><button type="button" onclick="$(\'#option-value-row' + option_value_row + '\').remove();" data-toggle="tooltip" title="{{ button_remove }}" class="btn btn-danger"><i class="fa fa-minus-circle"></i></button></td>';
-      html += '</tr>';
-      html += '</tbody>;';
-
-      $('#option-value' + option_row + ' tfoot').before(html);
-
-      option_value_row++;
-    }
+    } #}
     //
     -->
   </script>
@@ -2990,68 +2957,51 @@
   });
 
 // custom option
-var option_value_row = {{ option_value_row }};
+var option_value_row = {{ option_value_row|default(1) }}; // Start at next index
 
 function addOptionValue(option_row) {
   let html = '<tr id="option-value-row' + option_value_row + '">';
 
-  // Option value name (with hidden ID and text input)
-  html += '  <td class="text-center">';
-  html += '    <input type="hidden" name="option_value[' + option_value_row + '][option_value_id]" value="" />';
-  html += '    <div class="input-group">';
-  html += '      <input type="text" name="option_value[' + option_value_row + '][option_value_description][{{ language.language_id }}][name]" value="" placeholder="{{ entry_option_value }}" class="form-control" />';
-  html += '    </div>';
-  html += '  </td>';
+  html += '<td class="text-center">';
+  html += '  <input type="hidden" name="product_option[' + option_row + '][product_option_value][' + option_value_row + '][product_option_value_id]" value="">';
+  html += '  <div class="input-group">';
+  html += '    <input type="text" name="product_option[' + option_row + '][product_option_value][' + option_value_row + '][name]" value="" placeholder="{{ entry_option_value }}" class="form-control">';
+  html += '  </div>';
+  html += '</td>';
 
-  // Image field
-  html += '  <td class="text-left">';
-  html += '    <a href="" id="thumb-image' + option_value_row + '" data-toggle="image" class="img-thumbnail">';
-  html += '      <img src="{{ placeholder }}" alt="" title="" data-placeholder="{{ placeholder }}" />';
-  html += '    </a>';
-  html += '    <input type="hidden" name="option_value[' + option_value_row + '][image]" value="" id="input-image' + option_value_row + '" />';
-  html += '  </td>';
+  html += '<td class="text-left">';
+  html += '  <a href="" id="thumb-image' + option_value_row + '" data-toggle="image" class="img-thumbnail">';
+  html += '    <img src="{{ placeholder }}" alt="" title="" data-placeholder="{{ placeholder }}">';
+  html += '  </a>';
+  html += '  <input type="hidden" name="product_option[' + option_row + '][product_option_value][' + option_value_row + '][image]" value="" id="input-image' + option_value_row + '">';
+  html += '</td>';
 
-  // Quantity input
-  html += '  <td class="text-right">';
-  html += '    <input type="text" name="product_option[' + option_row + '][product_option_value][' + option_value_row + '][quantity]" value="" placeholder="{{ entry_quantity }}" class="form-control" />';
-  html += '  </td>';
+  html += '<td class="text-right"><input type="text" name="product_option[' + option_row + '][product_option_value][' + option_value_row + '][quantity]" value="" placeholder="{{ entry_quantity }}" class="form-control"></td>';
 
-  // Subtract select
-  html += '  <td class="text-left">';
-  html += '    <select name="product_option[' + option_row + '][product_option_value][' + option_value_row + '][subtract]" class="form-control">';
-  html += '      <option value="1">{{ text_yes }}</option>';
-  html += '      <option value="0">{{ text_no }}</option>';
-  html += '    </select>';
-  html += '  </td>';
+  html += '<td class="text-left">';
+  html += '  <select name="product_option[' + option_row + '][product_option_value][' + option_value_row + '][subtract]" class="form-control">';
+  html += '    <option value="1">{{ text_yes }}</option>';
+  html += '    <option value="0">{{ text_no }}</option>';
+  html += '  </select>';
+  html += '</td>';
 
-  // Price input
-  html += '  <td class="text-right">';
-  html += '    <input type="text" name="product_option[' + option_row + '][product_option_value][' + option_value_row + '][price]" value="" placeholder="{{ entry_price }}" class="form-control" />';
-  html += '  </td>';
+  html += '<td class="text-right"><input type="text" name="product_option[' + option_row + '][product_option_value][' + option_value_row + '][price]" value="" placeholder="{{ entry_price }}" class="form-control"></td>';
 
-  // Weight input
-  html += '  <td class="text-right">';
-  html += '    <input type="text" name="product_option[' + option_row + '][product_option_value][' + option_value_row + '][weight]" value="" placeholder="{{ entry_weight }}" class="form-control" />';
-  html += '  </td>';
+  html += '<td class="text-right"><input type="text" name="product_option[' + option_row + '][product_option_value][' + option_value_row + '][weight]" value="" placeholder="{{ entry_weight }}" class="form-control"></td>';
 
-  // Remove button
-  html += '  <td class="text-right">';
-  html += '    <button type="button" onclick="$(this).tooltip(\'destroy\');$(\'#option-value-row' + option_value_row + '\').remove();" data-toggle="tooltip" title="{{ button_remove }}" class="btn btn-danger">';
-  html += '      <i class="fa fa-minus-circle"></i>';
-  html += '    </button>';
-  html += '  </td>';
+  html += '<td class="text-right"><button type="button" onclick="$(\'#option-value-row' + option_value_row + '\').remove();" data-toggle="tooltip" title="{{ button_remove }}" class="btn btn-danger"><i class="fa fa-minus-circle"></i></button></td>';
 
   html += '</tr>';
 
-  $('#option-value' + option_row + ' tbody').append(html);
+  $('#option-value-body' + option_row).append(html);
   $('[data-toggle="tooltip"]').tooltip();
 
   option_value_row++;
 }
-
 //-->
-
 </script>
+
+
 <style type="text/css">
   .imgoption {
     display: block;

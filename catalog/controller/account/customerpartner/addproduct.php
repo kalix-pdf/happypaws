@@ -140,9 +140,9 @@ class ControllerAccountCustomerpartnerAddproduct extends Controller
 					$this->model_customerpartner_master->addSubscription($sbstype, $product_id, $amount);
 				}
 			} 
-			// $this->log->write($this->request->post['product_option']);
+			// $this->log->write(print_r($this->request->post['product_option'], true));
  
-			$this->model_account_customerpartner->addOption($this->request->post);
+			$this->model_account_customerpartner->addOption($product_id, $this->request->post);
 		}
 
 		$data['entry_image'] = ' <span data-toggle="tooltip" title="' . $this->config->get('marketplace_imageex') . '">' . $this->language->get('entry_image') . '</span>';

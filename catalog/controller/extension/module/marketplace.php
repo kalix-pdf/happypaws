@@ -167,6 +167,9 @@ class ControllerExtensionModuleMarketplace extends Controller
 				'category' => $this->url->link('account/customerpartner/category', '', true),
 				'productlist' => $this->url->link('account/customerpartner/productlist', '', true),
 				'addproduct' => $this->url->link('account/customerpartner/addproduct', '', true),
+				
+				'addproductoption' => $this->url->link('account/customerpartner/addproductoption', '', true),
+
 				'downloads' => $this->url->link('account/customerpartner/download', '', true),
 				'manageshipping' => $this->url->link('account/customerpartner/add_shipping_mod', '', true),
 				'asktoadmin' => $this->url->link('account/customerpartner/addproduct', '', true),
@@ -756,6 +759,8 @@ class ControllerExtensionModuleMarketplace extends Controller
 		 * membership code ends here
 		 */
 		$data['mp_addproduct'] = $this->url->link('account/customerpartner/addproduct', '', true);
+		$data['mp_addproductoption'] = $this->url->link('account/customerpartner/addproductoption', '', true);
+		
 		$data['mp_productlist'] = $this->url->link('account/customerpartner/productlist', '', true);
 		$data['mp_dashboard'] = $this->url->link('account/customerpartner/dashboard', '', true);
 		$data['mp_add_shipping_mod'] = $this->url->link('account/customerpartner/add_shipping_mod', '', true);
@@ -928,9 +933,9 @@ class ControllerExtensionModuleMarketplace extends Controller
 
 				$weight = 0;
 
-				if (isset($product_info['weight']) && $product_info['weight']) {
-					$weight = $product_info['weight'];
-				}
+				// if (isset($product_info['weight']) && $product_info['weight']) {
+				// 	$weight = $product_info['weight'];
+				// }
 
 				$max_days = $this->model_account_customerpartner->getMinDays($seller_id, $this->session->data['shipping_address']['postcode'], $weight);
 

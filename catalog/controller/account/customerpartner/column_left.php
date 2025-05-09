@@ -115,11 +115,18 @@ class ControllerAccountCustomerpartnerColumnLeft extends Controller
 				);
 			}
 
+				$product[] = array(
+					'name'	   => 'Add Product Variety',
+					'href'     => $this->url->link('account/customerpartner/addproductoption', '', true),
+					'children' => array()
+				);
+			
+
 
 			if ($product) {
 				$data['menus'][] = array(
 					'id'       => 'menu-product',
-					'icon'	   => 'fa-building',
+					'icon'	   => 'fa-building', 
 					'name'	   => $this->language->get('text_product'),
 					'href'     => '',
 					'children' => $product

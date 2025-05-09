@@ -1,302 +1,83 @@
-2025-05-08 20:23:45 - Array
-(
-    [product_description] => Array
-        (
-            [1] => Array
-                (
-                    [name] => testoption
-                    [description] => &lt;p&gt;testoption&lt;/p&gt;
-                    [meta_title] => testoption
-                )
-
-        )
-
-    [model] => testoption
-    [price] => 323
-    [prevPrice] => 0
-    [quantity] => 323
-    [image] => 
-    [length] => 1
-    [width] => 1
-    [height] => 1
-    [weight] => 11
-    [product_link_tab] => 1
-    [manufacturer] => 
-    [manufacturer_id] => 0
-    [product_category] => Array
-        (
-            [0] => 106
-        )
-
-    [filter] => 
-    [related] => 
-    [option_value] => Array
-        (
-            [0] => Array
-                (
-                    [option_value_id] => 
-                )
-
-            [1] => Array
-                (
-                    [option_value_description] => Array
-                        (
-                            [0] => Array
-                                (
-                                    [name] => red
-                                )
-
-                        )
-
-                )
-
-            [2] => Array
-                (
-                    [image] => 
-                )
-
-        )
-
-    [product_option] => Array
-        (
-            [0] => Array
-                (
-                    [product_option_value] => Array
-                        (
-                            [0] => Array
-                                (
-                                    [product_option_value_id] => 
-                                )
-
-                        )
-
-                )
-
-            [1] => Array
-                (
-                    [product_option_value] => Array
-                        (
-                            [0] => Array
-                                (
-                                    [quantity] => 23
-                                )
-
-                        )
-
-                )
-
-            [2] => Array
-                (
-                    [product_option_value] => Array
-                        (
-                            [0] => Array
-                                (
-                                    [subtract] => 0
-                                )
-
-                        )
-
-                )
-
-            [3] => Array
-                (
-                    [product_option_value] => Array
-                        (
-                            [0] => Array
-                                (
-                                    [price] => 32
-                                )
-
-                        )
-
-                )
-
-            [4] => Array
-                (
-                    [product_option_value] => Array
-                        (
-                            [0] => Array
-                                (
-                                    [weight] => 
-                                )
-
-                        )
-
-                )
-
-        )
-
-    [subs_ppd] => 10
-    [subs_ppm] => 
-    [product_special_tab] => 1
-    [type] => select
-)
-
-2025-05-08 21:36:08 - Array
+2025-05-09 14:50:34 - Array
 (
     [0] => Array
         (
-            [name] => red
-        )
+            [product_option_value] => Array
+                (
+                    [0] => Array
+                        (
+                            [product_option_value_id] => 
+                            [name] => red
+                            [image] => 
+                            [quantity] => 232
+                            [subtract] => 1
+                            [price] => 23
+                            [weight] => 
+                        )
 
-    [1] => Array
-        (
-            [image] => 
-        )
+                    [1] => Array
+                        (
+                            [product_option_value_id] => 
+                            [name] => green
+                            [image] => 
+                            [quantity] => 90
+                            [subtract] => 1
+                            [price] => 120
+                            [weight] => 
+                        )
 
-    [2] => Array
-        (
-            [product_option_value_id] => 
-        )
+                )
 
-    [3] => Array
-        (
-            [quantity] => 323
-        )
-
-    [4] => Array
-        (
-            [subtract] => 0
-        )
-
-    [5] => Array
-        (
-            [price] => 3
-        )
-
-    [6] => Array
-        (
-            [weight] => 
         )
 
 )
 
-2025-05-08 21:41:42 - Array
-(
-    [0] => Array
-        (
-            [name] => red
-        )
-
-    [1] => Array
-        (
-            [image] => 
-        )
-
-    [2] => Array
-        (
-            [product_option_value_id] => 
-        )
-
-    [3] => Array
-        (
-            [quantity] => 323
-        )
-
-    [4] => Array
-        (
-            [subtract] => 1
-        )
-
-    [5] => Array
-        (
-            [price] => 323
-        )
-
-    [6] => Array
-        (
-            [weight] => 
-        )
-
-)
-
-2025-05-08 21:43:13 - PHP Warning:  rmdir(D:/xampp/htdocs/store/storage/modification/admin/view/template): Permission denied in D:\xampp\htdocs\store\admin\controller\marketplace\modification.php on line 105
-2025-05-08 21:43:13 - PHP Warning:  unlink(D:/xampp/htdocs/store/storage/modification/admin/model/customer/customer.php): No such file or directory in D:\xampp\htdocs\store\admin\controller\marketplace\modification.php on line 101
-2025-05-08 21:43:13 - PHP Warning:  unlink(D:/xampp/htdocs/store/storage/modification/admin/model/catalog/product.php): No such file or directory in D:\xampp\htdocs\store\admin\controller\marketplace\modification.php on line 101
-2025-05-08 21:43:13 - PHP Warning:  rmdir(D:/xampp/htdocs/store/storage/modification/admin/model): No such file or directory in D:\xampp\htdocs\store\admin\controller\marketplace\modification.php on line 105
-2025-05-08 21:43:13 - PHP Warning:  rmdir(D:/xampp/htdocs/store/storage/modification/admin): No such file or directory in D:\xampp\htdocs\store\admin\controller\marketplace\modification.php on line 105
-2025-05-08 21:44:06 - Array
-(
-    [0] => Array
-        (
-            [name] => red
-        )
-
-    [1] => Array
-        (
-            [image] => 
-        )
-
-    [2] => Array
-        (
-            [product_option_value_id] => 
-        )
-
-    [3] => Array
-        (
-            [quantity] => 323
-        )
-
-    [4] => Array
-        (
-            [subtract] => 1
-        )
-
-    [5] => Array
-        (
-            [price] => 232
-        )
-
-    [6] => Array
-        (
-            [weight] => 
-        )
-
-)
-
-2025-05-08 21:46:33 - Array
-(
-    [0] => Array
-        (
-            [name] => red
-        )
-
-    [1] => Array
-        (
-            [image] => 
-        )
-
-    [2] => Array
-        (
-            [product_option_value_id] => 
-        )
-
-    [3] => Array
-        (
-            [quantity] => 323
-        )
-
-    [4] => Array
-        (
-            [subtract] => 1
-        )
-
-    [5] => Array
-        (
-            [price] => 32
-        )
-
-    [6] => Array
-        (
-            [weight] => 
-        )
-
-)
-
-2025-05-08 21:54:28 - PHP Warning:  unlink(D:/xampp/htdocs/store/storage/modification/catalog/view/theme/default/template/account/register.twig): No such file or directory in D:\xampp\htdocs\store\admin\controller\marketplace\modification.php on line 101
-2025-05-08 21:54:28 - PHP Warning:  unlink(D:/xampp/htdocs/store/storage/modification/catalog/language/en-gb/api/customer.php): Permission denied in D:\xampp\htdocs\store\admin\controller\marketplace\modification.php on line 101
-2025-05-08 21:54:28 - PHP Warning:  unlink(D:/xampp/htdocs/store/storage/modification/catalog/controller/product/special.php): No such file or directory in D:\xampp\htdocs\store\admin\controller\marketplace\modification.php on line 101
-2025-05-08 21:54:28 - PHP Warning:  unlink(D:/xampp/htdocs/store/storage/modification/admin/model/setting/extension.php): No such file or directory in D:\xampp\htdocs\store\admin\controller\marketplace\modification.php on line 101
-2025-05-08 21:54:28 - PHP Warning:  rmdir(D:/xampp/htdocs/store/storage/modification/admin/controller/marketplace): No such file or directory in D:\xampp\htdocs\store\admin\controller\marketplace\modification.php on line 105
-2025-05-08 21:54:28 - PHP Warning:  rmdir(D:/xampp/htdocs/store/storage/modification/admin/controller/catalog): No such file or directory in D:\xampp\htdocs\store\admin\controller\marketplace\modification.php on line 105
-2025-05-08 22:01:35 - PHP Warning:  mysqli::query(): (42S22/1054): Unknown column 'r.attachment' in 'field list' in D:\xampp\htdocs\store\system\library\db\mysqli.php on line 25
+2025-05-09 14:52:22 - PHP Warning:  mysqli::query(): (42S22/1054): Unknown column 'r.attachment' in 'field list' in C:\xampp\htdocs\store\system\library\db\mysqli.php on line 25
+2025-05-09 14:56:12 - PHP Warning:  mysqli::query(): (42S22/1054): Unknown column 'r.attachment' in 'field list' in C:\xampp\htdocs\store\system\library\db\mysqli.php on line 25
+2025-05-09 14:56:30 - PHP Warning:  mysqli::query(): (42S22/1054): Unknown column 'r.attachment' in 'field list' in C:\xampp\htdocs\store\system\library\db\mysqli.php on line 25
+2025-05-09 14:56:33 - PHP Warning:  mysqli::query(): (42S22/1054): Unknown column 'r.attachment' in 'field list' in C:\xampp\htdocs\store\system\library\db\mysqli.php on line 25
+2025-05-09 14:59:18 - PHP Warning:  mysqli::query(): (42S22/1054): Unknown column 'r.attachment' in 'field list' in C:\xampp\htdocs\store\system\library\db\mysqli.php on line 25
+2025-05-09 15:00:00 - PHP Warning:  mysqli::query(): (42S22/1054): Unknown column 'r.attachment' in 'field list' in C:\xampp\htdocs\store\system\library\db\mysqli.php on line 25
+2025-05-09 15:02:23 - PHP Warning:  mysqli::query(): (42S22/1054): Unknown column 'r.attachment' in 'field list' in C:\xampp\htdocs\store\system\library\db\mysqli.php on line 25
+2025-05-09 15:03:09 - PHP Warning:  mysqli::query(): (42S22/1054): Unknown column 'r.attachment' in 'field list' in C:\xampp\htdocs\store\system\library\db\mysqli.php on line 25
+2025-05-09 15:03:19 - PHP Warning:  mysqli::query(): (42S22/1054): Unknown column 'r.attachment' in 'field list' in C:\xampp\htdocs\store\system\library\db\mysqli.php on line 25
+2025-05-09 7:06:01 - PHP Warning:  unlink(C:/xampp/htdocs/store/storage/cache/cache.stock_status.1.1746774350): Permission denied in C:\xampp\htdocs\store\system\library\cache\file.php on line 17
+2025-05-09 7:06:01 - PHP Warning:  unlink(C:/xampp/htdocs/store/storage/cache/cache.weight_class.1.1746774350): Permission denied in C:\xampp\htdocs\store\system\library\cache\file.php on line 17
+2025-05-09 15:07:15 - PHP Warning:  mysqli::query(): (42S22/1054): Unknown column 'r.attachment' in 'field list' in C:\xampp\htdocs\store\system\library\db\mysqli.php on line 25
+2025-05-09 15:07:54 - PHP Warning:  mysqli::query(): (42S22/1054): Unknown column 'r.attachment' in 'field list' in C:\xampp\htdocs\store\system\library\db\mysqli.php on line 25
+2025-05-09 15:07:57 - PHP Warning:  mysqli::query(): (42S22/1054): Unknown column 'r.attachment' in 'field list' in C:\xampp\htdocs\store\system\library\db\mysqli.php on line 25
+2025-05-09 15:07:59 - PHP Warning:  mysqli::query(): (42S22/1054): Unknown column 'r.attachment' in 'field list' in C:\xampp\htdocs\store\system\library\db\mysqli.php on line 25
+2025-05-09 15:08:39 - PHP Warning:  mysqli::query(): (42S22/1054): Unknown column 'r.attachment' in 'field list' in C:\xampp\htdocs\store\system\library\db\mysqli.php on line 25
+2025-05-09 15:11:01 - PHP Warning:  mysqli::query(): (42S22/1054): Unknown column 'r.attachment' in 'field list' in C:\xampp\htdocs\store\system\library\db\mysqli.php on line 25
+2025-05-09 15:12:52 - PHP Warning:  mysqli::query(): (42S22/1054): Unknown column 'r.attachment' in 'field list' in C:\xampp\htdocs\store\system\library\db\mysqli.php on line 25
+2025-05-09 15:13:21 - PHP Warning:  mysqli::query(): (42S22/1054): Unknown column 'r.attachment' in 'field list' in C:\xampp\htdocs\store\system\library\db\mysqli.php on line 25
+2025-05-09 15:13:36 - PHP Warning:  mysqli::query(): (42S22/1054): Unknown column 'r.attachment' in 'field list' in C:\xampp\htdocs\store\system\library\db\mysqli.php on line 25
+2025-05-09 15:15:47 - PHP Warning:  mysqli::query(): (42S22/1054): Unknown column 'r.attachment' in 'field list' in C:\xampp\htdocs\store\system\library\db\mysqli.php on line 25
+2025-05-09 15:28:08 - PHP Warning:  mysqli::query(): (42S22/1054): Unknown column 'r.attachment' in 'field list' in C:\xampp\htdocs\store\system\library\db\mysqli.php on line 25
+2025-05-09 17:05:44 - PHP Warning:  Undefined array key "customer_id" in C:\xampp\htdocs\store\storage\modification\catalog\controller\account\account.php on line 133
+2025-05-09 17:05:44 - PHP Warning:  Undefined array key "companyname" in C:\xampp\htdocs\store\storage\modification\catalog\controller\account\account.php on line 138
+2025-05-09 17:05:44 - PHP Warning:  Undefined array key "customer_id" in C:\xampp\htdocs\store\storage\modification\catalog\controller\account\account.php on line 139
+2025-05-09 17:06:32 - PHP Warning:  Undefined array key "customer_id" in C:\xampp\htdocs\store\storage\modification\catalog\controller\account\account.php on line 133
+2025-05-09 17:06:32 - PHP Warning:  Undefined array key "companyname" in C:\xampp\htdocs\store\storage\modification\catalog\controller\account\account.php on line 138
+2025-05-09 17:06:32 - PHP Warning:  Undefined array key "customer_id" in C:\xampp\htdocs\store\storage\modification\catalog\controller\account\account.php on line 139
+2025-05-09 17:07:02 - PHP Warning:  Undefined array key "customer_id" in C:\xampp\htdocs\store\storage\modification\catalog\controller\account\account.php on line 133
+2025-05-09 17:07:02 - PHP Warning:  Undefined array key "companyname" in C:\xampp\htdocs\store\storage\modification\catalog\controller\account\account.php on line 138
+2025-05-09 17:07:02 - PHP Warning:  Undefined array key "customer_id" in C:\xampp\htdocs\store\storage\modification\catalog\controller\account\account.php on line 139
+2025-05-09 17:07:12 - PHP Warning:  Undefined array key "customer_id" in C:\xampp\htdocs\store\storage\modification\catalog\controller\account\account.php on line 133
+2025-05-09 17:07:12 - PHP Warning:  Undefined array key "companyname" in C:\xampp\htdocs\store\storage\modification\catalog\controller\account\account.php on line 138
+2025-05-09 17:07:12 - PHP Warning:  Undefined array key "customer_id" in C:\xampp\htdocs\store\storage\modification\catalog\controller\account\account.php on line 139
+2025-05-09 17:07:14 - PHP Warning:  Undefined array key "customer_id" in C:\xampp\htdocs\store\storage\modification\catalog\controller\account\account.php on line 133
+2025-05-09 17:07:14 - PHP Warning:  Undefined array key "companyname" in C:\xampp\htdocs\store\storage\modification\catalog\controller\account\account.php on line 138
+2025-05-09 17:07:14 - PHP Warning:  Undefined array key "customer_id" in C:\xampp\htdocs\store\storage\modification\catalog\controller\account\account.php on line 139
+2025-05-09 17:07:15 - PHP Warning:  Undefined array key "customer_id" in C:\xampp\htdocs\store\storage\modification\catalog\controller\account\account.php on line 133
+2025-05-09 17:07:15 - PHP Warning:  Undefined array key "companyname" in C:\xampp\htdocs\store\storage\modification\catalog\controller\account\account.php on line 138
+2025-05-09 17:07:15 - PHP Warning:  Undefined array key "customer_id" in C:\xampp\htdocs\store\storage\modification\catalog\controller\account\account.php on line 139
+2025-05-09 17:07:20 - PHP Warning:  Undefined array key "customer_id" in C:\xampp\htdocs\store\storage\modification\catalog\controller\account\account.php on line 133
+2025-05-09 17:07:20 - PHP Warning:  Undefined array key "companyname" in C:\xampp\htdocs\store\storage\modification\catalog\controller\account\account.php on line 138
+2025-05-09 17:07:20 - PHP Warning:  Undefined array key "customer_id" in C:\xampp\htdocs\store\storage\modification\catalog\controller\account\account.php on line 139
+2025-05-09 17:07:21 - PHP Warning:  Undefined array key "customer_id" in C:\xampp\htdocs\store\storage\modification\catalog\controller\account\account.php on line 133
+2025-05-09 17:07:21 - PHP Warning:  Undefined array key "companyname" in C:\xampp\htdocs\store\storage\modification\catalog\controller\account\account.php on line 138
+2025-05-09 17:07:21 - PHP Warning:  Undefined array key "customer_id" in C:\xampp\htdocs\store\storage\modification\catalog\controller\account\account.php on line 139
+2025-05-09 17:11:26 - PHP Warning:  Undefined array key "customer_id" in C:\xampp\htdocs\store\storage\modification\catalog\controller\account\account.php on line 133
+2025-05-09 17:11:26 - PHP Warning:  Undefined array key "companyname" in C:\xampp\htdocs\store\storage\modification\catalog\controller\account\account.php on line 138
+2025-05-09 17:11:26 - PHP Warning:  Undefined array key "customer_id" in C:\xampp\htdocs\store\storage\modification\catalog\controller\account\account.php on line 139

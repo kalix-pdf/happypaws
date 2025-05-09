@@ -1067,30 +1067,23 @@ class ModelAccountCustomerpartner extends Model
 	}
 
 	//CUSTOM OPTION!!
-	public function addOption($data)
+	public function addOption($product_id, $data)
 	{
-		$product_id = $this->db->getLastId();
-
 		if (isset($data['product_option'])) {
-			$name     = $data['product_option'][0]['name'] ?? '';
-			$image    = $data['product_option'][1]['image'] ?? '';
-			$quantity = $data['product_option'][3]['quantity'] ?? 0;
-			$subtract = $data['product_option'][4]['subtract'] ?? 0;
-			$price    = $data['product_option'][5]['price'] ?? 0.00;
-			$weight   = $data['product_option'][6]['weight'] ?? 0.00;
-			$product_option_value_id = $data[2]['product_option_value_id'] ?? NULL;
-
-			$this->db->query("INSERT INTO custom_product_option SET 
-				product_id = '" . (int)$product_id . "',
-				product_option_id = '" . (int)$product_option_value_id ."',
-				name = '" . $this->db->escape($name) . "',
-				image = '" . $this->db->escape($image) . "',
-				quantity = '" . (int)$quantity . "',
-				subtract = '" . (int)$subtract . "',
-				price = '" . (float)$price . "',
-				weight = '" . (float)$weight . "'");
+			foreach ($data['product_option'] as $product_option) {
+				foreach ($product_option['product_option_value'] as $option_value) {
+					// $this->log->write($option_value); 
+					$this->db->query("INSERT INTO custom_product_option SET 
+					product_id = '" . (int)$product_id . "',
+					name = '" . $this->db->escape($option_value['name'] ?? '') . "',
+					image = '" . $this->db->escape($option_value['image'] ?? '') . "',
+					quantity = '" . (int)($option_value['quantity'] ?? 0) . "',
+					subtract = '" . (int)($option_value['subtract'] ?? 0) . "',
+					price = '" . (float)($option_value['price'] ?? 0) . "',
+					weight = '" . (float)($option_value['weight'] ?? 0) . "'");		
+				}
+			}
 		}
-		
 	}
 
 	/**

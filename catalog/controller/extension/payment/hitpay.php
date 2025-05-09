@@ -74,7 +74,8 @@ class ControllerExtensionPaymentHitPay extends Controller {
                 $result = json_decode($response, true);
 
                 if (isset($result['url'])) {
-                    $this->response->redirect($result['url']);
+                    $this->log->write($result);
+                    // $this->response->redirect($result['url']);
                 } else {
                     $this->session->data['error'] = 'Could not create payment link!';
                     $this->log->write($response, $result);

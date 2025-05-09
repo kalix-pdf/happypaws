@@ -38,7 +38,12 @@ text-align :left;
             {% endif %}
 
             {% if marketplace_allowed_account_menu is defined and marketplace_allowed_account_menu and 'addproduct' in marketplace_allowed_account_menu %}
-                <li><a href="{{ mp_addproduct }}">{{ text_addproduct }}</a></li>
+                <li><a href="{{ mp_addproduct }}">{{ text_addproduct }}sdsd</a></li>
+            {% endif %}
+
+{# ADD PRODUCT OPTION #}
+            {% if marketplace_allowed_account_menu is defined and marketplace_allowed_account_menu and 'addproductoption' in marketplace_allowed_account_menu %}
+                <li><a href="{{ mp_addproductoption }}">Add Product Option</a></li>
             {% endif %}
 
             {% if marketplace_allowed_account_menu is defined and marketplace_allowed_account_menu and 'downloads' in marketplace_allowed_account_menu %}
