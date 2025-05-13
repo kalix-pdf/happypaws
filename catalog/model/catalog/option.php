@@ -1,27 +1,47 @@
 <?php
 class ModelCatalogOption extends Model {
 	public function addOption($data) {
-		$this->db->query("INSERT INTO `" . DB_PREFIX . "option` SET type = '" . $this->db->escape($data['type']) . "', sort_order = '" . (int)$data['sort_order'] . "'");
+		//need seller ID!
+		$seller_id = $this->customer->getId();
+		$data['type'] = 'select';
+		$sort_order = isset($data['sort_order']) ? (int)$data['sort_order'] : 0;
+
+		$option_name = isset($data['option_description'][1]['name']) ? $data['option_description'][1]['name'] : '';
+
+		$this->db->query("INSERT INTO `seller_product_option` SET type = '" . $this->db->escape($data['type']) . "', 
+						sort_order = '" . (int)$sort_order . "', seller_id = '" . (int)$seller_id . "',
+						name = '" . $this->db->escape($option_name) . "'");
 
 		$option_id = $this->db->getLastId();
 
-		foreach ($data['option_description'] as $language_id => $value) {
-			$this->db->query("INSERT INTO " . DB_PREFIX . "option_description SET option_id = '" . (int)$option_id . "', language_id = '" . (int)$language_id . "', name = '" . $this->db->escape($value['name']) . "'");
-		}
-
 		if (isset($data['option_value'])) {
 			foreach ($data['option_value'] as $option_value) {
-				$this->db->query("INSERT INTO " . DB_PREFIX . "option_value SET option_id = '" . (int)$option_id . "', image = '" . $this->db->escape(html_entity_decode($option_value['image'], ENT_QUOTES, 'UTF-8')) . "', sort_order = '" . (int)$option_value['sort_order'] . "'");
+				$name = isset($option_value['option_value_description'][1]['name']) ? $option_value['option_value_description'][1]['name'] : '';
+				$image = isset($option_value['image']) ? html_entity_decode($option_value['image'], ENT_QUOTES, 'UTF-8') : '';
+				$sort_order = isset($option_value['sort_order']) ? (int)$option_value['sort_order'] : 0;
 
-				$option_value_id = $this->db->getLastId();
-
-				foreach ($option_value['option_value_description'] as $language_id => $option_value_description) {
-					$this->db->query("INSERT INTO " . DB_PREFIX . "option_value_description SET option_value_id = '" . (int)$option_value_id . "', language_id = '" . (int)$language_id . "', option_id = '" . (int)$option_id . "', name = '" . $this->db->escape($option_value_description['name']) . "'");
-				}
+				$this->db->query("INSERT INTO seller_product_option_value SET 
+							seller_option_id = '" . (int)$option_id . "', 
+							image = '" . $this->db->escape($image) . "',
+							value = '" . $this->db->escape($name) . "',
+							sort_order = '" . $this->db->escape($sort_order) . "'");
 			}
 		}
 
 		return $option_id;
+
+		// foreach ($data['option_description'] as $language_id => $value) {
+			// 	$this->db->query("INSERT INTO " . DB_PREFIX . "option_description SET option_id = '" . (int)$option_id . "', language_id = '" . (int)$language_id . "', name = '" . $this->db->escape($value['name']) . "'");
+			// }
+	
+	}
+	public function getOptionsBySeller($seller_id) {
+		$query = $this->db->query("SELECT seller_option_id,
+									name AS option_name 
+									FROM `seller_product_option`  
+				WHERE seller_id = '". (int)$seller_id . "'");
+	
+		return $query->rows;
 	}
 
 	public function editOption($option_id, $data) {

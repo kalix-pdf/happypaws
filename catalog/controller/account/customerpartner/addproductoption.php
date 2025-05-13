@@ -20,7 +20,10 @@ class ControllerAccountCustomerpartnerAddproductOption extends Controller {
 		$this->load->model('catalog/option');
 
 		if (($this->request->server['REQUEST_METHOD'] == 'POST') && $this->validateForm()) {
+			$this->request->post['type'] = 'select';
 			$this->model_catalog_option->addOption($this->request->post);
+			
+			// $this->log->write($this->request->post);
 
 			$this->session->data['success'] = $this->language->get('text_success');
 
@@ -38,7 +41,7 @@ class ControllerAccountCustomerpartnerAddproductOption extends Controller {
 				$url .= '&page=' . $this->request->get['page'];
 			}
 
-			$this->response->redirect($this->url->link('catalog/option', $url, true));
+			$this->response->redirect($this->url->link('account/customerpartner/addproductoption', $url, true));
 		}
 
 		$this->getForm();
@@ -70,7 +73,7 @@ class ControllerAccountCustomerpartnerAddproductOption extends Controller {
 				$url .= '&page=' . $this->request->get['page'];
 			}
 
-			$this->response->redirect($this->url->link('catalog/option', 'user_token=' . $this->session->data['user_token'] . $url, true));
+			$this->response->redirect($this->url->link('account/customerpartner/addproductoption', $url, true));
 		}
 
 		$this->getForm();
@@ -104,13 +107,16 @@ class ControllerAccountCustomerpartnerAddproductOption extends Controller {
 				$url .= '&page=' . $this->request->get['page'];
 			}
 
-			$this->response->redirect($this->url->link('catalog/option', 'user_token=' . $this->session->data['user_token'] . $url, true));
+			$this->response->redirect($this->url->link('account/customerpartner/addproductoption' . $url, true));
 		}
 
 		$this->getList();
 	}
 
 	protected function getList() {
+		
+		$seller_id = $this->customer->getId();
+		
 		if (isset($this->request->get['sort'])) {
 			$sort = $this->request->get['sort'];
 		} else {
@@ -159,13 +165,8 @@ class ControllerAccountCustomerpartnerAddproductOption extends Controller {
 			// 'href'      => $this->url->link('account/customerpartner/addproductoption/getList'),
 		);
 
-		// $data['breadcrumbs'][] = array(
-		// 	'text'      => $this->language->get('text_product'),
-		// 	'href'      => $data['action'],
-		// );
-
-		$data['add'] = $this->url->link('account/customerpartner/addproductoption/add', 'user_token=', true);
-		$data['delete'] = $this->url->link('account/customerpartner/addproductoption/delete', 'user_token=', true);
+		$data['add'] = $this->url->link('account/customerpartner/addproductoption/add', true);
+		$data['delete'] = $this->url->link('account/customerpartner/addproductoption/delete', true);
 
 		$data['options'] = array();
 
@@ -178,16 +179,15 @@ class ControllerAccountCustomerpartnerAddproductOption extends Controller {
 
 		$option_total = $this->model_catalog_option->getTotalOptions();
 
-		$results = $this->model_catalog_option->getOptions($filter_data);
+		$results = $this->model_catalog_option->getOptionsBySeller($seller_id);
 
 		foreach ($results as $result) {
 			$data['options'][] = array(
-				'option_id'  => $result['option_id'],
-				'name'       => $result['name'],
-				'sort_order' => $result['sort_order'],
-				'edit'       => $this->url->link('catalog/option/edit', 'user_token=' . $this->session->data['user_token'] . '&option_id=' . $result['option_id'] . $url, true)
+				'option_id'  => $result['seller_option_id'],
+				'name'       => $result['option_name'],
+				'edit'       => $this->url->link('account/customerpartner/addproductoption/edit', '&option_id=' . $result['seller_option_id'] . $url, true)
 			);
-		}
+		}			
 
 		if (isset($this->error['warning'])) {
 			$data['error_warning'] = $this->error['warning'];
@@ -221,7 +221,7 @@ class ControllerAccountCustomerpartnerAddproductOption extends Controller {
 			$url .= '&page=' . $this->request->get['page'];
 		}
 
-		$data['sort_name'] = $this->url->link('catalog/option', 'user_token=' . $this->session->data['user_token'] . '&sort=od.name' . $url, true);
+		$data['sort_name'] = $this->url->link('catalog/option', '&sort=od.name' . $url, true);
 		$data['sort_sort_order'] = $this->url->link('catalog/option', 'user_token=' . $this->session->data['user_token'] . '&sort=o.sort_order' . $url, true);
 
 		$url = '';
@@ -300,18 +300,23 @@ class ControllerAccountCustomerpartnerAddproductOption extends Controller {
 
 		$data['breadcrumbs'][] = array(
 			'text' => $this->language->get('text_home'),
-			'href' => $this->url->link('common/dashboard', 'user_token=' . $this->session->data['user_token'], true)
+			'href' => $this->url->link('common/dashboard', true)
+		);
+
+		$data['breadcrumbs'][] = array(
+			'text' => $this->language->get('Option List'),
+			'href' => $this->url->link('account/customerpartner/addproductoption'  . $url, true)
 		);
 
 		$data['breadcrumbs'][] = array(
 			'text' => $this->language->get('heading_title'),
-			'href' => $this->url->link('catalog/option', 'user_token=' . $this->session->data['user_token'] . $url, true)
+			
 		);
 
 		if (!isset($this->request->get['option_id'])) {
-			$data['action'] = $this->url->link('catalog/option/add', 'user_token=' . $this->session->data['user_token'] . $url, true);
+			$data['action'] = $this->url->link('account/customerpartner/addproductoption/add' . $url, true);
 		} else {
-			$data['action'] = $this->url->link('catalog/option/edit', 'user_token=' . $this->session->data['user_token'] . '&option_id=' . $this->request->get['option_id'] . $url, true);
+			$data['action'] = $this->url->link('account/customerpartner/addproductoption/edit' . '&option_id=' . $this->request->get['option_id'] . $url, true);
 		}
 
 		$data['cancel'] = $this->url->link('catalog/option', 'user_token=' . $this->session->data['user_token'] . $url, true);
@@ -319,8 +324,6 @@ class ControllerAccountCustomerpartnerAddproductOption extends Controller {
 		if (isset($this->request->get['option_id']) && ($this->request->server['REQUEST_METHOD'] != 'POST')) {
 			$option_info = $this->model_catalog_option->getOption($this->request->get['option_id']);
 		}
-
-		$data['user_token'] = $this->session->data['user_token'];
 
 		$this->load->model('localisation/language');
 
@@ -397,9 +400,9 @@ class ControllerAccountCustomerpartnerAddproductOption extends Controller {
 	}
 
 	protected function validateForm() {
-		if (!$this->user->hasPermission('modify', 'catalog/option')) {
-			$this->error['warning'] = $this->language->get('error_permission');
-		}
+		// if (!$this->user->hasPermission('modify', 'catalog/option')) {
+		// 	$this->error['warning'] = $this->language->get('error_permission');
+		// }
 
 		foreach ($this->request->post['option_description'] as $language_id => $value) {
 			if ((utf8_strlen($value['name']) < 1) || (utf8_strlen($value['name']) > 128)) {
@@ -407,9 +410,9 @@ class ControllerAccountCustomerpartnerAddproductOption extends Controller {
 			}
 		}
 
-		if (($this->request->post['type'] == 'select' || $this->request->post['type'] == 'radio' || $this->request->post['type'] == 'checkbox') && !isset($this->request->post['option_value'])) {
-			$this->error['warning'] = $this->language->get('error_type');
-		}
+		// if (($this->request->post['type'] == 'select' || $this->request->post['type'] == 'radio' || $this->request->post['type'] == 'checkbox') && !isset($this->request->post['option_value'])) {
+		// 	$this->error['warning'] = $this->language->get('error_type');
+		// }
 
 		if (isset($this->request->post['option_value'])) {
 			foreach ($this->request->post['option_value'] as $option_value_id => $option_value) {
@@ -425,9 +428,9 @@ class ControllerAccountCustomerpartnerAddproductOption extends Controller {
 	}
 
 	protected function validateDelete() {
-		if (!$this->user->hasPermission('modify', 'catalog/option')) {
-			$this->error['warning'] = $this->language->get('error_permission');
-		}
+		// if (!$this->user->hasPermission('modify', 'catalog/option')) {
+		// 	$this->error['warning'] = $this->language->get('error_permission');
+		// }
 
 		$this->load->model('catalog/product');
 

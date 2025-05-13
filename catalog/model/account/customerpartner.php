@@ -1425,6 +1425,11 @@ class ModelAccountCustomerpartner extends Model
 		return $product_option_data;
 	}
 
+	public function getProductOptionsBySeller()
+	{
+		$product_option_data = array();
+	}
+
 	/**
 	 * [getProductDiscounts to get discount of particular product]
 	 * @param  [integer] $product_id [product id of product]

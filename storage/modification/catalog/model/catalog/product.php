@@ -570,6 +570,12 @@ class ModelCatalogProduct extends Model {
 	}
 
 
+	//from admin
+	public function getTotalProductsByOptionId($option_id) {
+		$query = $this->db->query("SELECT COUNT(*) AS total FROM " . DB_PREFIX . "product_option WHERE option_id = '" . (int)$option_id . "'");
+
+		return $query->row['total'];
+	}
 	public function getTotalProducts($data = array()) {
 		$sql = "SELECT COUNT(DISTINCT p.product_id) AS total";
 
