@@ -233,10 +233,13 @@ class ControllerCustomerpartnerAutocomplete extends Controller {
 
 			$this->load->model('tool/image');
 
+			$seller_id = $this->customer->getId();
+
 			$data = array(
 				'filter_name' => $this->request->get['filter_name'],
-				'start'       => 0,
-				'limit'       => 20
+				'start'       => 0, 
+				'limit'       => 20,
+				'seller_id'   => $seller_id
 			);
 
 			$options = $this->model_account_customerpartner->getOptions($data);
@@ -245,7 +248,7 @@ class ControllerCustomerpartnerAutocomplete extends Controller {
 				$option_value_data = array();
 
 				if ($option['type'] == 'select' || $option['type'] == 'radio' || $option['type'] == 'checkbox' || $option['type'] == 'image') {
-					$option_values = $this->model_account_customerpartner->getOptionValues($option['option_id']);
+					$option_values = $this->model_account_customerpartner->getOptionValues($option['seller_option_id']);
 
 					foreach ($option_values as $option_value) {
 						if ($option_value['image'] && file_exists(DIR_IMAGE . $option_value['image'])) {
@@ -256,7 +259,7 @@ class ControllerCustomerpartnerAutocomplete extends Controller {
 
 						$option_value_data[] = array(
 							'option_value_id' => $option_value['option_value_id'],
-							'name'            => html_entity_decode($option_value['name'], ENT_QUOTES, 'UTF-8'),
+							'name'            => html_entity_decode($option_value['value'], ENT_QUOTES, 'UTF-8'),
 							'image'           => $image
 						);
 					}
@@ -289,7 +292,7 @@ class ControllerCustomerpartnerAutocomplete extends Controller {
 				}
 
 				$json[] = array(
-					'option_id'    => $option['option_id'],
+					'option_id'    => $option['seller_option_id'],
 					'name'         => strip_tags(html_entity_decode($option['name'], ENT_QUOTES, 'UTF-8')),
 					'category'     => $type,
 					'type'         => $option['type'],

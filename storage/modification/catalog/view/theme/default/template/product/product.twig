@@ -189,25 +189,38 @@
           <div id="product"> 
           {% if options %}
             <hr>
-            <h3>VARIATIONS</h3> 
-            {# <div class="form-group{% if option.required %} required {% endif %}"> #}
-            <div class="form-group">
-              <label class="control-label" for="input-option{{ option.product_option_id }}">
-                Variation
-              </label>
-             <select name="option_combined" id="input-option-combined" class="form-control">
-              <option value="">{{ text_select }}</option>
-              {% for option in options %}
-                {# {% for option_value in option.product_id %} #}
-                  <option value="{{ option.product_id }}">
-                    {{ option.name }} - P{{ option.price }}
-                  </option>
-                {# {% endfor %} #}
-              {% endfor %}
-            </select>
+            <h3>{{ text_option }}</h3>
+            {% for option in options %}
+            {# {% if option.type == 'select' %} #}
+            {# <div class="form-group{% if option.required %} required {% endif %}">
+              <label class="control-label" for="input-option{{ option.product_option_id }}">{{ option.name }}</label>
+              <select name="option[{{ option.product_option_id }}]" id="input-option{{ option.product_option_id }}" class="form-control">
+                <option value="">{{ text_select }}</option>
+                {% for option_value in option.product_option_value %}
+                <option value="{{ option_value.product_option_value_id }}">{{ option_value.name }}
+                {% if option_value.price %}
+                ({{ option_value.price_prefix }}{{ option_value.price }})
+                {% endif %} </option>
+                {% endfor %}
+              </select>
+            </div> #}
+            {# {% endif %} #}
+            
+            <div class="form-group{% if option.required %} required {% endif %}">
+              <label class="control-label">{{ option.name }}</label>
+              <div id="input-option{{ option.product_option_id }}"> {% for option_value in option.product_option_value %}
+                <div class="radio">
+                  <label>
+                    <input type="radio" name="option[{{ option.product_option_id }}]" value="{{ option_value.product_option_value_id }}" />
+                    {% if option_value.image %} <img src="{{ option_value.image }}" alt="{{ option_value.name }} {% if option_value.price %} {{ option_value.price_prefix }} {{ option_value.price }} {% endif %}" class="img-thumbnail" /> {% endif %}                  
+                    {{ option_value.name }}
+                    {% if option_value.price %}
+                    ({{ option_value.price_prefix }}{{ option_value.price }})
+                    {% endif %} </label>
+                </div>
+                {% endfor %} </div>
             </div>
-          {% else %}
-            <h3>No Variations</h3>
+            {% endfor %}
           {% endif %}
            
             {% if recurrings %}

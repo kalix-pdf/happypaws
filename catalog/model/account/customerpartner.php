@@ -1389,7 +1389,9 @@ class ModelAccountCustomerpartner extends Model
 	{
 		$product_option_data = array();
 
-		$product_option_query = $this->db->query("SELECT * FROM `" . DB_PREFIX . $tabletype . "product_option` po LEFT JOIN `" . DB_PREFIX . "option` o ON (po.option_id = o.option_id) LEFT JOIN `" . DB_PREFIX . "option_description` od ON (o.option_id = od.option_id) WHERE po.product_id = '" . (int)$product_id . "' AND od.language_id = '" . (int)$this->config->get('config_language_id') . "'");
+		$product_option_query = $this->db->query("SELECT * FROM `" . DB_PREFIX . $tabletype .
+				 "product_option` po LEFT JOIN ` seller_product_option` o ON (po.option_id = o.seller_option_id)
+				  WHERE po.product_id = '" . (int)$product_id . "'");
 
 		foreach ($product_option_query->rows as $product_option) {
 			$product_option_value_data = array();
@@ -2896,7 +2898,7 @@ class ModelAccountCustomerpartner extends Model
 	 * @param  [array]  $data [filter keywords]
 	 * @return [array]       [details of options]
 	 */
-	public function getOptions($data = array())
+	public function getOptionsOriginal($data = array())
 	{
 		$sql = "SELECT * FROM `" . DB_PREFIX . "option` o LEFT JOIN " . DB_PREFIX . "option_description od ON (o.option_id = od.option_id) WHERE od.language_id = '" . (int)$this->config->get('config_language_id') . "'";
 		if ($this->config->get('module_wk_seller_group_status')) {
@@ -2944,6 +2946,83 @@ class ModelAccountCustomerpartner extends Model
 		return $query->rows;
 	}
 
+	public function getOptions($data = array()) 
+	{
+		if (!isset($data['seller_id'])) {
+			return array(); 
+		}
+
+		$sql = "SELECT * FROM `seller_product_option` spo
+				WHERE spo.seller_id = '" . (int)$data['seller_id'] . "'";
+
+		if (isset($data['filter_name']) && !is_null($data['filter_name'])) {
+			$sql .= " AND spo.name LIKE '" . $this->db->escape($data['filter_name']) . "%'";
+		}
+
+		$sort_data = array(
+			'spo.name',
+			'spo.type',
+			'spo.sort_order'
+		);
+
+		if (isset($data['sort']) && in_array($data['sort'], $sort_data)) {
+			$sql .= " ORDER BY " . $data['sort'];
+		} else {
+			$sql .= " ORDER BY spo.name";
+		}
+
+		if (isset($data['order']) && ($data['order'] == 'DESC')) {
+			$sql .= " DESC";
+		} else {
+			$sql .= " ASC";
+		}
+
+		if (isset($data['start']) || isset($data['limit'])) {
+			if ($data['start'] < 0) {
+				$data['start'] = 0;
+			}
+
+			if ($data['limit'] < 1) {
+				$data['limit'] = 20;
+			}
+
+			$sql .= " LIMIT " . (int)$data['start'] . "," . (int)$data['limit'];
+		}
+
+		$query = $this->db->query($sql);
+
+		$options = array();
+
+		foreach ($query->rows as $row) {
+			// Get option values for each seller_option_id
+			$option_values = array();
+
+			$value_query = $this->db->query("SELECT * FROM `seller_product_option_value`
+				WHERE seller_option_id = '" . (int)$row['seller_option_id'] . "' ORDER BY sort_order ASC");
+
+			foreach ($value_query->rows as $value) {
+				$option_values[] = array(
+					'option_value_id' => $value['option_value_id'],
+					'value'           => $value['value'],
+					'image'           => $value['image'],
+					'sort_order'      => $value['sort_order']
+				);
+			}
+
+			$options[] = array(
+				'seller_option_id' => $row['seller_option_id'],
+				'name'             => $row['name'],
+				'type'             => $row['type'],
+				'required'         => $row['required'],
+				'sort_order'       => $row['sort_order'],
+				'option_values'    => $option_values
+			);
+		}
+
+		return $options;
+	}
+
+
 	/**
 	 * [getOption to get detail of particular option]
 	 * @param  [integer] $option_id [id of an option]
@@ -2973,7 +3052,7 @@ class ModelAccountCustomerpartner extends Model
 	 * @param  [integer] $option_id [id of an option]
 	 * @return [array]            [detail of option values]
 	 */
-	public function getOptionValues($option_id)
+	public function g3tOptionValuesOriginal($option_id)
 	{
 		$option_value_data = array();
 
@@ -2989,6 +3068,34 @@ class ModelAccountCustomerpartner extends Model
 		}
 
 		return $option_value_data;
+	}
+
+	public function getOptionValues($option_id)
+	{
+
+		$sql = "SELECT * FROM `seller_product_option_value` spo
+				WHERE spo.seller_option_id = '" . (int)$option_id . "'";
+
+		$query = $this->db->query($sql);
+
+		foreach ($query->rows as $row) {
+			$option_values = array();
+
+			$value_query = $this->db->query("SELECT * FROM `seller_product_option_value`
+				WHERE seller_option_id = '" . (int)$row['seller_option_id'] . "' ORDER BY sort_order ASC");
+
+			foreach ($value_query->rows as $value) {
+				$option_values[] = array(
+					'option_value_id' => $value['option_value_id'],
+					'value'           => $value['value'],
+					'image'           => $value['image'],
+					'sort_order'      => $value['sort_order']
+				);
+			}
+
+		}
+
+		return $option_values;
 	}
 
 	/**

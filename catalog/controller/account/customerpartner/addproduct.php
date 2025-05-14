@@ -800,6 +800,7 @@ class ControllerAccountCustomerpartnerAddproduct extends Controller
 			$product_options = $this->request->post['product_option'];
 		} elseif (isset($this->request->get['product_id'])) {
 			$product_options = $this->model_account_customerpartner->getProductOptions($this->request->get['product_id']);
+			$this->log->write($product_options);
 		if (!isset($product_info['product_id']) && !isset($this->request->get['product_id'])) {
 			$this->response->redirect($this->url->link('account/customerpartner/addproduct', '', true));
 		}

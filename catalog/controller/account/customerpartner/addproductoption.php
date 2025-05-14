@@ -221,8 +221,8 @@ class ControllerAccountCustomerpartnerAddproductOption extends Controller {
 			$url .= '&page=' . $this->request->get['page'];
 		}
 
-		$data['sort_name'] = $this->url->link('catalog/option', '&sort=od.name' . $url, true);
-		$data['sort_sort_order'] = $this->url->link('catalog/option', 'user_token=' . $this->session->data['user_token'] . '&sort=o.sort_order' . $url, true);
+		$data['sort_name'] = $this->url->link('account/customerpartner/addproductoption', '&sort=od.name' . $url, true);
+		$data['sort_sort_order'] = $this->url->link('account/customerpartner/addproductoption', '&sort=o.sort_order' . $url, true);
 
 		$url = '';
 
@@ -238,7 +238,7 @@ class ControllerAccountCustomerpartnerAddproductOption extends Controller {
 		$pagination->total = $option_total;
 		$pagination->page = $page;
 		$pagination->limit = $this->config->get('config_limit_admin');
-		$pagination->url = $this->url->link('catalog/option', 'user_token=' . $this->session->data['user_token'] . $url . '&page={page}', true);
+		$pagination->url = $this->url->link('account/customerpartner/addproductoption', $url . '&page={page}', true);
 
 		$data['pagination'] = $pagination->render();
 
@@ -376,11 +376,12 @@ class ControllerAccountCustomerpartnerAddproductOption extends Controller {
 
 			$data['option_values'][] = array(
 				'option_value_id'          => $option_value['option_value_id'],
-				'option_value_description' => $option_value['option_value_description'],
+				'name' => $option_value['name'],
 				'image'                    => $image,
 				'thumb'                    => $this->model_tool_image->resize($thumb, 100, 100),
 				'sort_order'               => $option_value['sort_order']
 			);
+	
 		}
 
 		$data['placeholder'] = $this->model_tool_image->resize('no_image.png', 100, 100);
@@ -404,9 +405,10 @@ class ControllerAccountCustomerpartnerAddproductOption extends Controller {
 		// 	$this->error['warning'] = $this->language->get('error_permission');
 		// }
 
-		foreach ($this->request->post['option_description'] as $language_id => $value) {
-			if ((utf8_strlen($value['name']) < 1) || (utf8_strlen($value['name']) > 128)) {
-				$this->error['name'][$language_id] = $this->language->get('error_name');
+		if (isset($this->request->post['option_description']['name'])) {
+			if ((utf8_strlen($this->request->post['option_description']['name']) < 1) || 
+				(utf8_strlen($this->request->post['option_description']['name']) > 128)) {
+				$this->error['name'] = $this->language->get('error_name');
 			}
 		}
 
@@ -416,10 +418,10 @@ class ControllerAccountCustomerpartnerAddproductOption extends Controller {
 
 		if (isset($this->request->post['option_value'])) {
 			foreach ($this->request->post['option_value'] as $option_value_id => $option_value) {
-				foreach ($option_value['option_value_description'] as $language_id => $option_value_description) {
-					if ((utf8_strlen($option_value_description['name']) < 1) || (utf8_strlen($option_value_description['name']) > 128)) {
-						$this->error['option_value'][$option_value_id][$language_id] = $this->language->get('error_option_value');
-					}
+				$option_value_description = $option_value['option_value_description'];
+
+				if ((utf8_strlen($option_value_description['name']) < 1) || (utf8_strlen($option_value_description['name']) > 128)) {
+					$this->error['option_value'][$option_value_id] = $this->language->get('error_option_value');
 				}
 			}
 		}
