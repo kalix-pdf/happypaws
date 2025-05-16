@@ -810,44 +810,55 @@ class ControllerAccountCustomerpartnerAddproduct extends Controller
 
 		$data['product_options'] = array();
 
-		foreach ($product_options as $product_option) {
-			if ($product_option['type'] == 'select' || $product_option['type'] == 'radio' || $product_option['type'] == 'checkbox' || $product_option['type'] == 'image') {
-				$product_option_value_data = array();
-				if (!empty($product_option['product_option_value'])) {
-					foreach ($product_option['product_option_value'] as $product_option_value) {
-						$product_option_value_data[] = array(
-							'product_option_value_id' => $product_option_value['product_option_value_id'],
-							'option_value_id'         => $product_option_value['option_value_id'],
-							'quantity'                => $product_option_value['quantity'],
-							'subtract'                => $product_option_value['subtract'],
-							'price'                   => ($product_option_value['price']) ? number_format($this->currency->convert((float)$product_option_value['price'], $this->config->get('config_currency'), $this->session->data['currency']), 2, '.', '') : $product_option_value['price'],
-							'price_prefix'            => $product_option_value['price_prefix'],
-							'points'                  => $product_option_value['points'],
-							'points_prefix'           => $product_option_value['points_prefix'],
-							'weight'                  => $product_option_value['weight'],
-							'weight_prefix'           => $product_option_value['weight_prefix']
-						);
-					}
+		if (!empty($product_options) && is_array($product_options)) 
+		{
+			foreach ($product_options as $product_option) {
+				if (!isset($product_option['type'])) {
+					continue; // Skip if 'type' key is not set
 				}
 
-				$data['product_options'][] = array(
-					'product_option_id'    => $product_option['product_option_id'],
-					'product_option_value' => $product_option_value_data,
-					'option_id'            => $product_option['option_id'],
-					'name'                 => $product_option['name'],
-					'type'                 => $product_option['type'],
-					'required'             => $product_option['required']
-				);
-			} else {
-				$data['product_options'][] = array(
-					'product_option_id' => $product_option['product_option_id'],
-					'option_id'         => $product_option['option_id'],
-					'name'              => $product_option['name'],
-					'type'              => $product_option['type'],
-					'option_value'      => $product_option['option_value'],
-					'required'          => $product_option['required']
-				);
+				if (in_array($product_option['type'], ['select', 'radio', 'checkbox', 'image'])) {
+					$product_option_value_data = array();
+
+					if (!empty($product_option['product_option_value']) && is_array($product_option['product_option_value'])) {
+						foreach ($product_option['product_option_value'] as $product_option_value) {
+							$product_option_value_data[] = array(
+								'product_option_value_id' => $product_option_value['product_option_value_id'] ?? '',
+								'option_value_id'         => $product_option_value['option_value_id'] ?? '',
+								'quantity'                => $product_option_value['quantity'] ?? 0,
+								'subtract'                => $product_option_value['subtract'] ?? 0,
+								'price'                   => isset($product_option_value['price']) && $product_option_value['price'] !== '' 
+															? number_format($this->currency->convert((float)$product_option_value['price'], $this->config->get('config_currency'), $this->session->data['currency']), 2, '.', '') 
+															: '',
+								'price_prefix'            => $product_option_value['price_prefix'] ?? '',
+								'points'                  => $product_option_value['points'] ?? 0,
+								'points_prefix'           => $product_option_value['points_prefix'] ?? '',
+								'weight'                  => $product_option_value['weight'] ?? '',
+								'weight_prefix'           => $product_option_value['weight_prefix'] ?? ''
+							);
+						}
+					}
+
+					$data['product_options'][] = array(
+						'product_option_id'    => $product_option['product_option_id'] ?? 0,
+						'product_option_value' => $product_option_value_data,
+						'option_id'            => $product_option['option_id'] ?? 0,
+						'name'                 => $product_option['name'] ?? '',
+						'type'                 => $product_option['type'],
+						'required'             => $product_option['required'] ?? 0
+					);
+				} else {
+					$data['product_options'][] = array(
+						'product_option_id' => $product_option['product_option_id'] ?? 0,
+						'option_id'         => $product_option['option_id'] ?? 0,
+						'name'              => $product_option['name'] ?? '',
+						'type'              => $product_option['type'],
+						'option_value'      => $product_option['option_value'] ?? '',
+						'required'          => $product_option['required'] ?? 0
+					);
+				}
 			}
+
 		}
 
 		$data['option_values'] = array();

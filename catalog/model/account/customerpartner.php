@@ -566,11 +566,15 @@ class ModelAccountCustomerpartner extends Model
 	public function deleteProduct($product_id)
 	{
 
+		$this->db->query("DELETE FROM product_subscription WHERE product_id = '" . (int)$product_id . "'");
+
 		if ($this->chkSellerProductAccess($product_id)) {
 
 			$this->db->query("DELETE FROM " . DB_PREFIX . "customerpartner_to_product WHERE product_id = '" . (int)$product_id . "'");
 
 			$this->db->query("DELETE FROM " . DB_PREFIX . "mp_customer_activity WHERE id = '" . (int)$product_id . "' AND `key` = 'product_stock'");
+
+			$this->db->query("DELETE FROM product_subscription WHERE product_id = '" . (int)$product_id . "'");
 
 			//if seller can delete product from store
 			if ($this->config->get('marketplace_sellerdeleteproduct')) {
@@ -592,6 +596,8 @@ class ModelAccountCustomerpartner extends Model
 				$this->db->query("DELETE FROM " . DB_PREFIX . "product_to_store WHERE product_id = '" . (int)$product_id . "'");
 				$this->db->query("DELETE FROM " . DB_PREFIX . "review WHERE product_id = '" . (int)$product_id . "'");
 				$this->db->query("DELETE FROM " . DB_PREFIX . "seo_url WHERE query = 'product_id=" . (int)$product_id . "'");
+				
+				$this->db->query("DELETE FROM product_subscription WHERE product_id = '" . (int)$product_id . "'");
 			}
 		}
 

@@ -60,17 +60,15 @@ class ModelCatalogOption extends Model {
 				if (!empty($option_value['option_value_id'])) {
 					$this->db->query("INSERT INTO seller_product_option_value SET option_value_id = '" . (int)$option_value['option_value_id'] . "', seller_option_id = '" . (int)$option_id . "', value = '" . $this->db->escape($option_value['option_value_description']['name']) . "', image = '" . $this->db->escape(html_entity_decode($option_value['image'], ENT_QUOTES, 'UTF-8')) . "', sort_order = '" . (int)$option_value['sort_order'] . "'");
 				} else {
-					$this->db->query("INSERT INTO seller_product_option_va lue SET seller_option_id = '" . (int)$option_id . "', value = '" . $this->db->escape($option_value['option_value_description']['name']) . "', image = '" . $this->db->escape(html_entity_decode($option_value['image'], ENT_QUOTES, 'UTF-8')) . "', sort_order = '" . (int)$option_value['sort_order'] . "'");
+					$this->db->query("INSERT INTO seller_product_option_value SET seller_option_id = '" . (int)$option_id . "', value = '" . $this->db->escape($option_value['option_value_description']['name']) . "', image = '" . $this->db->escape(html_entity_decode($option_value['image'], ENT_QUOTES, 'UTF-8')) . "', sort_order = '" . (int)$option_value['sort_order'] . "'");
 				}
 			}
 		}
 	}
 
 	public function deleteOption($option_id) {
-		$this->db->query("DELETE FROM `" . DB_PREFIX . "option` WHERE option_id = '" . (int)$option_id . "'");
-		$this->db->query("DELETE FROM " . DB_PREFIX . "option_description WHERE option_id = '" . (int)$option_id . "'");
-		$this->db->query("DELETE FROM " . DB_PREFIX . "option_value WHERE option_id = '" . (int)$option_id . "'");
-		$this->db->query("DELETE FROM " . DB_PREFIX . "option_value_description WHERE option_id = '" . (int)$option_id . "'");
+		$this->db->query("DELETE FROM `seller_product_option` WHERE seller_option_id = '" . (int)$option_id . "'");
+		$this->db->query("DELETE FROM seller_product_option_value WHERE seller_option_id = '" . (int)$option_id . "'");
 	}
 
 	public function getOption($option_id) {

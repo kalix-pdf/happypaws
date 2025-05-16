@@ -319,7 +319,7 @@ class ControllerAccountCustomerpartnerAddproductOption extends Controller {
 			$data['action'] = $this->url->link('account/customerpartner/addproductoption/edit' . '&option_id=' . $this->request->get['option_id'] . $url, true);
 		}
 
-		$data['cancel'] = $this->url->link('catalog/option', 'user_token=' . $this->session->data['user_token'] . $url, true);
+		$data['cancel'] = $this->url->link('account/customerpartner/addproductoption', $url, true);
 
 		if (isset($this->request->get['option_id']) && ($this->request->server['REQUEST_METHOD'] != 'POST')) {
 			$option_info = $this->model_catalog_option->getOption($this->request->get['option_id']);
@@ -383,6 +383,8 @@ class ControllerAccountCustomerpartnerAddproductOption extends Controller {
 			);
 	
 		}
+
+		$data['user_token'] = $this->session->data['user_token'];
 
 		$data['placeholder'] = $this->model_tool_image->resize('no_image.png', 100, 100);
 

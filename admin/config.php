@@ -1,19 +1,19 @@
 <?php
 // HTTP
-define('HTTP_SERVER', 'http://localhost/store/admin/');
-define('HTTP_CATALOG', 'http://localhost/store/');
+define('HTTP_SERVER', 'http://localhost/hp/admin/');
+define('HTTP_CATALOG', 'http://localhost/hp/');
 
 // HTTPS
-define('HTTPS_SERVER', 'http://localhost/store/admin/');
-define('HTTPS_CATALOG', 'http://localhost/store/');
-define('HTTP_IMAGE', 'http://localhost/store/image/');
+define('HTTPS_SERVER', 'http://localhost/hp/admin/');
+define('HTTPS_CATALOG', 'http://localhost/hp/');
+define('HTTP_IMAGE', 'http://localhost/hp/image/');
 
 // DIR
-define('DIR_APPLICATION', 'C:/xampp/htdocs/store/admin/');
-define('DIR_SYSTEM', 'C:/xampp/htdocs/store/system/');
-define('DIR_IMAGE', 'C:/xampp/htdocs/store/image/');
-define('DIR_STORAGE', 'C:/xampp/htdocs/store/storage/');
-define('DIR_CATALOG', 'C:/xampp/htdocs/store/catalog/');
+define('DIR_APPLICATION', 'C:/xampp/htdocs/hp/admin/');
+define('DIR_SYSTEM', 'C:/xampp/htdocs/hp/system/');
+define('DIR_IMAGE', 'C:/xampp/htdocs/hp/image/');
+define('DIR_STORAGE', 'C:/xampp/htdocs/hp/storage/');
+define('DIR_CATALOG', 'C:/xampp/htdocs/hp/catalog/');
 define('DIR_LANGUAGE', DIR_APPLICATION . 'language/');
 define('DIR_TEMPLATE', DIR_APPLICATION . 'view/template/');
 define('DIR_CONFIG', DIR_SYSTEM . 'config/');

@@ -336,6 +336,8 @@ class ModelCatalogProduct extends Model {
 	}
 
 	public function deleteProduct($product_id) {
+		$this->db->query("DELETE FROM product_subscription WHERE product_id = '" . (int)$product_id . "'");
+
 		$this->db->query("DELETE FROM " . DB_PREFIX . "product WHERE product_id = '" . (int)$product_id . "'");
 		$this->db->query("DELETE FROM " . DB_PREFIX . "product_attribute WHERE product_id = '" . (int)$product_id . "'");
 		$this->db->query("DELETE FROM " . DB_PREFIX . "product_description WHERE product_id = '" . (int)$product_id . "'");

@@ -71,16 +71,18 @@
                   {% endif %}
                   {% endfor %}</td>
                  <td class="text-left">
-                 <td class="text-left"><a href="" id="thumb-image{{ option_value_row }}" data-toggle="image" class="img-thumbnail"><img src="{{ option_value.thumb }}" alt="" title="" data-placeholder="{{ placeholder }}" /></a>
-                  <input type="hidden" name="option_value[{{ option_value_row }}][image]" value="{{ option_value.image }}" id="input-image{{ option_value_row }}" /></td>
-                </td>
+                  <a href="" id="thumb-image{{ option_value_row }}" data-toggle="image" class="img-thumbnail">
+                    <img src="{{ option_value.thumb }}" alt="" title="" data-placeholder="{{ placeholder }}" style="width:100px;height:100px;">
+                  </a>
+                    <input type="hidden" name="option_value[{{ option_value_row }}][image]" value="{{ option_value.image }}" id="input-image{{ option_value_row }}">
+                  </td>
                 <td class="text-right"><input type="text" name="option_value[{{ option_value_row }}][sort_order]" value="{{ option_value.sort_order }}" class="form-control" /></td>
                 <td class="text-right"><button type="button" onclick="$('#option-value-row{{ option_value_row }}').remove();" data-toggle="tooltip" title="{{ button_remove }}" class="btn btn-danger"><i class="fa fa-minus-circle"></i></button></td>
               </tr>
               {% set option_value_row = option_value_row + 1 %}
               {% endfor %}
                 </tbody>
-              
+            
               <tfoot>
                 <tr>
                   <td colspan="3"></td>
@@ -110,12 +112,12 @@ function addOptionValue() {
 	html  = '<tr id="option-value-row' + option_value_row + '">';
     html += '  <td class="text-left"><input type="hidden" name="option_value[' + option_value_row + '][option_value_id]" value="" />';
 
-	html += '    <div class="input-group">';
-	html += '      <span class="input-group-addon"></span><input type="text" name="option_value[' + option_value_row + '][option_value_description][name]" value="" placeholder="{{ entry_option_value }}" class="form-control" />';
+	html += '    <div class="input-group" required>';
+	html += '      <span class="input-group-addon"></span><input type="text" name="option_value[' + option_value_row + '][option_value_description][name]" value="" placeholder="{{ entry_option_value }}" class="form-control" required/>';
     html += '    </div>';
 
 	html += '  </td>';
-    html += '  <td class="text-left"><a href="" id="thumb-image' + option_value_row + '" data-toggle="image" class="img-thumbnail"><img src="{{ placeholder }}" alt="" title="" data-placeholder="{{ placeholder }}" /></a><input type="hidden" name="option_value[' + option_value_row + '][image]" value="" id="input-image' + option_value_row + '" /></td>';
+    html += '  <td class="text-left"><a href="" id="thumb-image' + option_value_row + '" data-toggle="image" class="img-thumbnail"><img src="{{ placeholder }}" alt="" title="" data-placeholder="{{ placeholder }}" style="width:100px;height:100px;" /></a><input type="hidden" name="option_value[' + option_value_row + '][image]" value="" id="input-image' + option_value_row + '" /></td>';
 	html += '  <td class="text-right"><input type="text" name="option_value[' + option_value_row + '][sort_order]" value="" placeholder="{{ entry_sort_order }}" class="form-control" /></td>';
 	html += '  <td class="text-right"><button type="button" onclick="$(\'#option-value-row' + option_value_row + '\').remove();" data-toggle="tooltip" title="{{ button_remove }}" class="btn btn-danger"><i class="fa fa-minus-circle"></i></button></td>';
 	html += '</tr>';
@@ -124,8 +126,70 @@ function addOptionValue() {
 
 	option_value_row++;
 }
-//--></script></div>
 
+$('body').on('click', '[data-toggle="image"]', function (e) {
+  e.preventDefault();
+
+  var $button = $(this);
+  var $img = $button.find('img');
+  var $input = $button.next('input');
+
+  $('#modal-image').remove();
+
+  $.ajax({
+    url: 'index.php?route=common/filemanager&user_token={{ user_token }}',
+    dataType: 'html',
+    success: function (html) {
+      $('body').append('<div id="modal-image" class="modal">' + html + '</div>');
+      $('#modal-image').modal('show');
+
+      $('#modal-image').on('click', 'a.thumbnail', function (e) {
+        e.preventDefault();
+
+        var image = $(this).attr('href');
+        var relative = image.replace(/^.*?image\//, ''); 
+
+        $img.attr('src', 'image/' + relative); // Set preview
+        $input.val(relative);                  // Save only relative path
+
+        $('#modal-image').modal('hide');
+      });
+    }
+  });
+});
+
+</script></div>
+
+{# <script src="view/javascript/common.js" type="text/javascript">
+$('body').on('click', '[data-toggle=\'image\']', function(e) {
+    var $element = $(this);
+    var $input = $('#' + $element.attr('id').replace('thumb-image', 'input-image'));
+    
+    $('#modal-image').remove();
+
+    $.ajax({
+        url: 'index.php?route=common/filemanager&user_token={{ user_token }}',
+        dataType: 'html',
+        beforeSend: function() {
+            $element.find('img').attr('src', 'view/image/loading.gif');
+        },
+        success: function(html) {
+            $('body').append('<div id="modal-image" class="modal">' + html + '</div>');
+            $('#modal-image').modal('show');
+
+            $('#modal-image').delegate('a.thumbnail', 'click', function(e) {
+                e.preventDefault();
+
+                $element.find('img').attr('src', $(this).attr('href'));
+                $input.val($(this).attr('href'));
+
+                $('#modal-image').modal('hide');
+            });
+        }
+    });
+});
+</script> #}
+ 
 
 <script>
   document.querySelectorAll('.image-upload').forEach(input => {
