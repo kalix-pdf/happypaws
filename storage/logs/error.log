@@ -1,0 +1,8 @@
+2025-05-20 21:25:59 - PHP Warning:  Undefined array key "user_token" in D:\xampp\htdocs\hp\catalog\controller\account\customerpartner\addproductoption.php on line 387
+2025-05-20 21:26:35 - PHP Warning:  Undefined array key "user_token" in D:\xampp\htdocs\hp\catalog\controller\account\customerpartner\addproductoption.php on line 387
+2025-05-20 21:26:59 - PHP Warning:  Undefined array key "user_token" in D:\xampp\htdocs\hp\catalog\controller\account\customerpartner\addproductoption.php on line 387
+2025-05-20 21:27:01 - PHP Warning:  Undefined array key "user_token" in D:\xampp\htdocs\hp\catalog\controller\account\customerpartner\addproductoption.php on line 387
+2025-05-20 21:27:02 - PHP Warning:  Undefined array key "user_token" in D:\xampp\htdocs\hp\catalog\controller\account\customerpartner\addproductoption.php on line 387
+2025-05-20 21:27:03 - PHP Warning:  Undefined array key "user_token" in D:\xampp\htdocs\hp\catalog\controller\account\customerpartner\addproductoption.php on line 387
+2025-05-20 14:49:26 - PHP Warning:  mysqli::query(): (42S02/1146): Table 'smesoftc_ocart3x0x3x9.oc_session' doesn't exist in D:\xampp\htdocs\hp\system\library\db\mysqli.php on line 25
+2025-05-20 14:49:26 - PHP Warning:  mysqli::query(): (42S02/1146): Table 'smesoftc_ocart3x0x3x9.oc_session' doesn't exist in D:\xampp\htdocs\hp\system\library\db\mysqli.php on line 25

@@ -1,0 +1,13 @@
+<h2>Flash Express Order Data</h2>
+<pre>{{ order_data }}</pre>
+<button id="sendToFlash">Send to Flash Express</button>
+
+<script>
+document.getElementById('sendToFlash').addEventListener('click', function() {
+    fetch('index.php?route=extension/flashexpress_api/sendToFlashAPI&order_id={{ order_id }}', {
+        method: 'POST'
+    }).then(response => response.json())
+    .then(data => alert('Order sent successfully: ' + JSON.stringify(data)))
+    .catch(error => console.error('Error:', error));
+});
+</script>

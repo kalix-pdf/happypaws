@@ -384,7 +384,7 @@ class ControllerAccountCustomerpartnerAddproductOption extends Controller {
 	
 		}
 
-		$data['user_token'] = $this->session->data['user_token'];
+		// $data['user_token'] = $this->session->data['user_token'];
 
 		$data['placeholder'] = $this->model_tool_image->resize('no_image.png', 100, 100);
 

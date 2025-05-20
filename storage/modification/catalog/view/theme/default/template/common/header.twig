@@ -27,37 +27,9 @@
 {% if keywords %}
 <meta name="keywords" content="{{ keywords }}" />
 {% endif %}
-<script src="catalog/view/javascript/jquery/jquery-3.7.0.min.js" type="text/javascript"></script>
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.6/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-4Q6Gf2aSP4eDXB8Miphtr37CMZZQ5oXLH2yaXMJ2w8e2ZtHTl7GptT4jmndRuHDT" crossorigin="anonymous">
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.6/dist/js/bootstrap.bundle.min.js" integrity="sha384-j1CDi7MgGQ12Z7Qab0qlWQ/Qqz24Gc6BM0thvEMVjHnfYGF0rmFCozFSxQBxwHKO" crossorigin="anonymous"></script>
 
-    {% if (direction is defined and direction == 'rtl') %}
-            <link 
-  rel="stylesheet"
-  href="https://cdn.rtlcss.com/bootstrap/3.3.7/css/bootstrap.min.css"
-  integrity="sha384-cSfiDrYfMj9eYCidq//oGXEkMc0vuTxHXizrMOFAaPsLt1zoCUVnSsURN+nef1lj"
-  crossorigin="anonymous">
-<!-- compiled and minified theme CSS -->
-<link
-  rel="stylesheet"
-  href="https://cdn.rtlcss.com/bootstrap/3.3.7/css/bootstrap-theme.min.css"
-  integrity="sha384-YNPmfeOM29goUYCxqyaDVPToebWWQrHk0e3QYEs7Ovg6r5hSRKr73uQ69DkzT1LH"
-  crossorigin="anonymous">
-
-<!-- compiled and minified JavaScript -->
-<script
-  src="https://cdn.rtlcss.com/bootstrap/3.3.7/js/bootstrap.min.js"
-  integrity="sha384-B4D+9otHJ5PJZQbqWyDHJc6z6st5fX3r680CYa0Em9AUG6jqu5t473Y+1CTZQWZv"
-  crossorigin="anonymous"></script>
-
-            {% else %}
-    
-<link href="catalog/view/javascript/bootstrap/css/bootstrap.min.css" rel="stylesheet" media="screen" />
-<script src="catalog/view/javascript/bootstrap/js/bootstrap.min.js" type="text/javascript"></script>
-
-    {% endif %}
-    
-<link href="catalog/view/javascript/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css" />
-<link href="//fonts.googleapis.com/css?family=Open+Sans:400,400i,300,700" rel="stylesheet" type="text/css" />
-<link href="catalog/view/theme/default/stylesheet/stylesheet.css" rel="stylesheet">
 {% for style in styles %}
 <link href="{{ style.href }}" type="text/css" rel="{{ style.rel }}" media="{{ style.media }}" />
 {% endfor %}
@@ -133,40 +105,3 @@
   </div>
 </header>
 {{ menu }}
-
-      <div class="modal fade" id="myModal-seller-mail" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-        <div class="modal-dialog">
-          <div class="modal-content">
-            <div class="modal-header">
-              <button type="button" class="close" data-dismiss="modal">
-                <span aria-hidden="true">&times;</span>
-                <span class="sr-only">{{ text_close}}</span>
-              </button>
-              <h3 class="modal-title">{{ text_ask_question}}</h3>
-            </div>
-            <form id="seller-mail-form">
-              <div class="modal-body">
-                <div class="form-group required">
-                  <label class="control-label" for="input-subject">{{ text_subject}}</label>
-                  <input type="text" name="subject" id="input-subject" class="form-control"/>
-                  {% if partner is defined %}
-                    <input type="hidden" name="seller" value="{{ seller_id}}"/>
-                  {% endif %}
-                </div>
-                <div class="form-group required">
-                  <label class="control-label" for="input-message">{{ text_ask}}</label>
-                  <textarea class="form-control" name="message" rows="3" id="input-message"></textarea>
-                </div>
-                <div class="error text-center text-danger"></div>
-              </div>
-            </form>
-            <div class="modal-footer">
-              <button type="button" class="wk-btn btn btn-default" data-dismiss="modal">{{ text_close}}</button>
-              <button type="button" class="wk-btn btn btn-primary" id="send-mail">{{ text_send}}</button>
-            </div>
-          </div>
-          <!-- /.modal-content -->
-        </div>
-        <!-- /.modal-dialog -->
-      </div>
-    
