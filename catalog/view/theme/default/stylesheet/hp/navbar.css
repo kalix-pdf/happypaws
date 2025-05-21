@@ -13,6 +13,7 @@
   background: #f2f3f7;
   padding: 10px 25px;
   box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1);
+  margin: 0 0 20px 0;
 }
 
 #top .container {
@@ -84,6 +85,14 @@
 #top .caret {
   margin-left: 4px;
 }
+
+
+.product-thumb{
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+  width: 20%;
+  border-radius: 20px;
+}
+
 
 @media (max-width: 767px) {
   #top .container {
