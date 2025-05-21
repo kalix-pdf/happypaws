@@ -95,6 +95,20 @@
   flex-wrap: wrap;
 }
 
+.input-group {
+  display: flex;
+  align-items: center;
+  border-radius: 5px;
+  padding: 5px;
+  box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1);
+  border-radius: 20px 0 0 20px;
+}
+
+.input-group input {
+  border: none;
+  outline: none;
+}
+
 .cart{
   background-color: #2968c1;
   border-radius: 10px;
