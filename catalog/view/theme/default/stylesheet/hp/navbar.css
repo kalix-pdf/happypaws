@@ -95,6 +95,15 @@
   flex-wrap: wrap;
 }
 
+.font-controls {
+  font-size: 15px;
+  display: flex;
+  justify-content: flex-end;
+  margin-left: 8px;
+  font-family: 'poppins', sans-serif;
+
+}
+
 .input-group {
   display: flex;
   align-items: center;
@@ -143,4 +152,24 @@
     margin-bottom: 10px;
     margin-right: 0;
   }
+}
+
+html::-webkit-scrollbar {
+    width: 10px;
+}
+
+html::-webkit-scrollbar-thumb {
+    background: #0a4b78;
+    border-radius: 10px;
+    border: 2px solid transparent;
+    background-clip: content-box;
+}
+
+html::-webkit-scrollbar-thumb:hover {
+    background: #162F65;
+}
+
+html::-webkit-scrollbar-track {
+    background: #f1f1f1;
+    border-radius: 10px;
 }
