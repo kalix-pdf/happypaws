@@ -89,6 +89,12 @@
   margin-left: 4px;
 }
 
+.navbar{
+  color:#162F65!important;
+  font-size: 1.3rem!important;
+  font-weight: bold!important;
+}
+
 .search-cart{
   font-size: 12px;
   display: flex;
@@ -128,6 +134,14 @@
   box-shadow: 2px 0px 5px rgba(0, 0, 0, 0.1);
 }
 
+#cart .fa-shopping-cart {
+  color: #162F65;
+}
+
+#cart .btn {
+  color: #162F65;
+}
+
 .carts i{
   color: #0000;
   font-size: 14px;
@@ -144,7 +158,7 @@
 }
 
 .cart span{
-  color: #000;
+ color: #162F65;
   font-size: 14px;
 }
 
