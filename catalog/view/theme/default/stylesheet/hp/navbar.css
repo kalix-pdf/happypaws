@@ -154,6 +154,9 @@
   border-radius: 20px;
 }
 
+.colors {
+  color: #f6c96d;
+}
 .swiper-viewport {
     margin: 0 0 60px;
     background: #fff;
