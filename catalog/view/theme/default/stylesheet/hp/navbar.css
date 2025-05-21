@@ -91,19 +91,25 @@
   justify-content: flex-end;
   align-items: center;
   gap: 5px;
-  margin: 20px 0;
-  flex-wrap: wrap;
+  margin: 80px 0 0 0;
 }
 
 .cart{
   background-color: #2968c1;
-  border-radius: 10px;
+  border-radius: 15px;
+  padding: 0px 10px;
 }
 
 .carts i{
   color: #0000;
   font-size: 14px;
 }
+
+.cart:hover{
+  border: #f6c96d 2px solid;
+  position: relative;
+}
+
 
 .cart span{
   color: #000;
