@@ -11,7 +11,7 @@ define('DIR_SYSTEM', 'D:/xampp/htdocs/hp/system/');
 define('DIR_IMAGE', 'D:/xampp/htdocs/hp/image/');
 define('DIR_STORAGE', 'D:/xampp/htdocs/hp/storage/');
 define('DIR_LANGUAGE', DIR_APPLICATION . 'language/');
-define('DIR_TEMPLATE', DIR_APPLICATION . 'view/theme/');
+define('DIR_TEMPLATE', DIR_APPLICATION . 'view/theme/hp/');
 define('DIR_CONFIG', DIR_SYSTEM . 'config/');
 define('DIR_CACHE', DIR_STORAGE . 'cache/');
 define('DIR_DOWNLOAD', DIR_STORAGE . 'download/');
