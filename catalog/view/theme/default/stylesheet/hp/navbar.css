@@ -85,6 +85,32 @@
   margin-left: 4px;
 }
 
+.search-cart{
+  font-size: 12px;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  gap: 5px;
+  margin: 20px 0;
+  flex-wrap: wrap;
+}
+
+.cart{
+  background-color: #1a4b8e;
+  border-radius: 10px;
+}
+
+.carts i{
+  color: #0000;
+  font-size: 14px;
+}
+
+.cart span{
+  color: #000;
+  font-size: 14px;
+  font-weight: bold;
+}
+
 @media (max-width: 767px) {
   #top .container {
     flex-direction: column;
