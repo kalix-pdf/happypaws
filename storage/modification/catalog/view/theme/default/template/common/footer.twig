@@ -44,7 +44,7 @@
       </div>
     </div>
     <hr>
-    <p>{{ powered }}</p>
+    <p class="copyright">{{ powered }}</p>
   </div>
 </footer>
 
@@ -57,9 +57,9 @@
             </div>
             {% endif %}
             
-{% for style in styles %}
+{# {% for style in styles %}
 <link href="{{ style.href }}" type="text/css" rel="{{ style.rel }}" media="{{ style.media }}" />
-{% endfor %}
+{% endfor %} #}
 {% for script in scripts %}
 <script src="{{ script }}" type="text/javascript"></script>
 {% endfor %}
