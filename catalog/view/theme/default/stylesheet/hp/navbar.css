@@ -172,6 +172,10 @@
 .product-thumb:hover{
   transform: translateY(-5px);
 }
+
+.colors {
+  color: #f6c96d;
+}
 .swiper-viewport {
     margin: 0 0 60px;
     background: #fff;
