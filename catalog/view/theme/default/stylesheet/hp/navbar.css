@@ -90,9 +90,7 @@
   display: flex;
   justify-content: flex-end;
   align-items: center;
-  gap: 5px;
-  margin: 20px 0;
-  flex-wrap: wrap;
+  margin: 80px 0 0 0;
 }
 
 .font-controls {
@@ -119,14 +117,22 @@
 }
 
 .cart{
-  background-color: #2968c1;
-  border-radius: 10px;
+  background-color: #3484f4;
+  border-radius: 0 20px 20px 0;
+  padding: 5px 10px;
+  box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1);
 }
 
 .carts i{
   color: #0000;
   font-size: 14px;
 }
+
+/* .cart:hover{
+  border: #f6c96d 2px solid;
+  position: relative;
+} */
+
 
 .cart span{
   color: #000;
