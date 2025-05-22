@@ -69,7 +69,7 @@
         <span class="hide-on-mobile">{{ text_account }}</span>
         <span class="caret"></span>
       </a>
-      <ul class="dropdown-content">
+      <ul class="dropdown-content" style="display: none;">
         {% if logged %}
         <li><a href="{{ account }}">{{ text_account }}</a></li>
         <li><a href="{{ order }}">{{ text_order }}</a></li>
@@ -123,3 +123,21 @@
   </div>
 </header>
 {{ menu }}
+
+<script>
+        document.addEventListener('DOMContentLoaded', function() {
+          var dropdownLink = document.querySelector('.dropdown-link');
+          var dropdownContent = document.querySelector('.dropdown-content');
+          if(dropdownLink && dropdownContent) {
+        dropdownLink.addEventListener('click', function(e) {
+          e.preventDefault();
+          dropdownContent.style.display = dropdownContent.style.display === 'block' ? 'none' : 'block';
+        });
+        document.addEventListener('click', function(e) {
+          if (!dropdownLink.contains(e.target) && !dropdownContent.contains(e.target)) {
+            dropdownContent.style.display = 'none';
+          }
+        });
+          }
+        });
+      </script>

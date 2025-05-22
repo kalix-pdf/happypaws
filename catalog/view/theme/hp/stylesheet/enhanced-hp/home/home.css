@@ -296,11 +296,11 @@ hr {
     top: 40px;
     left: 0;
     background-color: white;
-    color: #000;
+    color: #162f65;
     min-width: 130px;
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
     z-index: 1000;
-    border-radius: 0 0 10px 10px;
+    border-radius: 10px;
     overflow: hidden;
     height: fit-content;
 }
@@ -315,14 +315,16 @@ hr {
 }
 
 #top-links .dropdown-content li a {
-    color: #000;
+    color: #162f65;
     text-decoration: none;
     display: block;
     padding: 5px 10px;
 }
 
 #top-links .dropdown-content li a:hover {
-    background-color: #f0f0f0;
+    background-color: #162f65;
+    color: #fff;
+    border-radius: 10px;
 }
 
 /* Icons */
