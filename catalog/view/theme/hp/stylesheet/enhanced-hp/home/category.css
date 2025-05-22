@@ -1,3 +1,55 @@
+#product-category .breadcrumb {
+    display: flex;
+    list-style: none;
+    width: 80%;
+    margin: 0 0 10px 0;
+    background: #fafafa;
+    border-radius: 0;  /* Remove border radius */
+    padding: 0;
+    overflow: hidden;
+    /* box-shadow: 0 1px 2px rgba(0, 0, 0, 0.2); */
+}
+
+#product-category .breadcrumb li {
+    margin-right: -18px; /* Overlap arrows */
+    position: relative;
+    z-index: 1;
+    width: 100px;
+}
+
+#product-category .breadcrumb li:first-child a {
+    border-top-left-radius: 5px;
+    border-bottom-left-radius: 5px;
+}
+
+#product-category .breadcrumb li:last-child a {
+    border-top-right-radius: 5px;
+    border-bottom-right-radius: 5px;
+}
+
+#product-category .breadcrumb a {
+    color: #162F65;
+    background: #eeeeee;
+    display: block;
+    padding: 5px 10px;
+    clip-path: polygon(75% 0%, 100% 50%, 75% 100%, 0% 100%, 25% 50%, 0% 0%);
+    text-decoration: none;
+    position: relative;
+    z-index: 2;
+    font-weight: 500;
+    font-size: 12px;
+    transition: background 0.2s;
+   text-align: center;
+   width: 100%;
+}
+#product-category .breadcrumb li:nth-child(1) a {
+    clip-path: polygon(75% 0%, 100% 50%, 75% 100%, 0% 100%, 0% 50%, 0% 0%);
+}
+
+#product-category .breadcrumb a:hover {
+    background: #ffd98a;
+}
+
 #product-category{
     display: flex;
     flex-direction: column;
@@ -7,7 +59,7 @@
 
 #product-category .row{
     display: grid;
-    grid-template-columns: 1fr 2fr;
+    grid-template-columns: 250px 2fr;
     gap: 20px;
     width: 80%;
 }
@@ -17,23 +69,36 @@
     flex-direction: column;
     gap: 5px;
     background: #fff;
-    border-radius: 10px;
+    border-radius: 5px;
     border: 1px solid #f1f1f1;
     overflow: hidden;
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
 }
 
-.list-group-item.active{
+#product-category .list-group-item.active{
     padding: 10px 15px;
     background-color: #162F65;
     font-weight: 600;
     color: #fff;
+    text-decoration: none;
 }
-.list-group-item, .list-group-item a{
+
+ #product-category .list-group-item:not(:first-child){
     padding: 5px 10px;
    text-decoration: none;
    color: #162F65;
+   transition: all 0.2s ease;
+ }
+
+#product-category .list-group-item:hover:not(:first-child){
+    background: #f6c96d;
 }
-.list-group-item:nth-child(even){
-    padding: 5px 10px;
+ #product-category .list-group-item:nth-child(even){
+    /* padding: 5px 10px; */
    background: #f1f1f1;
+}
+
+ #product-category .row #content{
+    background: #fafafa;
+    border-radius: 5px;
 }
