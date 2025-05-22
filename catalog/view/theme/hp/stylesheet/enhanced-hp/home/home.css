@@ -128,7 +128,7 @@ hr {
     list-style: none;
     background: #ffc766;
     border-radius: 5px;
-
+    margin-bottom: 20px;
 }
 
 #menu .nav.navbar-nav>li {
