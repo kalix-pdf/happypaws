@@ -86,8 +86,8 @@
 .list-inline li{
   position: relative;
   padding: 5px 0;
-  
 }
+
 .list-inline li:not(:first-child)::before {
   content: "";
   position: absolute;
@@ -102,6 +102,7 @@
 .list-inline li:hover::before{
   width: 100%;
 }
+
 .navbar{
   color:#162F65!important;
   font-size: 1.3rem!important;
@@ -113,7 +114,7 @@
   display: flex;
   justify-content: flex-end;
   align-items: center;
-  margin: 30px 0 30px 0;
+  margin: 30px 100px 30px 0;
 }
 
 .font-controls {
@@ -271,8 +272,6 @@ html::-webkit-scrollbar-track {
   background-color: #f6c96d;
   border-radius: 0 20px 20px 0;
   padding: 2px 10px;
-  /* margin-right: 50px; */
-
 }
 
 .cart-container:hover {
@@ -304,10 +303,12 @@ html::-webkit-scrollbar-track {
   right: 0;
   background-color: #fff;
   width: 100%;
-  border: 1px solid #ccc;
+  border: 1px solid #162F65;
   z-index: 1000;
   box-shadow: 0 4px 8px rgba(0,0,0,0.1);
   padding: 10px;
+  margin-top: 5px;
+  border-radius: 20px;
 }
 
 .cart-dropdown.active {
