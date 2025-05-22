@@ -167,7 +167,25 @@
   width: 20%;
   border-radius: 20px;
 }
+/* .list-inline li{
+  position: relative;
+  padding: 5px 0;
+  
+}
+.list-inline li:not(:first-child)::before {
+  content: "";
+  position: absolute;
+  justify-content: center;
+  bottom: 0;
+  width: 0%;
+  background-color: #1a4b8e;
+  height: 2px;
+  transition: width 0.3s ease;
+}
 
+.list-inline li:hover::before{
+  width: 100%;
+} */
 .colors {
   color: #f6c96d;
 }
