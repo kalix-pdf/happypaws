@@ -127,7 +127,7 @@
    font-size: 13px;
  }
 
-#product-category .list-group-item:hover:not(:first-child){
+#product-category .list-group-item:hover{
     background: #f6c96d;
 }
  #product-category .list-group-item:nth-child(even){
