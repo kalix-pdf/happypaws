@@ -42,7 +42,7 @@
     content: '';
 		position: absolute;
 		left: 0;
-		height: 50%;
+		height: 51%;
 		width: 100%;
 		z-index: 1;
         bottom: 0;
@@ -55,7 +55,7 @@
     content: '';
 		position: absolute;
 		left: 0;
-		height: 50%;
+		height: 51%;
 		width: 100%;
 		z-index: 1;
         top: 0;
@@ -85,6 +85,7 @@
     text-decoration: none;
     color: #000;
     font-size: 12px;
+   
 }
 #product-category{
     display: flex;
@@ -138,4 +139,5 @@
  #product-category .row #content{
     background: #fafafa;
     border-radius: 5px;
+    padding: 20px;
 }
