@@ -6,3 +6,11 @@
 2025-05-20 21:27:03 - PHP Warning:  Undefined array key "user_token" in D:\xampp\htdocs\hp\catalog\controller\account\customerpartner\addproductoption.php on line 387
 2025-05-20 14:49:26 - PHP Warning:  mysqli::query(): (42S02/1146): Table 'smesoftc_ocart3x0x3x9.oc_session' doesn't exist in D:\xampp\htdocs\hp\system\library\db\mysqli.php on line 25
 2025-05-20 14:49:26 - PHP Warning:  mysqli::query(): (42S02/1146): Table 'smesoftc_ocart3x0x3x9.oc_session' doesn't exist in D:\xampp\htdocs\hp\system\library\db\mysqli.php on line 25
+2025-05-21 16:54:33 - PHP Warning:  rmdir(C:/xampp/htdocs/hp/storage/modification/system/library): Directory not empty in C:\xampp\htdocs\hp\admin\controller\marketplace\modification.php on line 105
+2025-05-21 16:54:33 - PHP Warning:  rmdir(C:/xampp/htdocs/hp/storage/modification/system): Directory not empty in C:\xampp\htdocs\hp\admin\controller\marketplace\modification.php on line 105
+2025-05-21 16:54:33 - PHP Warning:  rmdir(C:/xampp/htdocs/hp/storage/modification/catalog/controller): Directory not empty in C:\xampp\htdocs\hp\admin\controller\marketplace\modification.php on line 105
+2025-05-21 16:54:33 - PHP Warning:  rmdir(C:/xampp/htdocs/hp/storage/modification/catalog): Directory not empty in C:\xampp\htdocs\hp\admin\controller\marketplace\modification.php on line 105
+2025-05-21 16:54:34 - PHP Warning:  rmdir(C:/xampp/htdocs/hp/storage/modification/admin/model): Directory not empty in C:\xampp\htdocs\hp\admin\controller\marketplace\modification.php on line 105
+2025-05-21 16:54:34 - PHP Warning:  rmdir(C:/xampp/htdocs/hp/storage/modification/admin/language/en-gb): Directory not empty in C:\xampp\htdocs\hp\admin\controller\marketplace\modification.php on line 105
+2025-05-21 16:54:34 - PHP Warning:  rmdir(C:/xampp/htdocs/hp/storage/modification/admin/language): Directory not empty in C:\xampp\htdocs\hp\admin\controller\marketplace\modification.php on line 105
+2025-05-21 16:54:34 - PHP Warning:  rmdir(C:/xampp/htdocs/hp/storage/modification/admin): Directory not empty in C:\xampp\htdocs\hp\admin\controller\marketplace\modification.php on line 105
