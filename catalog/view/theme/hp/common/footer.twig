@@ -1,14 +1,21 @@
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <link href="catalog\view\theme\hp\stylesheet\enhanced-hp\home\home.css" rel="stylesheet" />
+</head>
 <footer>
-  <div class="container">
-    <div class="row">
-        <div class="col-sm-3 text-white">
-            <h2>Let's Get Connected</h2>
-        </div>
+  <div class="container-footer">
+    <div class="row-footer">
+      <div class="bold-align">
+        <img src="image\catalog\logo.png" alt="Happy Paws" class="img-responsive" />
+        <h2 class="bolder-footer">Let's Get Connected</h2>
+      </div>
       {% if informations %}
       <div class="col-sm-3">
         <h5>{{ text_information }}</h5>
         <ul class="list-unstyled">
-         {% for information in informations %}
+          {% for information in informations %}
           <li><a href="{{ information.href }}">{{ information.title }}</a></li>
           {% endfor %}
         </ul>
@@ -18,13 +25,14 @@
         <h5>{{ text_service }}</h5>
         <ul class="list-unstyled">
           <li><a href="{{ contact }}">{{ text_contact }}</a></li>
-          <li><a href="https://www.facebook.com/profile.php?id=61566451568161" target="_blank">Official Facebook</a></li>
+          <li><a href="https://www.facebook.com/profile.php?id=61566451568161" target="_blank">Official Facebook</a>
+          </li>
           <li><a href="mailto:inquire@happypaws.ph, hapipaws.ph@gmail.com" target="_blank">inquire@happypaws.ph</a></li>
           <!--<li><a href="{{ return }}">{{ text_return }}</a></li>
           <li><a href="{{ sitemap }}">{{ text_sitemap }}</a></li>-->
         </ul>
       </div>
-      
+
       <div class="col-sm-3">
         <h5>{{ text_account }}</h5>
         <ul class="list-unstyled">
@@ -36,7 +44,7 @@
       </div>
     </div>
     <hr>
-    <p>{{ powered }}</p>
+    <p class="copyright">{{ powered }}</p>
   </div>
 </footer>
 {% for style in styles %}
@@ -49,4 +57,6 @@
 OpenCart is open source software and you are free to remove the powered by OpenCart if you want, but its generally accepted practise to make a small donation.
 Please donate via PayPal to donate@opencart.com
 //-->
-</body></html>
+</body>
+
+</html>
