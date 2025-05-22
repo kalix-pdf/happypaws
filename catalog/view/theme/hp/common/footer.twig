@@ -8,11 +8,11 @@
   <div class="container-footer">
     <div class="row-footer">
       <div class="bold-align">
-        <img src="image\catalog\logo.png" alt="Happy Paws" class="img-responsive" />
+        <img src="image\catalog\Happypaws.png" alt="Happy Paws" class="img-responsive" />
         <h2 class="bolder-footer">Let's Get Connected</h2>
       </div>
       {% if informations %}
-      <div class="col-sm-3">
+      <div class="align-footer">
         <h5>{{ text_information }}</h5>
         <ul class="list-unstyled">
           {% for information in informations %}
@@ -21,7 +21,7 @@
         </ul>
       </div>
       {% endif %}
-      <div class="col-sm-3">
+      <div class="align-footer">
         <h5>{{ text_service }}</h5>
         <ul class="list-unstyled">
           <li><a href="{{ contact }}">{{ text_contact }}</a></li>
@@ -33,7 +33,7 @@
         </ul>
       </div>
 
-      <div class="col-sm-3">
+      <div class="align-footer">
         <h5>{{ text_account }}</h5>
         <ul class="list-unstyled">
           <li><a href="{{ account }}">{{ text_account }}</a></li>
