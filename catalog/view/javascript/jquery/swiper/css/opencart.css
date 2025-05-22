@@ -53,24 +53,30 @@
 }
 .swiper-viewport:hover .swiper-button-next {
 	opacity: 0.7;
-	right: 10px;
+	right: 20px;
 }
 }
-.swiper-button-prev:before {
-	width: 40px;
+
+.swiper-button-prev::before {
+    display: inline-block; /* Ensure it behaves like a block for transform */
+    width: 40px;
     height: 40px;
-	font-family: FontAwesome;
-	content: "\f053"; 
-	color: rgba(0,0,0,0.8);
-	font-size: 40px;
+    font-family: FontAwesome;
+    content: "\f1b0"; /* Unicode for the icon */
+    color: #162f65;
+    font-size: 40px;
+    transform: rotate(-90deg);
 }
+
 .swiper-button-next:before {
+	display: inline-block; /* Ensure it behaves like a block for transform */
 	width: 40px;
     height: 40px;
 	font-family: FontAwesome;
-	content: "\f054"; 
-	color: rgba(0,0,0,0.8);
+	content: "\f1b0"; 
+	color: #162f65;
 	font-size: 40px;
+	transform: rotate(90deg);
 }
 .swiper-pagination {
 	bottom: -40px;
