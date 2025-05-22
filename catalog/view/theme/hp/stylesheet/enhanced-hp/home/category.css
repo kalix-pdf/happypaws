@@ -112,18 +112,19 @@
 
 #product-category .list-group-item.active{
     padding: 10px 15px;
-    background-color: #162F65;
+    background-color: #f6c96d !important;
     font-weight: 600;
-    color: #fff;
+    color: #162F65 ;
     text-decoration: none;
+    border-bottom: 1px solid #f1f1f1;
 }
 
- #product-category .list-group-item:not(:first-child){
+ #product-category .list-group-item{
     padding: 10px 15px;
    text-decoration: none;
    color: #162F65;
    transition: all 0.2s ease;
-   font-size: 15px;
+   font-size: 13px;
  }
 
 #product-category .list-group-item:hover:not(:first-child){
