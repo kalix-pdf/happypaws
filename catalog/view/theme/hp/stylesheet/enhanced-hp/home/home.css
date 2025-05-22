@@ -245,6 +245,7 @@ hr {
         flex-direction: column;
         border-top: 1px solid #fff;
         gap: 1px;
+        border-radius: 0 0 5px 5px;
 
     }
 
