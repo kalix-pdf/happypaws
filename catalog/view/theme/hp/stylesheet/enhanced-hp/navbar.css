@@ -67,6 +67,25 @@
   font-size: 15px;
   color: #f6c96d;
 }
+.top-links-list li{
+  position: relative;
+  padding: 5px 0;
+  
+}
+.top-links-list > li:not(:first-child)::before {
+  content: "";
+  position: absolute;
+  justify-content: center;
+  bottom: 0;
+  width: 0%;
+  background-color: #f6c96d;
+  height: 2px;
+  transition: width 0.3s ease;
+}
+
+.top-links-list > li:hover::before{
+  width: 100%;
+}
 
 .button-search {
   border: none;
