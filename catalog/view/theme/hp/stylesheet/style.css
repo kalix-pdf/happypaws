@@ -5,25 +5,11 @@
     font-family: 'Poppins';
 }
 
-/* #top ul {
-    display: flex;
-    justify-content: space-around;
-} */
-/* Container dropdown */
 .dropdown {
   position: relative;
   display: inline-block;
 }
-.list-inline {
-    display: flex;
-    align-items: center;
-    justify-content: space-around;
-    list-style: none;
-}
-.list-inline a {
-    text-decoration: none;
-    color: black;
-}
+
 
 .dropdown-link {
   display: flex;

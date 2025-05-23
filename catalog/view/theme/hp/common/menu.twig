@@ -1,30 +1,66 @@
+
 {% if categories %}
 <div class="container-menu">
-  <nav id="menu" class="navbar">
-    <div class="navbar-header"><span id="category" class="visible-xs">{{ text_category }}</span>
-      <button type="button" class="btn btn-navbar navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse"><i class="fa fa-bars"></i></button>
-    </div>
-    <div class="collapse navbar-collapse navbar-ex1-collapse">
-      <ul class="nav navbar-nav">
-        {% for category in categories %}
-        {% if category.children %}
-        <li class="dropdown"><a href="{{ category.href }}" class="dropdown-toggle" data-toggle="dropdown">{{ category.name }}</a>
-          <div class="dropdown-menu">
-            <div class="dropdown-inner"> {% for children in category.children|batch(category.children|length / category.column|round(1, 'ceil')) %}
-              <ul class="list-unstyled">
-                {% for child in children %}
-                <li><a href="{{ child.href }}">{{ child.name }}</a></li>
-                {% endfor %}
-              </ul>
-              {% endfor %}</div>
-            <a href="{{ category.href }}" class="see-all">{{ text_all }} {{ category.name }}</a> </div>
-        </li>
-        {% else %}
-        <li><a href="{{ category.href }}">{{ category.name }}</a></li>
-        {% endif %}
-        {% endfor %}
-      </ul>
+  <nav id="menu" class="navbar navbar-expand-lg bg-body">
+    <div class="container-fluid">
+      <a class="navbar-brand d-lg-none" href="#">{{ text_category }}</a>
+
+      <!-- Toggler Button -->
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+
+      <!-- Navbar Links -->
+      <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav">
+          {% for category in categories %}
+          {% if category.children %}
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="{{ category.href }}" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+              {{ category.name }}
+            </a>
+            <ul class="dropdown-menu">
+              {% for children in category.children|batch(category.children|length / category.column|round(1, 'ceil')) %}
+              <li>
+                <ul class="list-unstyled">
+                  {% for child in children %}
+                  <li><a class="dropdown-item" href="{{ child.href }}">{{ child.name }}</a></li>
+                  {% endfor %}
+                </ul>
+              </li>
+              {% endfor %}
+              <li><hr class="dropdown-divider"></li>
+              <li><a class="dropdown-item see-all" href="{{ category.href }}">{{ text_all }} {{ category.name }}</a></li>
+            </ul>
+          </li>
+          {% else %}
+          <li class="nav-item">
+            <a class="nav-link" href="{{ category.href }}">{{ category.name }}</a>
+          </li>
+          {% endif %}
+          {% endfor %}
+        </ul>
+      </div>
     </div>
   </nav>
 </div>
-{% endif %} 
+{% endif %}
+
+<script>
+  document.addEventListener('DOMContentLoaded', function () {
+    const navLinks = document.querySelectorAll('.nav-link, .dropdown-item');
+    const navbarCollapse = document.querySelector('.navbar-collapse');
+
+    navLinks.forEach(function (link) {
+      link.addEventListener('click', function () {
+        // Don't close if the clicked link is a dropdown toggle
+        if (link.classList.contains('dropdown-toggler')) return;
+
+        // Close the navbar if it's open
+        if (navbarCollapse.classList.contains('show')) {
+          new bootstrap.Collapse(navbarCollapse).toggle();
+        }
+      });
+    });
+  });
+</script>
