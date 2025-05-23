@@ -4,6 +4,10 @@
     box-sizing: border-box;
 }
 
+body {
+    background-color: #F2F3F7FA;
+}
+
 #content {
     width: 100%;
 }

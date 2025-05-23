@@ -1,4 +1,4 @@
-#product-category .breadcrumb {
+ .breadcrumb {
     display: flex;
     list-style: none;
     align-items: center;
@@ -11,7 +11,7 @@
     overflow: hidden;
     /* box-shadow: 0 1px 2px rgba(0, 0, 0, 0.2); */
 }
-#product-category .breadcrumb li{
+.breadcrumb li{
     /* background: #f6c96d; */
     position: relative;
     display: inline-block;
@@ -38,7 +38,7 @@
     
 }
 
-#product-category .breadcrumb li::after{
+ .breadcrumb li::after{
     background: #ebebeb;
     content: '';
 		position: absolute;
@@ -51,7 +51,7 @@
         transition: all 0.2s ease;
    
 }
-#product-category .breadcrumb li::before{
+.breadcrumb li::before{
     background: #ebebeb;
     content: '';
 		position: absolute;
@@ -64,7 +64,7 @@
         transition: all 0.2s ease;
    
 }
-#product-category .breadcrumb li:first-child a::before{
+ .breadcrumb li:first-child a::before{
     background: #ebebeb;
     content: '';
         position: absolute;
@@ -74,21 +74,21 @@
         z-index: -1;   
         transition: all 0.2s ease;
 }
-#product-category .breadcrumb li:first-child:hover a::before{
+.breadcrumb li:first-child:hover a::before{
     background: #f6c96d;
     
 }
-#product-category .breadcrumb li a{
+.breadcrumb li a{
     padding: 10px ;
     display: block;
     position: relative;
     z-index: 2;
     text-decoration: none;
-    color: #000;
+    color: #162F65;
     font-size: 12px;
    
 }
-#product-category{
+#product-category, #information-information, #information-contact{
     display: flex;
     flex-direction: column;
     
@@ -143,4 +143,10 @@
     background: #fafafa;
     border-radius: 5px;
     padding: 20px;
+}
+
+.row-about span{
+    font-size: 14px;
+    font-weight: 400;
+    color: #162F65;
 }

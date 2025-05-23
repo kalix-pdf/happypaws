@@ -340,3 +340,13 @@ html::-webkit-scrollbar-track {
   padding: 10px 0;
   color: #888;
 }
+
+.row-about{
+    width: 77%;
+    min-height: 100vh;
+}
+
+.row-contact{
+    width: 77%;
+    min-height: 100vh;
+}

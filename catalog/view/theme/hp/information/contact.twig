@@ -1,3 +1,12 @@
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <link href="catalog\view\theme\hp\stylesheet\enhanced-hp\home\category.css" rel="stylesheet" />
+  <link href="{{ 'https://fonts.googleapis.com/css2?family=Poppins+One&family=Poppins:wght@400;500;600;700&display=swap' }}" rel="stylesheet">
+</head>
+
+
 {{ header }}
 <div id="information-contact" class="container">
   <ul class="breadcrumb">
@@ -5,7 +14,7 @@
     <li><a href="{{ breadcrumb.href }}">{{ breadcrumb.text }}</a></li>
     {% endfor %}
   </ul>
-  <div class="row">{{ column_left }}
+  <div class="row-contact">{{ column_left }}
     {% if column_left and column_right %}
     {% set class = 'col-sm-6' %}
     {% elseif column_left or column_right %}
@@ -13,36 +22,41 @@
     {% else %}
     {% set class = 'col-sm-12' %}
     {% endif %}
-    <div id="content" class="{{ class }}">{{ content_top }}
+    <div id="content" class="contact">{{ content_top }}
       <h1>{{ heading_title }}</h1>
-      <h3>{{ text_location }}</h3>
-      <div class="panel panel-default">
-        <div class="panel-body">
-          <div class="row">
+      {# <h3>{{ text_location }}</h3> #}
+      <div class="custom-panel">
+        <div class="custom-panel-body">
+          <h3 class="letter-head">{{ text_location }}</h3>
+          <div class="custom-row-contact">
             {% if image %}
-            <div class="col-sm-3"><img src="{{ image }}" alt="{{ store }}" title="{{ store }}" class="img-thumbnail" /></div>
+            <div class="custom-col-1">
+              <img src="{{ image }}" alt="{{ store }}" title="{{ store }}" class="custom-img-thumbnail" />
+            </div>
             {% endif %}
-            <div class="col-sm-3"><strong>{{ store }}</strong><br />
+            <div class="custom-col">
+              <strong>{{ store }}</strong><br />
               <address>
-              {{ address }}
+                {{ address }}
               </address>
               {% if geocode %}
-              <a href="https://maps.google.com/maps?q={{ geocode|url_encode }}&hl={{ geocode_hl }}&t=m&z=15" target="_blank" class="btn btn-info"><i class="fa fa-map-marker"></i> {{ button_map }}</a>
+              <a href="https://maps.google.com/maps?q={{ geocode|url_encode }}&hl={{ geocode_hl }}&t=m&z=15" target="_blank" class="custom-btn custom-btn-info">
+                <i class="fa fa-map-marker"></i> {{ button_map }}
+              </a>
               {% endif %}
             </div>
-            <div class="col-sm-3"><strong>{{ text_telephone }}</strong><br>
-              {{ telephone }}<br />
-              <br />
+            <div class="custom-col">
+              <strong>{{ text_telephone }}</strong><br>
+              {{ telephone }}<br /><br />
               {% if fax %}
               <strong>{{ text_fax }}</strong><br>
               {{ fax }}
               {% endif %}
             </div>
-            <div class="col-sm-3">
+            <div class="custom-col">
               {% if open %}
               <strong>{{ text_open }}</strong><br />
-              {{ open }}<br />
-              <br />
+              {{ open }}<br /><br />
               {% endif %}
               {% if comment %}
               <strong>{{ text_comment }}</strong><br />
@@ -54,90 +68,92 @@
       </div>
       {% if locations %}
       <h3>{{ text_store }}</h3>
-      <div class="panel-group" id="accordion">
-        {% for location in locations %}
-        <div class="panel panel-default">
-          <div class="panel-heading">
-            <h4 class="panel-title"><a href="#collapse-location{{ location.location_id }}" class="accordion-toggle" data-toggle="collapse" data-parent="#accordion">{{ location.name }} <i class="fa fa-caret-down"></i></a></h4>
-          </div>
-          <div class="panel-collapse collapse" id="collapse-location{{ location.location_id }}">
-            <div class="panel-body">
-              <div class="row">
-                {% if location.image %}
-                <div class="col-sm-3"><img src="{{ location.image }}" alt="{{ location.name }}" title="{{ location.name }}" class="img-thumbnail" /></div>
-                {% endif %}
-                <div class="col-sm-3"><strong>{{ location.name }}</strong><br/>
-                  <address>
-                  {{ location.address }}
-                  </address>
-                  {% if location.geocode %}
-                  <a href="https://maps.google.com/maps?q={{ location.geocode|url_encode }}&hl={{ geocode_hl }}&t=m&z=15" target="_blank" class="btn btn-info"><i class="fa fa-map-marker"></i> {{ button_map }}</a>
-                  {% endif %}
-                </div>
-                <div class="col-sm-3"> <strong>{{ text_telephone }}</strong><br/>
-                  {{ location.telephone }}<br/>
-                  <br/>
-                  {% if location.fax %}
-                  <strong>{{ text_fax }}</strong><br/>
-                  {{ location.fax }}
-                  {% endif %}
-                </div>
-                <div class="col-sm-3">
-                  {% if location.open %}
-                  <strong>{{ text_open }}</strong><br/>
-                  {{ location.open }}<br/>
-                  <br/>
-                  {% endif %}
-                  {% if location.comment %}
-                  <strong>{{ text_comment }}</strong><br/>
-                  {{ location.comment }}
-                  {% endif %}
-                </div>
-              </div>
-            </div>
-          </div>
+      <div class="accordion">
+  {% for location in locations %}
+  <div class="accordion-item">
+    <input type="checkbox" id="accordion-location{{ location.location_id }}" hidden>
+    <label class="accordion-header" for="accordion-location{{ location.location_id }}">
+      {{ location.name }} <i class="fa fa-caret-down"></i>
+    </label>
+    <div class="accordion-content">
+      <div class="row">
+        {% if location.image %}
+        <div class="col">
+          <img src="{{ location.image }}" alt="{{ location.name }}" title="{{ location.name }}" class="thumbnail">
         </div>
-        {% endfor %}
+        {% endif %}
+        <div class="col">
+          <strong>{{ location.name }}</strong><br>
+          <address>{{ location.address }}</address>
+          {% if location.geocode %}
+          <a href="https://maps.google.com/maps?q={{ location.geocode|url_encode }}&hl={{ geocode_hl }}&t=m&z=15" target="_blank" class="btn">
+            <i class="fa fa-map-marker"></i> {{ button_map }}
+          </a>
+          {% endif %}
+        </div>
+        <div class="col">
+          <strong>{{ text_telephone }}</strong><br>
+          {{ location.telephone }}<br><br>
+          {% if location.fax %}
+          <strong>{{ text_fax }}</strong><br>
+          {{ location.fax }}
+          {% endif %}
+        </div>
+        <div class="col">
+          {% if location.open %}
+          <strong>{{ text_open }}</strong><br>
+          {{ location.open }}<br><br>
+          {% endif %}
+          {% if location.comment %}
+          <strong>{{ text_comment }}</strong><br>
+          {{ location.comment }}
+          {% endif %}
+        </div>
       </div>
+    </div>
+  </div>
+  {% endfor %}
+</div>
       {% endif %}
-      <form action="{{ action }}" method="post" enctype="multipart/form-data" class="form-horizontal">
-        <fieldset>
-          <legend>{{ text_contact }}</legend>
-          <div class="form-group required">
-            <label class="col-sm-2 control-label" for="input-name">{{ entry_name }}</label>
-            <div class="col-sm-10">
-              <input type="text" name="name" value="{{ name }}" id="input-name" class="form-control" />
-              {% if error_name %}
-              <div class="text-danger">{{ error_name }}</div>
-              {% endif %}
-            </div>
-          </div>
-          <div class="form-group required">
-            <label class="col-sm-2 control-label" for="input-email">{{ entry_email }}</label>
-            <div class="col-sm-10">
-              <input type="text" name="email" value="{{ email }}" id="input-email" class="form-control" />
-              {% if error_email %}
-              <div class="text-danger">{{ error_email }}</div>
-              {% endif %}
-            </div>
-          </div>
-          <div class="form-group required">
-            <label class="col-sm-2 control-label" for="input-enquiry">{{ entry_enquiry }}</label>
-            <div class="col-sm-10">
-              <textarea name="enquiry" rows="10" id="input-enquiry" class="form-control">{{ enquiry }}</textarea>
-              {% if error_enquiry %}
-              <div class="text-danger">{{ error_enquiry }}</div>
-              {% endif %}
-            </div>
-          </div>
-          {{ captcha }}
-        </fieldset>
-        <div class="buttons">
-          <div class="pull-right">
-            <input class="btn btn-primary" type="submit" value="{{ button_submit }}" />
-          </div>
-        </div>
-      </form>
+    <form action="{{ action }}" method="post" enctype="multipart/form-data" class="contact-form">
+    <legend>{{ text_contact }}</legend>
+
+    <div class="form-group required">
+      <label for="input-name">{{ entry_name }}</label>
+      <div class="form-input">
+        <input type="text" name="name" value="{{ name }}" id="input-name">
+        {% if error_name %}
+        <div class="text-danger">{{ error_name }}</div>
+        {% endif %}
+      </div>
+    </div>
+
+    <div class="form-group required">
+      <label for="input-email">{{ entry_email }}</label>
+      <div class="form-input">
+        <input type="text" name="email" value="{{ email }}" id="input-email">
+        {% if error_email %}
+        <div class="text-danger">{{ error_email }}</div>
+        {% endif %}
+      </div>
+    </div>
+
+    <div class="form-group required">
+      <label for="input-enquiry">{{ entry_enquiry }}</label>
+      <div class="form-input">
+        <textarea name="enquiry" rows="10" id="input-enquiry">{{ enquiry }}</textarea>
+        {% if error_enquiry %}
+        <div class="text-danger">{{ error_enquiry }}</div>
+        {% endif %}
+      </div>
+    </div>
+
+    {{ captcha }}
+
+  <div class="form-actions">
+    <input class="btn-primary" type="submit" value="{{ button_submit }}">
+  </div>
+</form>
       {{ content_bottom }}</div>
     {{ column_right }}</div>
 </div>
