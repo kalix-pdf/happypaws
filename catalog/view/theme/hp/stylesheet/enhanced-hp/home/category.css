@@ -88,7 +88,7 @@
     font-size: 12px;
    
 }
-#product-category, #product-product{
+#product-category, #product-product, #account-wishlist{
     display: flex;
     flex-direction: column;
     

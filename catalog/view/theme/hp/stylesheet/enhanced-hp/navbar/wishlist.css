@@ -1,0 +1,135 @@
+.wishlist{
+    width: 80%;
+    display: flex;
+}
+
+.alert {
+  padding: 15px;
+  border: 1px solid transparent;
+  border-radius: 4px;
+  margin-bottom: 20px;
+  font-size: 14px;
+}
+.alert-success {
+  color: #3c763d;
+  background-color: #dff0d8;
+  border-color: #d0e9c6;
+}
+.alert-dismissible {
+  position: relative;
+}
+.alert-dismissible .close {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  background: none;
+  border: none;
+  font-size: 20px;
+  cursor: pointer;
+}
+
+/* Table Styling */
+.table-responsive {
+  overflow-x: auto;
+}
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-bottom: 20px;
+  font-size: 14px;
+}
+table th, table td {
+  border: 1px solid #e5e5e5;
+  padding: 10px;
+}
+.table-hover tr:hover {
+  background-color: #f9f9f9;
+}
+.text-center {
+  text-align: center;
+}
+.text-left {
+  text-align: left;
+}
+.text-right {
+  text-align: right;
+}
+.price b {
+  color: #e60023;
+}
+.price s {
+  color: #999;
+  margin-left: 5px;
+}
+
+/* Buttons */
+.btn {
+  display: inline-block;
+  padding: 8px 15px;
+  font-size: 14px;
+  text-align: center;
+  text-decoration: none;
+  border: none;
+  border-radius: 3px;
+  cursor: pointer;
+  transition: background 0.2s ease-in-out;
+}
+.btn-primary {
+    background-color: #162F65;
+    color: #fff;
+    border-radius: 20px;
+}
+.btn-primary:hover {
+  background-color: #138496;
+}
+.btn-danger {
+  background-color: #dc3545;
+  color: #fff;
+}
+.btn-danger:hover {
+  background-color: #c82333;
+}
+
+/* Misc */
+.buttons {
+  margin-top: 20px;
+}
+.clearfix::after {
+  content: "";
+  display: table;
+  clear: both;
+}
+.pull-right {
+  float: right;
+}
+
+.list-group-item{
+display: block;
+  padding: 10px 15px;
+    text-decoration: none;
+    color: #162F65;
+    transition: all 0.2s ease;
+  border: 1px solid #e5e5e5;
+  font-size: 12px;
+  margin-left: 40px;
+}
+
+.list-group-item:nth-child(even) {
+   background: #f1f1f1;
+}
+
+.list-group-item:hover{
+    background: #ffc766;
+}
+
+/* Responsive Adjustments */
+@media (max-width: 768px) {
+  .col-6, .col-9, .col-12 {
+    flex: 0 0 100%;
+    max-width: 100%;
+  }
+  .pull-right {
+    float: none;
+    text-align: right;
+  }
+}
