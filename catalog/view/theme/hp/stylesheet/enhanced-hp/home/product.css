@@ -11,31 +11,31 @@
 #product-product .row {
   display: flex;
   flex-wrap: wrap;
-  gap: 30px;
-  margin-left: -11%;
+  gap: 50px;
+  margin-left: -14%;
 }
 
 /* Thumbnail Image Styling */
 .thumbnails a {
   display: flex;
   margin: 5px;
-  /* border: 1px solid #eee; */
   padding: 3px;
   transition: all 0.2s ease;
   justify-content: center;
 }
 
-.thumbnails a:hover {
-  border-color: #007bff;
+.thumbnails:hover {
+  border-color: #162F65
 }
 
 .thumbnails{
+    list-style: none;
     display: block;
     padding: 4px;
     margin-bottom: 20px;
     line-height: 1.42857143;
     background-color: #fff;
-    border: 1px solid #007bff;
+    border: 1px solid #CCC;
     border-radius: 4px;
     -webkit-transition: border .2s ease-in-out;
     -o-transition: border .2s ease-in-out;
@@ -113,110 +113,6 @@ display: flex;
   font-size: 18px;
 }
 
-/* Tabs */
-#product-product .nav-tabs {
-  margin-top: 30px;
-  border-bottom: 2px solid #eee;
-}
-#product-product .nav-tabs li a {
-  font-size: 16px;
-  padding: 10px 20px;
-  color: #007bff;
-}
-#product-product .tab-content {
-  padding: 20px 10px;
-  border: 1px solid #eee;
-  border-top: none;
-}
-
-/* Store Info Box */
-.store-rating, .store-box {
-  padding: 10px;
-  background-color: #fafafa;
-  border: 1px solid #ddd;
-  margin-top: 20px;
-}
-
-/* === ALERT MESSAGES (SUCCESS / ERROR) === */
-.alert-dismissible {
-  padding: 12px 20px;
-  border-radius: 5px;
-  margin-top: 15px;
-  position: relative;
-}
-
-.alert-success {
-  background-color: #dff0d8;
-  color: #3c763d;
-  border-left: 4px solid #3c763d;
-}
-
-.alert-danger {
-  background-color: #f2dede;
-  color: #a94442;
-  border-left: 4px solid #a94442;
-}
-
-.alert-dismissible .close {
-  position: absolute;
-  top: 10px;
-  right: 15px;
-  background: none;
-  border: none;
-  font-size: 20px;
-  color: #555;
-  cursor: pointer;
-}
-
-/* === RECURRING DESCRIPTION === */
-#recurring-description {
-  margin-top: 10px;
-  font-style: italic;
-  color: #555;
-}
-
-/* === ERROR HANDLING === */
-.text-danger {
-  color: #dc3545;
-  font-size: 14px;
-  margin-top: 5px;
-  display: block;
-}
-
-.has-error input,
-.has-error select,
-.has-error textarea {
-  border-color: #dc3545;
-  background-color: #fff6f6;
-}
-
-/* === BUTTON STATES === */
-#button-cart[disabled],
-button[disabled] {
-  opacity: 0.6;
-  cursor: not-allowed;
-}
-
-/* === DATETIME PICKERS === */
-.bootstrap-datetimepicker-widget {
-  z-index: 10000 !important;
-}
-
-.bootstrap-datetimepicker-widget table td.active,
-.bootstrap-datetimepicker-widget table td.active:hover {
-  background-color: #007bff;
-  color: #fff;
-}
-
-/* === FILE UPLOAD FIELD === */
-input[type="file"] {
-  border: 1px solid #ccc;
-  padding: 6px;
-  background: #f9f9f9;
-  width: 100%;
-  box-sizing: border-box;
-}
-
 /* === MAGNIFIC POPUP (Lightbox) === */
 .mfp-bg {
   background: rgba(0, 0, 0, 0.8);
@@ -241,21 +137,110 @@ input[type="file"] {
     font-weight: 700;
 }
 
-/* === REVIEW SECTION === */
-#review {
-  margin-top: 30px;
+/* === PRODUCT TABS === */
+.nav-tabs {
+ list-style: none;  
+  border-bottom: 1px solid #ddd;
+  margin-bottom: 20px;
 }
 
-#form-review textarea {
+.nav-tabs > li {
+  float: left;
+  margin-bottom: -1px;
+}
+
+.nav-tabs > li > a {
+  padding: 10px 20px;
+  font-weight: 500;
+  border: 1px solid transparent;
+  border-radius: 4px 4px 0 0;
+  color: #333;
+  background-color: #f9f9f9;
+}
+
+.nav-tabs > li.active > a,
+.nav-tabs > li.active > a:hover {
+  background-color: #fff;
+  border: 1px solid #ddd;
+  border-bottom-color: transparent;
+  color: #000;
+  cursor: default;
+}
+
+/* === REVIEW SECTION === */
+#review h2 {
+  font-size: 24px;
+  margin-bottom: 20px;
+  font-weight: bold;
+}
+
+#review .form-group label {
+  display: block;
+  margin-bottom: 6px;
+  font-weight: 500;
+}
+
+#review .form-group input[type="text"],
+#review .form-group textarea {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  font-size: 14px;
+  background: #fff;
+}
+
+#review .form-group textarea {
+  height: 120px;
   resize: vertical;
 }
 
-#form-review .form-group {
-  margin-bottom: 15px;
+#review .form-group .text-danger {
+  font-size: 13px;
+  color: #d9534f;
+  margin-top: 5px;
 }
 
-#form-review .btn {
-  margin-top: 10px;
+#review .form-group .note {
+  font-size: 13px;
+  color: #a94442;
+  margin-top: 5px;
+}
+
+/* === RATING STARS === */
+#review .form-group.rating label {
+  margin-right: 10px;
+  font-weight: normal;
+}
+
+#review .form-group.rating input[type="radio"] {
+  margin: 0 4px 0 10px;
+}
+
+/* === CONTINUE BUTTON === */
+#review .buttons {
+  margin-top: 20px;
+}
+
+#review .btn-primary {
+  padding: 8px 20px;
+  font-size: 15px;
+  border-radius: 4px;
+  background-color: #17a2b8;
+  border: none;
+  color: white;
+}
+
+#review .btn-primary:hover {
+  background-color: #138496;
+}
+
+.form-group .rating{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 10px;
+    justify-items: center;
 }
 
 /* === GENERAL FORM ENHANCEMENTS === */
@@ -266,14 +251,24 @@ input[type="file"] {
 
 .form-group input,
 .form-group select,
-.form-group textarea {
+.form-group textarea{
+    display: flex;
     width: 100%;
     padding: 10px;
     border-radius: 15px;
     border: 1px solid #ddd;
     font-size: 12px;
     margin-top: 10px;
-    margin-bottom: 10px;
+    margin-bottom: -15px;
+}
+
+.rating{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 10px;
+    justify-items: center;
+    font-size: 12px;
 }
 
 

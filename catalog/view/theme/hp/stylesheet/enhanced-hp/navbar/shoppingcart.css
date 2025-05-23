@@ -1,0 +1,32 @@
+.shopping{
+    width: 80%;
+    display: flex;
+}
+
+/* Buttons */
+.btn {
+  display: inline-block;
+  padding: 8px 15px;
+  font-size: 14px;
+  text-align: center;
+  text-decoration: none;
+  border: none;
+  border-radius: 3px;
+  cursor: pointer;
+  transition: background 0.2s ease-in-out;
+}
+.btn-primary {
+    background-color: #162F65;
+    color: #fff;
+    border-radius: 20px;
+}
+.btn-primary:hover {
+  background-color: #138496;
+}
+.btn-danger {
+  background-color: #dc3545;
+  color: #fff;
+}
+.btn-danger:hover {
+  background-color: #c82333;
+}

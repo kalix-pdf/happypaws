@@ -84,7 +84,7 @@
     font-size: 12px;
    
 }
-#product-category, #information-information, #error-not-found, #information-contact, #product-product, #product-search, #account-login{
+#product-category, #information-information, #error-not-found, #information-contact, #product-product, #product-search, #account-login, #product-product, #account-wishlist {
     display: flex;
     flex-direction: column;
     
