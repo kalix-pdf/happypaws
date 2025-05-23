@@ -19,7 +19,7 @@
 .thumbnails a {
   display: flex;
   margin: 5px;
-  border: 1px solid #eee;
+  /* border: 1px solid #eee; */
   padding: 3px;
   transition: all 0.2s ease;
   justify-content: center;
@@ -232,6 +232,13 @@ input[type="file"] {
   font-size: 30px;
   right: 10px;
   top: 5px;
+}
+
+.mfp-title{
+    text-align: center;
+    color: #ffff;
+    font-size: 16px;
+    font-weight: 700;
 }
 
 /* === REVIEW SECTION === */
