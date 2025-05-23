@@ -92,7 +92,7 @@
 
 #product-category .row{
     display: grid;
-    grid-template-columns: 280px 2fr;
+    grid-template-columns: 1fr 3fr;
     gap: 20px;
     width: 80%;
 }
@@ -352,3 +352,24 @@
         }
 }
  
+@media (max-width: 992px) {
+    .product-row-menu{
+       flex-wrap: wrap;
+       justify-content: space-around;
+    }
+}
+@media (max-width: 768px) {
+    .breadcrumb{
+        width: 95%;
+    }
+   #column-left{
+    display: none !important;
+   }
+   #product-category .row{
+    
+    grid-template-columns: 1fr;
+    width: 95%;
+    
+}
+
+}
