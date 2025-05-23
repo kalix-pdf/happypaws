@@ -218,3 +218,22 @@ legend {
 .btn-primary:hover {
     background-color: #0056b3;
 }
+
+.list-group-item{
+display: block;
+  padding: 10px 15px;
+    text-decoration: none;
+    color: #162F65;
+    transition: all 0.2s ease;
+  border: 1px solid #e5e5e5;
+  font-size: 12px;
+  margin-left: 40px;
+}
+
+.list-group-item:nth-child(even) {
+   background: #f1f1f1;
+}
+
+.list-group-item:hover{
+    background: #ffc766;
+}
