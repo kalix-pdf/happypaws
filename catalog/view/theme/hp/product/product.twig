@@ -1,4 +1,10 @@
 {{ header }}
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <link href="{{ 'https://fonts.googleapis.com/css2?family=Poppins+One&family=Poppins:wght@400;500;600;700&display=swap' }}" rel="stylesheet">
+  <link href="catalog\view\theme\hp\stylesheet\enhanced-hp\home\category.css" rel="stylesheet" />
+  <link href="catalog\view\theme\hp\stylesheet\enhanced-hp\home\product.css" rel="stylesheet" />
 <div id="product-product" class="container">
   <ul class="breadcrumb">
     {% for breadcrumb in breadcrumbs %}
@@ -134,8 +140,8 @@
         {% endif %}
         <div class="{{ class }}">
           <div class="btn-group">
-            <button type="button" data-toggle="tooltip" class="btn btn-default" title="{{ button_wishlist }}" onclick="wishlist.add('{{ product_id }}');"><i class="fa fa-heart"></i></button>
-            <button type="button" data-toggle="tooltip" class="btn btn-default" title="{{ button_compare }}" onclick="compare.add('{{ product_id }}');"><i class="fa fa-exchange"></i></button>
+            <button type="button" data-toggle="tooltip" class="btn btn-default" title="{{ button_wishlist }}" onclick="wishlist.add('{{ product_id }}');"><i class="fa fa-heart" style="color: #162F65"></i></button>
+            <button type="button" data-toggle="tooltip" class="btn btn-default" title="{{ button_compare }}" onclick="compare.add('{{ product_id }}');"><i class="fa fa-exchange" style="color: #162F65"></i></button>
           </div>
           <h1>{{ heading_title }}</h1>
           <ul class="list-unstyled">

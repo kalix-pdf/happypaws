@@ -1,0 +1,272 @@
+* {
+   font-family: 'Poppins', 'sans-serif';
+}
+
+#product-product h1, #product-product h2, #product-product p {
+  margin-top: 0;
+  font-family: 'Poppins', 'sans-serif';
+}
+
+/* Container layout */
+#product-product .row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 30px;
+  margin-left: -11%;
+}
+
+/* Thumbnail Image Styling */
+.thumbnails a {
+  display: flex;
+  margin: 5px;
+  border: 1px solid #eee;
+  padding: 3px;
+  transition: all 0.2s ease;
+  justify-content: center;
+}
+
+.thumbnails a:hover {
+  border-color: #007bff;
+}
+
+.thumbnails{
+    display: block;
+    padding: 4px;
+    margin-bottom: 20px;
+    line-height: 1.42857143;
+    background-color: #fff;
+    border: 1px solid #007bff;
+    border-radius: 4px;
+    -webkit-transition: border .2s ease-in-out;
+    -o-transition: border .2s ease-in-out;
+    transition: border .2s ease-in-out;
+}
+
+#product-product .thumbnails img {
+  max-width: 100%;
+  height: auto;
+  border-radius: 8px;
+  justify-items: center;
+}
+
+/* Product Title */
+#product-product h1 {
+  font-size: 28px;
+  color: #333;
+  font-weight: 600;
+}
+
+/* Product Meta (model, weight, stock) */
+#product-product ul.list-unstyled li {
+  font-size: 12px;
+  color: #555;
+}
+
+/* Price Section */
+#product-product h2 {
+  font-size: 26px;
+  color: #000;
+  margin-bottom: 10px;
+}
+
+/* Add to Cart Button */
+#product-product .btn-group {
+display: flex;
+}
+
+#product-product .btn-primary {
+    background-color: #162F65;
+    color: white;
+    font-size: 15px;
+    padding: 10px;
+    border-radius: 25px;
+    width: 100%;
+    border: none;
+}
+
+#product-product .fa-heart, .fa-exchange{
+   font-size: 20px;
+}
+
+#product-product .btn-primary:hover {
+  background-color: #0056b3;
+}
+
+/* Wishlist & Compare Buttons */
+#product-product .btn-default {
+  border: 1px solid #ccc;
+  background: #ffc766;
+  color: #333;
+  border-radius: 5px;
+  width: 40px;
+  height: 40px;
+}
+
+#product-product .btn-default:hover {
+  background: #f9f9f9;
+}
+
+/* Star Rating */
+#product-product .fa-star,
+#product-product .fa-star-o {
+  color: #f0ad4e;
+  font-size: 18px;
+}
+
+/* Tabs */
+#product-product .nav-tabs {
+  margin-top: 30px;
+  border-bottom: 2px solid #eee;
+}
+#product-product .nav-tabs li a {
+  font-size: 16px;
+  padding: 10px 20px;
+  color: #007bff;
+}
+#product-product .tab-content {
+  padding: 20px 10px;
+  border: 1px solid #eee;
+  border-top: none;
+}
+
+/* Store Info Box */
+.store-rating, .store-box {
+  padding: 10px;
+  background-color: #fafafa;
+  border: 1px solid #ddd;
+  margin-top: 20px;
+}
+
+/* === ALERT MESSAGES (SUCCESS / ERROR) === */
+.alert-dismissible {
+  padding: 12px 20px;
+  border-radius: 5px;
+  margin-top: 15px;
+  position: relative;
+}
+
+.alert-success {
+  background-color: #dff0d8;
+  color: #3c763d;
+  border-left: 4px solid #3c763d;
+}
+
+.alert-danger {
+  background-color: #f2dede;
+  color: #a94442;
+  border-left: 4px solid #a94442;
+}
+
+.alert-dismissible .close {
+  position: absolute;
+  top: 10px;
+  right: 15px;
+  background: none;
+  border: none;
+  font-size: 20px;
+  color: #555;
+  cursor: pointer;
+}
+
+/* === RECURRING DESCRIPTION === */
+#recurring-description {
+  margin-top: 10px;
+  font-style: italic;
+  color: #555;
+}
+
+/* === ERROR HANDLING === */
+.text-danger {
+  color: #dc3545;
+  font-size: 14px;
+  margin-top: 5px;
+  display: block;
+}
+
+.has-error input,
+.has-error select,
+.has-error textarea {
+  border-color: #dc3545;
+  background-color: #fff6f6;
+}
+
+/* === BUTTON STATES === */
+#button-cart[disabled],
+button[disabled] {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+/* === DATETIME PICKERS === */
+.bootstrap-datetimepicker-widget {
+  z-index: 10000 !important;
+}
+
+.bootstrap-datetimepicker-widget table td.active,
+.bootstrap-datetimepicker-widget table td.active:hover {
+  background-color: #007bff;
+  color: #fff;
+}
+
+/* === FILE UPLOAD FIELD === */
+input[type="file"] {
+  border: 1px solid #ccc;
+  padding: 6px;
+  background: #f9f9f9;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+/* === MAGNIFIC POPUP (Lightbox) === */
+.mfp-bg {
+  background: rgba(0, 0, 0, 0.8);
+}
+
+.mfp-content img {
+  max-width: 100%;
+  border-radius: 8px;
+}
+
+.mfp-close {
+  color: #fff;
+  font-size: 30px;
+  right: 10px;
+  top: 5px;
+}
+
+/* === REVIEW SECTION === */
+#review {
+  margin-top: 30px;
+}
+
+#form-review textarea {
+  resize: vertical;
+}
+
+#form-review .form-group {
+  margin-bottom: 15px;
+}
+
+#form-review .btn {
+  margin-top: 10px;
+}
+
+/* === GENERAL FORM ENHANCEMENTS === */
+.control-label{
+    font-size: 14px;
+    font-weight: bold;
+}
+
+.form-group input,
+.form-group select,
+.form-group textarea {
+    width: 100%;
+    padding: 10px;
+    border-radius: 15px;
+    border: 1px solid #ddd;
+    font-size: 12px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+
