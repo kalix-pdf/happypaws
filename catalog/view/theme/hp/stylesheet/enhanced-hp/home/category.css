@@ -34,7 +34,6 @@
 	}
     
 }
-
 .breadcrumb li::after{
     background: #ebebeb;
     content: '';
@@ -85,7 +84,7 @@
     font-size: 12px;
    
 }
-#product-category, #product-product, #product-search{
+#product-category, #information-information, #information-contact, #product-product, #product-search{
     display: flex;
     flex-direction: column;
     
