@@ -1,4 +1,4 @@
- .breadcrumb {
+.breadcrumb {
     display: flex;
     list-style: none;
     align-items: center;
@@ -11,7 +11,7 @@
     overflow: hidden;
     /* box-shadow: 0 1px 2px rgba(0, 0, 0, 0.2); */
 }
- .breadcrumb li{
+.breadcrumb li{
     /* background: #f6c96d; */
     position: relative;
     display: inline-block;
@@ -38,7 +38,7 @@
     
 }
 
- .breadcrumb li::after{
+.breadcrumb li::after{
     background: #ebebeb;
     content: '';
 		position: absolute;
@@ -51,7 +51,7 @@
         transition: all 0.2s ease;
    
 }
- .breadcrumb li::before{
+.breadcrumb li::before{
     background: #ebebeb;
     content: '';
 		position: absolute;
@@ -64,7 +64,7 @@
         transition: all 0.2s ease;
    
 }
- .breadcrumb li:first-child a::before{
+.breadcrumb li:first-child a::before{
     background: #ebebeb;
     content: '';
         position: absolute;
@@ -74,11 +74,11 @@
         z-index: -1;   
         transition: all 0.2s ease;
 }
- .breadcrumb li:first-child:hover a::before{
+.breadcrumb li:first-child:hover a::before{
     background: #f6c96d;
     
 }
- .breadcrumb li a{
+.breadcrumb li a{
     padding: 10px ;
     display: block;
     position: relative;
@@ -93,7 +93,6 @@
     flex-direction: column;
     
 }
-
 
 #product-category .row{
     display: grid;
