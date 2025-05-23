@@ -154,6 +154,7 @@
   width: 60%;
   position: relative;
   overflow: hidden !important;
+  padding-top: 5px !important;
 }
 
 .module-title {
