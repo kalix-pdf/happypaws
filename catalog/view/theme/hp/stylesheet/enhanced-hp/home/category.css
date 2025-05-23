@@ -84,7 +84,7 @@
     font-size: 12px;
    
 }
-#product-category, #information-information, #information-contact, #product-product, #product-search, #account-login{
+#product-category, #information-information, #error-not-found, #information-contact, #product-product, #product-search, #account-login{
     display: flex;
     flex-direction: column;
     
@@ -232,7 +232,6 @@
                border: 1px solid #e0e0e0;
                font-size: 15px;
                display: flex;
-               flex-wrap: ;
             }
             & label, select{
                border: none;
