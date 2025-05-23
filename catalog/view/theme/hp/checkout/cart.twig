@@ -5,7 +5,7 @@
   <link href="{{ 'https://fonts.googleapis.com/css2?family=Poppins+One&family=Poppins:wght@400;500;600;700&display=swap' }}" rel="stylesheet">
   <link href="catalog\view\theme\hp\stylesheet\enhanced-hp\home\category.css" rel="stylesheet" />
   <link href="catalog\view\theme\hp\stylesheet\enhanced-hp\navbar\shoppingcart.css" rel="stylesheet" />
-<div id="checkout-cart" class="container">
+<div id="checkout-cart" class="container-cart">
   <ul class="breadcrumb">
     {% for breadcrumb in breadcrumbs %}
     <li><a href="{{ breadcrumb.href }}">{{ breadcrumb.text }}</a></li>
@@ -26,7 +26,7 @@
     <button type="button" class="close" data-dismiss="alert">&times;</button>
   </div>
   {% endif %}
-  <div class="row">{{ column_left }}
+  <div class="row shopping">{{ column_left }}
     {% if column_left and column_right %}
     {% set class = 'col-sm-6' %}
     {% elseif column_left or column_right %}
