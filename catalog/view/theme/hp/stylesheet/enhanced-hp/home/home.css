@@ -4,6 +4,10 @@
     box-sizing: border-box;
 }
 
+body {
+    background-color: #F2F3F7FA;
+}
+
 #content {
     width: 100%;
 }
@@ -132,6 +136,7 @@ hr {
     border-radius: 15px;
     padding: 5px;
     margin-bottom: 20px;
+    align-items: center;
 }
 
 #menu .nav.navbar-nav>li {

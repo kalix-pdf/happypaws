@@ -34,7 +34,6 @@
 	}
     
 }
-
 .breadcrumb li::after{
     background: #ebebeb;
     content: '';
@@ -81,11 +80,11 @@
     position: relative;
     z-index: 2;
     text-decoration: none;
-    color: #000;
+    color: #162F65;
     font-size: 12px;
    
 }
-#product-category, #product-product, #product-search{
+#product-category, #information-information, #information-contact, #product-product, #product-search{
     display: flex;
     flex-direction: column;
     
