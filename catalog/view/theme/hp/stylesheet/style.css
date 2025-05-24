@@ -5,13 +5,6 @@
     font-family: 'Poppins';
 }
 
-<<<<<<< HEAD
-.dropdown {
-  position: relative;
-  display: inline-block;
-}
-
-=======
 
 #top ul {
     display: flex;
@@ -33,7 +26,6 @@
     text-decoration: none;
     color: black;
 } 
->>>>>>> rome
 
 .dropdown-link {
   /* display: flex; */
