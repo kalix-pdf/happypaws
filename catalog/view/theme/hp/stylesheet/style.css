@@ -5,14 +5,38 @@
     font-family: 'Poppins';
 }
 
+<<<<<<< HEAD
 .dropdown {
   position: relative;
   display: inline-block;
 }
 
+=======
+
+#top ul {
+    display: flex;
+    justify-content: space-around;
+}
+/* Container dropdown */
+.dropdown {
+  position: relative;
+  display: inline-block;
+} 
+
+.list-inline {
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    list-style: none;
+}
+.list-inline a {
+    text-decoration: none;
+    color: black;
+} 
+>>>>>>> rome
 
 .dropdown-link {
-  display: flex;
+  /* display: flex; */
   align-items: center;
   gap: 5px;
   padding: 10px;
@@ -48,3 +72,13 @@
 .dropdown-content li a:hover {
   background-color: #f0f0f0;
 }
+
+.about-us {
+    color: #162F65;
+}
+
+.contact{
+    color: #fff;
+    margin-bottom: 10px;
+}
+

@@ -4,6 +4,10 @@
     box-sizing: border-box;
 }
 
+body {
+    background-color: #F2F3F7FA;
+}
+
 #content {
     width: 100%;
 }
@@ -135,7 +139,12 @@ hr {
     background: #162f65;
     border-radius: 15px;
     padding: 5px;
+<<<<<<< HEAD
     margin-bottom: 10px;
+=======
+    margin-bottom: 20px;
+    align-items: center;
+>>>>>>> rome
 }
 
 #menu .navbar-nav>li {
