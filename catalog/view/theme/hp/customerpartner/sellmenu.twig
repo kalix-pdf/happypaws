@@ -15,20 +15,6 @@
         display:block;
         text-align :left;
     }
-    .dropdown-menu {
-        display: none;
-        position: absolute;
-        background-color: #fff;
-        min-width: 160px;
-        box-shadow: 0 8px 16px rgba(0,0,0,0.2);
-        z-index: 999;
-        padding: 0;
-        margin: 0;
-        list-style: none;
-    }
-    .dropdown:hover .dropdown-menu {
-        display: block;
-    }
     .dropdown-menu li a {
         display: block;
         padding: 10px 16px;
@@ -38,7 +24,7 @@
 
     </style>
 </head>
-    <li class="dropdown"><a href="{{ menusell }}" title="{{ text_sell_header }}" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-users"></i> <span class="hidden-xs hidden-sm hidden-md">{{ text_sell_header }}</span> <span class="caret"></span></a>
+    <li class="dropdown"><a href="{{ menusell }}" title="{{ text_sell_header }}" class="dropdown-toggle" data-bs-toggle="dropdown"><i class="fa fa-users"></i> <span class="hidden-xs hidden-sm hidden-md">{{ text_sell_header }}</span> <span class="caret"></span></a>
         <ul class="dropdown-menu dropdown-menu-right">
           {% if logged and chkIsPartner and marketplace_seller_mode is defined and marketplace_seller_mode %}
             {% if marketplace_allowed_account_menu is defined and marketplace_allowed_account_menu and 'profile' in marketplace_allowed_account_menu %}
@@ -76,7 +62,7 @@
                 <li><a href="{{ mp_add_shipping_mod }}">{{ text_wkshipping }}</a></li>
             {% endif %}
             {% if marketplace_allowed_account_menu is defined and marketplace_allowed_account_menu and 'asktoadmin' in marketplace_allowed_account_menu %}
-                <li><a id="ask-to-admin" data-toggle="modal" data-target="#myModal-seller-mail">{{ text_ask_admin }}</a></li>
+                <li><a id="ask-to-admin" data-bs-toggle="modal" data-bs-target="#myModal-seller-mail">{{ text_ask_admin }}</a></li>
             {% endif %}
             {% if marketplace_allowed_account_menu is defined and marketplace_allowed_account_menu and 'information' in marketplace_allowed_account_menu %}
                 <li><a href="{{ mp_information }}">{{ text_information }}</a></li>
@@ -90,7 +76,7 @@
             {% endif %}
             <li id="wk-notify">
             
-                <a href="javascript:;" id="notification-li" data-toggle="modal" data-target="#myModal-notification">{{ text_notifications }}
+                <a href="javascript:;" id="notification-li" data-bs-toggle="modal" data-bs-target="#myModal-notification">{{ text_notifications }}
                 {% if notification_total is defined and notification_total > 0 %}
                     <span class="badge">{{ notification_total }}</span>
                 {% endif %}

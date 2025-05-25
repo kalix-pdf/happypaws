@@ -1,15 +1,16 @@
-<meta charset="UTF-8" />
+{# <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <link href="{{ 'https://fonts.googleapis.com/css2?family=Poppins+One&family=Poppins:wght@400;500;600;700&display=swap' }}" rel="stylesheet">
   <link href="catalog\view\theme\hp\stylesheet\enhanced-hp\home\category.css" rel="stylesheet" />
-  <link href="catalog\view\theme\hp\stylesheet\enhanced-hp\navbar\shoppingcart.css" rel="stylesheet" />
-<div id="cart" class="cart-container">
-  <button type="button" class="cart-button" onclick="toggleCartDropdown()">
+  <link href="catalog\view\theme\hp\stylesheet\enhanced-hp\navbar\shoppingcart.css" rel="stylesheet" /> #}
+
+<div id="cart" class="cart-container position-relative">
+  <button type="button" class="btn btn-warning cart-button" onclick="toggleCartDropdown()">
     <i class="fa fa-shopping-cart"></i>
     <span id="cart-total">{{ text_items }}</span>
   </button>
-  <div id="cart-dropdown" class="cart-dropdown">
+  <div id="cart-dropdown" class="cart-dropdown d-none">
     {% if products or vouchers %}
     <div class="cart-items">
       <table class="cart-table">
@@ -37,7 +38,7 @@
           <td class="price">{{ product.total }}</td>
           <td class="remove">
             <button onclick="cart.remove('{{ product.cart_id }}');">
-              <i class="fa fa-times"></i>
+              <i class="fa fa-phone"></i>
             </button>
           </td>
         </tr>
@@ -79,15 +80,15 @@
 
 <script>
   function toggleCartDropdown() {
-    var dropdown = document.getElementById('cart-dropdown');
-    dropdown.classList.toggle('active');
+    const dropdown = document.getElementById('cart-dropdown');
+    dropdown.classList.toggle('d-none');
   }
 
-  // Optional: Close the dropdown when clicking outside
   document.addEventListener('click', function(event) {
-    var cart = document.getElementById('cart');
+    const cart = document.getElementById('cart');
+    const dropdown = document.getElementById('cart-dropdown');
     if (!cart.contains(event.target)) {
-      document.getElementById('cart-dropdown').classList.remove('active');
+      dropdown.classList.add('d-none');
     }
   });
 </script>

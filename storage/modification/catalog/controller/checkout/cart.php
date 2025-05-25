@@ -356,6 +356,7 @@ class ControllerCheckoutCart extends Controller {
 		}
 
 		$this->load->model('catalog/product');
+		$seller_id = $this->customer->getId();
 
 		$product_info = $this->model_catalog_product->getProduct($product_id);
 
@@ -372,7 +373,7 @@ class ControllerCheckoutCart extends Controller {
 				$option = array();
 			}
 
-			$product_options = $this->model_catalog_product->getProductOptions($this->request->post['product_id']);
+			$product_options = $this->model_catalog_product->getProductOptions($this->request->post['product_id'], $seller_id);
 
 			foreach ($product_options as $product_option) {
 				if ($product_option['required'] && empty($option[$product_option['product_option_id']])) {

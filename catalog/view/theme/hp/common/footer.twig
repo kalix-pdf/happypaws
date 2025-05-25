@@ -1,63 +1,47 @@
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <link href="catalog\view\theme\hp\stylesheet\enhanced-hp\home\home.css" rel="stylesheet" />
-</head>
-
 <footer>
-  <div class="container-footer">
-    <div class="row-footer">
-      <div class="bold-align">
-        <img src="image\catalog\Happypaws.png" alt="Happy Paws" class="img-responsive" />
-        <h2 class="bolder-footer">Let's Get Connected</h2>
-      </div>
-      {% if informations %}
-      <div class="align-footer">
-        <h5>{{ text_information }}</h5>
-        <ul class="list-unstyled">
-          {% for information in informations %}
-          <li><a href="{{ information.href }}">{{ information.title }}</a></li>
-          {% endfor %}
-        </ul>
-      </div>
-      {% endif %}
-      <div class="align-footer">
-        <h5>{{ text_service }}</h5>
-        <ul class="list-unstyled">
-          <li><a href="{{ contact }}">{{ text_contact }}</a></li>
-          <li><a href="https://www.facebook.com/profile.php?id=61566451568161" target="_blank">Official Facebook</a>
-          </li>
-          <li><a href="mailto:inquire@happypaws.ph, hapipaws.ph@gmail.com" target="_blank">inquire@happypaws.ph</a></li>
-          <!--<li><a href="{{ return }}">{{ text_return }}</a></li>
-          <li><a href="{{ sitemap }}">{{ text_sitemap }}</a></li>-->
-        </ul>
-      </div>
-
-      <div class="align-footer">
-        <h5>{{ text_account }}</h5>
-        <ul class="list-unstyled">
-          <li><a href="{{ account }}">{{ text_account }}</a></li>
-          <li><a href="{{ order }}">{{ text_order }}</a></li>
-          <li><a href="{{ wishlist }}">{{ text_wishlist }}</a></li>
-          {# <li><a href="{{ newsletter }}">{{ text_newsletter }}</a></li> #}
-        </ul>
-      </div>
+  <div class="footer-wrapper">
+    <!-- Logo and Slogan -->
+    <div class="footer-column">
+      <img src="image/catalog/Happypaws.png" alt="Happy Paws" class="footer-logo img-fluid" />
+      <h5 class="text-white">Let's Get Connected</h5>
     </div>
-    <hr>
-    <p class="copyright">{{ powered }}</p>
-  </div>
-</footer>
-{% for style in styles %}
-<link href="{{ style.href }}" type="text/css" rel="{{ style.rel }}" media="{{ style.media }}" />
-{% endfor %}
-{% for script in scripts %}
-<script src="{{ script }}" type="text/javascript"></script>
-{% endfor %}
-<!--
-OpenCart is open source software and you are free to remove the powered by OpenCart if you want, but its generally accepted practise to make a small donation.
-Please donate via PayPal to donate@opencart.com
-//-->
-</body>
 
-</html>
+    {% if informations %}
+    <div class="footer-column">
+      <h5 class="text-white">{{ text_information }}</h5>
+      <ul>
+        {% for information in informations %}
+        <li><a href="{{ information.href }}">{{ information.title }}</a></li>
+        {% endfor %}
+      </ul>
+    </div>
+    {% endif %}
+
+    <div class="footer-column">
+      <h5 class="text-white">{{ text_service }}</h5>
+      <ul>
+        <li><a href="{{ contact }}">{{ text_contact }}</a></li>
+        <li><a href="https://www.facebook.com/profile.php?id=61566451568161" target="_blank">Official Facebook</a></li>
+        <li><a href="mailto:inquire@happypaws.ph, hapipaws.ph@gmail.com" target="_blank">inquire@happypaws.ph</a></li>
+      </ul>
+    </div>
+    <div class="footer-column">
+      <h5 class="text-white">{{ text_account }}</h5>
+      <ul>
+        <li><a href="{{ account }}">{{ text_account }}</a></li>
+        <li><a href="{{ order }}">{{ text_order }}</a></li>
+        <li><a href="{{ wishlist }}">{{ text_wishlist }}</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    {{ powered }}
+  </div>
+
+  {% for style in styles %}
+  <link href="{{ style.href }}" type="text/css" rel="{{ style.rel }}" media="{{ style.media }}" />
+  {% endfor %}
+  {% for script in scripts %}
+  <script src="{{ script }}" type="text/javascript"></script>
+  {% endfor %}
+</footer>
