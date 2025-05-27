@@ -58,7 +58,7 @@ class ControllerExtensionPaymentHitPay extends Controller {
                     'name' => $order_data['firstname'],
                     'phone' => $order_data['telephone'],
                     'reference_number' => $order_id,
-                    // 'redirect_url' => $this->url->link('checkout/success', '', true),
+                    'redirect_url' => $this->url->link('checkout/success', '', true),
                     // 'webhook' => HTTPS_CATALOG . 'index.php?route=extension/payment/hitpay/webhook'
                 );
 

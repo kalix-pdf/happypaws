@@ -1,69 +1,101 @@
+<style>
+  .card {
+    box-shadow: 0 2px 4px black;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+  }
+  .card-header {
+    background-color: #f8f9fa;
+    font-weight: bold;
+    padding: 10px 15px;
+    border-bottom: 1px solid #ddd;
+  }
+  .card-body {
+    padding: 15px;
+  }
+</style>
+
 {{ header }}
+
+<div class="custom-header-bar py-3">
+  <div class="container">
+    <div class="row align-items-center justify-content-end">
+      <div class="col-12 col-md-6 col-lg-4 search-bar">
+        <div class="search-cart d-flex justify-content-end align-items-center">
+          <div class="search flex-grow me-2">{{ search }}</div>
+          <div class="carts">{{ cart }}</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
 <form action="index.php?route=checkout/place_order" method="POST">
-<div id="checkout-checkout" class="container">
-  <ul class="breadcrumb">
-    {% for breadcrumb in breadcrumbs %}
-    <li><a href="{{ breadcrumb.href }}">{{ breadcrumb.text }}</a></li>
-    {% endfor %}
-  </ul>
+  <nav id="checkout-checkout" class="container mb-4 mt-4" style="--bs-breadcrumb-divider: '>';" aria-label="breadcrumb">
+    <ol class="breadcrumb">
+      {% for breadcrumb in breadcrumbs %}
+      <li class="breadcrumb-item">
+        <a class="text-decoration-none text-black" href="{{ breadcrumb.href }}">{{ breadcrumb.text }}</a>
+      </li>
+      {% endfor %}
+    </ol>
+  </nav>
+
   {% if error_warning %}
-  <div class="alert alert-danger alert-dismissible"><i class="fa fa-exclamation-circle"></i> {{ error_warning }}
-    <button type="button" class="close" data-dismiss="alert">&times;</button>
+  <div class="container">
+    <div class="alert alert-danger alert-dismissible">
+      <i class="fa fa-exclamation-circle"></i> {{ error_warning }}
+      <button type="button" class="close" data-dismiss="alert">&times;</button>
+    </div>
   </div>
   {% endif %}
-    <div class="row">{{ column_left }}
-    {% if column_left and column_right %}
-      {% set class = 'col-sm-6' %}
-    {% elseif column_left or column_right %}
-      {% set class = 'col-sm-9' %}
-    {% else %}
-      {% set class = 'col-sm-12' %}
-    {% endif %}
-    <div class="{{ class }}" id="content"> {{ content_top }}
-        <h1>{{ heading_title }}</h1>
-        <div class="panel-group" id="accordion">
-            <div class="panel panel-default">
-                <div class="panel-heading">
-                    <h4 class="panel-title">Order Summary</h4>
-                </div>
-                <div class="panel-body"> 
-                  <h4 class="panel-title">Address</h4>
-                  {{ shipping_add }}
-                </div>
-                <div class="panel-body"> 
-                  <h4 class="panel-title">Shipping option</h4>
-                  {{ shipping_method }}
-                {% for prod in product_info %}
-                <div class="panel-body">
-                  <a href=""><h4 class="panel-title">{{ prod.store }}</h4></a>
-                  {% for image in images %}
-                    <img src="{{ image }}" class="img-responsive" />
-                  {% endfor %}
-                  {{ order_summary }}
-                </div>  
-                {% endfor %}
-                
-                <div class="panel-body">
-                    <h4 class="panel-title">Payment Method</h4>
-                </div>
-                <div class="panel-body">
-                    {{ payment_method }}                    
-                </div>
-                <div class="panel-heading">
-                    <h4 class="panel-title">Payment Details</h4>
-                </div>
-                <div class="panel-body"> 
-                  {{ payment_details }}
-                </div>
-            </div>
-        </div>
+
+  <div class="container px-4" id="content">
+    {{ content_top }}
+    <h2 class="mb-3">HappyPaws | {{ heading_title }}</h2>
+
+    <div class="card mb-3">
+      <div class="card-header">Shipping Address</div>
+      <div class="card-body px-4"> 
+        <h4 class="panel-title">Address</h4>
+        {{ shipping_add }}
+      </div>
     </div>
+
+    <div class="card mb-3">
+      <div class="card-header">Order Summary</div>
+      <div class="card-body px-4"> 
+        <div class="card-text">{{ order_summary }}</div>
+      </div>
     </div>
-    <div class="pull-right">
-          <button class="btn btn-primary" type="submit">Place Order</button>
+
+    <div class="card mb-3">
+      <div class="card-header">Shipping Option</div>
+      <div class="card-body px-4"> 
+        <div class="card-text">{{ shipping_method }}</div>
+      </div>
     </div>
-    </form>
-</div>
+
+    <div class="card mb-3">
+      <div class="card-header">Payment Method</div>
+      <div class="card-body px-4"> 
+        <div class="card-text">{{ payment_method }}</div>
+      </div>
+    </div>
+
+    <div class="card text-bg-light border-warning mb-3">
+      <div class="card-header">Payment Details</div>
+      <div class="card-body px-4"> 
+        <div class="card-text">{{ payment_details }}</div>
+      </div>
+      <div class="text-end px-4">
+        <button class="btn btn-primary mb-4 px-3 py-2 fs-5" type="submit">Place Order</button>
+      </div>
+    </div>
+  </div>
+</form>
+
 <script>
 {% if not logged %}
 $(document).ready(function() {
