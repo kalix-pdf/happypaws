@@ -1,14 +1,53 @@
-{% for product in products %}
-    <h4>{{ product.name }} x{{ product.quantity }} - <strong>{{ product.total }}</strong></h4>
-    {% for shipping_method in shipping_methods %}
+<div class="order-summary mb-4">
+
+  {% for product in products %}
+    <div class="row mb-2">
+      <div class="col-8">
+        <strong>{{ product.name }}</strong> × {{ product.quantity }}
+      </div>
+      <div class="col-4 text-end">
+        <strong>{{ product.total }}</strong> PHP
+      </div>
+    </div>
+  {% endfor %}
+
+  <hr />
+
+  <div class="row mb-2">
+    <div class="col-8">
+      <strong>Subtotal</strong>
+    </div>
+    <div class="col-4 text-end">
+      <strong>{{ product_total }}</strong> PHP
+    </div>
+  </div>
+
+  {% for shipping_method in shipping_methods %}
     {% if not shipping_method.error %}
-    {% for quote in shipping_method.quote %}
-        <h4>{{ quote.title }} - <strong>{{ quote.text }}</strong></h4>
-    {% endfor %}
+      {% for quote in shipping_method.quote %}
+        <div class="row mb-2">
+          <div class="col-8">
+            <strong>{{ quote.title }}</strong>
+          </div>
+          <div class="col-4 text-end">
+            <strong>{{ quote.text }}</strong>
+          </div>
+        </div>
+      {% endfor %}
     {% else %}
-    <div class="alert alert-danger alert-dismissible">{{ shipping_method.error }}</div>
+      <div class="alert alert-danger alert-dismissible">{{ shipping_method.error }}</div>
     {% endif %}
-    {% endfor %}
-     <h4>SubTotal - <strong>{{ grand_total }}</strong></h4>
-     <h4>Total - <strong>{{ grand_total }}</strong></h4>
-{% endfor %}
+  {% endfor %}
+
+  <hr />
+
+  <div class="row">
+    <div class="col-8">
+      <strong>Total</strong>
+    </div>
+    <div class="col-4 text-end">
+      <strong>{{ grand_total }}</strong> PHP
+    </div>
+  </div>
+
+</div>

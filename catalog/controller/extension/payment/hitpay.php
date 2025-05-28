@@ -6,8 +6,11 @@ class ControllerExtensionPaymentHitPay extends Controller {
         $api_url = 'https://api.hit-pay.com/v1/payment-requests';
 
         $this->load->model('account/customer');
+        $this->load->model('checkout/order');
+
         $order_id = $this->session->data['order_id'];
         $order_data = array();
+        $total = 0;
 
         if ($this->customer->isLogged()) {
             $customer_info = $this->model_account_customer->getCustomer($this->customer->getId());
@@ -23,6 +26,7 @@ class ControllerExtensionPaymentHitPay extends Controller {
         foreach ($this->cart->getProducts() as $product) {
 				$option_data = array();
 
+                $total += $product['total'];
 				foreach ($product['option'] as $option) {
 					$option_data[] = array(
 						'product_option_id'       => $option['product_option_id'],
@@ -44,7 +48,6 @@ class ControllerExtensionPaymentHitPay extends Controller {
 					'quantity'   => $product['quantity'],
 					'subtract'   => $product['subtract'],
 					'price'      => $product['price'],
-					'total'      => $product['total'],
 					'tax'        => $this->tax->getTax($product['price'], $product['tax_class_id']),
 					'reward'     => $product['reward']
 				);
@@ -52,16 +55,20 @@ class ControllerExtensionPaymentHitPay extends Controller {
             }
 
                 $params = array(
-                    'amount' => $product['total'] + 39,
+                    'amount' => number_format($total + 39, 2, '.', ''),
                     'currency' => 'PHP',
                     'email' => $order_data['email'],
                     'name' => $order_data['firstname'],
                     'phone' => $order_data['telephone'],
                     'reference_number' => $order_id,
-                    'redirect_url' => $this->url->link('checkout/success', '', true),
-                    // 'webhook' => HTTPS_CATALOG . 'index.php?route=extension/payment/hitpay/webhook'
-                );
+                    'redirect_url' => $this->url->link('checkout/success'),
+                    // 'redirect_url' => $this->url->link('extension/payment/hitpay/redirect', 'order_id=' . $order_id, true),
+                    // 'webhook' => 'https://happypaws.ph/hp/catalog/controller/extension/payment/hitpay/webhook.php'
+                ); 
 
+                // https://happypaws.ph/hp/index.php?route=extension/payment/hitpay/webhook
+                // change this also on hitpay dashboard!
+                
                 $curl = curl_init($api_url);
                 curl_setopt($curl, CURLOPT_HTTPHEADER, array(
                     'X-BUSINESS-API-KEY:' . $api_key
@@ -74,8 +81,9 @@ class ControllerExtensionPaymentHitPay extends Controller {
                 $result = json_decode($response, true);
 
                 if (isset($result['url'])) {
-                    $this->log->write($result);
-                    // $this->response->redirect($result['url']);
+                    // $this->log->write($result);
+                    $this->model_checkout_order->addPaymentUrl($order_id, $result['url']);
+                    $this->response->redirect($result['url']);
                 } else {
                     $this->session->data['error'] = 'Could not create payment link!';
                     $this->log->write($response, $result);
@@ -85,32 +93,6 @@ class ControllerExtensionPaymentHitPay extends Controller {
         
     }
 
-    public function webhook() {
-        $json = file_get_contents('php://input');
-        $data = json_decode($json, true);
-
-        file_put_contents(DIR_LOGS . 'hitpay_webhook.log', print_r($data, true));
     
-        http_response_code(200); 
-        echo 'Webhook received';
-
-        // if (isset($data['status']) && $data['status'] === 'completed' && isset($data['reference_number'])) {
-        //     $order_id = $data['reference_number']; 
-        //     $this->load->model('checkout/order');
-
-        //     $order_info = $this->model_checkout_order->getOrder($order_id);
-        //     if ($order_info) {
-        //         $this->model_checkout_order->addOrderHistory($order_id, $this->config->get('payment_hitpay_order_status_id'), 'Paid via HitPay');
-        //         http_response_code(200); 
-        //         echo 'Webhook received';
-        //     } else {
-        //         http_response_code(404);
-        //         echo 'Order not found';
-        //     }
-        // } else {
-        //     http_response_code(400);
-        //     echo 'Invalid webhook';
-        // }
-    }
 }
 ?>

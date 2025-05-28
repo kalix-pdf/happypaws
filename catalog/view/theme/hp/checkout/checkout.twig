@@ -30,8 +30,6 @@
   </div>
 </div>
 
-
-<form action="index.php?route=checkout/place_order" method="POST">
   <nav id="checkout-checkout" class="container mb-4 mt-4" style="--bs-breadcrumb-divider: '>';" aria-label="breadcrumb">
     <ol class="breadcrumb">
       {% for breadcrumb in breadcrumbs %}
@@ -42,6 +40,7 @@
     </ol>
   </nav>
 
+<form action="index.php?route=checkout/place_order" method="POST">
   {% if error_warning %}
   <div class="container">
     <div class="alert alert-danger alert-dismissible">
@@ -52,7 +51,6 @@
   {% endif %}
 
   <div class="container px-4" id="content">
-    {{ content_top }}
     <h2 class="mb-3">HappyPaws | {{ heading_title }}</h2>
 
     <div class="card mb-3">
@@ -71,29 +69,30 @@
     </div>
 
     <div class="card mb-3">
-      <div class="card-header">Shipping Option</div>
-      <div class="card-body px-4"> 
-        <div class="card-text">{{ shipping_method }}</div>
+      <div class="card-header">Order Summary</div>
+        <div class="card-body px-4"> 
+          <div class="card-text">{{ shipping_method }}</div>
       </div>
     </div>
+    
+      <div class="card mb-3">
+        <div class="card-header">Payment Method</div>
+        <div class="card-body px-4"> 
+          <div class="card-text">{{ payment_method }}</div>
+        </div>
+      </div>
 
-    <div class="card mb-3">
-      <div class="card-header">Payment Method</div>
-      <div class="card-body px-4"> 
-        <div class="card-text">{{ payment_method }}</div>
+      <div class="card text-bg-light border-warning mb-3">
+        <div class="card-header">Payment Details</div>
+        <div class="card-body px-4"> 
+          <div class="card-text">{{ payment_details }}</div>
+        </div>
+        <div class="text-end px-4">
+          <button class="btn btn-primary mb-4 px-3 py-2 fs-5" type="submit">Place Order</button>
+        </div>
       </div>
-    </div>
 
-    <div class="card text-bg-light border-warning mb-3">
-      <div class="card-header">Payment Details</div>
-      <div class="card-body px-4"> 
-        <div class="card-text">{{ payment_details }}</div>
-      </div>
-      <div class="text-end px-4">
-        <button class="btn btn-primary mb-4 px-3 py-2 fs-5" type="submit">Place Order</button>
-      </div>
     </div>
-  </div>
 </form>
 
 <script>

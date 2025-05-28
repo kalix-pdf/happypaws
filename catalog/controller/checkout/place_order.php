@@ -18,9 +18,8 @@ class ControllerCheckoutPlaceOrder extends Controller {
 			$order_data = array();
             $shipping_address = $this->model_account_address->getAddress($address_id);
 
-			//invoice
-			$order_data['invoice_prefix'] = 'INV-2024-00';
-
+			$total = 0;
+			
 			if ($this->customer->isLogged()) {
 				$customer_info = $this->model_account_customer->getCustomer($this->customer->getId());
 
@@ -79,6 +78,7 @@ class ControllerCheckoutPlaceOrder extends Controller {
             foreach ($this->cart->getProducts() as $product) {
 				$option_data = array();
 
+				$total += $product['total'];
 				foreach ($product['option'] as $option) {
 					$option_data[] = array(
 						'product_option_id'       => $option['product_option_id'],
@@ -100,10 +100,10 @@ class ControllerCheckoutPlaceOrder extends Controller {
 					'quantity'   => $product['quantity'],
 					'subtract'   => $product['subtract'],
 					'price'      => $product['price'],
-					'total'      => $product['total'],
 					'tax'        => $this->tax->getTax($product['price'], $product['tax_class_id']),
 					'reward'     => $product['reward']
 				);
+				
 			}
 
 			$order_data['comment'] = '';
@@ -129,8 +129,9 @@ class ControllerCheckoutPlaceOrder extends Controller {
 			$order_data['payment_code'] = $payment_method;
 			$order_data['shipping_method'] = $shipping_method;
 			$order_data['shipping_code'] = $shipping_method;
-			$order_data['total'] = $product['total'] + 39;
+			$order_data['total'] = $total + 39;
 			
+			$order_data['payment_status'] = 'pending';
 
 			$order_data['totals'] = array(
 				array(
@@ -140,18 +141,17 @@ class ControllerCheckoutPlaceOrder extends Controller {
 					'sort_order' => 9
 				)
 			);		
-
-			// $order_status_id = 1;
-			// $this->session->data['order_id'] =  $this->model_checkout_order->addOrder($order_data);
+			$order_status_id = 1;
+			$this->session->data['order_id'] =  $this->model_checkout_order->addOrder($order_data);
 			
-			// $order_info = $this->model_checkout_order->getOrder($this->session->data['order_id']);
+			$order_info = $this->model_checkout_order->getOrder($this->session->data['order_id']);
 	
-			// $this->model_account_customerpartnerorder->customerpartner($order_info, $order_status_id, '', $order_status_id);
-			// $this->load->controller('extension/mailtoseller', [
-			// 	'order_id' => $this->session->data['order_id'],
-			// 	'order_status_id' => $order_status_id
-			// ]);
-			
+			$this->model_account_customerpartnerorder->customerpartner($order_info, $order_status_id, '', $order_status_id);
+			$this->load->controller('extension/mailtoseller', [
+				'order_id' => $this->session->data['order_id'],
+				'order_status_id' => $order_status_id
+			]);
+			 
 			if ($payment_method == 'xendit') {
 				$this->response->redirect($this->url->link('extension/payment/xendit'));
 			}

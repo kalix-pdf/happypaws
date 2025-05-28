@@ -150,7 +150,7 @@ class ControllerCheckoutCheckout extends Controller {
 		$this->document->addScript('catalog/view/javascript/jquery/datetimepicker/moment/moment-with-locales.min.js');
 		$this->document->addScript('catalog/view/javascript/jquery/datetimepicker/bootstrap-datetimepicker.min.js');
 		$this->document->addStyle('catalog/view/javascript/jquery/datetimepicker/bootstrap-datetimepicker.min.css');
-
+	
 		// Required by klarna
 		if ($this->config->get('payment_klarna_account') || $this->config->get('payment_klarna_invoice')) {
 			$this->document->addScript('http://cdn.klarna.com/public/kitt/toc/v1.0/js/klarna.terms.min.js');
@@ -208,6 +208,9 @@ class ControllerCheckoutCheckout extends Controller {
 		$data['shipping_add'] = $this->load->controller('checkout/shipping_address');
 		$data['payment_method'] = $this->load->controller('checkout/payment_method');
 		$data['payment_details'] = $this->load->controller('checkout/payment_details');
+
+		$data['cart'] = $this->load->controller('common/cart');
+		$data['search'] = $this->load->controller('common/search');
 
 		$data['column_left'] = $this->load->controller('common/column_left');
 		$data['column_right'] = $this->load->controller('common/column_right');

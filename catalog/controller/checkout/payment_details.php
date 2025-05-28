@@ -2,9 +2,12 @@
 class ControllerCheckoutPaymentDetails extends Controller {
     public function index()
     {
+        $product_total = 0;
+
         foreach ($this->cart->getProducts() as $product) {
             $option_data = array();
 
+            $product_total += (float) preg_replace('/[^0-9.]/', '', $product['total']);
             foreach ($product['option'] as $option) {
                 $option_data[] = array(
                     'product_option_id'       => $option['product_option_id'],
@@ -81,9 +84,9 @@ class ControllerCheckoutPaymentDetails extends Controller {
 			$data['code'] = '';
 		}
 		
-        $product_total = (float) preg_replace('/[^0-9.]/', '', $product['total']);
         $shipping_total = (float) preg_replace('/[^0-9.]/', '', $quote['quote']['flashexpress']['cost']);
         $data['grand_total'] = $product_total + $shipping_total;        
+        $data['product_total'] = $product_total;
 
         return $this->load->view('checkout/payment_details', $data);
     }

@@ -10,7 +10,11 @@ class ControllerCommonHome extends Controller {
 		}
 
 		$data['sellmenu'] = $this->load->controller('extension/module/marketplace/sellmenu');
- 
+		$data['menu'] = $this->load->controller('common/menu');
+		$data['shopping_cart'] = $this->url->link('checkout/cart');
+		$data['cart'] = $this->load->controller('common/cart');
+		$data['search'] = $this->load->controller('common/search');
+
 		$data['column_left'] = $this->load->controller('common/column_left');
 		$data['column_right'] = $this->load->controller('common/column_right');
 		$data['content_top'] = $this->load->controller('common/content_top');

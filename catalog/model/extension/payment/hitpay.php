@@ -17,7 +17,7 @@ class ModelExtensionPaymentHitpay extends Model {
 		if ($status) {
 			$method_data = array(
 				'code'       => 'hitpay',
-				'title'      => 'hitpay',
+				'title'      => 'Online Payment (E-Wallets, Banks)',
 				'terms'      => '',
 				'sort_order' => 0,
 			);
