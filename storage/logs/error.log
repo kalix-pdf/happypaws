@@ -14,3 +14,6 @@
 2025-05-21 16:54:34 - PHP Warning:  rmdir(C:/xampp/htdocs/hp/storage/modification/admin/language/en-gb): Directory not empty in C:\xampp\htdocs\hp\admin\controller\marketplace\modification.php on line 105
 2025-05-21 16:54:34 - PHP Warning:  rmdir(C:/xampp/htdocs/hp/storage/modification/admin/language): Directory not empty in C:\xampp\htdocs\hp\admin\controller\marketplace\modification.php on line 105
 2025-05-21 16:54:34 - PHP Warning:  rmdir(C:/xampp/htdocs/hp/storage/modification/admin): Directory not empty in C:\xampp\htdocs\hp\admin\controller\marketplace\modification.php on line 105
+2025-05-28 15:14:47 - PHP Warning:  Undefined array key "invoice_prefix" in D:\xampp\htdocs\hp\storage\modification\catalog\model\checkout\order.php on line 6
+2025-05-28 15:14:47 - PHP Warning:  Undefined array key "total" in D:\xampp\htdocs\hp\storage\modification\catalog\model\checkout\order.php on line 15
+2025-05-28 15:14:52 - Email was sent

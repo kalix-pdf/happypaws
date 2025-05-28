@@ -94,17 +94,16 @@ class ControllerCommonHeader extends Controller {
 		$data['login'] = $this->url->link('account/login', '', true);
 		$data['order'] = $this->url->link('account/order', '', true);
 		$data['transaction'] = $this->url->link('account/transaction', '', true);
-		$data['download'] = $this->url->link('account/download', '', true);
 		$data['logout'] = $this->url->link('account/logout', '', true);
 		$data['shopping_cart'] = $this->url->link('checkout/cart');
 		$data['checkout'] = $this->url->link('checkout/checkout', '', true);
 		$data['contact'] = $this->url->link('information/contact');
 		$data['telephone'] = $this->config->get('config_telephone');
+
+		$data['edit'] = $this->url->link('account/edit');
 		
 		$data['sellmenu'] = $this->load->controller('extension/module/marketplace/sellmenu');
 
-		$data['language'] = $this->load->controller('common/language');
-		$data['currency'] = $this->load->controller('common/currency');
 		$data['search'] = $this->load->controller('common/search');
 		$data['cart'] = $this->load->controller('common/cart');
 		$data['menu'] = $this->load->controller('common/menu');

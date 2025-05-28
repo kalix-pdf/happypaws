@@ -1,27 +1,31 @@
 {{ header }}
 <div id="common-success" class="container">
-  <ul class="breadcrumb">
-    {% for breadcrumb in breadcrumbs %}
-    <li><a href="{{ breadcrumb.href }}">{{ breadcrumb.text }}</a></li>
-    {% endfor %}
-  </ul>
-  <div class="row">{{ column_left }}
-    {% if column_left and column_right %}
-    {% set class = 'col-sm-6' %}
-    {% elseif column_left or column_right %}
-    {% set class = 'col-sm-9' %}
-    {% else %}
-    {% set class = 'col-sm-12' %}
-    {% endif %}
-    <div id="content" class="{{ class }}">{{ content_top }}
+  <nav id="checkout-checkout" class="container mb-4 mt-4" style="--bs-breadcrumb-divider: '>';" aria-label="breadcrumb">
+    <ol class="breadcrumb">
+      {% for breadcrumb in breadcrumbs %}
+        <li class="breadcrumb-item">
+          <a class="text-decoration-none text-black" href="{{ breadcrumb.href }}">{{ breadcrumb.text }}</a>
+        </li>
+      {% endfor %}
+    </ol>
+  </nav>
+  <div class="text-center"><img class="img-fluid" src="{{ picture }}" style="height: 200px;"></div>
+
+  <div class="row">
+    <div id="content" class="text-center container">
       <h1>{{ heading_title }}</h1>
+    </div>
+    <div class="container px-4">
       <div class="alert alert-info alert-dismissible"><i class="fa fa-exclamation-circle">
         </i><strong> You can track your orders at <a href="index.php?route=account/account">View Orders</a></strong></div>
+      <div class="container px-4">
       {{ text_message }}
+      
       <div class="buttons">
-        <div class="pull-right"><a href="{{ continue }}" class="btn btn-primary">{{ button_continue }}</a></div>
+        <div class="mb-5"><a href="{{ continue }}" class="btn btn-primary">{{ button_continue }}</a></div>
       </div>
-      {{ content_bottom }}</div>
-    {{ column_right }}</div>
+      </div>
+    </div>
+    </div>
 </div>
 {{ footer }}

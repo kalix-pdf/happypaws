@@ -45,12 +45,13 @@ class ControllerCheckoutSuccess extends Controller {
 		);
 
 		if ($this->customer->isLogged()) {
-			$data['text_message'] = sprintf($this->language->get('text_customer'), $this->url->link('account/account', '', true), $this->url->link('account/order', '', true), $this->url->link('account/download', '', true), $this->url->link('information/contact'));
+			$data['text_message'] = sprintf($this->language->get('text_customer'), $this->url->link('account/account', '', true), $this->url->link('account/order', '', true), $this->url->link('information/contact'));
 		} else {
 			$data['text_message'] = sprintf($this->language->get('text_guest'), $this->url->link('information/contact'));
 		}
 
 		$data['continue'] = $this->url->link('common/home');
+		$data['picture'] = HTTP_SERVER . 'image/order_placed.gif';
 
 		$data['column_left'] = $this->load->controller('common/column_left');
 		$data['column_right'] = $this->load->controller('common/column_right');
