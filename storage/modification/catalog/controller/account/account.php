@@ -106,6 +106,7 @@ class ControllerAccountAccount extends Controller {
 		$this->load->model('account/order');
 		$this->load->model('account/customerpartner');
         $this->load->model('customerpartner/master');
+		$this->load->model('tool/image');
 		$limit = 10;
 
 		$results = $this->model_account_order->getOrders(($page - 1) * $limit, $limit);
@@ -120,11 +121,14 @@ class ControllerAccountAccount extends Controller {
 				'name'       => $result['firstname'] . ' ' . $result['lastname'],
 				'status'     => $result['status'],
 				'tracking'	 => $result['tracking_number'],
+				'payment_status' => $result['payment_status'],
+				'payment_url' => $result['payment_url'],
+				'payment_method' => $result['payment_method'],
 				'date_added' => date($this->language->get('date_format_short'), strtotime($result['date_added'])),
 				'products'   => ($product_total + $voucher_total),
 				'total'      => $this->currency->format($result['total'], $result['currency_code'], $result['currency_value']),
 				);
-			// print_r($data);
+
 			$products = $this->model_account_order->getOrderProducts($result['order_id']);
 			
 			foreach($products as $product)
@@ -132,12 +136,17 @@ class ControllerAccountAccount extends Controller {
 				$check_seller = $this->model_account_customerpartner->getProductSellerDetails($product['product_id']);
             	$partner = $this->model_customerpartner_master->getProfile($check_seller['customer_id']);  
 
+				$imagefile = $this->model_account_order->getProductImage($product['product_id']);
+
+				$image = $this->model_tool_image->resize($imagefile, 300, 300);
+
 				$data['product_info'][$result['order_id']][] = array(
 					'name' => $product['name'],
 					'quantity' => $product['quantity'],
 					'store' => $partner['companyname'],
 					'seller_id' => $partner['customer_id'],
-					'product_id' => $product['product_id']
+					'product_id' => $product['product_id'],
+					'image' => $image
 				);
 			}
 		}

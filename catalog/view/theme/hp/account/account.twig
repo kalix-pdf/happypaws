@@ -1,4 +1,31 @@
 {{ header }}
+
+<style>
+  .nav li a:hover {
+    background: #ffc766;
+  }
+
+  .n {
+    padding-bottom: 10px;
+    border-bottom: 1px solid black;
+  }
+
+  .card {
+    box-shadow: 0 2px 4px black;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+  }
+  .card-header {
+    background-color: #f8f9fa;
+    font-weight: bold;
+    padding: 10px 15px;
+    border-bottom: 1px solid #ddd;
+  }
+  .card-body {
+    padding: 15px;
+  }
+</style>
+
 <div id="account-account" class="container">
   <nav id="checkout-checkout" class="container mb-4 mt-4" style="--bs-breadcrumb-divider: '>';" aria-label="breadcrumb">
     <ol class="breadcrumb">
@@ -22,62 +49,95 @@
     {% set class = 'col-sm-12' %}
     {% endif %}
     <div id="content" class="{{ class }}">{{ content_top }}
-{% if orders is defined and orders|length > 0 %}
-    <h2>My Purchase</h2>
-    <div class="row">
-      <ul class="nav nav-tabs" id="nav_tabs">
-        <li class="active"><a href="#tab-to-pay" data-toggle="tab">To Pay</a></li>
-        <li><a href="#tab-to-ship" data-toggle="tab">To Ship</a></li>
-        <li><a href="#tab-to-receive" data-toggle="tab">To Receive</a></li>
-        <li><a href="#tab-to-rate" data-toggle="tab">To Rate</a></li>
-        <li><a href="#tab-to-cancel" data-toggle="tab">Canceled</a></li>
-      </ul>
-    </div>
-    <div class="tab-content">
-      <div class="tab-pane active" id="tab-to-pay">
-        {% for order in orders %}
-        {% if order.status == 'Pending' and order.status|length > 0 %}
-        <div class="alert alert-info alert-dismissible"><i class="fa fa-exclamation-circle">
-        </i> Waiting for Seller to approve your order</div>
-          <div class="table-responsive">
-            <table class="table table-bordered table-hover">
-              <thead>
-              <tr>
-                <td class="text-left">Order ID</td>
-                <td class="text-left">Product Name</td>
-                <td class="text-left">Quantity</td>
-                <td class="text-left">Status</td>
-                <td class="text-left">Store</td>
-              </tr>
-              </thead>
-              <tbody>
-                {% set product_list = product_info[order.order_id] ?? [] %}
-                {% for prod in product_list %}
-                <tr>
-                  {% if loop.first %}
-                    <td class="text-left" rowspan="{{ product_list|length }}">{{ order.order_id }}</td>
-                  {% endif %}
-                    <td class="text-left">{{ prod.name }}</td>
-                    <td class="text-center">{{ prod.quantity }}</td>
-                  {% if loop.first %}
-                    <td class="text-left" rowspan="{{ product_list|length }}">{{ order.status }}</td>
-                  {% endif %}
-                  {% if loop.first %}
-                    <td class="text-left"><a href="index.php?route=customerpartner/profile&seller_id={{prod.seller_id}}">{{ prod.store }}</a></td>
-                  {% endif %}</tr>
-                {% endfor %}
-                <td class="text-right">   
-                  <button id="cancelOrderBtnFromPending" data-tracking="{{order.order_id}}" class="btn btn-danger text-right">Cancel Order</button>
-                </td>
-              </tbody>
-            </table>
-          </div>
-       
-        {% endif %}
-        {% endfor %}
+      <h2>My Purchase</h2>
+    {% if orders is defined and orders|length > 0 %}
+       <div class="overflow-auto n">
+        <ul class="nav nav-pills nav-fill flex-nowrap" role="tablist" style="min-width: 600px;">
+          <li class="nav-item">
+            <a class="nav-link active" href="#tab-to-pay" data-bs-toggle="tab">To Pay</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#tab-to-ship" data-bs-toggle="tab">To Ship</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#tab-to-receive" data-bs-toggle="tab">To Receive</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#tab-to-rate" data-bs-toggle="tab">To Rate</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#tab-to-cancel" data-bs-toggle="tab">Canceled</a>
+          </li>
+        </ul>
       </div>
+    
+      <div class="tab-content">
+        <div class="tab-pane fade show active" id="tab-to-pay">
+            {% for order in orders %}
+              {% if order.status == 'Pending' and order.status|length > 0 %}
+              <div class="card my-4">
+                <div class="card-header">
+                  <div class="alert alert-info alert-dismissible">
+                    <i class="fa fa-exclamation-circle"></i> Waiting for Seller to approve your order
+                  </div>
+                </div>
+                <div class="table-responsive container mb-4">
+                  <table class="table table-bordered table-light">
+                    <thead>
+                      <tr>
+                        <td class="text-left">Image</td>
+                        <td class="text-left">Product Name</td>
+                        <td class="text-left">Quantity</td>
+                        <td class="text-left">Status</td>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      {% set product_list = product_info[order.order_id] ?? [] %}
+                      {% for prod in product_list %}
+                        <tr>
+                          <td style="width: 250px;" class="text-center align-center">
+                            <img src="{{ prod.image }}" alt="{{ prod.name }}" style="max-width: 120px; height: auto;" class="img-fluid rounded">
+                          </td>
+                          <td class="text-left">{{ prod.name }}</td>
+                          <td class="text-center">{{ prod.quantity }}</td>
+                          <td class="text-left">{{ order.status }}</td>
+                        </tr>
+                      <tr>
+                        <td class="text-left"><strong>Payment Method:</strong></td>
+                        {% if order.payment_method == 'hitpay' %}
+                          <td colspan="3">Online Payment</td>
+                        {% else %}
+                          <td colspan="3">{{ order.payment_method }}</td>
+                        {% endif %}
+                      </tr>
+                      <tr>
+                        <td><strong>Payment Status:</strong></td>
+                        <td colspan="3">{{ order.payment_status }}</td>
+                      </tr>
+                      {% if order.payment_url %}
+                      <tr class="table-danger">
+                        <td><strong>Payment Link:</strong></td>
+                        <td colspan="3"><a class="text-decoration-none btn btn-primary" href="{{ order.payment_url }}">Pay Order<a></td>
+                      </tr>
+                      {% endif %}
+                      <tr>
+                        <td><strong>Store Owner:</strong></td>
+                        <td colspan="3"><a class="text-decoration-none" href="index.php?route=customerpartner/profile&seller_id={{prod.seller_id}}">{{ prod.store }} Shop</a></td>
+                      </tr>
+                    </tbody>
+                    {% endfor %}
+                  </table>
+                  <div class="d-flex justify-content-end">
+                    <button id="cancelOrderBtnFromPending" data-tracking="{{order.order_id}}" class="btn btn-danger">Cancel Order</button>
+                  </div>
+                </div>
+                
+              </div>
+              {% endif %}
+            {% endfor %}
+        </div>
 
-      <div class="tab-pane" id="tab-to-ship">
+      {# <div class="tab-pane fade" id="tab-to-ship">
         {% for order in orders %}
         {% if order.status == 'Processing' and order.status|length > 0 %}
         <div class="alert alert-info alert-dismissible"><i class="fa fa-exclamation-circle">
@@ -194,6 +254,7 @@
         </i> Your Parcel has been Delivered</div>
         {% for order in orders %}
         {% if order.status == 'To Rate' %}
+        
           <div class="table-responsive">
             <table class="table table-bordered table-hover">
               <thead>
@@ -233,91 +294,62 @@
           </div>
         {% endif %}
         {% endfor %}
-      </div>
+      </div> #}
 
-      <div class="tab-pane" id="tab-to-cancel">
-      {% for order in orders %}
-        {% if order.status == 'Canceled' %}
-        <div class="table-responsive">
-          <div class="table table-bordered table-hover">
-          <table class="table table-bordered table-hover">
-            <thead>
-                <td class="text-left">Order ID</td>
-                <td class="text-left">Product Name</td>
-                <td class="text-left">Quantity</td>
-                <td class="text-left">Status</td>
-                <td class="text-left">Store</td>
-            </thead>
-              <tbody>
-                {% set product_list = product_info[order.order_id] ?? [] %}
-                {% for prod in product_list %}
-                <tr>
-                  {% if loop.first %}
-                    <td class="text-left" rowspan="{{ product_list|length }}">{{ order.order_id }}</td>
-                  {% endif %}
-                    <td class="text-left">{{ prod.name }}</td>
-                    <td class="text-center">{{ prod.quantity }}</td>
-                  {% if loop.first %}
-                    <td class="text-left" rowspan="{{ product_list|length }}">{{ order.status }}</td>
-                  {% endif %}
-                  {% if loop.first %}
-                    <td class="text-left"><a href="index.php?route=customerpartner/profile&seller_id={{prod.seller_id}}">{{ prod.store }}</a></td>
-                  {% endif %}</tr>
-                {% endfor %}
-              </tbody>
-            </table>
-          </div>
+        <div class="tab-pane fade show" id="tab-to-cancel">
+            {% for order in orders %}
+              {% if order.status == 'Canceled' %}
+              <div class="card my-4">
+                <div class="table-responsive container mb-4">
+                  <table class="table table-bordered table-light">
+                    <thead>
+                      <tr>
+                        <td class="text-left">Image</td>
+                        <td class="text-left">Product Name</td>
+                        <td class="text-left">Quantity</td>
+                        <td class="text-left">Status</td>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      {% set product_list = product_info[order.order_id] ?? [] %}
+                      {% for prod in product_list %}
+                        <tr>
+                          <td style="width: 250px;" class="text-center align-center">
+                            <img src="{{ prod.image }}" alt="{{ prod.name }}" style="max-width: 120px; height: auto;" class="img-fluid rounded">
+                          </td>
+                          <td class="text-left">{{ prod.name }}</td>
+                          <td class="text-center">{{ prod.quantity }}</td>
+                          <td class="text-left">{{ order.status }}</td>
+                        </tr>
+                      <tr>
+                        <td class="text-left"><strong>Payment Method:</strong></td>
+                        {% if order.payment_method == 'hitpay' %}
+                          <td colspan="3">Online Payment</td>
+                        {% else %}
+                          <td colspan="3">{{ order.payment_method }}</td>
+                        {% endif %}
+                      </tr>
+                      <tr>
+                        <td><strong>Store Owner:</strong></td>
+                        <td colspan="3"><a class="text-decoration-none" href="index.php?route=customerpartner/profile&seller_id={{prod.seller_id}}">{{ prod.store }} Shop</a></td>
+                      </tr>
+                    </tbody>
+                    {% endfor %}
+                  </table>
+                </div>
+              </div>
+              {% endif %}
+            {% endfor %}
         </div>
-        {% endif %}
-      {% endfor %}
-      </div>
     </div>
-{% endif %}
-
-
-      {# <h2>{{ text_my_account }}</h2>
-      <ul class="list-unstyled">
-        <li><a href="{{ edit }}">{{ text_edit }}</a></li>
-        <li><a href="{{ password }}">{{ text_password }}</a></li>
-        <li><a href="{{ address }}">{{ text_address }}</a></li>
-        <li><a href="{{ wishlist }}">{{ text_wishlist }}</a></li>
-      </ul>
-      {% if credit_cards %}
-      <h2>{{ text_credit_card }}</h2>
-      <ul class="list-unstyled">
-        {% for credit_card in credit_cards %}
-        <li><a href="{{ credit_card.href }}">{{ credit_card.name }}</a></li>
-        {% endfor %}
-      </ul>
-      {% endif %}
-      <h2>{{ text_my_orders }}</h2>
-      <ul class="list-unstyled">
-        <li><a href="{{ order }}">{{ text_order }}</a></li>
-        {# <li><a href="{{ download }}">{{ text_download }}</a></li> #}
-        {# {% if reward %}
-        <li><a href="{{ reward }}">{{ text_reward }}</a></li>
-        {% endif %}
-        <li><a href="{{ return }}">{{ text_return }}</a></li>
-        <li><a href="{{ transaction }}">{{ text_transaction }}</a></li>
-        <li><a href="{{ recurring }}">{{ text_recurring }}</a></li>
-      </ul>
-      <h2>{{ text_my_affiliate }}</h2>
-      <ul class="list-unstyled">
-        {% if not tracking %}
-        <li><a href="{{ affiliate }}">{{ text_affiliate_add }}</a></li>
-        {% else %}
-        <li><a href="{{ affiliate }}">{{ text_affiliate_edit }}</a></li>
-        <li><a href="{{ tracking }}">{{ text_tracking }}</a></li>
-        {% endif %}
-      </ul>
-      <h2>{{ text_my_newsletter }}</h2>
-      <ul class="list-unstyled">
-        <li><a href="{{ newsletter }}">{{ text_newsletter }}</a></li>
-      </ul> #}
+  {% else %}
+  <p>You have no product purchase history. Order now!</p>
+  {% endif %}
       {# {{ content_bottom }} #}
       </div>
-    {# {{ column_right }} #}
+    {{ column_right }}
     </div>
+</div>
 </div>
 {{ footer }}
 
