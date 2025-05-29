@@ -57,7 +57,7 @@
   }
 </style>
 
-<div class="container">
+<div class="container my-5">
   <ul class="list-group">
     {% if not logged %}
     <li class="list-group-item">
@@ -83,6 +83,10 @@
       </div>
     </li>
     {% endif %}
+
+    <li class="list-group-item list-group-item-action ">
+      {{ sellmenu }}
+    </li>
 
     <li class="list-group-item list-group-item-action {% if route == 'account/account' %}active text-white{% endif %}">
       <a class="btn" href="{{ account }}">

@@ -4,6 +4,9 @@ class ControllerExtensionModuleAccount extends Controller {
 		$this->load->language('extension/module/account');
 
 		$data['route'] = $this->request->get['route'];
+		// $data['sellmenu'] = $this->url->link('extension/module/marketplace/sellmenu');
+
+		$data['sellmenu'] = $this->load->controller('extension/module/marketplace/sellmenu');
 
 		$data['logged'] = $this->customer->isLogged();
 		$data['register'] = $this->url->link('account/register', '', true);
