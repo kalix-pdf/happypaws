@@ -5,328 +5,284 @@
   <link href="{{ 'https://fonts.googleapis.com/css2?family=Poppins+One&family=Poppins:wght@400;500;600;700&display=swap' }}" rel="stylesheet">
   <link href="catalog\view\theme\hp\stylesheet\enhanced-hp\home\category.css" rel="stylesheet" />
   <link href="catalog\view\theme\hp\stylesheet\enhanced-hp\home\product.css" rel="stylesheet" /> #}
-<div id="product-product" class="container">
-	<nav id="checkout-checkout" class="container mb-4 mt-4" style="--bs-breadcrumb-divider: '>';" aria-label="breadcrumb">
+<div id="product-product" class="container mb-5">
+  <nav class="mb-4 mt-4" aria-label="breadcrumb">
     <ol class="breadcrumb">
       {% for breadcrumb in breadcrumbs %}
         <li class="breadcrumb-item">
-          <a class="text-decoration-none text-black" href="{{ breadcrumb.href }}">{{ breadcrumb.text }}</a>
+          <a class="text-decoration-none text-dark" href="{{ breadcrumb.href }}">{{ breadcrumb.text }}</a>
         </li>
       {% endfor %}
     </ol>
   </nav>
-	<div class="row">
-  {{ column_left }}
-		{% if column_left and column_right %}
-			{% set class = 'col-sm-6' %}
-		{% elseif column_left or column_right %}
-			{% set class = 'col-sm-9' %}
-		{% else %}
-			{% set class = 'col-sm-12' %}
-		{% endif %}
-		<div id="content" class="{{ class }}">
-    {{ content_top }}
-			<div class="row">
-				{% if column_left or column_right %}
-					{% set class = 'col-sm-6' %}
-				{% else %}
-					{% set class = 'col-sm-8' %}
-				{% endif %}
-				<div class="{{ class }}">
-					{% if thumb or images %}
-						<ul class="thumbnails">
-							{% if thumb %}
-								<li>
-									<a class="thumbnail" href="{{ popup }}" title="{{ heading_title }}"><img src="{{ thumb }}" title="{{ heading_title }}" alt="{{ heading_title }}"/></a>
-								</li>
-							{% endif %}
-							{% if images %}
-								{% for image in images %}
-									<li class="image-additional">
-										<a class="thumbnail" href="{{ image.popup }}" title="{{ heading_title }}">
-											<img src="{{ image.thumb }}" title="{{ heading_title }}" alt="{{ heading_title }}"/></a>
-									</li>
-								{% endfor %}
-							{% endif %}
-						</ul>
-					{% endif %}
-					<ul class="nav nav-tabs">
-						<li class="active">
-							<a href="#tab-description" data-toggle="tab">{{ tab_description }}</a>
-						</li>
-						{% if attribute_groups %}
-							<li>
-								<a href="#tab-specification" data-toggle="tab">{{ tab_attribute }}</a>
-							</li>
-						{% endif %}
-						{% if review_status %}
-							<li>
-								<a href="#tab-review" data-toggle="tab">{{ tab_review }}</a>
-							</li>
-						{% endif %}
-					</ul>
-					<div class="tab-content">
-						<div class="tab-pane active" id="tab-description">{{ description }}</div>
-						{% if attribute_groups %}
-							<div class="tab-pane" id="tab-specification">
-								<table class="table table-bordered">
-									{% for attribute_group in attribute_groups %}
-										<thead>
-											<tr>
-												<td colspan="2">
-													<strong>{{ attribute_group.name }}</strong>
-												</td>
-											</tr>
-										</thead>
-										<tbody>
-											{% for attribute in attribute_group.attribute %}
-												<tr>
-													<td>{{ attribute.name }}</td>
-													<td>{{ attribute.text }}</td>
-												</tr>
-											{% endfor %}
-										</tbody>
-									{% endfor %}
-								</table>
-							</div>
-						{% endif %}
-						{% if review_status %}
-							<div class="tab-pane" id="tab-review">
-								<form class="form-horizontal" enctype="multipart/form-data" id="form-review" method="post">
-									<div id="review"></div>
-									<h2>{{ text_write }}</h2>
-									{% if review_guest %}
-										<div class="form-group">
-											<label>Display Name:</label><br/>
-											<div class="form-check">
-												<input class="form-check-input" type="radio" name="is_anonymous" id="show_name" value="0" checked>
-												<label class="form-check-label" for="show_name">Show my name</label>
-											</div>
-											<div class="form-check">
-												<input class="form-check-input" type="radio" name="is_anonymous" id="anonymous" value="1">
-												<label class="form-check-label" for="anonymous">Post as Anonymous</label>
-											</div>
-										</div>
-										{# <div class="form-group required">
-																														                  <div class="col-sm-12">
-																														                    <label class="control-label" for="input-name">{{ entry_name }}</label>
-																														                    <input type="text" name="name" value="{{ customer_name }}" id="input-name" class="form-control" />
-																														                  </div>
-																														                </div> #}
-										{# ADD ATTACHMENT #}
-										<div class="form-group">
-											<label for="input-attachment">Attach a file</label>
-											<input type="file" name="attachment" id="input-attachment" class="form-control"/>
-										</div>
 
-                <div class="form-group required">
-                  <div class="col-sm-12">
-                    <label class="control-label" for="input-review">{{ entry_review }}</label>
-                    <textarea name="text" rows="5" id="input-review" class="form-control"></textarea>
-                    {# <div class="help-block">{{ text_note }}</div> #}
-                  </div>
-                </div>
-                <div class="form-group required">
-                  <div class="col-sm-12 rating">
-                    <label class="control-label">{{ entry_rating }}</label>
-                    &nbsp;&nbsp;&nbsp; {{ entry_bad }}&nbsp;
-                    <input type="radio" name="rating" value="1" />
-                    &nbsp;
-                    <input type="radio" name="rating" value="2" />
-                    &nbsp;
-                    <input type="radio" name="rating" value="3" />
-                    &nbsp;
-                    <input type="radio" name="rating" value="4" />
-                    &nbsp;
-                    <input type="radio" name="rating" value="5" />
-                    &nbsp;{{ entry_good }}</div>
-                </div>
-                {{ captcha }}
-                <div class="buttons clearfix">
-                  <div class="pull-right">
-                    <button type="button" id="button-review" data-loading-text="{{ text_loading }}" class="btn btn-primary">{{ button_continue }}</button>
-                  </div>
-                </div>
-                {% else %}
-                {{ text_login }}
-                {% endif %}
-              </form>
+  <div class="row p-3 rounded-3 mainproduct">
+    {% set left = column_left ? 1 : 0 %}
+    {% set right = column_right ? 1 : 0 %}
+    {% set mainCol = 12 - (left + right) * 3 %}
+
+    {% if column_left %}
+      <aside class="col-md-3">{{ column_left }}</aside>
+    {% endif %}
+
+    <main id="content" class="col-md-{{ mainCol }}">
+      {{ content_top }}
+
+      <div class="row">
+        <div class="col-md-6 card">
+          {% if thumb or images %}
+            <ul class="list-unstyled d-flex flex-wrap gap-2 justify-content">
+              {% if thumb %}
+                <li>
+                  <a href="{{ popup }}" title="{{ heading_title }}">
+                    <img src="{{ thumb }}" alt="{{ heading_title }}" class="img-fluid card-img-top" style="height: 270px;"/>
+                  </a>
+                </li>
+              {% endif %}
+              {% for image in images %}
+                <li>
+                  <a href="{{ image.popup }}" title="{{ heading_title }}">
+                    <img src="{{ image.thumb }}" alt="{{ heading_title }}" class="img-thumbnail"/>
+                  </a>
+                </li>
+              {% endfor %}
+            </ul>
+          {% endif %}
+
+          <div>
+            <div class="card-body">
+              <p class="card-header">{{ tab_description }}</p>
+              <p class="card-text">{{ description }}</p>
             </div>
-            {% endif %}</div>
-        </div>
-        {% if column_left or column_right %}
-        {% set class = 'col-sm-6' %}
-        {% else %}
-        {% set class = 'col-sm-4' %}
-        {% endif %}
-        <div class="{{ class }}">
-          <div class="btn-group">
-            <button type="button" data-toggle="tooltip" class="btn btn-default" title="{{ button_wishlist }}" onclick="wishlist.add('{{ product_id }}');"><i class="fa fa-heart" style="color: #162F65"></i></button>
-            <button type="button" data-toggle="tooltip" class="btn btn-default" title="{{ button_compare }}" onclick="compare.add('{{ product_id }}');"><i class="fa fa-exchange" style="color: #162F65"></i></button>
           </div>
+          {# <ul class="nav nav-tabs mt-3" role="tablist">
+            <li class="nav-item">
+              <a class="nav-link active" data-toggle="tab" href="#tab-description">{{ tab_description }}</a>
+            </li>
+            {% if attribute_groups %}
+              <li class="nav-item">
+                <a class="nav-link" data-toggle="tab" href="#tab-specification">{{ tab_attribute }}</a>
+              </li>
+            {% endif %}
+            {% if review_status %}
+              <li class="nav-item">
+                <a class="nav-link" data-toggle="tab" href="#tab-review">{{ tab_review }}</a>
+              </li>
+            {% endif %}
+          </ul> #}
+
+          {# <div class="tab-content mt-3">
+            <div class="tab-pane fade show active" id="tab-description">{{ description }}</div>
+            {% if attribute_groups %}
+              <div class="tab-pane fade" id="tab-specification">
+                <table class="table table-bordered">
+                  {% for attribute_group in attribute_groups %}
+                    <thead>
+                      <tr><th colspan="2">{{ attribute_group.name }}</th></tr>
+                    </thead>
+                    <tbody>
+                      {% for attribute in attribute_group.attribute %}
+                        <tr>
+                          <td>{{ attribute.name }}</td>
+                          <td>{{ attribute.text }}</td>
+                        </tr>
+                      {% endfor %}
+                    </tbody>
+                  {% endfor %}
+                </table>
+              </div>
+            {% endif %}
+            {% if review_status %}
+              <div class="tab-pane fade" id="tab-review">
+                <form class="mt-3" id="form-review" method="post" enctype="multipart/form-data">
+                  <div id="review"></div>
+                  <h5>{{ text_write }}</h5>
+                  {% if review_guest %}
+                    <div class="mb-3">
+                      <label>Display Name:</label>
+                      <div class="form-check">
+                        <input class="form-check-input" type="radio" name="is_anonymous" value="0" checked>
+                        <label class="form-check-label">Show my name</label>
+                      </div>
+                      <div class="form-check">
+                        <input class="form-check-input" type="radio" name="is_anonymous" value="1">
+                        <label class="form-check-label">Post as Anonymous</label>
+                      </div>
+                    </div>
+                    <div class="mb-3">
+                      <label for="input-attachment">Attach a file</label>
+                      <input type="file" name="attachment" class="form-control" />
+                    </div>
+                    <div class="mb-3">
+                      <label for="input-review">{{ entry_review }}</label>
+                      <textarea name="text" rows="5" id="input-review" class="form-control"></textarea>
+                    </div>
+                    <div class="mb-3">
+                      <label class="control-label">{{ entry_rating }}</label>
+                      <div>
+                        {% for i in 1..5 %}
+                          <label class="me-2"><input type="radio" name="rating" value="{{ i }}"> {{ i }}</label>
+                        {% endfor %}
+                      </div>
+                    </div>
+                    {{ captcha }}
+                    <button type="button" id="button-review" class="btn btn-primary">{{ button_continue }}</button>
+                  {% else %}
+                    {{ text_login }}
+                  {% endif %}
+                </form>
+              </div>
+            {% endif %}
+          </div> #}
+        </div>
+
+        <div class="col-md-6">
+          <div class="d-flex mb-3">
+            <button type="button" class="btn btn-outline-secondary me-2" title="{{ button_wishlist }}" onclick="wishlist.add('{{ product_id }}');">
+              <i class="fa fa-heart text-primary"></i>
+            </button>
+            <button type="button" class="btn btn-outline-secondary" title="{{ button_compare }}" onclick="compare.add('{{ product_id }}');">
+              <i class="fa fa-exchange text-primary"></i>
+            </button>
+          </div>
+
           <h1>{{ heading_title }}</h1>
           <ul class="list-unstyled">
             {% if manufacturer %}
-            <li>{{ text_manufacturer }} <a href="{{ manufacturers }}">{{ manufacturer }}</a></li>
+              <li>{{ text_manufacturer }}: <a href="{{ manufacturers }}">{{ manufacturer }}</a></li>
             {% endif %}
-            <li>{{ text_model }} {{ model }}</li>
-            <li>weight: {{ weight }} grams</li>
-            {% if reward %}
-            <li>{{ text_reward }} {{ reward }}</li>
-            {% endif %}
-            <li>{{ text_stock }} {{ stock }}</li>
+            <li>{{ text_model }}: {{ model }}</li>
+            <li>Weight: {{ weight }} grams</li>
+            <li>{{ text_stock }}: {{ stock }}</li>
           </ul>
+
           {% if price %}
-          <ul class="list-unstyled">
-            {% if not special %}
-            <li>
-              <h2>{{ price }}</h2>
-            </li>
-            {% else %}
-            <li><span style="text-decoration: line-through;">{{ price }}</span></li>
-            <li>
-              <h2>{{ special }}</h2>
-            </li>
-            {% endif %}
-            {% if tax %}
-            <li>{{ text_tax }} {{ tax }}</li>
-            {% endif %}
-            {% if points %}
-            <li>{{ text_points }} {{ points }}</li>
-            {% endif %}
-            {% if discounts %}
-            <li>
-              <hr>
-            </li>
-            {% for discount in discounts %}
-            <li>{{ discount.quantity }}{{ text_discount }}{{ discount.price }}</li>
-            {% endfor %}
-            {% endif %}
-          </ul>
-          {% endif %}
-          <div id="product"> 
-          {% if options %}
-            <hr>
-            <h3>{{ text_option }}</h3>
-            {% for option in options %}
-            {# {% if option.type == 'select' %} #}
-            {# <div class="form-group{% if option.required %} required {% endif %}">
-              <label class="control-label" for="input-option{{ option.product_option_id }}">{{ option.name }}</label>
-              <select name="option[{{ option.product_option_id }}]" id="input-option{{ option.product_option_id }}" class="form-control">
-                <option value="">{{ text_select }}</option>
-                {% for option_value in option.product_option_value %}
-                <option value="{{ option_value.product_option_value_id }}">{{ option_value.name }}
-                {% if option_value.price %}
-                ({{ option_value.price_prefix }}{{ option_value.price }})
-                {% endif %} </option>
-                {% endfor %}
-              </select>
-            </div> #}
-            {# {% endif %} #}
-            
-            <div class="form-group{% if option.required %} required {% endif %}">
-              <label class="control-label">{{ option.name }}</label>
-              <div id="input-option{{ option.product_option_id }}"> {% for option_value in option.product_option_value %}
-                <div class="radio">
-                  <label>
-                    <input type="radio" name="option[{{ option.product_option_id }}]" value="{{ option_value.product_option_value_id }}" />
-                    {% if option_value.image %} <img src="{{ option_value.image }}" alt="{{ option_value.name }} {% if option_value.price %} {{ option_value.price_prefix }} {{ option_value.price }} {% endif %}" class="img-thumbnail" /> {% endif %}                  
-                    {{ option_value.name }}
-                    {% if option_value.price %}
-                    ({{ option_value.price_prefix }}{{ option_value.price }})
-                    {% endif %} </label>
-                </div>
-                {% endfor %} </div>
-            </div>
-            {% endfor %}
-          {% endif %}
-           
-            {% if recurrings %}
-            <hr>
-            <h3>{{ text_payment_recurring }}</h3>
-            <div class="form-group required">
-              <select name="recurring_id" class="form-control">
-                <option value="">{{ text_select }}</option>
-                {% for recurring in recurrings %}
-                <option value="{{ recurring.recurring_id }}">{{ recurring.name }}</option>
-                {% endfor %}
-              </select>
-              <div class="help-block" id="recurring-description"></div>
-            </div>
-            {% endif %}
-            <div class="form-group">
-              <label class="control-label" for="input-quantity">{{ entry_qty }}</label>
-              <input type="text" name="quantity" value="{{ minimum }}" size="2" id="input-quantity" class="form-control" />
-              <input type="hidden" name="product_id" value="{{ product_id }}" />
-              <br/>
-              <button type="button" id="button-cart" data-loading-text="{{ text_loading }}" class="btn btn-primary btn-lg btn-block">{{ button_cart }}</button>
-            </div>
-            {% if minimum > 1 %}
-            <div class="alert alert-info"><i class="fa fa-info-circle"></i> {{ text_minimum }}</div>
-            {% endif %}</div>
-          {% if review_status %}
-          <div class="rating">
-            <p>{% for i in 1..5 %}
-              {% if rating < i %}<span class="fa fa-stack"><i class="fa fa-star-o fa-stack-1x"></i></span>{% else %}<span class="fa fa-stack"><i class="fa fa-star fa-stack-1x"></i><i class="fa fa-star-o fa-stack-1x"></i></span>{% endif %}
-              {% endfor %} <a href="" onclick="$('a[href=\'#tab-review\']').trigger('click'); return false;">{{ reviews }}</a> / <a href="" onclick="$('a[href=\'#tab-review\']').trigger('click'); return false;">{{ text_write }}</a></p>
-          </div>
-          {% endif %} </div>
-      </div>
-      {% if products %}
-      <h3>{{ text_related }}</h3>
-      <div class="row"> {% set i = 0 %}
-        {% for product in products %}
-        {% if column_left and column_right %}
-        {% set class = 'col-xs-8 col-sm-6' %}
-        {% elseif column_left or column_right %}
-        {% set class = 'col-xs-6 col-md-4' %}
-        {% else %}
-        {% set class = 'col-xs-6 col-sm-3' %}
-        {% endif %}
-        <div class="{{ class }}">
-          <div class="product-thumb transition">
-            <div class="image"><a href="{{ product.href }}"><img src="{{ product.thumb }}" alt="{{ product.name }}" title="{{ product.name }}" class="img-responsive" /></a></div>
-            <div class="caption">
-              <h4><a href="{{ product.href }}">{{ product.name }}</a></h4>
-              <p>{{ product.description }}</p>
-              {% if product.rating %}
-              <div class="rating"> {% for j in 1..5 %}
-                {% if product.rating < j %} <span class="fa fa-stack"><i class="fa fa-star-o fa-stack-1x"></i></span> {% else %} <span class="fa fa-stack"><i class="fa fa-star fa-stack-1x"></i><i class="fa fa-star-o fa-stack-1x"></i></span> {% endif %}
-                {% endfor %} </div>
+            <ul class="list-unstyled">
+              {% if not special %}
+                <li><h2>{{ price }}</h2></li>
+              {% else %}
+                <li><span class="text-muted text-decoration-line-through">{{ price }}</span></li>
+                <li><h2 class="text-danger">{{ special }}</h2></li>
               {% endif %}
-              {% if product.price %}
-              <p class="price"> {% if not product.special %}
-                {{ product.price }}
-                {% else %} <span class="price-new">{{ product.special }}</span> <span class="price-old">{{ product.price }}</span> {% endif %}
-                {% if product.tax %} <span class="price-tax">{{ text_tax }} {{ product.tax }}</span> {% endif %} </p>
-              {% endif %} </div>
-            <div class="button-group">
-              <button type="button" onclick="cart.add('{{ product.product_id }}', '{{ product.minimum }}');"><span class="hidden-xs hidden-sm hidden-md">{{ button_cart }}</span> <i class="fa fa-shopping-cart"></i></button>
-              <button type="button" data-toggle="tooltip" title="{{ button_wishlist }}" onclick="wishlist.add('{{ product.product_id }}');"><i class="fa fa-heart"></i></button>
-              <button type="button" data-toggle="tooltip" title="{{ button_compare }}" onclick="compare.add('{{ product.product_id }}');"><i class="fa fa-exchange"></i></button>
+              {% if tax %}<li>{{ text_tax }} {{ tax }}</li>{% endif %}
+              {% if points %}<li>{{ text_points }} {{ points }}</li>{% endif %}
+            </ul>
+          {% endif %}
+
+          <form>
+            {% if options %}
+              <hr>
+              <h4>{{ text_option }}</h4>
+              {% for option in options %}
+                <div class="mb-3">
+                  <label class="form-label">{{ option.name }}</label>
+                  <div>
+                    {% for option_value in option.product_option_value %}
+                      <div class="form-check">
+                        <input class="form-check-input" type="radio" name="option[{{ option.product_option_id }}]" value="{{ option_value.product_option_value_id }}">
+                        <label class="form-check-label">
+                          {{ option_value.name }}
+                          {% if option_value.price %} ({{ option_value.price_prefix }}{{ option_value.price }}){% endif %}
+                        </label>
+                      </div>
+                    {% endfor %}
+                  </div>
+                </div>
+              {% endfor %}
+            {% endif %}
+
+            <div class="mb-3">
+              <label for="input-quantity">{{ entry_qty }}</label>
+              <input type="number" id="input-quantity" name="quantity" value="{{ minimum }}" class="form-control" />
             </div>
-          </div>
+
+            <input type="hidden" name="product_id" value="{{ product_id }}">
+            <button type="button" id="button-cart" class="btn btn-primary btn-lg btn-block">{{ button_cart }}</button>
+
+            {% if minimum > 1 %}
+              <div class="alert alert-info mt-2">{{ text_minimum }}</div>
+            {% endif %}
+          </form>
+
+          {% if review_status %}
+            <div class="mt-3">
+              <p>
+                {% for i in 1..5 %}
+                  {% if rating < i %}
+                    <span class="fa fa-star-o text-warning"></span>
+                  {% else %}
+                    <span class="fa fa-star text-warning"></span>
+                  {% endif %}
+                {% endfor %}
+                <a href="#tab-review" onclick="$('a[href=\'#tab-review\']').tab('show'); return false;">{{ reviews }}</a>
+                / 
+                <a href="#tab-review" onclick="$('a[href=\'#tab-review\']').tab('show'); return false;">{{ text_write }}</a>
+              </p>
+            </div>
+          {% endif %}
         </div>
-        {% if column_left and column_right and (i + 1) % 2 == 0 %}
-        <div class="clearfix visible-md visible-sm"></div>
-        {% elseif column_left or column_right and (i + 1) % 3 == 0 %}
-        <div class="clearfix visible-md"></div>
-        {% elseif (i + 1) % 4 == 0 %}
-        <div class="clearfix visible-md"></div>
-        {% endif %}
-        {% set i = i + 1 %}
-        {% endfor %} </div>
-        {% endif %}
-        {% if tags %}
+      </div>
+
+      {% if products %}
+        <h3>{{ text_related }}</h3>
+        <div class="row">
+          {% for product in products %}
+            <div class="col-md-3 col-sm-6 mb-4">
+              <div class="card h-100">
+                <a href="{{ product.href }}">
+                  <img src="{{ product.thumb }}" class="card-img-top" alt="{{ product.name }}">
+                </a>
+                <div class="card-body">
+                  <h5 class="card-title">
+                    <a href="{{ product.href }}">{{ product.name }}</a>
+                  </h5>
+                  <p class="card-text">{{ product.description }}</p>
+                  {% if product.rating %}
+                    <div class="rating mb-2">
+                      {% for j in 1..5 %}
+                        {% if product.rating < j %}
+                          <span class="fa fa-star-o text-warning"></span>
+                        {% else %}
+                          <span class="fa fa-star text-warning"></span>
+                        {% endif %}
+                      {% endfor %}
+                    </div>
+                  {% endif %}
+                  {% if product.price %}
+                    <p class="price">
+                      {% if not product.special %}
+                        {{ product.price }}
+                      {% else %}
+                        <span class="text-danger">{{ product.special }}</span>
+                        <span class="text-muted text-decoration-line-through">{{ product.price }}</span>
+                      {% endif %}
+                    </p>
+                  {% endif %}
+                </div>
+              </div>
+            </div>
+          {% endfor %}
+        </div>
+      {% endif %}
+
+      {% if tags %}
         <p>{{ text_tags }}
-        {% for i in 0..tags|length - 1 %}
-        {% if i < (tags|length - 1) %} <a href="{{ tags[i].href }}">{{ tags[i].tag }}</a>,
-        {% else %} <a href="{{ tags[i].href }}">{{ tags[i].tag }}</a> {% endif %}
-        {% endfor %} </p>
-        {% endif %}
-      {{ content_bottom }}</div>
-    {{ column_right }}</div>
+          {% for i in 0..tags|length - 1 %}
+            <a href="{{ tags[i].href }}">{{ tags[i].tag }}</a>{% if i < tags|length - 1 %}, {% endif %}
+          {% endfor %}
+        </p>
+      {% endif %}
+
+      {{ content_bottom }}
+    </main>
+
+    {% if column_right %}
+      <aside class="col-md-3">{{ column_right }}</aside>
+    {% endif %}
+  </div>
 </div>
+
+
 <script
 	type="text/javascript">
 	<!--
