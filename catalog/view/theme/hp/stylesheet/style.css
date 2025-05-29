@@ -300,5 +300,11 @@
 
   /* PRODUCT SECTION HERE! */
   .mainproduct {
-    background-color: #7d8baa;
+    background-color: #e2e9ff;
   }
+  .mainproduct button {
+    background-color: #f6c96d;
+    color: #162F65;
+  }
+  
+  

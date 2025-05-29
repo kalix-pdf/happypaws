@@ -5,6 +5,19 @@
   <link href="{{ 'https://fonts.googleapis.com/css2?family=Poppins+One&family=Poppins:wght@400;500;600;700&display=swap' }}" rel="stylesheet">
   <link href="catalog\view\theme\hp\stylesheet\enhanced-hp\home\category.css" rel="stylesheet" />
   <link href="catalog\view\theme\hp\stylesheet\enhanced-hp\home\product.css" rel="stylesheet" /> #}
+<div class="custom-header-bar py-3">
+  <div class="container">
+    <div class="row align-items-center justify-content-end">
+      <div class="col-12 col-md-6 col-lg-4 search-bar">
+        <div class="search-cart d-flex justify-content-end align-items-center">
+          <div class="search flex-grow me-2">{{ search }}</div>
+          <div class="carts">{{ cart }}</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
 <div id="product-product" class="container mb-5">
   <nav class="mb-4 mt-4" aria-label="breadcrumb">
     <ol class="breadcrumb">
@@ -136,13 +149,13 @@
           </div> #}
         </div>
 
-        <div class="col-md-6">
+        <div class="col-md-6 px-4">
           <div class="d-flex mb-3">
             <button type="button" class="btn btn-outline-secondary me-2" title="{{ button_wishlist }}" onclick="wishlist.add('{{ product_id }}');">
-              <i class="fa fa-heart text-primary"></i>
+              <i class="fa fa-heart"></i>
             </button>
             <button type="button" class="btn btn-outline-secondary" title="{{ button_compare }}" onclick="compare.add('{{ product_id }}');">
-              <i class="fa fa-exchange text-primary"></i>
+              <i class="fa fa-exchange"></i>
             </button>
           </div>
 
