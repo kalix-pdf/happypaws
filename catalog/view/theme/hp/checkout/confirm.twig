@@ -26,11 +26,7 @@
           {% if not product.stock %} 
             <span class="text-danger">***</span> 
           {% endif %}
-          {% if product.option %}
-            {% for option in product.option %}
-              <br/><small>{{ option.name }}: {{ option.value }}</small>
-            {% endfor %}
-          {% endif %}
+          
           {% if product.reward %}
             <br/><small>{{ product.reward }}</small>
           {% endif %}
@@ -58,6 +54,16 @@
 
         <td class="text-right">{{ product.price }}</td>
         <td class="text-right">{{ product.total }}</td>
+      </tr>
+      <tr>
+        <td>Variations:</td>
+        <td>
+          {% if product.option %}
+            {% for option in product.option %}
+              <small><strong>{{ option.name }}: </strong>{{ option.value }}</small><br>
+            {% endfor %}
+          {% endif %}
+        </td>
       </tr>
       {% endfor %}
 

@@ -340,10 +340,8 @@ class ControllerProductProduct extends Controller {
 			// 	}
 			// }
 			$data['options'] = array();
-
-			$seller_id = $this->customer->getId();
 			
-			$product_options = $this->model_catalog_product->getProductOptions($this->request->get['product_id'], $seller_id);
+			$product_options = $this->model_catalog_product->getProductOptions($this->request->get['product_id']);
 
 			foreach ($product_options as $option) {
 				$product_option_value_data = array();
@@ -356,11 +354,15 @@ class ControllerProductProduct extends Controller {
 							$price = false;
 						}
 
+						$image_popup = $this->model_tool_image->resize($option_value['image'], 800, 800);
+						$image_thumb = $this->model_tool_image->resize($option_value['image'], 50, 50); 
+
 						$product_option_value_data[] = array(
 							'product_option_value_id' => $option_value['product_option_value_id'],
 							'option_value_id'         => $option_value['option_value_id'],
 							'name'                    => $option_value['name'],
-							'image'                   => $this->model_tool_image->resize($option_value['image'], 50, 50),
+							'image'                   => $image_thumb,
+							'popup'					  => $image_popup,
 							'price'                   => $price,
 							'price_prefix'            => $option_value['price_prefix']
 						);
@@ -400,6 +402,8 @@ class ControllerProductProduct extends Controller {
 
 			$data['reviews'] = sprintf($this->language->get('text_reviews'), (int)$product_info['reviews']);
 			$data['rating'] = (int)$product_info['rating'];
+
+			$data['review_total'] = $this->model_catalog_review->getTotalReviewsByProductId($product_id);
 
 			// Captcha
 			if ($this->config->get('captcha_' . $this->config->get('config_captcha') . '_status') && in_array('review', (array)$this->config->get('config_captcha_page'))) {
@@ -488,10 +492,10 @@ class ControllerProductProduct extends Controller {
 			$data['content_bottom'] = $this->load->controller('common/content_bottom');
 			$data['footer'] = $this->load->controller('common/footer');
 			$data['header'] = $this->load->controller('common/header');
-
+			$data['revieww'] = $this->load->controller('product/product/review');
 			
-		$data['search'] = $this->load->controller('common/search');
-		$data['cart'] = $this->load->controller('common/cart');
+			$data['search'] = $this->load->controller('common/search');
+			$data['cart'] = $this->load->controller('common/cart');
 
 			$this->response->setOutput($this->load->view('product/product', $data));
 		} else {
@@ -550,6 +554,7 @@ class ControllerProductProduct extends Controller {
 				'href' => $this->url->link('product/product', $url . '&product_id=' . $product_id)
 			);
 
+			
 			$this->document->setTitle($this->language->get('text_error'));
 
 			$data['continue'] = $this->url->link('common/home');
@@ -584,6 +589,7 @@ class ControllerProductProduct extends Controller {
 
 		$results = $this->model_catalog_review->getReviewsByProductId($this->request->get['product_id'], ($page - 1) * 5, 5);
 
+
 		foreach ($results as $result) {
 			$data['reviews'][] = array(
 				'author'     => $result['author'],
@@ -605,7 +611,7 @@ class ControllerProductProduct extends Controller {
 
 		$data['results'] = sprintf($this->language->get('text_pagination'), ($review_total) ? (($page - 1) * 5) + 1 : 0, ((($page - 1) * 5) > ($review_total - 5)) ? $review_total : ((($page - 1) * 5) + 5), $review_total, ceil($review_total / 5));
 
-		$this->response->setOutput($this->load->view('product/review', $data));
+		return $this->load->view('product/review', $data);
 	}
 
 	public function write() {

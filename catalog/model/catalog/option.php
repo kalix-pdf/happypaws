@@ -1,12 +1,16 @@
 <?php
 class ModelCatalogOption extends Model {
 	public function addOption($data) {
-		//need seller ID!
+		
+		$this->log->write($data);
+
 		$seller_id = $this->customer->getId();
 		$data['type'] = 'select';
 		$sort_order = isset($data['sort_order']) ? (int)$data['sort_order'] : 0;
 
-		$option_name = isset($data['option_description'][1]['name']) ? $data['option_description'][1]['name'] : '';
+		// $option_name = isset($data['option_description'][1]['name']) ? $data['option_description'][1]['name'] : '';
+
+		$option_name = $data['option_description']['name'];
 
 		$this->db->query("INSERT INTO `seller_product_option` SET type = '" . $this->db->escape($data['type']) . "', 
 						sort_order = '" . (int)$sort_order . "', seller_id = '" . (int)$seller_id . "',
@@ -16,14 +20,14 @@ class ModelCatalogOption extends Model {
 
 		if (isset($data['option_value'])) {
 			foreach ($data['option_value'] as $option_value) {
-				$name = isset($option_value['option_value_description'][1]['name']) ? $option_value['option_value_description'][1]['name'] : '';
+				$value = $option_value['option_value_description']['name'];
 				$image = isset($option_value['image']) ? html_entity_decode($option_value['image'], ENT_QUOTES, 'UTF-8') : '';
 				$sort_order = isset($option_value['sort_order']) ? (int)$option_value['sort_order'] : 0;
 
 				$this->db->query("INSERT INTO seller_product_option_value SET 
 							seller_option_id = '" . (int)$option_id . "', 
 							image = '" . $this->db->escape($image) . "',
-							value = '" . $this->db->escape($name) . "',
+							value = '" . $this->db->escape($value) . "',
 							sort_order = '" . $this->db->escape($sort_order) . "'");
 			}
 		}

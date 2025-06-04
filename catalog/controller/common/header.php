@@ -4,6 +4,7 @@ class ControllerCommonHeader extends Controller {
         
         // Analytics
 		$this->load->model('setting/extension');
+		$this->load->model('account/customer');
 
 		$data['analytics'] = array();
 
@@ -51,9 +52,17 @@ class ControllerCommonHeader extends Controller {
 			$this->load->model('account/wishlist');
 
 			$data['text_wishlist'] = sprintf($this->language->get('text_wishlist'), $this->model_account_wishlist->getTotalWishlist());
+		
+			$customer_id = $this->customer->getId();
+
+			$customer = $this->model_account_customer->getCustomer($customer_id);
+			$data['name'] = $customer['email'];
+			
 		} else {
 			$data['text_wishlist'] = sprintf($this->language->get('text_wishlist'), (isset($this->session->data['wishlist']) ? count($this->session->data['wishlist']) : 0));
+			$data['name'] = "My Account";
 		}
+		
 
 		$data['text_logged'] = sprintf($this->language->get('text_logged'), $this->url->link('account/account', '', true), $this->customer->getFirstName(), $this->url->link('account/logout', '', true));
 		
@@ -70,6 +79,7 @@ class ControllerCommonHeader extends Controller {
 		$data['checkout'] = $this->url->link('checkout/checkout', '', true);
 		$data['contact'] = $this->url->link('information/contact');
 		$data['telephone'] = $this->config->get('config_telephone');
+
 
 		$data['edit'] = $this->url->link('account/edit');
 		

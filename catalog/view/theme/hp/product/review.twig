@@ -1,29 +1,35 @@
 {% if reviews %}
-{% for review in reviews %}
-<table class="table table-striped table-bordered">
-  <tr>
-      <td>{% if review.attachment %}
+  
+  {% for review in reviews %}
+    <div class="mb-4">
+      <div class="card-body px-4">
+        <h5 class="card-title">{{ review.author }}</h5>
+        <div class="mb-2">
+            {% for i in 1..5 %}
+              {% if review.rating < i %}
+                <span class="fa fa-stack"><i class="fa fa-paw text-muted fs-4"></i></span>
+              {% else %}
+                <span class="fa fa-stack"><i class="fa fa-paw stars fs-4"></i></span>
+              {% endif %}
+            {% endfor %}
+          </div>
+        <p class="card-subtitle text-muted mb-2">{{ review.date_added }}</p>
+        <p class="card-text me-5">{{ review.text }}</p>
+      {% if review.attachment %}
         <a href="image/{{ review.attachment }}" target="_blank">
-          <img src="image/{{ review.attachment }}" style="max-width: 250px;"></a>
+          <img src="image/{{ review.attachment }}" class="img-fluid card-img-top" style="max-width: 150px;" />
+        </a>
       {% endif %}
-      </td>
-  </tr>
-  <tr>
-    <td style="width: 50%;"><strong>{{ review.author }}</strong></td>
-    <td class="text-right">{{ review.date_added }}</td>
-  </tr>
-  <tr>
-    <td colspan="2"><p>{{ review.text }}</p>
-      {% for i in 1..5 %}
-      {% if review.rating < i %} <span class="fa fa-stack"><i class="fa fa-star-o fa-stack-2x"></i></span> {% else %} <span class="fa fa-stack"><i class="fa fa-star fa-stack-2x"></i><i class="fa fa-star-o fa-stack-2x"></i></span> {% endif %}
-      {% endfor %}</td>
-  </tr>
-</table>
-{% endfor %}
-<div class="row">
+      </div>
+    </div>
+    <hr class="border border-info border-1 opacity-50">
+  {% endfor %}
+{% else %}
+  <h3>{{ text_no_reviews }}</h3>
+{% endif %}
+
+
+{# <div class="row">
   <div class="col-sm-6 text-left">{{ pagination }}</div>
   <div class="col-sm-6 text-right">{{ results }}</div>
-</div>
-{% else %}
-<p>{{ text_no_reviews }}</p>
-{% endif %}
+</div> #}

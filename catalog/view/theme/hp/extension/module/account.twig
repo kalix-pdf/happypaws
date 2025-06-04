@@ -84,13 +84,17 @@
     </li>
     {% endif %}
 
-    <li class="list-group-item list-group-item-action ">
-      {{ sellmenu }}
-    </li>
-
     <li class="list-group-item list-group-item-action {% if route == 'account/account' %}active text-white{% endif %}">
       <a class="btn" href="{{ account }}">
         My Purchase
+      </a>
+    </li>
+    <li class="list-group-item list-group-item-action ">
+      {{ sellmenu }}
+    </li>
+    <li class="list-group-item list-group-item-action {% if route == 'account/wishlist' %}active text-white{% endif %}">
+      <a class="btn" href="{{ wishlist }}">
+        {{ text_wishlist }}
       </a>
     </li>
     <li class="list-group-item list-group-item-action {% if route == 'account/transaction' %}active text-white{% endif %}">

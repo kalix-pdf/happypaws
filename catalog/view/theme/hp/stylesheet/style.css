@@ -307,4 +307,12 @@
     color: #162F65;
   }
   
-  
+  /* RPODUCT RATINGS! */
+.rating-header {
+  background-color: #162f65;
+  color: #f6c96d;
+}
+
+.stars {
+  color: #162F65;
+}

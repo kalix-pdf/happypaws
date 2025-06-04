@@ -65,6 +65,17 @@ class ControllerAccountAccount extends Controller {
 		foreach ($results as $result) {
 			$product_total = $this->model_account_order->getTotalOrderProductsByOrderId($result['order_id']);
 			$voucher_total = $this->model_account_order->getTotalOrderVouchersByOrderId($result['order_id']);
+
+			$order_option = $this->model_account_order->getOrderOptions($result['order_id']);
+			
+			$option_names = [];
+			$option_values = [];
+
+			foreach ($order_option as $option) {
+				$option_names[] = $option['name'];
+				$option_values[] = $option['value'];
+			}
+
 			//$track_no = $this->model_account_order->getOrder($result['order_id']);
 
 			$data['orders'][] = array(
@@ -75,6 +86,8 @@ class ControllerAccountAccount extends Controller {
 				'payment_status' => $result['payment_status'],
 				'payment_url' => $result['payment_url'],
 				'payment_method' => $result['payment_method'],
+				'option_name' => implode(', ', $option_names),
+    			'option_value' => implode(', ', $option_values),
 				'date_added' => date($this->language->get('date_format_short'), strtotime($result['date_added'])),
 				'products'   => ($product_total + $voucher_total),
 				'total'      => $this->currency->format($result['total'], $result['currency_code'], $result['currency_value']),

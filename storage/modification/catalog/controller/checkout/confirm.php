@@ -42,7 +42,6 @@ class ControllerCheckoutConfirm extends Controller {
 						'type'                    => $option['type']
 					);
 				}
-
 			}
 
 			$this->load->model('tool/upload');
@@ -69,6 +68,7 @@ class ControllerCheckoutConfirm extends Controller {
 						'name'  => $option['name'],
 						'value' => (utf8_strlen($value) > 20 ? utf8_substr($value, 0, 20) . '..' : $value)
 					);
+					
 				}
 
 				$recurring = '';
@@ -125,17 +125,7 @@ class ControllerCheckoutConfirm extends Controller {
 					'store'      => $partner['companyname'],
 					'seller_id' => $partner['customer_id'],
 				);
-
-			// $data['product_info'][] = array(
-			// 	'name' => $product['name'],
-			// 	'quantity' => $product['quantity'],
-			// 	'store' => $partner['companyname'],
-			// 	'product_id' => $product['product_id']
-			// );
 			}
-
-			// Gift Voucher
-			
 			$data['totals'] = array();
 
 

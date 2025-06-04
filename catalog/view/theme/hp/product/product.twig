@@ -1,4 +1,11 @@
 {{ header }}
+<style>
+  .thumbnail-link.selected img {
+    border: 2px solid #007bff; /* Bootstrap primary */
+    box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
+  }
+</style>
+
   {# <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -44,22 +51,33 @@
       <div class="row">
         <div class="col-md-6 card">
           {% if thumb or images %}
-            <ul class="list-unstyled d-flex flex-wrap gap-2 justify-content">
+            <div class="main-image text-center mb-3">
               {% if thumb %}
-                <li>
-                  <a href="{{ popup }}" title="{{ heading_title }}">
-                    <img src="{{ thumb }}" alt="{{ heading_title }}" class="img-fluid card-img-top" style="height: 270px;"/>
-                  </a>
-                </li>
+                <a href="{{ popup }}" title="{{ heading_title }}">
+                  <img id="main-image" src="{{ thumb }}" alt="{{ heading_title }}" class="img-fluid card-img-top" style="height: 270px; width: 270px;" />
+                </a>
               {% endif %}
+              <ul class="list-unstyled d-flex flex-wrap gap-2 justify-content-center" id="thumbnail-list">
               {% for image in images %}
                 <li>
-                  <a href="{{ image.popup }}" title="{{ heading_title }}">
-                    <img src="{{ image.thumb }}" alt="{{ heading_title }}" class="img-thumbnail"/>
+                  <a href="{{ image.popup }}" class="thumbnail-link" data-large="{{ image.popup }}">
+                    <img src="{{ image.thumb }}" alt="{{ heading_title }}" class="img-thumbnail" style="width: 80px; height: 80px;" />
                   </a>
                 </li>
               {% endfor %}
-            </ul>
+                {% if options %}
+                {% for option in options %}
+                  <li class="option-swatches d-flex gap-2 justify-content-center" data-popup="{{ option_value.popup }}">
+                  {% for option_value in option.product_option_value %}
+                    <a href="{{ option_value.popup }}" class="thumbnail-link" data-large="{{ option_value.popup }}" title="{{ option_value.name }}">
+                      <img src="{{ option_value.image }}" class="img-thumbnail" style="width: 60px; height: 60px;" />
+                    </a>
+                  {% endfor %}
+                  </li>
+                {% endfor %}
+              {% endif %}
+              </ul>
+            </div>
           {% endif %}
 
           <div>
@@ -105,44 +123,7 @@
                 </table>
               </div>
             {% endif %}
-            {% if review_status %}
-              <div class="tab-pane fade" id="tab-review">
-                <form class="mt-3" id="form-review" method="post" enctype="multipart/form-data">
-                  <div id="review"></div>
-                  <h5>{{ text_write }}</h5>
-                  {% if review_guest %}
-                    <div class="mb-3">
-                      <label>Display Name:</label>
-                      <div class="form-check">
-                        <input class="form-check-input" type="radio" name="is_anonymous" value="0" checked>
-                        <label class="form-check-label">Show my name</label>
-                      </div>
-                      <div class="form-check">
-                        <input class="form-check-input" type="radio" name="is_anonymous" value="1">
-                        <label class="form-check-label">Post as Anonymous</label>
-                      </div>
-                    </div>
-                    <div class="mb-3">
-                      <label for="input-attachment">Attach a file</label>
-                      <input type="file" name="attachment" class="form-control" />
-                    </div>
-                    <div class="mb-3">
-                      <label for="input-review">{{ entry_review }}</label>
-                      <textarea name="text" rows="5" id="input-review" class="form-control"></textarea>
-                    </div>
-                    <div class="mb-3">
-                      <label class="control-label">{{ entry_rating }}</label>
-                      <div>
-                        {% for i in 1..5 %}
-                          <label class="me-2"><input type="radio" name="rating" value="{{ i }}"> {{ i }}</label>
-                        {% endfor %}
-                      </div>
-                    </div>
-                    {{ captcha }}
-                    <button type="button" id="button-review" class="btn btn-primary">{{ button_continue }}</button>
-                  {% else %}
-                    {{ text_login }}
-                  {% endif %}
+            
                 </form>
               </div>
             {% endif %}
@@ -160,6 +141,20 @@
           </div>
 
           <h1>{{ heading_title }}</h1>
+          {% if review_status %}
+            <div class="mt-3">
+              <p>
+                {% for i in 1..5 %}
+                  {% if rating < i %}
+                    <span class="fa fa-paw text-muted fs-4"></span>
+                  {% else %}
+                    <span class="fa fa-paw stars fs-4"></span>
+                  {% endif %}
+                {% endfor %}
+                <a class="text-decoration-none text-black">{{ reviews }}</a>
+                </p>
+            </div>
+          {% endif %}
           <ul class="list-unstyled">
             {% if manufacturer %}
               <li>{{ text_manufacturer }}: <a href="{{ manufacturers }}">{{ manufacturer }}</a></li>
@@ -174,7 +169,7 @@
               {% if not special %}
                 <li><h2>{{ price }}</h2></li>
               {% else %}
-                <li><span class="text-muted text-decoration-line-through">{{ price }}</span></li>
+                <li><span class="text-muted text-decoration-line-through fs-4">{{ price }}</span></li>
                 <li><h2 class="text-danger">{{ special }}</h2></li>
               {% endif %}
               {% if tax %}<li>{{ text_tax }} {{ tax }}</li>{% endif %}
@@ -182,25 +177,30 @@
             </ul>
           {% endif %}
 
-          <form>
+          <form id="product">
             {% if options %}
               <hr>
               <h4>{{ text_option }}</h4>
               {% for option in options %}
-                <div class="mb-3">
-                  <label class="form-label">{{ option.name }}</label>
-                  <div>
+                <div class="mb-3 d-flex gap-4">
+                  <label class="form-label">{{ option.name }}:</label>
+                  <input type="hidden" name="option[{{ option.product_option_id }}]" id="selectedOption{{ option.product_option_id }}">
+                  
+                  <div class="d-flex flex-wrap gap-3">
                     {% for option_value in option.product_option_value %}
-                      <div class="form-check">
-                        <input class="form-check-input" type="radio" name="option[{{ option.product_option_id }}]" value="{{ option_value.product_option_value_id }}">
-                        <label class="form-check-label">
-                          {{ option_value.name }}
-                          {% if option_value.price %} ({{ option_value.price_prefix }}{{ option_value.price }}){% endif %}
-                        </label>
+                      <div class="card selectable-option text-center" style="width: 70px; cursor: pointer;"
+                        data-option-id="{{ option.product_option_id }}"
+                        data-option-value-id="{{ option_value.product_option_value_id }}"
+                        data-option-name="{{ option_value.name }}"
+                        data-popup="{{ option_value.popup }}">
+                        <img src="{{ option_value.image }}" class="card-img-top" style="height: 50px; object-fit: contain;">
+                        <p class="card-text small">{{ option_value.name }}</p>
                       </div>
                     {% endfor %}
                   </div>
                 </div>
+                <div id="selectedPreview{{ option.product_option_id }}" class="mb-2 text-muted">No selection</div>
+
               {% endfor %}
             {% endif %}
 
@@ -210,29 +210,14 @@
             </div>
 
             <input type="hidden" name="product_id" value="{{ product_id }}">
-            <button type="button" onclick="cart.add('{{ product_id }}');" class="btn btn-primary btn-lg btn-block">{{ button_cart }}</button>
+            <button type="button" id="button-cart" class="btn btn-primary btn-lg btn-block">{{ button_cart }}</button>
 
             {% if minimum > 1 %}`
               <div class="alert alert-info mt-2">{{ text_minimum }}</div>
             {% endif %}
           </form>
 
-          {% if review_status %}
-            <div class="mt-3">
-              <p>
-                {% for i in 1..5 %}
-                  {% if rating < i %}
-                    <span class="fa fa-star-o text-warning"></span>
-                  {% else %}
-                    <span class="fa fa-star text-warning"></span>
-                  {% endif %}
-                {% endfor %}
-                <a href="#tab-review" onclick="$('a[href=\'#tab-review\']').tab('show'); return false;">{{ reviews }}</a>
-                / 
-                <a href="#tab-review" onclick="$('a[href=\'#tab-review\']').tab('show'); return false;">{{ text_write }}</a>
-              </p>
-            </div>
-          {% endif %}
+          
         </div>
       </div>
 
@@ -288,12 +273,181 @@
 
       {{ content_bottom }}
     </main>
-
     {% if column_right %}
       <aside class="col-md-3">{{ column_right }}</aside>
     {% endif %}
   </div>
+
+  <div class="card border border-info my-3">
+    <div class="card-body">
+      <p class="card-text">SELLER SHOP VIEW SHOP</p>
+    </div>
+  </div>
+
+  <div class="card my-4 px-5 py-4">
+    {% if review_status %}
+      <div class="mb-3 d-flex align-items-center gap-4 ">
+        <h4><strong>Product Ratings</strong></h4>
+        <p class="mt-2">{{ reviews }}</p>
+      </div>
+      <div class="p-4 border border-info-subtle rating-header">
+        <h4><strong class="fs-1">{% set full = rating|round(0, 'floor') %} 
+          {% set half = rating - full >= 0.5 %}
+          {{ rating|number_format(1) }}</strong> OUT OF 5</h4>
+        
+        {% for i in 1..5 %}
+            {% if i <= full %}
+              <i class="fa fa-paw text-warning fs-4"></i>
+            {% elseif i == full + 1 and half %}
+              <i class="fa fa-paw text-secondary fs-4" style="opacity: 0.5;"></i>
+            {% else %}
+              <i class="fa fa-paw text-muted"></i>
+            {% endif %}
+          {% endfor %}
+      </div>
+    {% endif %}
+    {{ revieww }}
+  </div>
+
+   {% if review_status %}
+      <div id="tab-review">
+        <form class="mt-3" id="form-review" method="post" enctype="multipart/form-data">
+          <div id="review"></div>
+          <h5>{{ text_write }}</h5>
+
+          <div class="mb-3">
+            <label>Display Name:</label>
+            <div class="form-check">
+              <input class="form-check-input" type="radio" name="is_anonymous" value="0" checked>
+              <label class="form-check-label">Show my name</label>
+            </div>
+            <div class="form-check">
+              <input class="form-check-input" type="radio" name="is_anonymous" value="1">
+              <label class="form-check-label">Post as Anonymous</label>
+            </div>
+          </div>
+
+          <div class="mb-3">
+            <label for="input-attachment">Attach a file</label>
+            <input type="file" name="attachment" class="form-control" />
+          </div>
+
+          <div class="mb-3">
+            <label for="input-review">{{ entry_review }}</label>
+            <textarea name="text" rows="5" id="input-review" class="form-control"></textarea>
+          </div>
+
+          <div class="mb-3">
+            <label class="control-label">{{ entry_rating }}</label>
+            <div>
+              {% for i in 1..5 %}
+                <label class="me-2">
+                  <input type="radio" name="rating" value="{{ i }}"> {{ i }}
+                </label>
+              {% endfor %}
+            </div>
+          </div>
+
+          {{ captcha }}
+          <button type="button" id="button-review" class="btn btn-primary">{{ button_continue }}</button>
+        </form>
+      </div>
+    {% else %}
+      <div id="tab-review">
+        {{ text_login }}
+      </div>
+    {% endif %}
+
 </div>
+
+{# OPTIONS! #}
+<script>
+  document.addEventListener('DOMContentLoaded', function () {
+    document.querySelectorAll('.selectable-option').forEach(function (card) {
+      card.addEventListener('click', function () {
+        var optionId = this.dataset.optionId;
+        var optionValueId = this.dataset.optionValueId;
+        var optionName = this.dataset.optionName;
+
+        document.getElementById('selectedOption' + optionId).value = optionValueId;
+        document.getElementById('selectedPreview' + optionId).innerHTML = "Selected: " + optionName;
+
+        document.querySelectorAll('[data-option-id="' + optionId + '"]').forEach(function (opt) {
+          opt.classList.remove('border-primary', 'shadow');
+        });
+
+        this.classList.add('border-primary', 'shadow');
+      });
+    });
+  });
+</script>
+
+{# product images! #}
+
+<script>
+  document.addEventListener('DOMContentLoaded', function () {
+    const mainImage = document.getElementById('main-image');
+    
+    function handleThumbnailClick(links) {
+      links.forEach(function (link) {
+        link.addEventListener('click', function (e) {
+          e.preventDefault();
+          const newSrc = this.getAttribute('data-large');
+          if (mainImage) {
+            mainImage.src = newSrc;
+          }
+
+          links.forEach(l => l.classList.remove('selected'));
+          this.classList.add('selected');
+        });
+      });
+    }
+
+    const thumbnails = document.querySelectorAll('.thumbnail-link');
+    const swatches = document.querySelectorAll('.option-swatch-link');
+
+    handleThumbnailClick(thumbnails);
+    handleThumbnailClick(swatches);
+
+    if (swatches.length > 0) swatches[0].classList.add('selected');
+    else if (thumbnails.length > 0) thumbnails[0].classList.add('selected');
+  });
+</script>
+
+
+<script>
+  document.addEventListener('DOMContentLoaded', function () {
+    const mainImage = document.getElementById('main-image');
+
+    document.querySelectorAll('.selectable-option').forEach(card => {
+      card.addEventListener('click', function () {
+        const optionId = this.dataset.optionId;
+        const optionValueId = this.dataset.optionValueId;
+        const optionName = this.dataset.optionName;
+        const imageSrc = this.dataset.popup || this.querySelector('img').src;
+
+          mainImage.src = imageSrc;
+        
+
+        const hiddenInput = document.getElementById('selectedOption' + optionId);
+        if (hiddenInput) {
+          hiddenInput.value = optionValueId;
+        }
+        const previewText = document.getElementById('selectedPreview' + optionId);
+        if (previewText) {
+          previewText.textContent = 'Selected: ' + optionName;
+        }
+
+        document.querySelectorAll('[data-option-id="' + optionId + '"]').forEach(el => {
+          el.classList.remove('border-primary', 'border-2', 'shadow');
+        });
+
+        this.classList.add('border-primary', 'border-2', 'shadow');
+      });
+    });
+  });
+</script>
+
 
 
 <script
@@ -320,6 +474,7 @@ $('#recurring-description').html(json['success']);
 //
 	-->
 </script>
+
 <script
 	type="text/javascript">
 	<!--
@@ -327,7 +482,7 @@ $('#recurring-description').html(json['success']);
 $.ajax({
 url: 'index.php?route=checkout/cart/add',
 type: 'post',
-data: $('#product input[type=\'text\'], #product input[type=\'hidden\'], #product input[type=\'radio\']:checked, #product input[type=\'checkbox\']:checked, #product select, #product textarea'),
+data: $('#product').serialize(),
 dataType: 'json',
 beforeSend: function () {
 $('#button-cart').button('loading');
@@ -360,18 +515,18 @@ $('select[name=\'recurring_id\']').after('<div class="text-danger">' + json['err
 $('.text-danger').parent().addClass('has-error');
 }
 
-if (json['success']) {
-$('.breadcrumb').after('<div class="alert alert-success alert-dismissible">' + json['success'] + '<button type="button" class="close" data-dismiss="alert">&times;</button></div>');
+    if (json['success']) {
+        $('.breadcrumb').after('<div class="alert alert-success alert-dismissible">' + json['success'] + '<button type="button" class="close" data-dismiss="alert">&times;</button></div>');
 
-$('#cart > button').html('<span id="cart-total"><i class="fa fa-shopping-cart"></i> ' + json['total'] + '</span>');
+        $('#cart > button').html('<span id="cart-total"><i class="fa fa-shopping-cart"></i> ' + json['total'] + '</span>');
 
-$('html, body').animate({
-scrollTop: 0
-}, 'slow');
+        $('html, body').animate({
+        scrollTop: 0
+        }, 'slow');
 
-$('#cart > ul').load('index.php?route=common/cart/info ul li');
-}
-},
+        $('#cart-dropdown').load('index.php?route=common/cart/info #cart-dropdown > *');
+    }
+  },
 error: function (xhr, ajaxOptions, thrownError) {
 alert(thrownError + "\r\n" + xhr.statusText + "\r\n" + xhr.responseText);
 }
@@ -444,67 +599,65 @@ alert(thrownError + "\r\n" + xhr.statusText + "\r\n" + xhr.responseText);
 //
 	-->
 </script>
-<script
-	type="text/javascript">
-	<!--
-	$('#review').delegate('.pagination a', 'click', function (e) {
-e.preventDefault();
+<script type="text/javascript">
+<!--
+$('#review').delegate('.pagination a', 'click', function (e) {
+  e.preventDefault();
 
-$('#review').fadeOut('slow');
-
-$('#review').load(this.href);
-
-$('#review').fadeIn('slow');
+  $('#review').fadeOut('slow');
+  $('#review').load(this.href, function() {
+    $('#review').fadeIn('slow');
+  });
 });
 
-$('#review').load('index.php?route=product/product/review&product_id=   {{ product_id }}');
+{# $('#review').load('index.php?route=product/product/review&product_id={{ product_id }}'); #}
 
 $('#button-review').on('click', function (e) {
-e.preventDefault();
+  e.preventDefault();
 
-var form = document.getElementById('form-review');
-var formData = new FormData(form);
+  var form = document.getElementById('form-review');
+  var formData = new FormData(form);
 
-$.ajax({
-url: 'index.php?route=product/product/write&product_id=   {{ product_id }}',
-type: 'post',
-dataType: 'json',
-data: formData,
-contentType: false,
-processData: false,
-beforeSend: function () {
-$('#button-review').button('loading');
-},
-complete: function () {
-$('#button-review').button('reset');
-},
-success: function (json) {
-$('.alert-dismissible').remove();
+  $.ajax({
+    url: 'index.php?route=product/product/write&product_id={{ product_id }}',
+    type: 'post',
+    dataType: 'json',
+    data: formData,
+    contentType: false,
+    processData: false,
+    beforeSend: function () {
+      $('#button-review').button('loading');
+    },
+    complete: function () {
+      $('#button-review').button('reset');
+    },
+    success: function (json) {
+      $('.alert-dismissible').remove();
 
-if (json['error']) {
-$('#review').after('<div class="alert alert-danger alert-dismissible"><i class="fa fa-exclamation-circle"></i> ' + json['error'] + '</div>');
-}
+      if (json['error']) {
+        $('#review').after('<div class="alert alert-danger alert-dismissible"><i class="fa fa-exclamation-circle"></i> ' + json['error'] + '</div>');
+      }
 
-if (json['success']) {
-$('#review').after('<div class="alert alert-success alert-dismissible"><i class="fa fa-check-circle"></i> ' + json['success'] + '</div>');
+      if (json['success']) {
+        $('#review').after('<div class="alert alert-success alert-dismissible"><i class="fa fa-check-circle"></i> ' + json['success'] + '</div>');
 
-$('#form-review')[0].reset(); // Clear all form fields including file input
-}
-}
+        $('#form-review')[0].reset(); 
+        $('#review').load('index.php?route=product/product/review&product_id={{ product_id }}'); 
+      }
+    }
+  });
 });
-});
-
 
 $(document).ready(function () {
-$('.thumbnails').magnificPopup({
-type: 'image',
-delegate: 'a',
-gallery: {
-enabled: true
-}
+  $('.thumbnails').magnificPopup({
+    type: 'image',
+    delegate: 'a',
+    gallery: {
+      enabled: true
+    }
+  });
 });
-});
-//
-	-->
+-->
 </script>
+
 {{ footer }}

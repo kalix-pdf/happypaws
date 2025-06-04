@@ -375,7 +375,7 @@ class ModelCatalogProduct extends Model {
 		return $product_option_data;
 	}
 
-	public function getProductOptions($product_id, $seller_id) {
+	public function getProductOptions($product_id) {
 		$product_option_data = array();
 
 		$product_option_query = $this->db->query("
@@ -383,7 +383,6 @@ class ModelCatalogProduct extends Model {
 			FROM " . DB_PREFIX . "product_option po
 			LEFT JOIN seller_product_option spo ON (po.option_id = spo.seller_option_id)
 			WHERE po.product_id = '" . (int)$product_id . "' 
-			AND spo.seller_id = '" . (int)$seller_id . "'
 			ORDER BY spo.sort_order
 		");
 
