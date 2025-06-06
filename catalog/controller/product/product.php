@@ -296,7 +296,11 @@ class ControllerProductProduct extends Controller {
 			} else {
 				$data['price'] = false;
 			}
+			$data['price_value'] = $product_info['price'];
+			$data['special_value'] = $product_info['special'];
 
+			$data['currency_symbol'] = $this->currency->getSymbolLeft($this->session->data['currency']);
+			
 			if (!is_null($product_info['special']) && (float)$product_info['special'] >= 0) {
 				$data['special'] = $this->currency->format($this->tax->calculate($product_info['special'], $product_info['tax_class_id'], $this->config->get('config_tax')), $this->session->data['currency']);
 				$tax_price = (float)$product_info['special'];
@@ -322,23 +326,6 @@ class ControllerProductProduct extends Controller {
 				);
 			}
 
-			//CUSTOM OPTION
-			// $this->load->model('catalog/custom_option');
-
-			// $option = $this->model_catalog_custom_option->getProductOption($this->request->get['product_id']);
-
-			// if ($option) {
-			// 	foreach ($option as $option_data) {
-			// 		$data['options'][] = array(
-			// 			'product_option_id' => $option_data['product_option_id'],
-			// 			'name' => $option_data['name'],
-			// 			'quantity' => $option_data['quantity'],
-			// 			'subtract' => $option_data['subtract'],
-			// 			'price' => $option_data['price'],
-			// 			'weight' => $option_data['weight']
-			// 		);
-			// 	}
-			// }
 			$data['options'] = array();
 			
 			$product_options = $this->model_catalog_product->getProductOptions($this->request->get['product_id']);
@@ -361,6 +348,7 @@ class ControllerProductProduct extends Controller {
 							'product_option_value_id' => $option_value['product_option_value_id'],
 							'option_value_id'         => $option_value['option_value_id'],
 							'name'                    => $option_value['name'],
+							'quantity'				  => $option_value['quantity'],
 							'image'                   => $image_thumb,
 							'popup'					  => $image_popup,
 							'price'                   => $price,
@@ -589,17 +577,23 @@ class ControllerProductProduct extends Controller {
 
 		$results = $this->model_catalog_review->getReviewsByProductId($this->request->get['product_id'], ($page - 1) * 5, 5);
 
-
 		foreach ($results as $result) {
-			$data['reviews'][] = array(
+			$review_id = $result['review_id'];
+
+			$data['reviews'][$review_id] = array(
 				'author'     => $result['author'],
 				'text'       => nl2br($result['text']),
 				'rating'     => (int)$result['rating'],
 				'date_added' => date($this->language->get('date_format_short'), strtotime($result['date_added'])),
-				'attachment' => $result['attachment']
+				'attachments' => [],
 			);
+			if (!empty($result['filename'])) {
+				$data['reviews'][$review_id]['attachments'][] = $result['filename'];
+			}
+			$this->log->write($data['reviews'][$review_id]['attachments']);
+			$this->log->write($result['filename']);
 		}
-		// $data['upload_url'] = HTTP_CATALOG . 'image/';
+		$data['reviews'] = array_values($data['reviews']);
 
 		$pagination = new Pagination();
 		$pagination->total = $review_total;
@@ -627,31 +621,53 @@ class ControllerProductProduct extends Controller {
 					$reviewer_name = $this->customer->getFirstName(); 
 				}				
 
-				if (!empty($this->request->files['attachment']['name'])) {
-					$file = $this->request->files['attachment'];
-					$filename = basename(html_entity_decode($file['name'], ENT_QUOTES, 'UTF-8'));
-					$ext = pathinfo($filename, PATHINFO_EXTENSION);
+				if (!empty($this->request->files['attachments']['name'][0])) {
+					$uploaded_files = [];
 					$allowed = ['jpg', 'jpeg', 'png', 'mp4'];
 					$maxSizeMB = 10;
-					$maxSizeBytes = $maxSizeMB * 1024 * 1024; 
-				
-					if (!in_array(strtolower($ext), $allowed)) {
-						$json['error'] = 'Invalid file type! Only JPG, JPEG, PNG, or MP4 are allowed.';
-					}
-				
-					if ($file['size'] > $maxSizeBytes) {
-						$json['error'] = 'File too large! Max allowed size is ' . $maxSizeMB . ' MB.';
-					}
-				
-					// Upload if no error
-					if (!isset($json['error'])) {
+					$maxSizeBytes = $maxSizeMB * 1024 * 1024;
+
+					foreach ($this->request->files['attachments']['name'] as $key => $original_name) {
+						$file = [
+							'name'     => $this->request->files['attachments']['name'][$key],
+							'type'     => $this->request->files['attachments']['type'][$key],
+							'tmp_name' => $this->request->files['attachments']['tmp_name'][$key],
+							'error'    => $this->request->files['attachments']['error'][$key],
+							'size'     => $this->request->files['attachments']['size'][$key],
+						];
+
+						$filename = preg_replace('/[^A-Za-z0-9.\-_]/', '_', basename(html_entity_decode($file['name'], ENT_QUOTES, 'UTF-8')));
+						$ext = strtolower(pathinfo($filename, PATHINFO_EXTENSION));
+
+						if (!in_array($ext, $allowed)) {
+							$json['error'] = 'Invalid file type for "' . $filename . '". Allowed types: JPG, JPEG, PNG, MP4.';
+							break;
+						}
+
+						if ($file['size'] > $maxSizeBytes) {
+							$json['error'] = 'File "' . $filename . '" is too large. Max size: ' . $maxSizeMB . ' MB.';
+							break;
+						}
+
 						$new_filename = md5(mt_rand()) . '.' . $ext;
-						move_uploaded_file($file['tmp_name'], DIR_IMAGE . $new_filename);
-						$this->request->post['attachment'] = $new_filename;
+						$destination = DIR_IMAGE . $new_filename;
+
+						if (move_uploaded_file($file['tmp_name'], $destination)) {
+							$uploaded_files[] = $new_filename;
+						} else {
+							$json['error'] = 'Failed to save "' . $filename . '". Check folder permissions.';
+							break;
+						}
 					}
-				} else {
-					$json['error'] = 'No File Uploaded!';	
-				}
+
+					if (!isset($json['error'])) {
+						$this->request->post['attachments'] = $uploaded_files;
+					}
+				} 
+					else {
+						$json['error'] = 'No files uploaded!';
+					}
+
 				
 				// if ((utf8_strlen($this->request->post['name']) < 3) || (utf8_strlen($this->request->post['name']) > 25)) {
 				// 	$json['error'] = $this->language->get('error_name');
@@ -677,8 +693,14 @@ class ControllerProductProduct extends Controller {
 				if (!isset($json['error'])) {
 					$this->load->model('catalog/review');
 
-					$this->model_catalog_review->addReview($this->request->get['product_id'], 
-							$this->request->post, $this->request->post['attachment']);
+					$review_id = $this->model_catalog_review->addReview($this->request->get['product_id'], 
+							$this->request->post);
+
+					if (!empty($this->request->post['attachments'])) {
+						foreach ($this->request->post['attachments'] as $filename) {
+							$this->db->query("INSERT INTO review_attachments SET review_id = '" . (int)$review_id . "', filename = '" . $this->db->escape($filename) . "', date_added = NOW()");
+						}
+					}
 
 					$json['success'] = $this->language->get('text_success');
 				}
