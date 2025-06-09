@@ -24,7 +24,7 @@ class ControllerExtensionWebhookForFlash extends Controller {
             if (isset($data['data']) && is_string($data['data'])) {
                 $decodedData = json_decode($data['data'], true);
                 if (json_last_error() === JSON_ERROR_NONE) {
-                    $data['data'] = $decodedData; // Replace string with proper array/object
+                    $data['data'] = $decodedData; 
                 }
             }
 
@@ -42,11 +42,11 @@ class ControllerExtensionWebhookForFlash extends Controller {
                 return;
             }
     
-            if (!$this->verifySignature($data['mchId'], $data['nonceStr'], $data['sign'])) {
-                http_response_code(401);
-                echo json_encode(["errorCode" => "0", "message" => "Invalid signature"]);
-                return;
-            }
+            // if (!$this->verifySignature($data['mchId'], $data['nonceStr'], $data['sign'])) {
+            //     http_response_code(401);
+            //     echo json_encode(["errorCode" => "0", "message" => "Invalid signature"]);
+            //     return;
+            // }
     
             // Process webhook data (update order status, save to DB, etc.)
             // $this->processWebhookData($data['data']);

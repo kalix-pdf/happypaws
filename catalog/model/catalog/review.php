@@ -57,6 +57,19 @@ class ModelCatalogReview extends Model {
 		return $review_id;
 	}
 
+
+	public function getAttachmentsByReviewId($review_id) {
+		$query = $this->db->query("SELECT filename FROM review_attachments WHERE review_id = '" . (int)$review_id . "'");
+		$files = [];
+
+		foreach ($query->rows as $row) {
+			$files[] = $row['filename'];
+		}
+
+		return $files;
+	}
+
+
 	public function getReviewsByProductId($product_id, $start = 0, $limit = 20) {
 		if ($start < 0) {
 			$start = 0;

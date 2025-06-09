@@ -1,7 +1,7 @@
 {% if reviews %}
   
   {% for review in reviews %}
-    <div class="mb-4">
+    <div class="mb-1">
       <div class="card-body px-4">
         <h5 class="card-title">{{ review.author }}</h5>
         <div class="mb-2">
@@ -15,10 +15,14 @@
           </div>
         <p class="card-subtitle text-muted mb-2">{{ review.date_added }}</p>
         <p class="card-text me-5">{{ review.text }}</p>
-      {% if review.attachment %}
-        <a href="image/{{ review.attachment }}" target="_blank">
-          <img src="image/{{ review.attachment }}" class="img-fluid card-img-top" style="max-width: 150px;" />
-        </a>
+      {% if review.attachments %}
+        <div class="attachments mt-2 d-flex flex-wrap">
+        {% for file in review.attachments %}
+          <a href="image/{{ file }}" target="_blank" class="me-2 mb-2">
+            <img src="image/{{ file }}" class="img-thumbnail" style="max-width: 100px;" />
+          </a>
+        {% endfor %}
+      </div>
       {% endif %}
       </div>
     </div>

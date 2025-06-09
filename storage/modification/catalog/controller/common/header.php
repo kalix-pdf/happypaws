@@ -71,7 +71,7 @@ class ControllerCommonHeader extends Controller {
 			$customer_id = $this->customer->getId();
 
 			$customer = $this->model_account_customer->getCustomer($customer_id);
-			$data['name'] = $customer['email'];
+			$data['name'] = $customer['firstname'];
 			
 		} else {
 			$data['text_wishlist'] = sprintf($this->language->get('text_wishlist'), (isset($this->session->data['wishlist']) ? count($this->session->data['wishlist']) : 0));

@@ -585,13 +585,8 @@ class ControllerProductProduct extends Controller {
 				'text'       => nl2br($result['text']),
 				'rating'     => (int)$result['rating'],
 				'date_added' => date($this->language->get('date_format_short'), strtotime($result['date_added'])),
-				'attachments' => [],
+				'attachments' => $this->model_catalog_review->getAttachmentsByReviewId($review_id)
 			);
-			if (!empty($result['filename'])) {
-				$data['reviews'][$review_id]['attachments'][] = $result['filename'];
-			}
-			$this->log->write($data['reviews'][$review_id]['attachments']);
-			$this->log->write($result['filename']);
 		}
 		$data['reviews'] = array_values($data['reviews']);
 

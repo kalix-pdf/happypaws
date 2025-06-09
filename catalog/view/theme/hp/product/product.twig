@@ -507,7 +507,7 @@ $('.selectable-option').on('click', function () {
 
   if (priceDelta !== null) {
 
-    lastTotalPrice = basePrice + priceDelta;
+    lastTotalPrice = priceDelta;
     $('#special-price').text(formatPrice(lastTotalPrice));
   } else {
     $('#special-price').text(formatPrice(basePrice));

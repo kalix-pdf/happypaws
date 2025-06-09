@@ -93,6 +93,34 @@ class ControllerExtensionPaymentHitPay extends Controller {
         
     }
 
+    public function webhook()
+    {
+        $json = file_get_contents('php://input');
+        $data = json_decode($json, true);
+
+        file_put_contents(DIR_LOGS . 'hitpay_webhook.log', print_r($data, true));
+    
+        http_response_code(200); 
+        echo 'Webhook received';
+
+        if (isset($data['status']) && $data['status'] === 'completed' && isset($data['reference_number'])) {
+            $order_id = $data['reference_number']; 
+            $this->load->model('checkout/order');
+
+            $order_info = $this->model_checkout_order->getOrder($order_id);
+            if ($order_info) {
+                $this->model_checkout_order->addPaymentStatus($order_id);
+                http_response_code(200); 
+                echo 'Webhook received';
+            } else {
+                http_response_code(404);
+                echo 'Order not found';
+            }
+        } else {
+            http_response_code(400);
+            echo 'Invalid webhook';
+        }
+    }
     
 }
 ?>

@@ -40,17 +40,15 @@
   <div class="alert alert-success alert-dismissible"><i class="fa fa-check-circle"></i> {{ success }}</div>
   {% endif %} #}
   
-  <div class="row">{{ column_left }}
-    {% if column_left and column_right %}
-    {% set class = 'col-sm-6' %}
-    {% elseif column_left or column_right %}
+  <div class="row">
+    {% if column_left or column_right %}
     {% set class = 'col-sm-9' %}
     {% else %}
     {% set class = 'col-sm-12' %}
     {% endif %}
     <div id="content" class="{{ class }}">{{ content_top }}
       <h2>My Purchase</h2>
-    {% if orders is defined and orders|length > 0 %}
+      {% if orders is defined and orders|length > 0 %}
        <div class="overflow-auto n">
         <ul class="nav nav-pills nav-fill flex-nowrap" role="tablist" style="min-width: 600px;">
           <li class="nav-item">
@@ -89,7 +87,6 @@
                         <td class="text-left">Product Name</td>
                         <td class="text-left">Quantity</td>
                         <td class="text-left">Status</td>
-                        <td class="text-left">Variety</td>
                       </tr>
                     </thead>
                     <tbody>
@@ -99,10 +96,9 @@
                           <td style="width: 250px;" class="text-center align-center">
                             <img src="{{ prod.image }}" alt="{{ prod.name }}" style="max-width: 120px; height: auto;" class="img-fluid rounded">
                           </td>
-                          <td class="text-left">{{ prod.name }}</td>
+                          <td class="text-left">{{ prod.name }}<br>{{ order.option_value }}</td>
                           <td class="text-center">{{ prod.quantity }}</td>
                           <td class="text-left">{{ order.status }}</td>
-                          <td class="text-left">{{ order.option_value }}</td>
                         </tr>
                       <tr>
                         <td class="text-left"><strong>Payment Method:</strong></td>
@@ -137,121 +133,256 @@
               </div>
               {% endif %}
             {% endfor %}
-        </div>
-
-      {# <div class="tab-pane fade" id="tab-to-ship">
-        {% for order in orders %}
-        {% if order.status == 'Processing' and order.status|length > 0 %}
-        <div class="alert alert-info alert-dismissible"><i class="fa fa-exclamation-circle">
-        </i> Seller is preparing to ship your parcel</div>
-          <div class="table-responsive">
-            <table class="table table-bordered table-hover">
-              <thead>
-                <td class="text-left">Order ID</td>
-                <td class="text-left">Tracking Number</td>
-                <td class="text-left">Product Name</td>
-                <td class="text-left">Quantity</td>
-                <td class="text-left">Status</td>
-                <td class="text-left">Store</td>
-              </thead>
-              <tbody>
-                {% set product_list = product_info[order.order_id] ?? [] %}
-                {% for prod in product_list %}
-                <tr>
-                  {% if loop.first %}
-                    <td class="text-left" rowspan="{{ product_list|length }}">{{ order.order_id }}</td>
-                  {% endif %}
-                    <td class="text-left">{{ order.tracking }}</td>
-                    <td class="text-left">{{ prod.name }}</td>
-                    <td class="text-center">{{ prod.quantity }}</td>
-                  {% if loop.first %}
-                    <td class="text-left" rowspan="{{ product_list|length }}">{{ order.status }}</td>
-                  {% endif %}
-                  {% if loop.first %}
-                    <td class="text-left"><a href="index.php?route=customerpartner/profile&seller_id={{prod.seller_id}}">{{ prod.store }}</a></td>
-                  {% endif %}
-                </tr>
-                {% endfor %}
-              <td class="text-right">   
-                <button  data-tracking="{{order.tracking}}"
-                  data-order-id="{{ order.order_id }}" 
-                 class="btn btn-danger text-right cancelOrderBtn">Cancel Order</button>
-              </td>
-              </tbody>
-            </table>
-          </div>
-        {% endif %}
-        {% else %}
-        <div class="alert alert-info alert-dismissible"><i class="fa fa-exclamation-circle">
-        </i> No orders for today</div>
-        {% endfor %}
       </div>
 
-      <div class="tab-pane" id="tab-to-receive">
-        {% for order in orders %}
-        {% if order.status == 'Picked-up' or order.status == 'In Transit' or order.status == 'Delivered' %}
-          <div class="table-responsive">
-          {% if order.status == 'Picked-up' and order.status|length > 0 %}
-            <div class="alert alert-info alert-dismissible"><i class="fa fa-exclamation-circle">
-             Your parcel has been picked-up by our logistics partner</i></div>
-          {% elseif order.status == 'In Transit' and order.status|length > 0 %}
-            <div class="alert alert-info alert-dismissible"><i class="fa fa-exclamation-circle">
-             Your parcel is on the way!</i></div>
-          {% elseif order.status == 'Delivered' and order.status|length > 0 %}
-            <div class="alert alert-info alert-dismissible"><i class="fa fa-exclamation-circle">
-             Click the order received button to confirm delivery</i></div>
-          {% else %}
-            <div class="alert alert-info alert-dismissible"><i class="fa fa-exclamation-circle">
-             No Orders for todays </i></div>
-          {% endif %}
-            <table class="table table-bordered table-hover">
-              <thead>
-                <td class="text-left">Order ID</td>
-                <td class="text-left">Tracking Number</td>
-                <td class="text-left">Product Name</td>
-                <td class="text-left">Quantity</td>
-                <td class="text-left">Status</td>
-                <td class="text-left">Store</td>
-              </thead>
-              <tbody>
-                {% set product_list = product_info[order.order_id] ?? [] %}
-                {% for prod in product_list %}
-                <tr>
-                  {% if loop.first %}
-                    <td class="text-left" rowspan="{{ product_list|length }}">{{ order.order_id }}</td>
-                  {% endif %}
-                    <td class="text-left">{{ order.tracking }}</td>
-                    <td class="text-left">{{ prod.name }}</td>
-                    <td class="text-center">{{ prod.quantity }}</td>
-                  {% if loop.first %}
-                    <td class="text-left" rowspan="{{ product_list|length }}">{{ order.status }}</td>
-                  {% endif %}
-                  {% if loop.first %}
-                    <td class="text-left"><a href="index.php?route=customerpartner/profile&seller_id={{prod.seller_id}}">{{ prod.store }}</a></td>
-                  {% endif %}
-                </tr>
-                {% endfor %}
-                {% if order.status == 'Picked-up' or order.status == 'In Transit' %}
-                  <td class="text-right">   
-                    <a href="index.php?route=account/order/info&order_id={{order.order_id}}" class="btn btn-primary text-right">Track Location</a>
-                  </td>
-                {% endif %}
-              {% if order.status == 'Delivered' %}
-                <td class="text-right">
-                    <button id="RcvdOrderBtn" data-tracking="{{order.order_id}}" class="btn btn-primary text-right">Order Received</button>
-                </td>
-                <td class="text-right">
-                    <button id="ReFundBtn" data-tracking="{{order.order_id}}" class="btn btn-danger text-right">Refund/Return</button>
-                </td>
+      <div class="tab-content">
+        <div class="tab-pane fade show" id="tab-to-ship">
+            {% for order in orders %}
+              {% if order.status == 'Processing' %}
+              <div class="card my-4">
+                <div class="card-header">
+                  <div class="alert alert-info alert-dismissible">
+                    <i class="fa fa-exclamation-circle"></i> Seller has approved your order. Seller is preparing to ship your parcel.
+                  </div>
+                </div>
+                <div class="table-responsive container mb-4">
+                  <table class="table table-bordered table-light">
+                    <thead>
+                      <tr>
+                        <td class="text-left">Image</td>
+                        <td class="text-left">Product Name</td>
+                        <td class="text-left">Quantity</td>
+                        <td class="text-left">Status</td>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      {% set product_list = product_info[order.order_id] ?? [] %}
+                      {% for prod in product_list %}
+                        <tr>
+                          <td style="width: 250px;" class="text-center align-center">
+                            <img src="{{ prod.image }}" alt="{{ prod.name }}" style="max-width: 120px; height: auto;" class="img-fluid rounded">
+                          </td>
+                          <td class="text-left">{{ prod.name }}<br>{{ order.option_value }}</td>
+                          <td class="text-center">{{ prod.quantity }}</td>
+                          <td class="text-left">{{ order.status }}</td>
+                        </tr>
+                      <tr>
+                        <td class="text-left">
+                          <strong>Total: </strong></td>
+                        <td class="text-left">
+                          {{ order.total }}
+                        </td>
+                      </tr>
+                      <tr>
+                        <td class="text-left">
+                          <strong>Tracking Number: </strong></td>
+                        <td class="text-left">
+                          {{ order.tracking }}
+                        </td>
+                      </tr>
+                      <tr>
+                        <td class="text-left"><strong>Payment Method:</strong></td>
+                        {% if order.payment_method == 'hitpay' %}
+                          <td colspan="3">Online Payment</td>
+                        {% else %}
+                          <td colspan="3">{{ order.payment_method }}</td>
+                        {% endif %}
+                      </tr>
+                      <tr>
+                        <td><strong>Payment Status:</strong></td>
+                        <td colspan="3">{{ order.payment_status }}</td>
+                      </tr>
+                      {% if order.payment_url %}
+                      <tr class="table-danger">
+                        <td><strong>Payment Link:</strong></td>
+                        <td colspan="3"><a class="text-decoration-none btn btn-primary" href="{{ order.payment_url }}">Pay Order<a></td>
+                      </tr>
+                      {% endif %}
+                      <tr>
+                        <td><strong>Store Owner:</strong></td>
+                        <td colspan="3"><a class="text-decoration-none" href="index.php?route=customerpartner/profile&seller_id={{prod.seller_id}}">{{ prod.store }} Shop</a></td>
+                      </tr>
+                    </tbody>
+                    {% endfor %}
+                  </table>
+                  <div class="d-flex justify-content-end">
+                    <button data-tracking="{{order.tracking}}" class="btn btn-danger text-right cancelOrderBtn">Cancel Order</button>
+                  </div>
+                </div>
+              </div>
               {% endif %}
-              </tbody>
-            </table>
-          </div>
-        {% endif %}
-        {% endfor %}
+            {% endfor %}
+      </div>
+
+      <div class="tab-content">
+        <div class="tab-pane fade show" id="tab-to-receive">
+            {% for order in orders %}
+              {% if order.status == 'Picked-up' or order.status == 'In Transit' or order.status == 'Delivered' %}
+              <div class="card my-4">
+                <div class="card-header">
+                 {% if order.status == 'Picked-up' and order.status|length > 0 %}
+                    <div class="alert alert-info alert-dismissible"><i class="fa fa-exclamation-circle">
+                    Your parcel has been picked-up by our logistics partner</i></div>
+                  {% elseif order.status == 'In Transit' and order.status|length > 0 %}
+                    <div class="alert alert-info alert-dismissible"><i class="fa fa-exclamation-circle">
+                    Your parcel is on the way!</i></div>
+                  {% elseif order.status == 'Delivered' and order.status|length > 0 %}
+                    <div class="alert alert-info alert-dismissible"><i class="fa fa-exclamation-circle">
+                    Click the order received button to confirm delivery</i></div>
+                  {% else %}
+                    <div class="alert alert-info alert-dismissible"><i class="fa fa-exclamation-circle">
+                    No Orders for todays </i></div>
+                {% endif %}
+                </div>
+                <div class="table-responsive container mb-4">
+                  <table class="table table-bordered table-light">
+                    <thead>
+                      <tr>
+                        <td class="text-left">Image</td>
+                        <td class="text-left">Product Name</td>
+                        <td class="text-left">Quantity</td>
+                        <td class="text-left">Status</td>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      {% set product_list = product_info[order.order_id] ?? [] %}
+                      {% for prod in product_list %}
+                        <tr>
+                          <td style="width: 250px;" class="text-center align-center">
+                            <img src="{{ prod.image }}" alt="{{ prod.name }}" style="max-width: 120px; height: auto;" class="img-fluid rounded">
+                          </td>
+                          <td class="text-left">{{ prod.name }}<br>{{ order.option_value }}</td>
+                          <td class="text-center">{{ prod.quantity }}</td>
+                          <td class="text-left">{{ order.status }}</td>
+                        </tr>
+                      <tr>
+                        <td class="text-left"><strong>Total: </strong></td>
+                        <td colspan="3">{{ order.total }}</td>
+                      </tr>
+                      <tr>
+                        <td class="text-left"><strong>Tracking Number: </strong></td>
+                        <td colspan="3">{{ order.tracking }}</td>
+                      </tr>
+                      <tr>
+                        <td class="text-left"><strong>Payment Method:</strong></td>
+                        {% if order.payment_method == 'hitpay' %}
+                          <td colspan="3">Online Payment</td>
+                        {% else %}
+                          <td colspan="3">{{ order.payment_method }}</td>
+                        {% endif %}
+                      </tr>
+                      <tr>
+                        <td><strong>Payment Status:</strong></td>
+                        <td colspan="3">{{ order.payment_status }}</td>
+                      </tr>
+                      {% if order.payment_url %}
+                      <tr class="table-danger">
+                        <td><strong>Payment Link:</strong></td>
+                        <td colspan="3"><a class="text-decoration-none btn btn-primary" href="{{ order.payment_url }}">Pay Order<a></td>
+                      </tr>
+                      {% endif %}
+                      <tr>
+                        <td><strong>Store Owner:</strong></td>
+                        <td colspan="3"><a class="text-decoration-none" href="index.php?route=customerpartner/profile&seller_id={{prod.seller_id}}">{{ prod.store }} Shop</a></td>
+                      </tr>
+                    </tbody>
+                    {% endfor %}
+                  </table>
+                  {% if order.status == 'Picked-up' or order.status == 'In Transit' %}
+                      <div class="d-flex justify-content-end">   
+                        <a href="index.php?route=account/order/info&order_id={{order.order_id}}" class="btn btn-primary text-right">Track Location</a>
+                      </div>
+                    {% endif %}
+                  {% if order.status == 'Delivered' %}
+                    <div class="d-flex justify-content-end gap-3">
+                        <button id="RcvdOrderBtn" data-tracking="{{order.order_id}}" class="btn btn-primary text-right">Order Received</button>
+                        <button id="ReFundBtn" data-tracking="{{order.order_id}}" class="btn btn-danger text-right">Refund/Return</button>
+                    </div>
+                  {% endif %}
+                </div>
+              </div>
+              {% endif %}
+            {% endfor %}
+        </div>
       </div>
       
-      <div class="tab-pane" id="tab-to-rate">
+      <div class="tab-content">
+        <div class="tab-pane fade show" id="tab-to-rate">
+            {% for order in orders %}
+              {% if order.status == 'To Rate' %}
+              <div class="card my-4">
+                <div class="card-header">
+                  <div class="alert alert-info alert-dismissible">
+                    <i class="fa fa-exclamation-circle"></i>Your Parcel has been Delivered
+                  </div>
+                </div>
+                <div class="table-responsive container mb-4">
+                  <table class="table table-bordered table-light">
+                    <thead>
+                      <tr>
+                        <td class="text-left">Image</td>
+                        <td class="text-left">Product Name</td>
+                        <td class="text-left">Quantity</td>
+                        <td class="text-left">Status</td>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      {% set product_list = product_info[order.order_id] ?? [] %}
+                      {% for prod in product_list %}
+                        <tr>
+                          <td style="width: 250px;" class="text-center align-center">
+                            <img src="{{ prod.image }}" alt="{{ prod.name }}" style="max-width: 120px; height: auto;" class="img-fluid rounded">
+                          </td>
+                          <td class="text-left">{{ prod.name }}<br>{{ order.option_value }}</td>
+                          <td class="text-center">{{ prod.quantity }}</td>
+                          <td class="text-left">{{ order.status }}</td>
+                        </tr>
+                      <tr>
+                        <td class="text-left"><strong>Total: </strong></td>
+                        <td colspan="3">{{ order.total }}</td>
+                      </tr>
+                      <tr>
+                        <td class="text-left"><strong>Tracking Number: </strong></td>
+                        <td colspan="3">{{ order.tracking }}</td>
+                      </tr>
+                      <tr>
+                        <td class="text-left"><strong>Payment Method:</strong></td>
+                        {% if order.payment_method == 'hitpay' %}
+                          <td colspan="3">Online Payment</td>
+                        {% else %}
+                          <td colspan="3">{{ order.payment_method }}</td>
+                        {% endif %}
+                      </tr>
+                      <tr>
+                        <td><strong>Payment Status:</strong></td>
+                        <td colspan="3">{{ order.payment_status }}</td>
+                      </tr>
+                      {% if order.payment_url %}
+                      <tr class="table-danger">
+                        <td><strong>Payment Link:</strong></td>
+                        <td colspan="3"><a class="text-decoration-none btn btn-primary" href="{{ order.payment_url }}">Pay Order<a></td>
+                      </tr>
+                      {% endif %}
+                      <tr>
+                        <td><strong>Store Owner:</strong></td>
+                        <td colspan="3"><a class="text-decoration-none" href="index.php?route=customerpartner/profile&seller_id={{prod.seller_id}}">{{ prod.store }} Shop</a></td>
+                      </tr>
+                    </tbody>
+                    {% endfor %}
+                  </table>
+                  <div class="d-flex justify-content-end gap-3">   
+                    <a href="index.php?route=product/product&product_id={{prod.product_id}}" class="btn btn-primary text-right">Rate</a>
+                
+                    <a href="index.php?route=account/order/info&order_id={{order.order_id}}" class="btn btn-primary text-right">View order</a>
+                  </div>
+                </div>
+              </div>
+              {% endif %}
+            {% endfor %}
+          </div>
+      </div>
+
+      {#<div class="tab-pane" id="tab-to-rate">
         <div class="alert alert-info alert-dismissible"><i class="fa fa-exclamation-circle">
         </i> Your Parcel has been Delivered</div>
         {% for order in orders %}
@@ -344,13 +475,12 @@
             {% endfor %}
         </div>
     </div>
-  {% else %}
-  <p>You have no product purchase history. Order now!</p>
-  {% endif %}
-      {# {{ content_bottom }} #}
-      </div>
-    {{ column_right }}
+    {% else %}
+    <p>You have no product purchase history. Order now!</p>
+    {% endif %}
     </div>
+  </div>
+  {{ column_right }}
 </div>
 </div>
 {{ footer }}

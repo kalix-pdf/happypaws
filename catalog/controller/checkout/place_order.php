@@ -101,10 +101,13 @@ class ControllerCheckoutPlaceOrder extends Controller {
 					'subtract'   => $product['subtract'],
 					'price'      => $product['price'],
 					'tax'        => $this->tax->getTax($product['price'], $product['tax_class_id']),
+					'total'		 => $product['total'] * $product['quantity'],
 					'reward'     => $product['reward']
 				);
 				
 			}
+
+			$order_data['invoice_prefix'] = $this->config->get('config_invoice_prefix');
 
 			$order_data['comment'] = '';
 			$order_data['affiliate_id'] = 0;

@@ -394,13 +394,12 @@ class ControllerExtensionFlashExpressAPI extends Controller {
             foreach ($category as $categoryn) {
                 $category_id = $categoryn['category_id'];
                 $categorynames[] = $this->model_customerpartner_master->getCategoryName($category_id);
-                
             }
 
             $product_data[] = [
                 "itemName" => $product['name'],
                 //"weight" => (int) $weight,
-                "category" => $categorynames[1],
+                "category" => isset($categorynames[1]) ? $categorynames : $categorynames[0],
                 "height" => $height,
                 "width" => $width,
                 "length" => $length,
@@ -543,36 +542,4 @@ class ControllerExtensionFlashExpressAPI extends Controller {
     }
 
 }
-
-// $data['order_data'] = json_encode($order_data, JSON_PRETTY_PRINT); 
-        // $this->response->setOutput($this->load->view('common/flashexpress_fetchdata', $data));
-    
- // foreach ($products as $product)
-        // {
-        //     $order_data['items'] = array(
-        //         "COD Enabled" => ($order_info['payment_method'] == 'Cash On Delivery') ? 1 : 0,
-        //         "Mode of Payment" => $order_info['payment_method'],
-        //         "Product" => $product['name'],
-        //         "Model" => $product['model'],
-        //         "Quantity" => $product['quantity'],
-        //         "Total in cents" => number_format($order_info['total'] * $peso_amount, 0, ',', ','),
-        //         "Express category" => 1,
-        
-        //     );
-        // }  
-    
-        //$category_list = implode(', ', $categorynames);
-        
-        // $order_data['seller'] = array(
-        //     "Article Category" => $category_list,
-        //     "Seller name" => $partner['firstname'] . ' ' . $partner['lastname'],
-        //     "Seller Store" => $partner['companyname'],
-        //     "Seller Phone" => $partner['telephone'],
-        //     "Seller Province" => $province['name'],
-        //     "Seller City"=> $partner['city'],
-        //     "Seller Address" => $partner['address_1'],
-        //     "postcode" => $partner['postcode'], 
-        //     "Country" => $partner['country'],
-        // );
-
 ?>
