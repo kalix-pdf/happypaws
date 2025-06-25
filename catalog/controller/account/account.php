@@ -66,18 +66,6 @@ class ControllerAccountAccount extends Controller {
 			$product_total = $this->model_account_order->getTotalOrderProductsByOrderId($result['order_id']);
 			$voucher_total = $this->model_account_order->getTotalOrderVouchersByOrderId($result['order_id']);
 
-			$order_option = $this->model_account_order->getOrderOptions($result['order_id']);
-			
-			$option_names = [];
-			$option_values = [];
-
-			foreach ($order_option as $option) {
-				$option_names[] = $option['name'];
-				$option_values[] = $option['value'];
-			}
-
-			//$track_no = $this->model_account_order->getOrder($result['order_id']);
-
 			$data['orders'][] = array(
 				'order_id'   => $result['order_id'],
 				'name'       => $result['firstname'] . ' ' . $result['lastname'],
@@ -86,8 +74,6 @@ class ControllerAccountAccount extends Controller {
 				'payment_status' => $result['payment_status'],
 				'payment_url' => $result['payment_url'],
 				'payment_method' => $result['payment_method'],
-				'option_name' => implode(', ', $option_names),
-    			'option_value' => implode(', ', $option_values),
 				'date_added' => date($this->language->get('date_format_short'), strtotime($result['date_added'])),
 				'products'   => ($product_total + $voucher_total),
 				'total'      => $this->currency->format($result['total'], $result['currency_code'], $result['currency_value']),
@@ -98,7 +84,17 @@ class ControllerAccountAccount extends Controller {
 			foreach($products as $product)
 			{
 				$check_seller = $this->model_account_customerpartner->getProductSellerDetails($product['product_id']);
-            	$partner = $this->model_customerpartner_master->getProfile($check_seller['customer_id']);  
+            	$partner = $this->model_customerpartner_master->getProfile($check_seller['customer_id']); 
+
+				$order_option = $this->model_account_order->getOrderOptions($result['order_id'], $product['order_product_id']);
+
+				$options = [];
+				foreach ($order_option as $option) {
+					$options[] = array(
+						'name'  => $option['name'],
+						'value' => $option['value']
+					);
+				} 
 
 				$imagefile = $this->model_account_order->getProductImage($product['product_id']);
 
@@ -110,7 +106,8 @@ class ControllerAccountAccount extends Controller {
 					'store' => $partner['companyname'],
 					'seller_id' => $partner['customer_id'],
 					'product_id' => $product['product_id'],
-					'image' => $image
+					'image' => $image,
+					'options'    => $options
 				);
 			}
 		}

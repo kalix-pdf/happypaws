@@ -13,6 +13,9 @@ class ControllerProductProduct extends Controller {
 		);
 
 		$this->load->model('catalog/category');
+		
+		$this->load->model('account/customerpartner');
+		$this->load->model('customerpartner/master');
 
 		if (isset($this->request->get['path'])) {
 			$path = '';
@@ -469,6 +472,12 @@ class ControllerProductProduct extends Controller {
 					);
 				}
 			}
+			
+			$check_seller = $this->model_account_customerpartner->getProductSellerDetails($this->request->get['product_id']);
+			$partner = $this->model_customerpartner_master->getProfile($check_seller['customer_id']);
+			
+			$data['is_logged'] = $this->customer->isLogged();
+			$data['seller_is_logged'] = $partner['customer_id'];
 
 			$data['recurrings'] = $this->model_catalog_product->getProfiles($this->request->get['product_id']);
 
@@ -564,6 +573,8 @@ class ControllerProductProduct extends Controller {
 		$this->load->language('product/product');
 
 		$this->load->model('catalog/review');
+		$this->load->model('account/customerpartner');
+		$this->load->model('customerpartner/master');
 
 		if (isset($this->request->get['page'])) {
 			$page = (int)$this->request->get['page'];
@@ -576,6 +587,12 @@ class ControllerProductProduct extends Controller {
 		$review_total = $this->model_catalog_review->getTotalReviewsByProductId($this->request->get['product_id']);
 
 		$results = $this->model_catalog_review->getReviewsByProductId($this->request->get['product_id'], ($page - 1) * 5, 5);
+		
+		$check_seller = $this->model_account_customerpartner->getProductSellerDetails($this->request->get['product_id']);
+		$partner = $this->model_customerpartner_master->getProfile($check_seller['customer_id']);
+		$data['is_logged'] = $this->customer->isLogged();
+		$data['seller_is_logged'] = $partner['customer_id'];
+		$data['login'] = $this->url->link('account/login', '', true);
 
 		foreach ($results as $result) {
 			$review_id = $result['review_id'];
@@ -585,7 +602,9 @@ class ControllerProductProduct extends Controller {
 				'text'       => nl2br($result['text']),
 				'rating'     => (int)$result['rating'],
 				'date_added' => date($this->language->get('date_format_short'), strtotime($result['date_added'])),
-				'attachments' => $this->model_catalog_review->getAttachmentsByReviewId($review_id)
+				'attachments' => $this->model_catalog_review->getAttachmentsByReviewId($review_id),
+				'review_id'  => $review_id,
+				'seller_reply' => isset($result['seller_reply']) ? $result['seller_reply'] : null
 			);
 		}
 		$data['reviews'] = array_values($data['reviews']);
@@ -593,11 +612,15 @@ class ControllerProductProduct extends Controller {
 		$pagination = new Pagination();
 		$pagination->total = $review_total;
 		$pagination->page = $page;
-		$pagination->limit = 5;
+		$pagination->limit = 5;	
 		$pagination->url = $this->url->link('product/product/review', 'product_id=' . $this->request->get['product_id'] . '&page={page}');
+
+		$data['current_page'] = $page;
+		$data['total_pages'] = ceil($review_total / 5);
 
 		$data['pagination'] = $pagination->render();
 
+		$data['pagination_url'] = $this->url->link('product/product/review', 'product_id=' . (int)$this->request->get['product_id'] . '&page=');
 		$data['results'] = sprintf($this->language->get('text_pagination'), ($review_total) ? (($page - 1) * 5) + 1 : 0, ((($page - 1) * 5) > ($review_total - 5)) ? $review_total : ((($page - 1) * 5) + 5), $review_total, ceil($review_total / 5));
 
 		return $this->load->view('product/review', $data);
@@ -659,15 +682,7 @@ class ControllerProductProduct extends Controller {
 						$this->request->post['attachments'] = $uploaded_files;
 					}
 				} 
-					else {
-						$json['error'] = 'No files uploaded!';
-					}
-
 				
-				// if ((utf8_strlen($this->request->post['name']) < 3) || (utf8_strlen($this->request->post['name']) > 25)) {
-				// 	$json['error'] = $this->language->get('error_name');
-				// }
-
 				if ((utf8_strlen($this->request->post['text']) < 5) || (utf8_strlen($this->request->post['text']) > 1000)) {
 					$json['error'] = $this->language->get('error_text');
 				}
@@ -685,6 +700,8 @@ class ControllerProductProduct extends Controller {
 					}
 				}
 
+				$this->request->post['name'] = $reviewer_name;
+
 				if (!isset($json['error'])) {
 					$this->load->model('catalog/review');
 
@@ -697,7 +714,7 @@ class ControllerProductProduct extends Controller {
 						}
 					}
 
-					$json['success'] = $this->language->get('text_success');
+					$json['success'] = "Thank you for your review. It has been submitted for approval.";
 				}
 			}
 		} else {
@@ -768,4 +785,26 @@ class ControllerProductProduct extends Controller {
 		$this->response->addHeader('Content-Type: application/json');
 		$this->response->setOutput(json_encode($json));
 	}
+
+	public function reply() {
+		$this->load->language('product/product');
+  		$json = [];
+
+		if (isset($this->request->post['review_id']) && isset($this->request->post['reply'])) {
+			$review_id = (int)$this->request->post['review_id'];
+			$reply = $this->request->post['reply'];
+
+			$this->db->query("UPDATE " . DB_PREFIX . "review SET seller_reply = '" . $this->db->escape($reply) . 
+			"' WHERE review_id = '" . (int)$review_id . "'");
+			
+			$json['success'] = 'Reply Posted Successfully!';
+		} else {
+			$json['error'] = 'Error, No review ID';
+		}
+		
+	
+		$this->response->addHeader('Content-Type: application/json');
+  		$this->response->setOutput(json_encode($json));
+	}
+
 }

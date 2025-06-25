@@ -515,25 +515,19 @@ class ControllerExtensionFlashExpressAPI extends Controller {
             "nonceStr" => time()
         );
 
-        //print_r($this->Warehouse( $warehouse_arr));
         list($apiResponse, $parcelNumber) = $this->CreateOrder($order_data);
-        $jsonObj = $this->queryParcel($parcelNumber);
-        // print_r($apiResponse);
-        // print_r($this->acceptOrder($order_id, $parcelNumber));
-        $this->acceptOrder($order_id, $parcelNumber);
-        $download_inv = $this->queryPrePrint($parcelNumber);
+        if ($parcelNumber) {
+            $jsonObj = $this->queryParcel($parcelNumber);
+            $this->acceptOrder($order_id, $parcelNumber);
+            $download_inv = $this->queryPrePrint($parcelNumber);
 
-        $this->db->query("UPDATE `" . DB_PREFIX . "customerpartner_to_order` SET flash_inv = '" . $this->db->escape($download_inv) . "' WHERE order_id = '" . (int)$order_id . "'");
+            $this->db->query("UPDATE `" . DB_PREFIX . "customerpartner_to_order` SET flash_inv = '" . $this->db->escape($download_inv) . "' WHERE order_id = '" . (int)$order_id . "'");
 
-        //for debugging
-        // echo '<pre>';
-        // var_dump($jsonObj);
-        // echo '</pre>';
-
-        // echo '<pre>';
-        // print_r($order_data);
-        // echo '</pre>';
-        $json['success'] = 'Order accepted';    
+            $json['success'] = 'Order accepted';    
+        } else {
+            $json['error'] = 'Error while accepting your order, try contacting the support or admin';    
+        }
+        
     }
     else {
         $json['error'] = 'Missing order ID';

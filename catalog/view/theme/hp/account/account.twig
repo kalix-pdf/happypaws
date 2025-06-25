@@ -71,153 +71,213 @@
     
       <div class="tab-content">
         <div class="tab-pane fade show active" id="tab-to-pay">
-            {% for order in orders %}
-              {% if order.status == 'Pending' and order.status|length > 0 %}
+          {% for order in orders %}
+            {% if order.status == 'Pending' and order.status|length > 0 %}
+              {% set product_list = product_info[order.order_id] ?? [] %}
+              {% set grouped = {} %}
+
+              {% for prod in product_list %}
+                {% set seller = prod.store %}
+                {% if grouped[seller] is not defined %}
+                  {% set grouped = grouped | merge({ (seller): [] }) %}
+                {% endif %}
+                {% set grouped = grouped | merge({ (seller): grouped[seller] | merge([prod]) }) %}
+              {% endfor %}
+
               <div class="card my-4">
                 <div class="card-header">
                   <div class="alert alert-info alert-dismissible">
                     <i class="fa fa-exclamation-circle"></i> Waiting for Seller to approve your order
                   </div>
                 </div>
-                <div class="table-responsive container mb-4">
-                  <table class="table table-bordered table-light">
-                    <thead>
-                      <tr>
-                        <td class="text-left">Image</td>
-                        <td class="text-left">Product Name</td>
-                        <td class="text-left">Quantity</td>
-                        <td class="text-left">Status</td>
-                      </tr>
-                    </thead>
-                    <tbody>
-                      {% set product_list = product_info[order.order_id] ?? [] %}
-                      {% for prod in product_list %}
-                        <tr>
-                          <td style="width: 250px;" class="text-center align-center">
-                            <img src="{{ prod.image }}" alt="{{ prod.name }}" style="max-width: 120px; height: auto;" class="img-fluid rounded">
-                          </td>
-                          <td class="text-left">{{ prod.name }}<br>{{ order.option_value }}</td>
-                          <td class="text-center">{{ prod.quantity }}</td>
-                          <td class="text-left">{{ order.status }}</td>
-                        </tr>
-                      <tr>
-                        <td class="text-left"><strong>Payment Method:</strong></td>
-                        {% if order.payment_method == 'hitpay' %}
-                          <td colspan="3">Online Payment</td>
-                        {% else %}
-                          <td colspan="3">{{ order.payment_method }}</td>
-                        {% endif %}
-                      </tr>
-                      <tr>
-                        <td><strong>Payment Status:</strong></td>
-                        <td colspan="3">{{ order.payment_status }}</td>
-                      </tr>
-                      {% if order.payment_url %}
-                      <tr class="table-danger">
-                        <td><strong>Payment Link:</strong></td>
-                        <td colspan="3"><a class="text-decoration-none btn btn-primary" href="{{ order.payment_url }}">Pay Order<a></td>
-                      </tr>
-                      {% endif %}
-                      <tr>
-                        <td><strong>Store Owner:</strong></td>
-                        <td colspan="3"><a class="text-decoration-none" href="index.php?route=customerpartner/profile&seller_id={{prod.seller_id}}">{{ prod.store }} Shop</a></td>
-                      </tr>
-                    </tbody>
-                    {% endfor %}
-                  </table>
-                  <div class="d-flex justify-content-end">
-                    <button id="cancelOrderBtnFromPending" data-tracking="{{order.order_id}}" class="btn btn-danger">Cancel Order</button>
-                  </div>
-                </div>
-                
-              </div>
-              {% endif %}
-            {% endfor %}
-      </div>
 
+                {% for seller, products in grouped %}
+                  <div class="table-responsive container mb-4">
+                    <table class="table table-bordered table-light">
+                      <thead>
+                        <tr>
+                          <td class="text-left">Image</td>
+                          <td class="text-left">Product Name</td>
+                          <td class="text-left">Quantity</td>
+                          <td class="text-left">Status</td>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        {% for prod in products %}
+                          <tr>
+                            <td style="width: 250px;" class="text-center align-center">
+                              <img src="{{ prod.image }}" alt="{{ prod.name }}" style="max-width: 120px; height: auto;" class="img-fluid rounded">
+                            </td>
+                            <td class="text-left">
+                              {{ prod.name }}
+                              {% if prod.options %}
+                                <ul class="mt-2 mb-0">
+                                  {% for option in prod.options %}
+                                    <li><strong>{{ option.name }}:</strong> {{ option.value }}</li>
+                                  {% endfor %}
+                                </ul>
+                              {% endif %}
+                            </td>
+                            <td class="text-center">{{ prod.quantity }}</td>
+                            <td class="text-left">{{ order.status }}</td>
+                          </tr>
+                        {% endfor %}
+
+                        <tr>
+                          <td class="text-left"><strong>Payment Method:</strong></td>
+                          <td colspan="3">
+                            {% if order.payment_method == 'hitpay' %}
+                              Online Payment
+                            {% else %}
+                              {{ order.payment_method }}
+                            {% endif %}
+                          </td>
+                        </tr>
+                        <tr>
+                          <td><strong>Payment Status:</strong></td>
+                          <td colspan="3">{{ order.payment_status }}</td>
+                        </tr>
+                        {% if order.payment_url %}
+                          <tr class="table-danger">
+                            <td><strong>Payment Link:</strong></td>
+                            <td colspan="3">
+                              <a class="text-decoration-none btn btn-primary" href="{{ order.payment_url }}">Pay Order</a>
+                            </td>
+                          </tr>
+                        {% endif %}
+                        <tr>
+                          <td><strong>Store Owner:</strong></td>
+                          <td colspan="3">
+                            <a class="text-decoration-none" href="index.php?route=customerpartner/profile&seller_id={{ products[0].seller_id }}">
+                              {{ seller }} Shop
+                            </a>
+                          </td>
+                        </tr>
+                      </tbody>
+                    </table>
+                  </div>
+                {% endfor %}
+
+                <div class="d-flex justify-content-end px-3 pb-3">
+                  <button id="cancelOrderBtnFromPending" data-tracking="{{ order.order_id }}" class="btn btn-danger">Cancel Order</button>
+                </div>
+              </div>
+            {% endif %}
+          {% endfor %}
+        </div>
+      
       <div class="tab-content">
         <div class="tab-pane fade show" id="tab-to-ship">
-            {% for order in orders %}
-              {% if order.status == 'Processing' %}
+          {% for order in orders %}
+            {% if order.status == 'Processing' %}
+              {% set product_list = product_info[order.order_id] ?? [] %}
+              {% set grouped = {} %}
+
+              {% for prod in product_list %}
+                {% set seller = prod.store %}
+                {% if grouped[seller] is not defined %}
+                  {% set grouped = grouped | merge({ (seller): [] }) %}
+                {% endif %}
+                {% set grouped = grouped | merge({ (seller): grouped[seller] | merge([prod]) }) %}
+              {% endfor %}
+
               <div class="card my-4">
                 <div class="card-header">
                   <div class="alert alert-info alert-dismissible">
                     <i class="fa fa-exclamation-circle"></i> Seller has approved your order. Seller is preparing to ship your parcel.
                   </div>
                 </div>
-                <div class="table-responsive container mb-4">
-                  <table class="table table-bordered table-light">
-                    <thead>
-                      <tr>
-                        <td class="text-left">Image</td>
-                        <td class="text-left">Product Name</td>
-                        <td class="text-left">Quantity</td>
-                        <td class="text-left">Status</td>
-                      </tr>
-                    </thead>
-                    <tbody>
-                      {% set product_list = product_info[order.order_id] ?? [] %}
-                      {% for prod in product_list %}
+
+                {% for seller, products in grouped %}
+                  <div class="table-responsive container mb-4">
+                    <table class="table table-bordered table-light">
+                      <thead>
                         <tr>
-                          <td style="width: 250px;" class="text-center align-center">
-                            <img src="{{ prod.image }}" alt="{{ prod.name }}" style="max-width: 120px; height: auto;" class="img-fluid rounded">
-                          </td>
-                          <td class="text-left">{{ prod.name }}<br>{{ order.option_value }}</td>
-                          <td class="text-center">{{ prod.quantity }}</td>
-                          <td class="text-left">{{ order.status }}</td>
+                          <td class="text-left">Image</td>
+                          <td class="text-left">Product Name</td>
+                          <td class="text-left">Quantity</td>
+                          <td class="text-left">Status</td>
                         </tr>
-                      <tr>
-                        <td class="text-left">
-                          <strong>Total: </strong></td>
-                        <td class="text-left">
-                          {{ order.total }}
-                        </td>
-                      </tr>
-                      <tr>
-                        <td class="text-left">
-                          <strong>Tracking Number: </strong></td>
-                        <td class="text-left">
-                          {{ order.tracking }}
-                        </td>
-                      </tr>
-                      <tr>
-                        <td class="text-left"><strong>Payment Method:</strong></td>
-                        {% if order.payment_method == 'hitpay' %}
-                          <td colspan="3">Online Payment</td>
-                        {% else %}
-                          <td colspan="3">{{ order.payment_method }}</td>
+                      </thead>
+                      <tbody>
+                        {% for prod in products %}
+                          <tr>
+                            <td style="width: 250px;" class="text-center align-center">
+                              <img src="{{ prod.image }}" alt="{{ prod.name }}" style="max-width: 120px; height: auto;" class="img-fluid rounded">
+                            </td>
+                            <td class="text-left">
+                              {{ prod.name }}
+                              {% if prod.options %}
+                                <ul class="mt-2 mb-0">
+                                  {% for option in prod.options %}
+                                    <li><strong>{{ option.name }}:</strong> {{ option.value }}</li>
+                                  {% endfor %}
+                                </ul>
+                              {% endif %}
+                            </td>
+                            <td class="text-center">{{ prod.quantity }}</td>
+                            <td class="text-left">{{ order.status }}</td>
+                          </tr>
+                        {% endfor %}
+
+                        <tr>
+                          <td class="text-left"><strong>Payment Method:</strong></td>
+                          <td colspan="3">
+                            {% if order.payment_method == 'hitpay' %}
+                              Online Payment
+                            {% else %}
+                              {{ order.payment_method }}
+                            {% endif %} | Total: {{ order.total }}
+                          </td>
+                        </tr>
+                        <tr>
+                          <td><strong>Payment Status:</strong></td>
+                          <td colspan="3">{{ order.payment_status }}</td>
+                        </tr>
+                        {% if order.payment_url %}
+                          <tr class="table-danger">
+                            <td><strong>Payment Link:</strong></td>
+                            <td colspan="3">
+                              <a class="text-decoration-none btn btn-primary" href="{{ order.payment_url }}">Pay Order</a>
+                            </td>
+                          </tr>
                         {% endif %}
-                      </tr>
-                      <tr>
-                        <td><strong>Payment Status:</strong></td>
-                        <td colspan="3">{{ order.payment_status }}</td>
-                      </tr>
-                      {% if order.payment_url %}
-                      <tr class="table-danger">
-                        <td><strong>Payment Link:</strong></td>
-                        <td colspan="3"><a class="text-decoration-none btn btn-primary" href="{{ order.payment_url }}">Pay Order<a></td>
-                      </tr>
-                      {% endif %}
-                      <tr>
-                        <td><strong>Store Owner:</strong></td>
-                        <td colspan="3"><a class="text-decoration-none" href="index.php?route=customerpartner/profile&seller_id={{prod.seller_id}}">{{ prod.store }} Shop</a></td>
-                      </tr>
-                    </tbody>
-                    {% endfor %}
-                  </table>
-                  <div class="d-flex justify-content-end">
-                    <button data-tracking="{{order.tracking}}" class="btn btn-danger text-right cancelOrderBtn">Cancel Order</button>
+                        <tr>
+                          <td><strong>Store Owner:</strong></td>
+                          <td colspan="3">
+                            <a class="text-decoration-none" href="index.php?route=customerpartner/profile&seller_id={{ products[0].seller_id }}">
+                              {{ seller }} Shop
+                            </a>
+                          </td>
+                        </tr>
+                      </tbody>
+                    </table>
                   </div>
+                {% endfor %}
+
+                <div class="d-flex justify-content-end">
+                  <button data-tracking="{{order.tracking}}" class="btn btn-danger text-right cancelOrderBtn">Cancel Order</button>
                 </div>
               </div>
-              {% endif %}
-            {% endfor %}
-      </div>
+            {% endif %}
+          {% endfor %}
+        </div>
 
       <div class="tab-content">
         <div class="tab-pane fade show" id="tab-to-receive">
-            {% for order in orders %}
-              {% if order.status == 'Picked-up' or order.status == 'In Transit' or order.status == 'Delivered' %}
+          {% for order in orders %}
+            {% if order.status == 'Picked-up' or order.status == 'In Transit' or order.status == 'Delivered' %}
+              {% set product_list = product_info[order.order_id] ?? [] %}
+              {% set grouped = {} %}
+
+              {% for prod in product_list %}
+                {% set seller = prod.store %}
+                {% if grouped[seller] is not defined %}
+                  {% set grouped = grouped | merge({ (seller): [] }) %}
+                {% endif %}
+                {% set grouped = grouped | merge({ (seller): grouped[seller] | merge([prod]) }) %}
+              {% endfor %}
+
               <div class="card my-4">
                 <div class="card-header">
                  {% if order.status == 'Picked-up' and order.status|length > 0 %}
@@ -234,246 +294,279 @@
                     No Orders for todays </i></div>
                 {% endif %}
                 </div>
-                <div class="table-responsive container mb-4">
-                  <table class="table table-bordered table-light">
-                    <thead>
-                      <tr>
-                        <td class="text-left">Image</td>
-                        <td class="text-left">Product Name</td>
-                        <td class="text-left">Quantity</td>
-                        <td class="text-left">Status</td>
-                      </tr>
-                    </thead>
-                    <tbody>
-                      {% set product_list = product_info[order.order_id] ?? [] %}
-                      {% for prod in product_list %}
+
+                {% for seller, products in grouped %}
+                  <div class="table-responsive container mb-4">
+                    <table class="table table-bordered table-light">
+                      <thead>
                         <tr>
-                          <td style="width: 250px;" class="text-center align-center">
-                            <img src="{{ prod.image }}" alt="{{ prod.name }}" style="max-width: 120px; height: auto;" class="img-fluid rounded">
-                          </td>
-                          <td class="text-left">{{ prod.name }}<br>{{ order.option_value }}</td>
-                          <td class="text-center">{{ prod.quantity }}</td>
-                          <td class="text-left">{{ order.status }}</td>
+                          <td class="text-left">Image</td>
+                          <td class="text-left">Product Name</td>
+                          <td class="text-left">Quantity</td>
+                          <td class="text-left">Status</td>
                         </tr>
-                      <tr>
-                        <td class="text-left"><strong>Total: </strong></td>
-                        <td colspan="3">{{ order.total }}</td>
-                      </tr>
-                      <tr>
-                        <td class="text-left"><strong>Tracking Number: </strong></td>
-                        <td colspan="3">{{ order.tracking }}</td>
-                      </tr>
-                      <tr>
-                        <td class="text-left"><strong>Payment Method:</strong></td>
-                        {% if order.payment_method == 'hitpay' %}
-                          <td colspan="3">Online Payment</td>
-                        {% else %}
-                          <td colspan="3">{{ order.payment_method }}</td>
+                      </thead>
+                      <tbody>
+                        {% for prod in products %}
+                          <tr>
+                            <td style="width: 250px;" class="text-center align-center">
+                              <img src="{{ prod.image }}" alt="{{ prod.name }}" style="max-width: 120px; height: auto;" class="img-fluid rounded">
+                            </td>
+                            <td class="text-left">
+                              {{ prod.name }}
+                              {% if prod.options %}
+                                <ul class="mt-2 mb-0">
+                                  {% for option in prod.options %}
+                                    <li><strong>{{ option.name }}:</strong> {{ option.value }}</li>
+                                  {% endfor %}
+                                </ul>
+                              {% endif %}
+                            </td>
+                            <td class="text-center">{{ prod.quantity }}</td>
+                            <td class="text-left">{{ order.status }}</td>
+                          </tr>
+                        {% endfor %}
+
+                        <tr>
+                          <td class="text-left"><strong>Payment Method:</strong></td>
+                          <td colspan="3">
+                            {% if order.payment_method == 'hitpay' %}
+                              Online Payment
+                            {% else %}
+                              {{ order.payment_method }}
+                            {% endif %}
+                          </td>
+                        </tr>
+                        <tr>
+                          <td><strong>Payment Status:</strong></td>
+                          <td colspan="3">{{ order.payment_status }}</td>
+                        </tr>
+                        {% if order.payment_url %}
+                          <tr class="table-danger">
+                            <td><strong>Payment Link:</strong></td>
+                            <td colspan="3">
+                              <a class="text-decoration-none btn btn-primary" href="{{ order.payment_url }}">Pay Order</a>
+                            </td>
+                          </tr>
                         {% endif %}
-                      </tr>
-                      <tr>
-                        <td><strong>Payment Status:</strong></td>
-                        <td colspan="3">{{ order.payment_status }}</td>
-                      </tr>
-                      {% if order.payment_url %}
-                      <tr class="table-danger">
-                        <td><strong>Payment Link:</strong></td>
-                        <td colspan="3"><a class="text-decoration-none btn btn-primary" href="{{ order.payment_url }}">Pay Order<a></td>
-                      </tr>
-                      {% endif %}
-                      <tr>
-                        <td><strong>Store Owner:</strong></td>
-                        <td colspan="3"><a class="text-decoration-none" href="index.php?route=customerpartner/profile&seller_id={{prod.seller_id}}">{{ prod.store }} Shop</a></td>
-                      </tr>
-                    </tbody>
-                    {% endfor %}
-                  </table>
-                  {% if order.status == 'Picked-up' or order.status == 'In Transit' %}
-                      <div class="d-flex justify-content-end">   
-                        <a href="index.php?route=account/order/info&order_id={{order.order_id}}" class="btn btn-primary text-right">Track Location</a>
-                      </div>
-                    {% endif %}
-                  {% if order.status == 'Delivered' %}
-                    <div class="d-flex justify-content-end gap-3">
-                        <button id="RcvdOrderBtn" data-tracking="{{order.order_id}}" class="btn btn-primary text-right">Order Received</button>
-                        <button id="ReFundBtn" data-tracking="{{order.order_id}}" class="btn btn-danger text-right">Refund/Return</button>
-                    </div>
-                  {% endif %}
-                </div>
-              </div>
-              {% endif %}
-            {% endfor %}
+                        <tr>
+                          <td><strong>Store Owner:</strong></td>
+                          <td colspan="3">
+                            <a class="text-decoration-none" href="index.php?route=customerpartner/profile&seller_id={{ products[0].seller_id }}">
+                              {{ seller }} Shop
+                            </a>
+                          </td>
+                        </tr>
+                      </tbody>
+                    </table>
+                  </div>
+                {% endfor %}
+                {% if order.status == 'Picked-up' or order.status == 'In Transit' %}
+                  <div class="d-flex justify-content-end">   
+                    <a href="index.php?route=account/order/info&order_id={{order.order_id}}" class="btn btn-primary text-right">Track Location</a>
+                  </div>
+                {% endif %}
+                {% if order.status == 'Delivered' %}
+                  <div class="d-flex justify-content-end gap-3">
+                    <button id="RcvdOrderBtn" data-tracking="{{order.order_id}}" class="btn btn-primary text-right">Order Received</button>
+                    <button id="ReFundBtn" data-tracking="{{order.order_id}}" class="btn btn-danger text-right">Refund/Return</button>
+                  </div>
+                {% endif %}
+            {% endif %}
+          {% endfor %}
         </div>
       </div>
       
       <div class="tab-content">
         <div class="tab-pane fade show" id="tab-to-rate">
-            {% for order in orders %}
-              {% if order.status == 'To Rate' %}
+          {% for order in orders %}
+            {% if order.status == 'To Rate' %}
+              {% set product_list = product_info[order.order_id] ?? [] %}
+              {% set grouped = {} %}
+
+              {% for prod in product_list %}
+                {% set seller = prod.store %}
+                {% if grouped[seller] is not defined %}
+                  {% set grouped = grouped | merge({ (seller): [] }) %}
+                {% endif %}
+                {% set grouped = grouped | merge({ (seller): grouped[seller] | merge([prod]) }) %}
+              {% endfor %}
+
               <div class="card my-4">
                 <div class="card-header">
                   <div class="alert alert-info alert-dismissible">
                     <i class="fa fa-exclamation-circle"></i>Your Parcel has been Delivered
                   </div>
                 </div>
-                <div class="table-responsive container mb-4">
-                  <table class="table table-bordered table-light">
-                    <thead>
-                      <tr>
-                        <td class="text-left">Image</td>
-                        <td class="text-left">Product Name</td>
-                        <td class="text-left">Quantity</td>
-                        <td class="text-left">Status</td>
-                      </tr>
-                    </thead>
-                    <tbody>
-                      {% set product_list = product_info[order.order_id] ?? [] %}
-                      {% for prod in product_list %}
+
+                {% for seller, products in grouped %}
+                  <div class="table-responsive container mb-4">
+                    <table class="table table-bordered table-light">
+                      <thead>
                         <tr>
-                          <td style="width: 250px;" class="text-center align-center">
-                            <img src="{{ prod.image }}" alt="{{ prod.name }}" style="max-width: 120px; height: auto;" class="img-fluid rounded">
-                          </td>
-                          <td class="text-left">{{ prod.name }}<br>{{ order.option_value }}</td>
-                          <td class="text-center">{{ prod.quantity }}</td>
-                          <td class="text-left">{{ order.status }}</td>
+                          <td class="text-left">Image</td>
+                          <td class="text-left">Product Name</td>
+                          <td class="text-left">Quantity</td>
+                          <td class="text-left">Status</td>
                         </tr>
-                      <tr>
-                        <td class="text-left"><strong>Total: </strong></td>
-                        <td colspan="3">{{ order.total }}</td>
-                      </tr>
-                      <tr>
-                        <td class="text-left"><strong>Tracking Number: </strong></td>
-                        <td colspan="3">{{ order.tracking }}</td>
-                      </tr>
-                      <tr>
-                        <td class="text-left"><strong>Payment Method:</strong></td>
-                        {% if order.payment_method == 'hitpay' %}
-                          <td colspan="3">Online Payment</td>
-                        {% else %}
-                          <td colspan="3">{{ order.payment_method }}</td>
+                      </thead>
+                      <tbody>
+                        {% for prod in products %}
+                          <tr>
+                            <td style="width: 250px;" class="text-center align-center">
+                              <img src="{{ prod.image }}" alt="{{ prod.name }}" style="max-width: 120px; height: auto;" class="img-fluid rounded">
+                            </td>
+                            <td class="text-left">
+                              {{ prod.name }}
+                              {% if prod.options %}
+                                <ul class="mt-2 mb-0">
+                                  {% for option in prod.options %}
+                                    <li><strong>{{ option.name }}:</strong> {{ option.value }}</li>
+                                  {% endfor %}
+                                </ul>
+                              {% endif %}
+                            </td>
+                            <td class="text-center">{{ prod.quantity }}</td>
+                            <td class="text-left">{{ order.status }}</td>
+                          </tr>
+                        {% endfor %}
+
+                        <tr>
+                          <td class="text-left"><strong>Payment Method:</strong></td>
+                          <td colspan="3">
+                            {% if order.payment_method == 'hitpay' %}
+                              Online Payment
+                            {% else %}
+                              {{ order.payment_method }}
+                            {% endif %}
+                          </td>
+                        </tr>
+                        <tr>
+                          <td><strong>Payment Status:</strong></td>
+                          <td colspan="3">{{ order.payment_status }}</td>
+                        </tr>
+                        {% if order.payment_url %}
+                          <tr class="table-danger">
+                            <td><strong>Payment Link:</strong></td>
+                            <td colspan="3">
+                              <a class="text-decoration-none btn btn-primary" href="{{ order.payment_url }}">Pay Order</a>
+                            </td>
+                          </tr>
                         {% endif %}
-                      </tr>
-                      <tr>
-                        <td><strong>Payment Status:</strong></td>
-                        <td colspan="3">{{ order.payment_status }}</td>
-                      </tr>
-                      {% if order.payment_url %}
-                      <tr class="table-danger">
-                        <td><strong>Payment Link:</strong></td>
-                        <td colspan="3"><a class="text-decoration-none btn btn-primary" href="{{ order.payment_url }}">Pay Order<a></td>
-                      </tr>
-                      {% endif %}
-                      <tr>
-                        <td><strong>Store Owner:</strong></td>
-                        <td colspan="3"><a class="text-decoration-none" href="index.php?route=customerpartner/profile&seller_id={{prod.seller_id}}">{{ prod.store }} Shop</a></td>
-                      </tr>
-                    </tbody>
-                    {% endfor %}
-                  </table>
-                  <div class="d-flex justify-content-end gap-3">   
-                    <a href="index.php?route=product/product&product_id={{prod.product_id}}" class="btn btn-primary text-right">Rate</a>
-                
-                    <a href="index.php?route=account/order/info&order_id={{order.order_id}}" class="btn btn-primary text-right">View order</a>
+                        <tr>
+                          <td><strong>Store Owner:</strong></td>
+                          <td colspan="3">
+                            <a class="text-decoration-none" href="index.php?route=customerpartner/profile&seller_id={{ products[0].seller_id }}">
+                              {{ seller }} Shop
+                            </a>
+                          </td>
+                        </tr>
+                      </tbody>
+                    </table>
                   </div>
+                {% endfor %}
+                <div class="d-flex justify-content-end gap-3">   
+                  <a href="index.php?route=product/product&product_id={{prod.product_id}}" class="btn btn-primary text-right">Rate</a>
+                  <a href="index.php?route=account/order/info&order_id={{order.order_id}}" class="btn btn-primary text-right">View order</a>
                 </div>
-              </div>
-              {% endif %}
-            {% endfor %}
-          </div>
+            {% endif %}
+          {% endfor %}
+        </div>
       </div>
 
-      {#<div class="tab-pane" id="tab-to-rate">
-        <div class="alert alert-info alert-dismissible"><i class="fa fa-exclamation-circle">
-        </i> Your Parcel has been Delivered</div>
-        {% for order in orders %}
-        {% if order.status == 'To Rate' %}
-        
-          <div class="table-responsive">
-            <table class="table table-bordered table-hover">
-              <thead>
-                <td class="text-left">Order ID</td>
-                <td class="text-left">Tracking Number</td>
-                <td class="text-left">Product Name</td>
-                <td class="text-left">Quantity</td>
-                <td class="text-left">Status</td>
-                <td class="text-left">Store</td>
-              </thead>
-              <tbody>
-                {% set product_list = product_info[order.order_id] ?? [] %}
-                {% for prod in product_list %}
-                <tr>
-                  {% if loop.first %}
-                    <td class="text-left" rowspan="{{ product_list|length }}">{{ order.order_id }}</td>
-                  {% endif %}
-                    <td class="text-left">{{ order.tracking }}</td>
-                    <td class="text-left">{{ prod.name }}</td>
-                    <td class="text-center">{{ prod.quantity }}</td>
-                  {% if loop.first %}
-                    <td class="text-left" rowspan="{{ product_list|length }}">{{ order.status }}</td>
-                  {% endif %}
-                  {% if loop.first %}
-                    <td class="text-left"><a href="index.php?route=customerpartner/profile&seller_id={{prod.seller_id}}">{{ prod.store }}</a></td>
-                  {% endif %}
-                </tr>
-              <td class="text-right">   
-                <a href="index.php?route=product/product&product_id={{prod.product_id}}" class="btn btn-primary text-right">Rate</a>
-              </td>
-              {% endfor %}
-              <td class="text-right">   
-                <a href="index.php?route=account/order/info&order_id={{order.order_id}}" class="btn btn-primary text-right">View order</a>
-              </td>
-              </tbody>
-            </table>
-          </div>
-        {% endif %}
-        {% endfor %}
-      </div> #}
-
+      <div class="tab-content">
         <div class="tab-pane fade show" id="tab-to-cancel">
-            {% for order in orders %}
-              {% if order.status == 'Canceled' %}
+          {% for order in orders %}
+            {% if order.status == 'Canceled' %}
+              {% set product_list = product_info[order.order_id] ?? [] %}
+              {% set grouped = {} %}
+
+              {% for prod in product_list %}
+                {% set seller = prod.store %}
+                {% if grouped[seller] is not defined %}
+                  {% set grouped = grouped | merge({ (seller): [] }) %}
+                {% endif %}
+                {% set grouped = grouped | merge({ (seller): grouped[seller] | merge([prod]) }) %}
+              {% endfor %}
+
               <div class="card my-4">
-                <div class="table-responsive container mb-4">
-                  <table class="table table-bordered table-light">
-                    <thead>
-                      <tr>
-                        <td class="text-left">Image</td>
-                        <td class="text-left">Product Name</td>
-                        <td class="text-left">Quantity</td>
-                        <td class="text-left">Status</td>
-                      </tr>
-                    </thead>
-                    <tbody>
-                      {% set product_list = product_info[order.order_id] ?? [] %}
-                      {% for prod in product_list %}
-                        <tr>
-                          <td style="width: 250px;" class="text-center align-center">
-                            <img src="{{ prod.image }}" alt="{{ prod.name }}" style="max-width: 120px; height: auto;" class="img-fluid rounded">
-                          </td>
-                          <td class="text-left">{{ prod.name }}</td>
-                          <td class="text-center">{{ prod.quantity }}</td>
-                          <td class="text-left">{{ order.status }}</td>
-                        </tr>
-                      <tr>
-                        <td class="text-left"><strong>Payment Method:</strong></td>
-                        {% if order.payment_method == 'hitpay' %}
-                          <td colspan="3">Online Payment</td>
-                        {% else %}
-                          <td colspan="3">{{ order.payment_method }}</td>
-                        {% endif %}
-                      </tr>
-                      <tr>
-                        <td><strong>Store Owner:</strong></td>
-                        <td colspan="3"><a class="text-decoration-none" href="index.php?route=customerpartner/profile&seller_id={{prod.seller_id}}">{{ prod.store }} Shop</a></td>
-                      </tr>
-                    </tbody>
-                    {% endfor %}
-                  </table>
+                <div class="card-header">
+                  <div class="alert alert-info alert-dismissible">
+                    <i class="fa fa-exclamation-circle"></i>Your Parcel has been Delivered
+                  </div>
                 </div>
-              </div>
-              {% endif %}
-            {% endfor %}
+
+                {% for seller, products in grouped %}
+                  <div class="table-responsive container mb-4">
+                    <table class="table table-bordered table-light">
+                      <thead>
+                        <tr>
+                          <td class="text-left">Image</td>
+                          <td class="text-left">Product Name</td>
+                          <td class="text-left">Quantity</td>
+                          <td class="text-left">Status</td>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        {% for prod in products %}
+                          <tr>
+                            <td style="width: 250px;" class="text-center align-center">
+                              <img src="{{ prod.image }}" alt="{{ prod.name }}" style="max-width: 120px; height: auto;" class="img-fluid rounded">
+                            </td>
+                            <td class="text-left">
+                              {{ prod.name }}
+                              {% if prod.options %}
+                                <ul class="mt-2 mb-0">
+                                  {% for option in prod.options %}
+                                    <li><strong>{{ option.name }}:</strong> {{ option.value }}</li>
+                                  {% endfor %}
+                                </ul>
+                              {% endif %}
+                            </td>
+                            <td class="text-center">{{ prod.quantity }}</td>
+                            <td class="text-left">{{ order.status }}</td>
+                          </tr>
+                        {% endfor %}
+
+                        <tr>
+                          <td class="text-left"><strong>Payment Method:</strong></td>
+                          <td colspan="3">
+                            {% if order.payment_method == 'hitpay' %}
+                              Online Payment
+                            {% else %}
+                              {{ order.payment_method }}
+                            {% endif %} Total: {{ Total }}
+                          </td>
+                        </tr> 
+                        <tr>
+                          <td><strong>Payment Status:</strong></td>
+                          <td colspan="3">{{ order.payment_status }}</td>
+                        </tr>
+                        {% if order.payment_url %}
+                          <tr class="table-danger">
+                            <td><strong>Payment Link:</strong></td>
+                            <td colspan="3">
+                              <a class="text-decoration-none btn btn-primary" href="{{ order.payment_url }}">Pay Order</a>
+                            </td>
+                          </tr>
+                        {% endif %}
+                        <tr>
+                          <td><strong>Store Owner:</strong></td>
+                          <td colspan="3">
+                            <a class="text-decoration-none" href="index.php?route=customerpartner/profile&seller_id={{ products[0].seller_id }}">
+                              {{ seller }} Shop
+                            </a>
+                          </td>
+                        </tr>
+                      </tbody>
+                    </table>
+                  </div>
+                {% endfor %}
+            {% endif %}
+          {% endfor %}
         </div>
+      </div>
+
     </div>
     {% else %}
     <p>You have no product purchase history. Order now!</p>

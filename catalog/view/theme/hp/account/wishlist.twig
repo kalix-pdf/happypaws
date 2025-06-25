@@ -1,16 +1,14 @@
 {{ header }}
-<meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <link href="{{ 'https://fonts.googleapis.com/css2?family=Poppins+One&family=Poppins:wght@400;500;600;700&display=swap' }}" rel="stylesheet">
-  <link href="catalog\view\theme\hp\stylesheet\enhanced-hp\home\category.css" rel="stylesheet" />
-  <link href="catalog\view\theme\hp\stylesheet\enhanced-hp\navbar\wishlist.css" rel="stylesheet" />
 <div id="account-wishlist" class="container">
-  <ul class="breadcrumb">
-    {% for breadcrumb in breadcrumbs %}
-    <li><a href="{{ breadcrumb.href }}">{{ breadcrumb.text }}</a></li>
-    {% endfor %}
-  </ul>
+  <nav id="checkout-checkout" class="container mb-4 mt-4" style="--bs-breadcrumb-divider: '>';" aria-label="breadcrumb">
+    <ol class="breadcrumb">
+      {% for breadcrumb in breadcrumbs %}
+        <li class="breadcrumb-item">
+          <a class="text-decoration-none text-black" href="{{ breadcrumb.href }}">{{ breadcrumb.text }}</a>
+        </li>
+      {% endfor %}
+    </ol>
+  </nav>
   {% if success %}
   <div class="alert alert-success alert-dismissible"><i class="fa fa-check-circle"></i> {{ success }}
     <button type="button" class="close" data-dismiss="alert">&times;</button>
@@ -52,8 +50,8 @@
                 {{ product.price }}
                 {% else %} <b>{{ product.special }}</b> <s>{{ product.price }}</s> {% endif %} </div>
               {% endif %}</td>
-            <td class="text-right"><button type="button" onclick="cart.add('{{ product.product_id }}');" data-toggle="tooltip" title="{{ button_cart }}" class="btn btn-primary"><i class="fa fa-shopping-cart"></i></button>
-              <a href="{{ product.remove }}" data-toggle="tooltip" title="{{ button_remove }}" class="btn btn-danger"><i class="fa fa-times"></i></a></td>
+            <td class="text-right"><button type="button" style="background-color: #162F65; color: #f6c96d;" onclick="cart.add('{{ product.product_id }}');" data-toggle="tooltip" title="{{ button_cart }}" class="btn"><i class="fa fa-shopping-cart"></i></button>
+              <a href="{{ product.remove }}" data-toggle="tooltip" style="background-color: #162F65; color: #f6c96d;" title="{{ button_remove }}" class="btn"><i class="fa fa-times"></i></a></td>
           </tr>
           {% endfor %}
             </tbody>
@@ -64,7 +62,7 @@
       <p>{{ text_empty }}</p>
       {% endif %}
       <div class="buttons clearfix">
-        <div class="pull-right"><a href="{{ continue }}" class="btn btn-primary">{{ button_continue }}</a></div>
+        <div class="pull-right"><a href="{{ continue }}" style="background-color: #162F65; color: #f6c96d;" class="btn">{{ button_continue }}</a></div>
       </div>
       {{ content_bottom }}</div>
     {{ column_right }}</div>

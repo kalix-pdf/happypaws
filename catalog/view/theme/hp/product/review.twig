@@ -1,7 +1,14 @@
+<style>
+  .rev .btn {
+    background-color: #162F65;
+    color: #f6c96d;;
+}
+</style>
+
 {% if reviews %}
   
   {% for review in reviews %}
-    <div class="mb-1">
+    <div class="mb-1 rev">
       <div class="card-body px-4">
         <h5 class="card-title">{{ review.author }}</h5>
         <div class="mb-2">
@@ -24,6 +31,19 @@
         {% endfor %}
       </div>
       {% endif %}
+      {% if seller_is_logged == is_logged %}
+        {% if review.seller_reply %}
+          <div class="mt-3 p-3 bg-light border-start border-info border-3">
+            <strong>Seller's Reply:</strong>
+            <p>{{ review.seller_reply }}</p>
+          </div>
+        {% else %}
+          <div class="mt-3">
+            <textarea class="form-control mb-2 border-info" id="reply-text-{{ review.review_id }}" placeholder="Reply as seller..."></textarea>
+            <button class="btn" onclick="submitReply({{ review.review_id }})">Submit Reply</button>
+          </div>
+        {% endif %}
+      {% endif %}
       </div>
     </div>
     <hr class="border border-info border-1 opacity-50">
@@ -31,9 +51,36 @@
 {% else %}
   <h3>{{ text_no_reviews }}</h3>
 {% endif %}
-
-
-{# <div class="row">
+<div class="row">
   <div class="col-sm-6 text-left">{{ pagination }}</div>
-  <div class="col-sm-6 text-right">{{ results }}</div>
-</div> #}
+  <div class="col-sm-6 text-right d-flex justify-content-end">{{ results }}
+    {% if current_page < total_pages %}
+      <a href="{{ pagination_url }}{{ current_page + 1 }}" class="btn btn-outline-primary ms-3">Next</a>
+    {% endif %}
+  </div>
+</div>
+
+<script>
+  function submitReply(reviewId) {
+    const replyText = document.getElementById('reply-text-' + reviewId).value;
+    const formData = 'review_id=' + reviewId + '&reply=' + encodeURIComponent(replyText);
+
+    fetch('index.php?route=product/product/reply', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/x-www-form-urlencoded'
+      },
+      body: formData
+    })
+    .then(response => response.json())
+    .then(data => {
+      if (data.success) {
+        alert(data.success);
+        location.reload();
+      } else {
+        alert(data.error || 'An error occurred.');
+      }
+    });
+  }
+</script>
+

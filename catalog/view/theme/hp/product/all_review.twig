@@ -1,0 +1,22 @@
+{{ header }}
+<div class="container py-4">
+  <h3 class="mb-4">All Reviews</h3>
+
+  {% if reviews %}
+    {% for review in reviews %}
+      <div class="card mb-3 p-3">
+        <h5>{{ review.author }}</h5>
+        <p>{{ review.text }}</p>
+        <strong>Rating: {{ review.rating }}/5</strong><br />
+        <small class="text-muted">{{ review.date_added }}</small>
+      </div>
+    {% endfor %}
+
+    <div class="pagination-container mt-4">
+      {{ pagination }}
+    </div>
+  {% else %}
+    <p>No reviews found for this product.</p>
+  {% endif %}
+</div>
+{{ footer }}

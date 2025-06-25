@@ -25,6 +25,6 @@ class ModelExtensionPaymentXendit extends Model {
 			);
 		}
 
-		return $method_data;
+		// return $method_data;
 	}
 }

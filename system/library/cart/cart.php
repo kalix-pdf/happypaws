@@ -175,6 +175,10 @@ class Cart {
 					$reward = 0;
 				}
 
+				if (isset($option_price) && $option_price > 0) {
+					$price = 0;
+				}
+				
 				// Downloads
 				$download_data = array();
 

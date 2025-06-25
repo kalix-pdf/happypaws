@@ -59,7 +59,7 @@ class ControllerAccountOrder extends Controller {
 				'name'       => $result['firstname'] . ' ' . $result['lastname'],
 				'status'     => $result['status'],
 				'date_added' => date($this->language->get('date_format_short'), strtotime($result['date_added'])),
-				'products'   => ($product_total + $voucher_total),
+				'products'   => $product_total,
 				'total'      => $this->currency->format($result['total'], $result['currency_code'], $result['currency_value']),
 				'view'       => $this->url->link('account/order/info', 'order_id=' . $result['order_id'], true),
 			);
@@ -306,6 +306,7 @@ class ControllerAccountOrder extends Controller {
                 $product['price'] == 0 ? html_entity_decode($this->config->get('wk_gift_gift_label')[$this->config->get('config_language_id')]) : $this->currency->format($product['price'] + ($this->config->get('config_tax') ? $product['tax'] : 0), $order_info['currency_code'], $order_info['currency_value'])
             ,
 					'total'    => $this->currency->format($product['total'] + ($this->config->get('config_tax') ? ($product['tax'] * $product['quantity']) : 0), $order_info['currency_code'], $order_info['currency_value']),
+					'totals'   => $this->currency->format($product['price'] * $product['quantity'], $order_info['currency_code'], $order_info['currency_value']),
 					'reorder'  => $reorder,
 
                            // marketplace

@@ -97,6 +97,11 @@
         {{ text_wishlist }}
       </a>
     </li>
+     <li class="list-group-item list-group-item-action {% if route == 'account/order' or route == 'account/order/info' %}active text-white{% endif %}">
+      <a class="btn" href="{{ order }}">
+        {{ text_order }}
+      </a>
+    </li>
     <li class="list-group-item list-group-item-action {% if route == 'account/transaction' %}active text-white{% endif %}">
       <a class="btn" href="{{ transaction }}">
         {{ text_transaction }}
