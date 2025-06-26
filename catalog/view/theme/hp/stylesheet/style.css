@@ -313,7 +313,7 @@
   }
   .mainproduct .btn, .shop .btn, #button-review {
     background-color: #162F65;
-    color: #f6c96d;;
+    color: #f6c96d;
   }
   @media(max-width:720px) {
 	  .wishlisht {

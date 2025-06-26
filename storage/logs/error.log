@@ -225,3 +225,17 @@
 2025-06-25 21:28:12 - PHP Warning:  Undefined array key "customer_id" in D:\xampp\htdocs\hp\storage\modification\catalog\controller\product\product.php on line 731
 2025-06-25 21:28:12 - PHP Warning:  Undefined array key "product_id" in D:\xampp\htdocs\hp\storage\modification\catalog\controller\product\product.php on line 753
 2025-06-25 21:28:12 - PHP Warning:  Undefined array key "product_id" in D:\xampp\htdocs\hp\storage\modification\catalog\controller\product\product.php on line 760
+2025-06-25 21:46:40 - PHP Warning:  Undefined array key "attachment" in D:\xampp\htdocs\hp\catalog\controller\product\allreview.php on line 27
+2025-06-25 21:46:40 - PHP Warning:  Undefined array key "attachment" in D:\xampp\htdocs\hp\catalog\controller\product\allreview.php on line 27
+2025-06-25 21:46:40 - PHP Warning:  Undefined array key "attachment" in D:\xampp\htdocs\hp\catalog\controller\product\allreview.php on line 27
+2025-06-25 21:46:40 - PHP Warning:  Undefined array key "attachment" in D:\xampp\htdocs\hp\catalog\controller\product\allreview.php on line 27
+2025-06-25 21:46:40 - PHP Warning:  Undefined array key "attachment" in D:\xampp\htdocs\hp\catalog\controller\product\allreview.php on line 27
+2025-06-25 22:16:25 - PHP Warning:  Undefined array key "HTTP_X_REQUESTED_WITH" in D:\xampp\htdocs\hp\catalog\controller\product\allreview.php on line 49
+2025-06-25 22:17:29 - PHP Warning:  Undefined array key "HTTP_X_REQUESTED_WITH" in D:\xampp\htdocs\hp\catalog\controller\product\allreview.php on line 49
+2025-06-25 22:17:30 - PHP Warning:  Undefined array key "HTTP_X_REQUESTED_WITH" in D:\xampp\htdocs\hp\catalog\controller\product\allreview.php on line 49
+2025-06-25 22:17:33 - PHP Warning:  Undefined array key "HTTP_X_REQUESTED_WITH" in D:\xampp\htdocs\hp\catalog\controller\product\allreview.php on line 49
+2025-06-25 22:18:24 - PHP Warning:  Undefined array key "HTTP_X_REQUESTED_WITH" in D:\xampp\htdocs\hp\catalog\controller\product\allreview.php on line 49
+2025-06-26 1:59:03 - PHP Warning:  Trying to access array offset on value of type bool in D:\xampp\htdocs\hp\catalog\controller\product\allreview.php on line 19
+2025-06-26 1:59:03 - PHP Warning:  Undefined array key "product_id" in D:\xampp\htdocs\hp\catalog\controller\product\allreview.php on line 20
+2025-06-26 1:59:16 - PHP Warning:  Trying to access array offset on value of type bool in D:\xampp\htdocs\hp\catalog\controller\product\allreview.php on line 19
+2025-06-26 1:59:16 - PHP Warning:  Undefined array key "product_id" in D:\xampp\htdocs\hp\catalog\controller\product\allreview.php on line 20

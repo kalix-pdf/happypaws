@@ -1,4 +1,11 @@
 {{ header }}
+<style>
+.store-tab, .store-tab a {
+	background-color: #162F65;
+	color: #f6c96d;
+}
+</style>
+
 <script>
 	var base_url = location.origin;
 	var current_url = location.href;{% if admin_analytic_id is defined and admin_analytic_id and profile_analytic is defined and profile_analytic %}
@@ -26,7 +33,7 @@
 </script>
 <div id="container" class="container j-container">
 
-  <div id="top" class="top top-row" style="background-color:transparent;border: none;">
+  <div id="top" class="top top-row border" style="background-color:transparent;">
         <div class="ms-container">
           <div class="ms-inner-controls-cont">
             <div class="ms-view ms-fade-flow-view">
@@ -50,12 +57,11 @@
         </div>
   </div>
 
-	<div class="min-profile-wk-mp" style="gap: 10px;">
+	<div class="" style="gap: 10px;">
 		<div id="content">
-			<div class="col-md-2 col-sm-12 col-xs-12 min-profile min-profile-left" style="height:fit-content;padding:0 0 0 0;">
-				{# <div class=""> #}
+			<div class="col-md-2 col-sm-12 col-xs-12 min-profile min-profile-right">
 				
-					<div class="product-thumb product-wrapper" style="">
+					{# <div class="product-thumb product-wrapper" style="">
 						<div class="wk-new">
 							<div class="col-md-6 col-sm-6 col-xs-6">
 								<div class="image">
@@ -244,136 +250,136 @@
 							<div id="tab-location" class="card-div"></div>
 
 						</div>
-					</div>
-				{# </div> #}
+					</div> #}
 
 			</div><!-- emd col-3 -->
 
-			{# tab start #}
-			<div class="col-md-10 col-sm-12 col-xs-12 min-profile min-profile-right" style="border: 1px solid #dde;padding-left: 15px;padding-right: 15px;border-radius: 10px;">
-				<div class="module module-categories module-categories-wk-mp  module-categories- align-to-content">
+			{# tab start  min-profile min-profile-right #}  
+			<div class="col-md-12 col-sm-12 container">
+				{# <div class="bg-info align-to-content">
 					<div class="module-body" id="wk-mp-body">
-						<div class="tab-container">
-							<ul class="nav nav-tabs">
-								<li class="mp-list-group-item">
-									<a href="#tab-profile" data-toggle="tab">
-										<center><img src="image/MP/profile.png" /></center>
-										&nbsp;<p class="wk-mp-tab-text">{{ text_profile }}</p>
-									</a>
-								</li>
+						<div class="tab-container store-tab container">
+							<ul class="nav nav-pills nav-justified" role="tablist">
+							<li class="nav-item mp-list-group-item">
+								<a class="nav-link active text-decoration-none" id="profile-tab" data-bs-toggle="tab" href="#tab-profile" role="tab">
+								<div class="text-center">
+									<img src="image/MP/profile.png" class="img-fluid" />
+									<p class="wk-mp-tab-text mt-2 mb-0">{{ text_profile }}</p>
+								</div>
+								</a>
+							</li>
 
-								{% if public_seller_profile is defined and 'store' in public_seller_profile %}
-								<li class="mp-list-group-item">
-									<a href="#tab-store" data-toggle="tab">
-										<center><img src="image/MP/about.png" /></center>
-										&nbsp;<p class="wk-mp-tab-text">{{ text_store }}</p>
-									</a>
-								</li>
-								{% endif %}
+							{% if public_seller_profile is defined and 'store' in public_seller_profile %}
+							<li class="nav-item mp-list-group-item">
+								<a class="nav-link" id="store-tab" data-bs-toggle="tab" href="#tab-store" role="tab">
+								<div class="text-center">
+									<img src="image/MP/about.png" class="img-fluid" />
+									<p class="wk-mp-tab-text mt-2 mb-0">{{ text_store }}</p>
+								</div>
+								</a>
+							</li>
+							{% endif %}
 
-								{% if public_seller_profile is defined and 'collection' in public_seller_profile %}
-								<li class="mp-list-group-item">
-									<a href="#tab-collection" data-toggle="tab">
-										<center><img src="image/MP/collection.png" /></center>
-										&nbsp;<p class="wk-mp-tab-text">
-											{{ text_collection ~ ' (' ~ (collection_total ? collection_total : '0') ~ ')' }}
-										</p>
-									</a>
-								</li>
-								{% endif %}
-								{% if public_seller_profile is defined and 'review' in public_seller_profile %}
-								<li class="mp-list-group-item">
-									<a href="#tab-reviews" data-toggle="tab">
-										<center><img src="image/MP/review.png" /></center>
-										&nbsp;<p class="wk-mp-tab-text">
-											{{ text_reviews ~ ' (' ~ (feedback_total ? feedback_total : '0') ~ ')' }}
-										</p>
-									</a>
-								</li>
-								{% endif %}
-								{% if public_seller_profile is defined and 'productReview' in public_seller_profile %}
-								<li class="mp-list-group-item">
-									<a href="#tab-product-reviews" data-toggle="tab">
-										<center><img src="image/MP/product.png" /></center>
-										&nbsp;<p class="wk-mp-tab-text">
-											{{ text_product_reviews ~ ' ('  ~ (product_feedback_total ? product_feedback_total : '0') ~ ')' }}
-										</p>
-									</a>
-								</li>
-								{% endif %}
+							{% if public_seller_profile is defined and 'collection' in public_seller_profile %}
+							<li class="nav-item mp-list-group-item">
+								<a class="nav-link" id="collection-tab" data-bs-toggle="tab" href="#tab-collection" role="tab">
+								<div class="text-center">
+									<img src="image/MP/collection.png" class="img-fluid" />
+									<p class="wk-mp-tab-text mt-2 mb-0">
+									{{ text_collection ~ ' (' ~ (collection_total ? collection_total : '0') ~ ')' }}
+									</p>
+								</div>
+								</a>
+							</li>
+							{% endif %}
 
+							{% if public_seller_profile is defined and 'review' in public_seller_profile %}
+							<li class="nav-item mp-list-group-item">
+								<a class="nav-link" id="reviews-tab" data-bs-toggle="tab" href="#tab-reviews" role="tab">
+								<div class="text-center">
+									<img src="image/MP/review.png" class="img-fluid" />
+									<p class="wk-mp-tab-text mt-2 mb-0">
+									{{ text_reviews ~ ' (' ~ (feedback_total ? feedback_total : '0') ~ ')' }}
+									</p>
+								</div>
+								</a>
+							</li>
+							{% endif %}
+
+							{% if public_seller_profile is defined and 'productReview' in public_seller_profile %}
+							<li class="nav-item mp-list-group-item">
+								<a class="nav-link" id="product-reviews-tab" data-bs-toggle="tab" href="#tab-product-reviews" role="tab">
+								<div class="text-center">
+									<img src="image/MP/product.png" class="img-fluid" />
+									<p class="wk-mp-tab-text mt-2 mb-0">
+									{{ text_product_reviews ~ ' (' ~ (product_feedback_total ? product_feedback_total : '0') ~ ')' }}
+									</p>
+								</div>
+								</a>
+							</li>
+							{% endif %}
 							</ul>
 						</div>
-						
 					</div>
-				</div>
-			
-				<div class="tab-content">
-					<div id="tab-profile" class="module-item module-item-1 tab-pane"
-						id="categories-6527a7b2cadc3-tab-1">
-						<p class="wk-mp-tab-content-text">{{ text_profile }}</p>
-						<div class="category-grid no-scroll-prev" data-loaded="true" style="flex-flow: wrap;word-break: break-word;">
-							{{ partner['shortprofile'] | raw }}
-							{# {% if informations is defined and informations %}
-							<h3 style="line-height: 24px;color: rgb(0, 0, 0);margin-top: 0px;">
-								{{ text_seller_information }}</h3>
-							{% for information in informations %}
-							<div>
-								<a href="{{ information['href'] }}" target="_blank">{{ information['title'] }}</a>
+				</div> #}
+				{% if public_seller_profile is defined and 'review' in public_seller_profile %}
+					<div class="card my-3">
+						<div class="card-body p-4">
+							<p class="card-title">Store Ratings</p>
+							<p class="wk-mp-tab-content-text card-text">
+								{{ text_reviews ~ ' (' ~ (feedback_total ? feedback_total : '0') ~ ')' }}
+							</p>
+							<div class="category-grid no-scroll-prev">
+								<div id="prev-reviews" style="width:100%;"></div>
 							</div>
-							{% endfor %}
-							{% endif %} #}
 						</div>
 					</div>
-					<!-- tab-profile -->
+				{% endif %}
+
+				<div class="tab-content mt-4">
+					<div class="tab-pane fade show active" id="tab-profile" role="tabpanel">
+					<p class="wk-mp-tab-content-text">{{ text_profile }}</p>
+					<div class="category-grid no-scroll-prev" style="flex-flow: wrap; word-break: break-word;">
+						{{ partner['shortprofile'] | raw }}
+						{% if informations is defined and informations %}
+						<h3 class="mt-3">{{ text_seller_information }}</h3>
+						{% for information in informations %}
+						<div><a href="{{ information['href'] }}" target="_blank">{{ information['title'] }}</a></div>
+						{% endfor %}
+						{% endif %}
+					</div>
+					</div>
+
 					{% if public_seller_profile is defined and 'store' in public_seller_profile %}
-					<div id="tab-store" class="module-item module-item-1 tab-pane"
-						id="categories-6527a7b2cadc3-tab-2">
-						<p class="wk-mp-tab-content-text">{{ text_store }}</p>
-						<div class="category-grid no-scroll-prev" data-loaded="true" style="flex-flow: wrap;word-break: break-word;">
-							{{ partner['companydescription'] | raw }}
-						</div>
+					<div class="tab-pane fade" id="tab-store" role="tabpanel">
+					<p class="wk-mp-tab-content-text">{{ text_store }}</p>
+					<div class="category-grid no-scroll-prev" style="flex-flow: wrap; word-break: break-word;">
+						{{ partner['companydescription'] | raw }}
 					</div>
-					<!-- tab-store -->
+					</div>
 					{% endif %}
 
-					{% if public_seller_profile is defined and 'review' in public_seller_profile %}
-					<div id="tab-reviews" class="module-item module-item-1 tab-pane"
-						id="categories-6527a7b2cadc3-tab-3">
-						<p class="wk-mp-tab-content-text">
-							{{ text_reviews ~ ' (' ~ (feedback_total ? feedback_total : '0') ~ ')' }}
-						</p>
-						<div class="category-grid no-scroll-prev" data-loaded="true">
-							<div id="prev-reviews" style="width:100%;"></div>
-						</div>
-					</div>
-					<!-- tab-reviews -->
-					{% endif %}
 
 					{% if public_seller_profile is defined and 'productReview' in public_seller_profile %}
-					<div id="tab-product-reviews" class="module-item module-item-1 tab-pane"
-						id="categories-6527a7b2cadc3-tab-4">
-						<p class="wk-mp-tab-content-text">
-							{{ text_product_reviews ~ ' ('  ~ (product_feedback_total ? product_feedback_total : '0') ~ ')' }}
-						</p>
-						<div class="category-grid no-scroll-prev" data-loaded="true"></div>
+					<div class="tab-pane fade" id="tab-product-reviews" role="tabpanel">
+					<p class="wk-mp-tab-content-text">
+						{{ text_product_reviews ~ ' ('  ~ (product_feedback_total ? product_feedback_total : '0') ~ ')' }}
+					</p>
+					<div class="category-grid no-scroll-prev"></div>
 					</div>
-					<!-- tab-product-reviews -->
 					{% endif %}
 
 					{% if public_seller_profile is defined and 'collection' in public_seller_profile %}
-					<div id="tab-collection" class="module-item module-item-1 tab-pane"
-						id="categories-6527a7b2cadc3-tab-5">
-						<p class="wk-mp-tab-content-text">
-							{{ text_collection ~ ' (' ~ (collection_total ? collection_total : '0') ~ ')' }}
-						</p>
-						<div class="category-grid no-scroll-prev" data-loaded="true"></div>
+					<div class="tab-pane fade" id="tab-collection" role="tabpanel">
+					<p class="wk-mp-tab-content-text">
+						{{ text_collection ~ ' (' ~ (collection_total ? collection_total : '0') ~ ')' }}
+					</p>
+					<div class="category-grid no-scroll-prev"></div>
 					</div>
-					<!-- tab-collection -->
 					{% endif %}
-					<div id="dummy-collection"></div>
 				</div>
 			</div>
+
 			{# end here #}
 		</div>
 	</div>
