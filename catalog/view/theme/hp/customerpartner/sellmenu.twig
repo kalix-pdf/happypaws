@@ -1,6 +1,7 @@
 {% if module_marketplace_status is defined and module_marketplace_status %}
 {% if logged and chkIsPartner and marketplace_seller_mode is defined and marketplace_seller_mode %}
-    <a class="btn" href="{{ mp_profile }}">Seller Profile</a></li>
+    <a class="btn" href="{{ mp_profile }}">Seller Dashboard</a>
+    <a class="btn" href="{{ seller_profile }}">Seller Profile</a>
 {% else %}
     <a class="btn" href="{{ menusell }}">Be a MeowChant!</a>
 {% endif %}

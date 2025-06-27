@@ -36,6 +36,8 @@ class ControllerCustomerpartnerProfile extends Controller
         }
 
         $this->load->model('tool/image');
+        
+// var_dump($this->session->data);
 
         $this->load->model('customerpartner/master');
 
@@ -134,6 +136,11 @@ class ControllerCustomerpartnerProfile extends Controller
         }
 
         $partner = $this->model_customerpartner_master->getProfile($seller_id);
+        
+        $this->load->model('localisation/zone');
+
+        $province = $this->model_localisation_zone->getZone($partner['zone_id']);
+        $data['province'] = $province['name'];
 
         $data['admin_analytic_id'] = $this->config->get('marketplace_google_analytic_id');
         if (isset($partner['google_analytic_id']) && $partner['google_analytic_id']) {

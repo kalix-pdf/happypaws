@@ -730,6 +730,8 @@ class ControllerExtensionModuleMarketplace extends Controller
 		 * @return {[type]}       [description]
 		 */
 
+		$seller_id = $this->customer->getId();
+
 		if ($this->config->get('module_wk_seller_group_status')) {
 			$data['marketplace_allowed_account_menu'] = array();
 			$this->load->model('account/customer_group');
@@ -787,6 +789,8 @@ class ControllerExtensionModuleMarketplace extends Controller
 			}
 		}
 
+		$data['seller_profile'] = $this->url->link('customerpartner/profile&seller_id=' . $this->session->data['customer_id'] . '&tab=profile');
+		
 		$data['notification'] = '';
 
 		$data['notification_total'] = 0;

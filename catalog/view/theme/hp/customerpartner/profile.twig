@@ -335,23 +335,49 @@
 				{% if public_seller_profile is defined and 'store' in public_seller_profile %}
 					<div class="card">
 						<div class="card-body p-4">
-							<p class="card-text">{{ text_store }}</p> <hr>
+							<p class="card-text">{{ text_store }}</p>
+							<p class="small"><i class="fa fa-map-marker-alt"></i> {{ partner['city'] | raw }}, {{ province }} {{ partner['postcode'] | raw }}</p> <hr>
 							<div class="category-grid no-scroll-prev small lh-1" style="flex-flow: wrap; word-break: break-word;">
-								{{ partner['companydescription'] | raw }}
+								<div id="company-description">
+									{{ partner['companydescription'] | raw }}
+								</div>
+								<button id="see-all-btn" class="btn btn-link">See All</button>
 							</div>
 						</div>
 					</div>
 				{% endif %}
+				<hr>
 
 				{# Seller Products! #}
-				{% if public_seller_profile is defined and 'collection' in public_seller_profile %}
-					<div class="my-4">
-						<h3 class="fw-bold">
-							{{ text_collection ~ ' (' ~ (collection_total ? collection_total : '0') ~ ')' }}
-						</h3>
-					<div class=""></div>
+				<ul class="nav nav-underline justify-content-center" role="tablist">
+					{% if public_seller_profile is defined and 'collection' in public_seller_profile %}
+						<li class="nav-item">	
+							<a class="nav-link active" aria-current="page" href="#products-tab" data-bs-toggle="tab">
+								<h3 class="fw-bold">{{ text_collection ~ ' (' ~ (collection_total ? collection_total : '0') ~ ')' }}
+								</h3>
+							</a>
+						</li>
+					{% endif %}
+					{% if public_seller_profile is defined and 'productReview' in public_seller_profile %}
+						<li class="nav-item">
+							<a class="nav-link" href="#product-review" data-bs-toggle="tab">
+								<p class="">{{ text_product_reviews ~ ' ('  ~ (product_feedback_total ? product_feedback_total : '0') ~ ')' }}
+							</p></a>
+						</li>
+					{% endif %}
+				</ul>
+
+				<div class="tab-content">
+					<div class="tab-pane fade show active" id="products-tab">
+						<div class="my-4" id="tab-collection"><div class="category-grid no-scroll-prev"></div>
+						</div>
 					</div>
-				{% endif %}
+
+					<div class="tab-pane fade show" id="product-review">
+						<div class="category-grid no-scroll-prev"></div>
+						</div>
+					</div>
+				</div>
 
 				<div class="tab-content mt-4">
 					<div class="tab-pane fade show active" id="tab-profile" role="tabpanel">
@@ -366,17 +392,6 @@
 						{% endif %}
 					</div>
 					</div>
-
-
-					{% if public_seller_profile is defined and 'productReview' in public_seller_profile %}
-					<div class="tab-pane fade" id="tab-product-reviews" role="tabpanel">
-					<p class="wk-mp-tab-content-text">
-						{{ text_product_reviews ~ ' ('  ~ (product_feedback_total ? product_feedback_total : '0') ~ ')' }}
-					</p>
-					<div class="category-grid no-scroll-prev"></div>
-					</div>
-					{% endif %}
-
 					
 				</div>
 			</div>
@@ -487,138 +502,126 @@
 </div><!-- /.modal -->
 
 <script type="text/javascript">
-	$(document).find('.review-button-popup').on('click', function() {
-		$('#myModal-seller-review').appendTo('body').modal();
-		$(document).find('#myModal-seller-review').modal('show');
-	});
-	$('.nav-tabs li a').on('click', function() {
-		if ($(this).attr('href')) {
-			localStorage.setItem("tab-active", $(this).attr('href'))
+	$(document).ready(function () {
+	// Initialize collection display
+	loadCollection(false);
+
+	// Load previous reviews
+	$.ajax({
+		url: '{{ feedback }}',
+		dataType: 'html',
+		success: function (response) {
+		$('#prev-reviews').html(response);
 		}
 	});
 
-	$(document).ready(function() {
-		localStorage.setItem('hide-child', 0);
-		var tabe_start = window.location.search.split('?')[1];
+	// Popup review modal
+	$(document).on('click', '.review-button-popup', function () {
+		$('#myModal-seller-review').appendTo('body').modal('show');
+	});
 
-		if(tabe_start == 'tab=profile') {
-			localStorage.setItem("tab-active",'');
-			
-			history.pushState(null, '', '{{sellerHrefLocation}}');  
-			
+	// Set hide-child default
+	localStorage.setItem('hide-child', 0);
+	});
+
+	let collectionUrl = '{{ collection }}';
+
+	function loadCollection(showMenu) {
+	$.ajax({
+		url: collectionUrl,
+		dataType: 'html',
+		success: function (response) {
+		let categoryMenu = $(response).find('#column-left').html();
+
+		$('#category-menu').remove();
+		$('.left-panel').append(categoryMenu);
+
+		let html = '<p class="wk-mp-tab-content-text">{{ text_collection ~ " (" ~ (collection_total ? collection_total : "0") ~ ")" }}</p>' + response;
+		$('#tab-collection').html(html);
+
+		if (showMenu) {
+			$('#category-menu').show();
 		}
-		var tab_active = '#tab-profile';
 
-		if (localStorage.getItem("tab-active")) {
-			tab_active = localStorage.getItem("tab-active");
+		if (localStorage.getItem('display') === 'list') {
+			$('#list-view').trigger('click');
+		} else {
+			$('#grid-view').trigger('click');
 		}
 
-		if (tab_active) {
-			$('a[href="' + tab_active + '"]').parent().addClass('active');
-			$('a[href="' + tab_active + '"]').parent().siblings().removeClass('active');
-			$(tab_active).addClass('active');
-			$(tab_active).siblings().removeClass('active');
-
-			var src = $('a[href="' + tab_active + '"]').find('img').attr('src');
-			if (src) {
-				src = src.substring(0, src.indexOf('.'));
-
-				src = src + '-active.png';
-
-				$('a[href="' + tab_active + '"]').find('img').attr('src', src);
+		if ($('#category-menu li').hasClass('hide-child')) {
+			if (localStorage.getItem("hide-child") == 1) {
+			$('.hide-child').css('display', 'none');
+			localStorage.setItem('hide-child', 0);
+			} else {
+			localStorage.setItem('hide-child', 1);
 			}
+		}
+		}
+	});
+	}
 
+	function loadCollectionProduct(showMenu, data = 0) {
+	$.ajax({
+		url: collectionUrl,
+		type: 'POST',
+		data: data,
+		dataType: 'html',
+		success: function (response) {
+		let categoryMenu = $(response).find('#column-left').html();
+
+		$('#category-menu').remove();
+		$('.left-panel').append(categoryMenu);
+
+		$('#tab-collection').html(response);
+
+		if (showMenu) {
+			$('#category-menu').show();
+		}
+
+		if (localStorage.getItem('display') === 'list') {
+			$('#list-view').trigger('click');
+		} else {
+			$('#grid-view').trigger('click');
+		}
+
+		if ($('#category-menu li').hasClass('hide-child')) {
+			if (localStorage.getItem("hide-child") == 1) {
+			$('.hide-child').addClass('hide');
+			localStorage.setItem('hide-child', 0);
+			} else {
+			localStorage.setItem('hide-child', 1);
+			}
+		}
+		}
+	});
+	}
+
+	document.getElementById('see-all-btn').addEventListener('click', function() {
+		var description = document.getElementById('company-description');
+		description.classList.toggle('expanded');
+
+		var btn = document.getElementById('see-all-btn');
+		if (description.classList.contains('expanded')) {
+			btn.textContent = 'See Less';
+		} else {
+			btn.textContent = 'See All';
 		}
 	});
 
 	$.ajax({
-			url: '{{ feedback }}',
+			url: '{{ product_feedback }}',
 			dataType: 'html',
 			success: function(response) {
-				$('#prev-reviews').html(response);
+				let html = '<p class="wk-mp-tab-content-text">{{ text_product_reviews ~ " ("  ~ (product_feedback_total ? product_feedback_total : "0") ~ ")" }}</p>' + response;
+
+				$('#product-review').html(html);
 			}
 		});
 
-	
-	collectionUrl = '{{ collection }}';
-	// alert(collectionUrl);
-	function loadCollection(showMenu) {
-		$.ajax({
-			url: collectionUrl,
-			dataType: 'html',
-			success: function(response) {
-				categoryMenu = $(response).find('#column-left').html();
-				$('#category-menu').remove();
-				$('.left-panel').append(categoryMenu);
-
-				let html = '<p class="wk-mp-tab-content-text">{{ text_collection ~ " (" ~ (collection_total ? collection_total : "0") ~ ")" }}</p>' + response;
-
-				$('#tab-collection').html(html);
-				if (showMenu) {
-					$('#category-menu').show();
-				}
-				if (localStorage.getItem('display') == 'list') {
-					$('#list-view').trigger('click');
-				} else {
-					$('#grid-view').trigger('click');
-				}
-
-				if ($('#category-menu li').hasClass('hide-child')) {
-					if (localStorage.getItem("hide-child") == 1) {
-						$('.hide-child').css('display', 'none');
-						localStorage.setItem('hide-child', 0);
-					} else {
-						localStorage.setItem('hide-child', 1);
-					}
-				}
-			}
-		})
-	}
-	function loadCollectionProduct(showMenu,data = 0){
-  $.ajax({
-    url : collectionUrl,
-    type:'POST',
-    data:data,
-    dataType: 'html',
-    success: function(response) {
-      categoryMenu = $(response).find('#column-left').html();
-      $('#category-menu').remove();
-      $('.left-panel').append(categoryMenu);
-      $('#tab-collection').html(response);
-      if(showMenu) {
-        $('#category-menu').show();
-      }
-      if (localStorage.getItem('display') == 'list') {
-        $('#list-view').trigger('click');
-      } else {
-        $('#grid-view').trigger('click');
-      }
-
-      if ($('#category-menu li').hasClass('hide-child')) {
-        if (localStorage.getItem("hide-child") == 1) {
-          $('.hide-child').addClass('hide');
-          localStorage.setItem('hide-child', 0);
-        } else{
-          localStorage.setItem('hide-child', 1);
-        }
-      }
-    }
-  })
-}
-	(function($) {
-		$('#main-tab li').on('click', function() {
-			tab = $(this).children('a').data('tab');
-			$('.mp-list-group li').removeClass('mp-active');
-			$(this).addClass('mp-active');
-			$('.mp-tab-content').removeClass('mp-tab-active');
-			$(tab).addClass('mp-tab-active');
-			if (tab == '#tab-collection') {
-				$('#category-menu').show();
-			} else {
-				$('#category-menu').hide();
-			}
-		});
 </script>
+
+
 <script type="text/javascript">
 	$('.mp-list-group-item a').on('click', function() {
 		var src = $(this).find('img').attr('src');
@@ -645,23 +648,6 @@
 		});
 	});
 
-	
-
-		
-
-		$.ajax({
-			url: '{{ product_feedback }}',
-			dataType: 'html',
-			success: function(response) {
-				let html = '<p class="wk-mp-tab-content-text">{{ text_product_reviews ~ " ("  ~ (product_feedback_total ? product_feedback_total : "0") ~ ")" }}</p>' + response;
-
-				$('#tab-product-reviews').html(html);
-			}
-		});
-
-		loadCollection(false);
-
-	})(jQuery)
 
 	
 	{% if showCollection %}
@@ -826,45 +812,45 @@
 	}
 
 
-$('body').on('change', '#seller-collection select',function() {
-  collectionUrl = this.value;
-  loadCollection(true);
-  // $('a[href=\'#tab-collection\']').append(' <i class="fa fa-spinner fa-spin remove-me"></i>');
-  // $('#tab-collection').load(thisvalue,function(){
-  //     $('.remove-me').remove();
-  //   });
-});
+	$('body').on('change', '#seller-collection select',function() {
+	collectionUrl = this.value;
+	loadCollection(true);
+	// $('a[href=\'#tab-collection\']').append(' <i class="fa fa-spinner fa-spin remove-me"></i>');
+	// $('#tab-collection').load(thisvalue,function(){
+	//     $('.remove-me').remove();
+	//   });
+	});
 
 //   Module Update Code Start;
 
-var waitTimer = 2000;
-$('body').on('keyup', '#seller-collection input',function() {
-   let el_val = this.value;
-   console.log(el_val);
-   setTimeout(function () {
-      loadCollectionProduct(true,'product_name= '+el_val);
-    }, waitTimer);
-});
+	var waitTimer = 2000;
+	$('body').on('keyup', '#seller-collection input',function() {
+	let el_val = this.value;
+	console.log(el_val);
+	setTimeout(function () {
+		loadCollectionProduct(true,'product_name= '+el_val);
+		}, waitTimer);
+	});
 
-//   Module Update Code Ends;
+	//   Module Update Code Ends;
 
-$('body').on('click','#seller-collection a',function(e){
-  if(!$(this).hasClass('default-work'))
-    e.preventDefault();
-  else
-    return;
+	$('body').on('click','#seller-collection-category a',function(e){
+		if(!$(this).hasClass('default-work'))
+			e.preventDefault();
+		else
+			return;
 
-  thisvalue = this.href;
-  $('a[href=\'#tab-collection\']').append(' <i class="fa fa-spinner fa-spin remove-me"></i>');
-  $('#tab-collection').load(thisvalue,function(){
-      $('.remove-me').remove();
-      if (localStorage.getItem('display') == 'list') {
-        $('#list-view').trigger('click');
-      } else {
-        $('#grid-view').trigger('click');
-      }
-    });
-});
+		thisvalue = this.href;
+		$('a[href=\'#tab-collection\']').append(' <i class="fa fa-spinner fa-spin remove-me"></i>');
+		$('#tab-collection').load(thisvalue,function(){
+			$('.remove-me').remove();
+			if (localStorage.getItem('display') == 'list') {
+				$('#list-view').trigger('click');
+			} else {
+				$('#grid-view').trigger('click');
+			}
+			});
+	});
 
 	{# $('body').on('change', '#seller-collection select', function() {
 		loadCollection(true);

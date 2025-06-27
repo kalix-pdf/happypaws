@@ -373,3 +373,29 @@
 .comp-banner {
 	border: 3px solid #162F65;
 }
+
+#company-description {
+    max-height: 100px; 
+    overflow: hidden;
+    transition: max-height 0.3s ease-out;
+}
+
+#company-description.expanded {
+    max-height: none; 
+}
+
+#see-all-btn {
+    background: none;
+    border: none;
+    color: #007bff;
+    cursor: pointer;
+    padding: 0;
+    text-decoration: underline;
+}
+
+.nav-underline .nav-link.active {
+  color: #162F65;
+}
+.nav-underline a{
+  color: black;
+}
