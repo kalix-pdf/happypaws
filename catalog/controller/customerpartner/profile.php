@@ -271,6 +271,8 @@ class ControllerCustomerpartnerProfile extends Controller
         $data['writeFeedback'] = $this->url->link('customerpartner/profile/writeFeedback&id=' . $seller_id, '', true);
         $data['product_feedback'] = $this->url->link('customerpartner/profile/productFeedback&id=' . $seller_id, '', true);
         $data['collection'] = $this->url->link('customerpartner/profile/collection&id=' . $seller_id, '', true);
+        
+        // $data['collection_notlink'] = $this->load->controller('customerpartner/profile/collection', $seller_id);
         $data['config'] = $this->url->link('account/customerpartner/config', '', true);
         $data['product_feedback_total'] = $this->model_customerpartner_master->getTotalProductFeedbackList($seller_id);
         $data['collection_total'] = $this->model_customerpartner_master->getPartnerCollectionCount($seller_id);

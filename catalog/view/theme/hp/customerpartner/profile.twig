@@ -1,10 +1,4 @@
 {{ header }}
-<style>
-.store-tab, .store-tab a {
-	background-color: #162F65;
-	color: #f6c96d;
-}
-</style>
 
 <script>
 	var base_url = location.origin;
@@ -33,7 +27,7 @@
 </script>
 <div id="container" class="container j-container">
 
-  <div id="top" class="top top-row border" style="background-color:transparent;">
+  <div id="top" class="top top-row comp-banner" style="background-color:transparent;">
         <div class="ms-container">
           <div class="ms-inner-controls-cont">
             <div class="ms-view ms-fade-flow-view">
@@ -322,17 +316,40 @@
 						</div>
 					</div>
 				</div> #}
+				
+				{# STORE RATINGS! #}
 				{% if public_seller_profile is defined and 'review' in public_seller_profile %}
 					<div class="card my-3">
 						<div class="card-body p-4">
-							<p class="card-title">Store Ratings</p>
-							<p class="wk-mp-tab-content-text card-text">
+							<p class="card-text">
 								{{ text_reviews ~ ' (' ~ (feedback_total ? feedback_total : '0') ~ ')' }}
-							</p>
+							</p> <hr>
 							<div class="category-grid no-scroll-prev">
 								<div id="prev-reviews" style="width:100%;"></div>
 							</div>
 						</div>
+					</div>
+				{% endif %}
+
+				{# ABOUT STORE #}
+				{% if public_seller_profile is defined and 'store' in public_seller_profile %}
+					<div class="card">
+						<div class="card-body p-4">
+							<p class="card-text">{{ text_store }}</p> <hr>
+							<div class="category-grid no-scroll-prev small lh-1" style="flex-flow: wrap; word-break: break-word;">
+								{{ partner['companydescription'] | raw }}
+							</div>
+						</div>
+					</div>
+				{% endif %}
+
+				{# Seller Products! #}
+				{% if public_seller_profile is defined and 'collection' in public_seller_profile %}
+					<div class="my-4">
+						<h3 class="fw-bold">
+							{{ text_collection ~ ' (' ~ (collection_total ? collection_total : '0') ~ ')' }}
+						</h3>
+					<div class=""></div>
 					</div>
 				{% endif %}
 
@@ -350,15 +367,6 @@
 					</div>
 					</div>
 
-					{% if public_seller_profile is defined and 'store' in public_seller_profile %}
-					<div class="tab-pane fade" id="tab-store" role="tabpanel">
-					<p class="wk-mp-tab-content-text">{{ text_store }}</p>
-					<div class="category-grid no-scroll-prev" style="flex-flow: wrap; word-break: break-word;">
-						{{ partner['companydescription'] | raw }}
-					</div>
-					</div>
-					{% endif %}
-
 
 					{% if public_seller_profile is defined and 'productReview' in public_seller_profile %}
 					<div class="tab-pane fade" id="tab-product-reviews" role="tabpanel">
@@ -369,14 +377,7 @@
 					</div>
 					{% endif %}
 
-					{% if public_seller_profile is defined and 'collection' in public_seller_profile %}
-					<div class="tab-pane fade" id="tab-collection" role="tabpanel">
-					<p class="wk-mp-tab-content-text">
-						{{ text_collection ~ ' (' ~ (collection_total ? collection_total : '0') ~ ')' }}
-					</p>
-					<div class="category-grid no-scroll-prev"></div>
-					</div>
-					{% endif %}
+					
 				</div>
 			</div>
 
@@ -529,33 +530,16 @@
 
 		}
 	});
-</script>
-<script type="text/javascript">
-	$('.mp-list-group-item a').on('click', function() {
-		var src = $(this).find('img').attr('src');
-		if (src.substring(0, src.indexOf('-'))) {
-			src = src.substring(0, src.indexOf('-'));
-		} else {
-			src = src.substring(0, src.indexOf('.'));
-		}
-		src = src + '-active.png';
 
-		$(this).find('img').attr('src', src)
-
-		$($(this).parent().siblings().find('img')).each(function(index, value) {
-			var sibling_src = $(this).attr('src');
-
-			if (sibling_src.substring(0, sibling_src.indexOf('-'))) {
-				sibling_src = sibling_src.substring(0, sibling_src.indexOf('-'));
-			} else {
-				sibling_src = sibling_src.substring(0, sibling_src.indexOf('.'));
+	$.ajax({
+			url: '{{ feedback }}',
+			dataType: 'html',
+			success: function(response) {
+				$('#prev-reviews').html(response);
 			}
-			sibling_src = sibling_src + '.png';
-
-			$(this).attr('src', sibling_src)
 		});
-	});
 
+	
 	collectionUrl = '{{ collection }}';
 	// alert(collectionUrl);
 	function loadCollection(showMenu) {
@@ -634,14 +618,36 @@
 				$('#category-menu').hide();
 			}
 		});
+</script>
+<script type="text/javascript">
+	$('.mp-list-group-item a').on('click', function() {
+		var src = $(this).find('img').attr('src');
+		if (src.substring(0, src.indexOf('-'))) {
+			src = src.substring(0, src.indexOf('-'));
+		} else {
+			src = src.substring(0, src.indexOf('.'));
+		}
+		src = src + '-active.png';
 
-		$.ajax({
-			url: '{{ feedback }}',
-			dataType: 'html',
-			success: function(response) {
-				$('#prev-reviews').html(response);
+		$(this).find('img').attr('src', src)
+
+		$($(this).parent().siblings().find('img')).each(function(index, value) {
+			var sibling_src = $(this).attr('src');
+
+			if (sibling_src.substring(0, sibling_src.indexOf('-'))) {
+				sibling_src = sibling_src.substring(0, sibling_src.indexOf('-'));
+			} else {
+				sibling_src = sibling_src.substring(0, sibling_src.indexOf('.'));
 			}
+			sibling_src = sibling_src + '.png';
+
+			$(this).attr('src', sibling_src)
 		});
+	});
+
+	
+
+		
 
 		$.ajax({
 			url: '{{ product_feedback }}',

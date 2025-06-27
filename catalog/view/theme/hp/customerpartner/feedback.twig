@@ -1,14 +1,20 @@
+<style>
+	.feedback {
+		font-size: 15px;
+	}
+</style>
+
 {% if feedbacks %}
 	{% for feedback in feedbacks %}
 
-	<div class="review-container">
-    <div class="reviewer-name">
-      <i class="fa fa-user"></i>&nbsp;&nbsp;&nbsp;{{ feedback['nickname'] }}
-			&nbsp;&nbsp;&nbsp;
-      <i class="fa fa-calendar"></i>&nbsp;&nbsp;&nbsp;{{ feedback['createdate'] }}
-    </div>
+	<div class="review-container feedback">
+		<div class="reviewer-name name" >
+			<i class="fa fa-user"></i>&nbsp;&nbsp;&nbsp;{{ feedback['nickname'] }}
+					&nbsp;&nbsp;&nbsp;
+			<i class="fa fa-calendar"></i>&nbsp;&nbsp;&nbsp;{{ feedback['createdate'] }}
+		</div>
 
-		<div class="rating">
+		<div class="rating d-flex gap-3 my-3">
 			{% if review_fields is defined and review_fields %}
 				{% for review_field in review_fields %}
 					{% if feedback['review_attributes'][review_field['field_id']] is defined %}
@@ -17,12 +23,12 @@
 							{{ review_field['field_name'] ~ ' :  ' }}
 						</div>
 						<div class="rating-container">
-							<div class="rating-container">
+							<div class="rating-container fs-4">
 								{% for i in 1..5 %}
 									{% if i < feedback['review_attributes'][review_field['field_id']] %}
-										<span class="fa fa-stack"><i class="fa fa-star fa-stack-2x"></i></span>
+										<i class="fa fa-paw stars"></i>
 									{% else %}
-											<span class="fa fa-stack"><i class="fa fa-star-o fa-stack-2x"></i></span>
+											<i class="fa fa-paw text-muted"></i>
 									{% endif %}
 								{% endfor %}
 							</div>

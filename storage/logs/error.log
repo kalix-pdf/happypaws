@@ -239,3 +239,15 @@
 2025-06-26 1:59:03 - PHP Warning:  Undefined array key "product_id" in D:\xampp\htdocs\hp\catalog\controller\product\allreview.php on line 20
 2025-06-26 1:59:16 - PHP Warning:  Trying to access array offset on value of type bool in D:\xampp\htdocs\hp\catalog\controller\product\allreview.php on line 19
 2025-06-26 1:59:16 - PHP Warning:  Undefined array key "product_id" in D:\xampp\htdocs\hp\catalog\controller\product\allreview.php on line 20
+2025-06-27 13:19:02 - PHP Warning:  Trying to access array offset on value of type bool in C:\xampp\htdocs\hp\catalog\controller\extension\flashexpress_api.php on line 378
+2025-06-27 13:19:02 - PHP Warning:  Trying to access array offset on value of type bool in C:\xampp\htdocs\hp\catalog\controller\extension\flashexpress_api.php on line 378
+2025-06-27 13:19:02 - PHP Warning:  Trying to access array offset on value of type bool in C:\xampp\htdocs\hp\catalog\controller\extension\flashexpress_api.php on line 378
+2025-06-27 13:19:02 - PHP Warning:  Trying to access array offset on value of type bool in C:\xampp\htdocs\hp\catalog\controller\extension\flashexpress_api.php on line 494
+2025-06-27 13:19:02 - PHP Warning:  Trying to access array offset on value of type bool in C:\xampp\htdocs\hp\catalog\controller\extension\flashexpress_api.php on line 494
+2025-06-27 13:19:02 - PHP Warning:  Trying to access array offset on value of type bool in C:\xampp\htdocs\hp\catalog\controller\extension\flashexpress_api.php on line 497
+2025-06-27 13:19:02 - PHP Warning:  Trying to access array offset on value of type bool in C:\xampp\htdocs\hp\catalog\controller\extension\flashexpress_api.php on line 498
+2025-06-27 13:19:02 - PHP Warning:  Trying to access array offset on value of type bool in C:\xampp\htdocs\hp\catalog\controller\extension\flashexpress_api.php on line 499
+2025-06-27 13:19:02 - PHP Warning:  Trying to access array offset on value of type bool in C:\xampp\htdocs\hp\catalog\controller\extension\flashexpress_api.php on line 500
+2025-06-27 13:19:02 - PHP Warning:  Trying to access array offset on value of type bool in C:\xampp\htdocs\hp\catalog\controller\extension\flashexpress_api.php on line 504
+2025-06-27 13:19:02 - PHP Warning:  Trying to access array offset on value of type bool in C:\xampp\htdocs\hp\catalog\controller\extension\flashexpress_api.php on line 504
+2025-06-27 13:19:02 - PHP Warning:  Trying to access array offset on value of type null in C:\xampp\htdocs\hp\catalog\controller\extension\flashexpress_api.php on line 185

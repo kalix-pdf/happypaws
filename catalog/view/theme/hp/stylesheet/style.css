@@ -364,3 +364,12 @@
   color: #f39c12;
 }
 
+
+/* SELLER PROFILE! */
+.store-tab, .store-tab a {
+	background-color: #162F65;
+	color: #f6c96d;
+}
+.comp-banner {
+	border: 3px solid #162F65;
+}
