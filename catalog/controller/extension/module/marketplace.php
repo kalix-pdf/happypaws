@@ -789,8 +789,9 @@ class ControllerExtensionModuleMarketplace extends Controller
 			}
 		}
 
-		$data['seller_profile'] = $this->url->link('customerpartner/profile&seller_id=' . $this->session->data['customer_id'] . '&tab=profile');
+		$data['seller_profile'] = $this->url->link('customerpartner/profile&seller_id=' . $seller_id . '&tab=profile');
 		
+
 		$data['notification'] = '';
 
 		$data['notification_total'] = 0;

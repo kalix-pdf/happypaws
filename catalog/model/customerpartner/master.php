@@ -108,6 +108,8 @@ class ModelCustomerpartnerMaster extends Model {
 	 */
 	public function checkIsSellerProduct($product_id) {
 		try {
+			$array = [];
+			
 			$sql = "SELECT p.product_id, c.customer_id, c.companyname, c.screenname as seller_name FROM ".DB_PREFIX."customerpartner_to_product p LEFT JOIN ".DB_PREFIX."customerpartner_to_customer c ON (c.customer_id = p.customer_id) WHERE c.is_partner = 1";
 
 			if(isset($product_id)) {
@@ -176,7 +178,7 @@ class ModelCustomerpartnerMaster extends Model {
 	}
 
 	public function getFeedbackList($customerid, $data = array()) {
-		$sql = "SELECT c2f.* FROM " . DB_PREFIX . "customerpartner_to_feedback c2f LEFT JOIN ".DB_PREFIX ."customer c ON (c2f.customer_id = c.customer_id) LEFT JOIN ".DB_PREFIX ."customerpartner_to_customer cpc ON (cpc.customer_id = c.customer_id) where c2f.seller_id = '".(int)$customerid."' AND c2f.status = '1'";
+		$sql = "SELECT c2f.* FROM " . DB_PREFIX . "customerpartner_to_feedback c2f LEFT JOIN ".DB_PREFIX ."customer c ON (c2f.customer_id = c.customer_id) LEFT JOIN ".DB_PREFIX ."customerpartner_to_customer cpc ON (cpc.customer_id = c.customer_id) where c2f.seller_id = '".(int)$customerid."' AND c2f.status = '0'";
 
 		if (isset($data['sort']) && in_array($data['sort'], ['c2f.createdate','c2f.id'])) {
 			$sql .= " ORDER BY " . $data['sort'];
@@ -206,6 +208,7 @@ class ModelCustomerpartnerMaster extends Model {
 			$sql .= " LIMIT " . (int)$data['start'] . "," . (int)$data['limit'];
 		}
 
+		$this->log->write($this->db->query($sql));
 		$query = $this->db->query($sql);
 
 		return $query->rows;
@@ -280,16 +283,18 @@ class ModelCustomerpartnerMaster extends Model {
 
 
 	public function saveFeedback($data,$seller_id){
-
+		$author = isset($data['is_anonymous']) && $data['is_anonymous'] ? 'Anonymous' : $this->customer->getFirstName();
+		$this->log->write($author);
+		
 		$feedback_id = 0;
 
 		$result = $this->db->query("SELECT id FROM ".DB_PREFIX ."customerpartner_to_feedback WHERE customer_id = ".(int)$this->customer->getId()." AND seller_id = '".(int)$seller_id."'")->row;
 
 		if(!$result){
-			$this->db->query("INSERT INTO ".DB_PREFIX ."customerpartner_to_feedback SET customer_id = '".(int)$this->customer->getId()."',seller_id = '".(int)$seller_id."', nickname = '".$this->db->escape($data['name'])."',  review = '".$this->db->escape($data['text'])."', createdate = NOW(), status = '0'");
+			$this->db->query("INSERT INTO ".DB_PREFIX ."customerpartner_to_feedback SET customer_id = '".(int)$this->customer->getId()."',seller_id = '".(int)$seller_id."', nickname = '".$this->db->escape($author) ."',  review = '".$this->db->escape($data['text'])."', createdate = NOW(), status = '0'");
 			$feedback_id = $this->db->getLastId();
 		}else{
-			$this->db->query("UPDATE ".DB_PREFIX ."customerpartner_to_feedback set nickname='".$this->db->escape($data['name'])."', review='".$this->db->escape($data['text'])."',createdate = NOW(), status = '0' WHERE id = '".$result['id']."'");
+			$this->db->query("UPDATE ".DB_PREFIX ."customerpartner_to_feedback set nickname='".$this->db->escape($author)."', review='".$this->db->escape($data['text'])."',createdate = NOW(), status = '0' WHERE id = '".$result['id']."'");
 			$feedback_id = $result['id'];
 		}
 

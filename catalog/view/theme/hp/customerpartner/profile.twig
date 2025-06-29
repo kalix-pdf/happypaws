@@ -250,80 +250,20 @@
 
 			{# tab start  min-profile min-profile-right #}  
 			<div class="col-md-12 col-sm-12 container">
-				{# <div class="bg-info align-to-content">
-					<div class="module-body" id="wk-mp-body">
-						<div class="tab-container store-tab container">
-							<ul class="nav nav-pills nav-justified" role="tablist">
-							<li class="nav-item mp-list-group-item">
-								<a class="nav-link active text-decoration-none" id="profile-tab" data-bs-toggle="tab" href="#tab-profile" role="tab">
-								<div class="text-center">
-									<img src="image/MP/profile.png" class="img-fluid" />
-									<p class="wk-mp-tab-text mt-2 mb-0">{{ text_profile }}</p>
-								</div>
-								</a>
-							</li>
-
-							{% if public_seller_profile is defined and 'store' in public_seller_profile %}
-							<li class="nav-item mp-list-group-item">
-								<a class="nav-link" id="store-tab" data-bs-toggle="tab" href="#tab-store" role="tab">
-								<div class="text-center">
-									<img src="image/MP/about.png" class="img-fluid" />
-									<p class="wk-mp-tab-text mt-2 mb-0">{{ text_store }}</p>
-								</div>
-								</a>
-							</li>
-							{% endif %}
-
-							{% if public_seller_profile is defined and 'collection' in public_seller_profile %}
-							<li class="nav-item mp-list-group-item">
-								<a class="nav-link" id="collection-tab" data-bs-toggle="tab" href="#tab-collection" role="tab">
-								<div class="text-center">
-									<img src="image/MP/collection.png" class="img-fluid" />
-									<p class="wk-mp-tab-text mt-2 mb-0">
-									{{ text_collection ~ ' (' ~ (collection_total ? collection_total : '0') ~ ')' }}
-									</p>
-								</div>
-								</a>
-							</li>
-							{% endif %}
-
-							{% if public_seller_profile is defined and 'review' in public_seller_profile %}
-							<li class="nav-item mp-list-group-item">
-								<a class="nav-link" id="reviews-tab" data-bs-toggle="tab" href="#tab-reviews" role="tab">
-								<div class="text-center">
-									<img src="image/MP/review.png" class="img-fluid" />
-									<p class="wk-mp-tab-text mt-2 mb-0">
-									{{ text_reviews ~ ' (' ~ (feedback_total ? feedback_total : '0') ~ ')' }}
-									</p>
-								</div>
-								</a>
-							</li>
-							{% endif %}
-
-							{% if public_seller_profile is defined and 'productReview' in public_seller_profile %}
-							<li class="nav-item mp-list-group-item">
-								<a class="nav-link" id="product-reviews-tab" data-bs-toggle="tab" href="#tab-product-reviews" role="tab">
-								<div class="text-center">
-									<img src="image/MP/product.png" class="img-fluid" />
-									<p class="wk-mp-tab-text mt-2 mb-0">
-									{{ text_product_reviews ~ ' (' ~ (product_feedback_total ? product_feedback_total : '0') ~ ')' }}
-									</p>
-								</div>
-								</a>
-							</li>
-							{% endif %}
-							</ul>
-						</div>
-					</div>
-				</div> #}
 				
 				{# STORE RATINGS! #}
 				{% if public_seller_profile is defined and 'review' in public_seller_profile %}
 					<div class="card my-3">
 						<div class="card-body p-4">
-							<p class="card-text">
-								{{ text_reviews ~ ' (' ~ (feedback_total ? feedback_total : '0') ~ ')' }}
-							</p> <hr>
+								<p class="card-text">
+									{{ text_reviews ~ ' (' ~ (feedback_total ? feedback_total : '0') ~ ')' }}
+									{% if logged %}
+									<a type="button" class="btn text-decoration-underline" data-bs-toggle="modal" data-bs-target="#myModal-seller-review">
+										Write Store Review
+									</a> 
+									{% endif %}
+								</p>
+							<hr>
 							<div class="category-grid no-scroll-prev">
 								<div id="prev-reviews" style="width:100%;"></div>
 							</div>
@@ -395,12 +335,74 @@
 					
 				</div>
 			</div>
-
 			{# end here #}
 		</div>
 	</div>
 </div>
 <!-- container -->
+
+{# MODAL! #}
+<div class="modal fade" id="myModal-seller-review" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+	<div class="modal-dialog">
+		<div class="modal-content"> 
+
+			<div class="modal-header">
+				<h1 class="modal-title fs-5" id="myModal-seller-review">{{ text_write_review }}</h1>
+				<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+			</div>
+
+			<div class="modal-body" id="review-modal">
+				<form class="form-horizontal" id="seller_review_form">
+				<div class="form-group required">
+					<div class="col-sm-12">
+					<label class="control-label">{{ text_nickname }}</label><br>
+					<input type="radio" class="btn-check" name="is_anonymous" value="0" id="input-name1" autocomplete="off" checked>
+					<label class="btn border" for="input-name1">Show my name</label>
+					<input type="radio" class="btn-check" name="is_anonymous" value="1" id="input-name2" autocomplete="off">
+					<label class="btn border" for="input-name2">Post as Anonymous</label>
+					</div>
+				</div>
+
+				<div class="form-group required">
+					<div class="col-sm-12">
+					<label class="control-label" for="input-review">{{ text_review }}</label>
+					<textarea name="text" rows="5" id="input-review" class="form-control" style="width: 95%;"></textarea>
+					{# <div class="help-block pull-right">{{ text_note }}</div> #}
+					</div>
+				</div>
+
+				{% if review_fields is defined and review_fields %}
+					{% for review_field in review_fields %}
+					<div class="form-group required">
+						<div class="col-sm-12 rating-paws">
+							<label class="control-label">{{ review_field['field_name'] }}</label><br>
+							<div class="d-flex flex-row-reverse gap-1 justify-content-end">
+								&nbsp;&nbsp;&nbsp;{{ entry_bad }}&nbsp;
+								{% for i in 5..1 %}
+									<label>
+										<input type="radio" name="review_attributes[{{ review_field['field_id'] }}]" value="{{ i }}">
+										<i class="fas fa-paw stars"></i>
+									</label>
+								{% endfor %}
+							&nbsp;{{ entry_good }}
+							</div>
+						</div>
+					</div>
+					{% endfor %}
+				{% endif %}
+				</form>
+			</div>
+
+			<div class="modal-footer">
+				<button type="button" class="btn btn-default" data-bs-dismiss="modal">{{ text_close }}</button>
+				<button type="button" id="button-review" data-loading-text="{{ text_loading }}" class="wk-btn btn">{{ text_send }}</button>
+			</div>
+
+		</div> 
+	</div>
+</div>
+
+
 
 {% if logged %}
 <div class="modal fade" id="myModal-seller-mail" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
@@ -443,7 +445,7 @@
 <!-- /.modal -->
 {% endif %}
 
-<div class="modal fade" id="myModal-seller-review" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+{# <div class="modal fade" id="myModal-seller-review" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
 	aria-hidden="true">
 	<div class="modal-dialog">
 		<div class="modal-content" style="padding:12px;">
@@ -499,7 +501,7 @@
 		</div>
 	</div>
 	<!-- /.modal-content -->
-</div><!-- /.modal -->
+</div><!-- /.modal --> #}
 
 <script type="text/javascript">
 	$(document).ready(function () {

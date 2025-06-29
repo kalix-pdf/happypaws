@@ -380,7 +380,7 @@ class ControllerCustomerpartnerProfile extends Controller
         if (isset($this->request->get['limit'])) {
             $limit = $this->request->get['limit'];
         } else {
-            $limit = 10;
+            $limit = 1;
         }
 
         $filter_data = array(
@@ -393,7 +393,7 @@ class ControllerCustomerpartnerProfile extends Controller
 
         $feedbacksTotal = $this->model_customerpartner_master->getFeedbackListTotal($seller_id, $filter_data);
         $feedbacks = $this->model_customerpartner_master->getFeedbackList($seller_id, $filter_data);
-
+        
         echo '<script>
 		 $(document).ready(function () {
 		 createCookie("time_diff");
@@ -417,6 +417,7 @@ class ControllerCustomerpartnerProfile extends Controller
 
         if ($feedbacks) {
             $review_fields = $this->model_customerpartner_master->getAllReviewFields();
+            
             $data['review_fields'] = $review_fields;
             foreach ($feedbacks as $key => $feedback) {
 
@@ -587,11 +588,13 @@ class ControllerCustomerpartnerProfile extends Controller
 
         if ($this->request->server['REQUEST_METHOD'] == 'POST') {
 
-            if (empty($this->request->post['name']) || (utf8_strlen(trim($this->request->post['name'])) < 3) || (utf8_strlen(trim($this->request->post['name'])) > 25)) {
-                $json['error'] = $this->language->get('error_name');
-            }
+            if (isset($this->request->post['is_anonymous']) && $this->request->post['is_anonymous']) {
+				$reviewer_name = 'Anonymous';
+			} else {
+				$reviewer_name = $this->customer->getFirstName(); 
+			}
 
-            if ((utf8_strlen(trim($this->request->post['text'])) < 25) || (utf8_strlen(trim($this->request->post['text'])) > 1000)) {
+            if ((utf8_strlen(trim($this->request->post['text'])) < 5) || (utf8_strlen(trim($this->request->post['text'])) > 1000)) {
                 $json['error'] = $this->language->get('error_text');
             }
 

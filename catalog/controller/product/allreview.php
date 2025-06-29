@@ -34,7 +34,7 @@ class ControllerProductAllReview extends Controller {
 
 		$review_total = $this->model_catalog_review->getTotalReviewsByProductId($product_id);
 
-		$results = $this->model_catalog_review->getReviewsByProductId($product_id, ($page - 1) * 5, 5);
+		$results = $this->model_catalog_review->getReviewsByProductId($product_id, ($page - 1) * 3, 3);
 
 		foreach ($results as $result) {
             $review_id = $result['review_id'];
@@ -52,7 +52,6 @@ class ControllerProductAllReview extends Controller {
                 $data['reviews'][$review_id]['filenames'][] = $result['filename'];
             }
         }
-		// $data['upload_url'] = HTTP_CATALOG . 'image/';
 
 		$pagination = new Pagination();
 		$pagination->total = $review_total;
@@ -65,8 +64,7 @@ class ControllerProductAllReview extends Controller {
 		$data['results'] = sprintf($this->language->get('text_pagination'), ($review_total) ? (($page - 1) * 5) + 1 : 0, ((($page - 1) * 5) > ($review_total - 5)) ? $review_total : ((($page - 1) * 5) + 5), $review_total, ceil($review_total / 5));
        
 		if (isset($this->request->server['HTTP_X_REQUESTED_WITH']) && $this->request->server['HTTP_X_REQUESTED_WITH'] == 'XMLHttpRequest') {
-    // AJAX request
-            $this->response->setOutput($this->load->view('product/all_review_partial', $data));
+           $this->response->setOutput($this->load->view('product/all_review_partial', $data));
         } else {
             // Normal full page request
             $data['header'] = $this->load->controller('common/header');

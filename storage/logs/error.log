@@ -1,257 +1,171 @@
-2025-06-25 1:58:52 - PHP Warning:  Undefined array key "product_id" in D:\xampp\htdocs\hp\storage\modification\catalog\controller\product\product.php on line 724
-2025-06-25 1:58:52 - PHP Warning:  Undefined array key "product_id" in D:\xampp\htdocs\hp\storage\modification\catalog\controller\product\product.php on line 726
-2025-06-25 1:58:52 - PHP Warning:  Undefined array key "product_id" in D:\xampp\htdocs\hp\storage\modification\catalog\controller\product\product.php on line 728
-2025-06-25 1:58:52 - PHP Warning:  Undefined array key "customer_id" in D:\xampp\htdocs\hp\storage\modification\catalog\controller\product\product.php on line 729
-2025-06-25 1:58:52 - PHP Warning:  Undefined array key "customer_id" in D:\xampp\htdocs\hp\storage\modification\catalog\controller\product\product.php on line 731
-2025-06-25 1:58:52 - PHP Warning:  Undefined array key "product_id" in D:\xampp\htdocs\hp\storage\modification\catalog\controller\product\product.php on line 753
-2025-06-25 1:58:52 - PHP Warning:  Undefined array key "product_id" in D:\xampp\htdocs\hp\storage\modification\catalog\controller\product\product.php on line 760
-2025-06-25 2:04:30 - PHP Warning:  Undefined array key "product_id" in D:\xampp\htdocs\hp\storage\modification\catalog\controller\product\product.php on line 724
-2025-06-25 2:04:30 - PHP Warning:  Undefined array key "product_id" in D:\xampp\htdocs\hp\storage\modification\catalog\controller\product\product.php on line 726
-2025-06-25 2:04:30 - PHP Warning:  Undefined array key "product_id" in D:\xampp\htdocs\hp\storage\modification\catalog\controller\product\product.php on line 728
-2025-06-25 2:04:30 - PHP Warning:  Undefined array key "customer_id" in D:\xampp\htdocs\hp\storage\modification\catalog\controller\product\product.php on line 729
-2025-06-25 2:04:30 - PHP Warning:  Undefined array key "customer_id" in D:\xampp\htdocs\hp\storage\modification\catalog\controller\product\product.php on line 731
-2025-06-25 2:04:30 - PHP Warning:  Undefined array key "product_id" in D:\xampp\htdocs\hp\storage\modification\catalog\controller\product\product.php on line 753
-2025-06-25 2:04:30 - PHP Warning:  Undefined array key "product_id" in D:\xampp\htdocs\hp\storage\modification\catalog\controller\product\product.php on line 760
-2025-06-25 2:05:00 - PHP Warning:  Undefined array key "product_id" in D:\xampp\htdocs\hp\storage\modification\catalog\controller\product\product.php on line 724
-2025-06-25 2:05:00 - PHP Warning:  Undefined array key "product_id" in D:\xampp\htdocs\hp\storage\modification\catalog\controller\product\product.php on line 726
-2025-06-25 2:05:00 - PHP Warning:  Undefined array key "product_id" in D:\xampp\htdocs\hp\storage\modification\catalog\controller\product\product.php on line 728
-2025-06-25 2:05:00 - PHP Warning:  Undefined array key "customer_id" in D:\xampp\htdocs\hp\storage\modification\catalog\controller\product\product.php on line 729
-2025-06-25 2:05:00 - PHP Warning:  Undefined array key "customer_id" in D:\xampp\htdocs\hp\storage\modification\catalog\controller\product\product.php on line 731
-2025-06-25 2:05:00 - PHP Warning:  Undefined array key "product_id" in D:\xampp\htdocs\hp\storage\modification\catalog\controller\product\product.php on line 753
-2025-06-25 2:05:00 - PHP Warning:  Undefined array key "product_id" in D:\xampp\htdocs\hp\storage\modification\catalog\controller\product\product.php on line 760
-2025-06-25 2:09:35 - PHP Warning:  Undefined array key "product_id" in D:\xampp\htdocs\hp\storage\modification\catalog\controller\product\product.php on line 724
-2025-06-25 2:09:35 - PHP Warning:  Undefined array key "product_id" in D:\xampp\htdocs\hp\storage\modification\catalog\controller\product\product.php on line 726
-2025-06-25 2:09:35 - PHP Warning:  Undefined array key "product_id" in D:\xampp\htdocs\hp\storage\modification\catalog\controller\product\product.php on line 728
-2025-06-25 2:09:35 - PHP Warning:  Undefined array key "customer_id" in D:\xampp\htdocs\hp\storage\modification\catalog\controller\product\product.php on line 729
-2025-06-25 2:09:35 - PHP Warning:  Undefined array key "customer_id" in D:\xampp\htdocs\hp\storage\modification\catalog\controller\product\product.php on line 731
-2025-06-25 2:09:35 - PHP Warning:  Undefined array key "product_id" in D:\xampp\htdocs\hp\storage\modification\catalog\controller\product\product.php on line 753
-2025-06-25 2:09:35 - PHP Warning:  Undefined array key "product_id" in D:\xampp\htdocs\hp\storage\modification\catalog\controller\product\product.php on line 760
-2025-06-25 2:11:22 - PHP Warning:  Undefined array key "product_id" in D:\xampp\htdocs\hp\storage\modification\catalog\controller\product\product.php on line 724
-2025-06-25 2:11:22 - PHP Warning:  Undefined array key "product_id" in D:\xampp\htdocs\hp\storage\modification\catalog\controller\product\product.php on line 726
-2025-06-25 2:11:22 - PHP Warning:  Undefined array key "product_id" in D:\xampp\htdocs\hp\storage\modification\catalog\controller\product\product.php on line 728
-2025-06-25 2:11:22 - PHP Warning:  Undefined array key "customer_id" in D:\xampp\htdocs\hp\storage\modification\catalog\controller\product\product.php on line 729
-2025-06-25 2:11:22 - PHP Warning:  Undefined array key "customer_id" in D:\xampp\htdocs\hp\storage\modification\catalog\controller\product\product.php on line 731
-2025-06-25 2:11:22 - PHP Warning:  Undefined array key "product_id" in D:\xampp\htdocs\hp\storage\modification\catalog\controller\product\product.php on line 753
-2025-06-25 2:11:22 - PHP Warning:  Undefined array key "product_id" in D:\xampp\htdocs\hp\storage\modification\catalog\controller\product\product.php on line 760
-2025-06-25 21:16:47 - PHP Warning:  Undefined array key "product_id" in D:\xampp\htdocs\hp\storage\modification\catalog\controller\product\product.php on line 724
-2025-06-25 21:16:47 - PHP Warning:  Undefined array key "product_id" in D:\xampp\htdocs\hp\storage\modification\catalog\controller\product\product.php on line 726
-2025-06-25 21:16:47 - PHP Warning:  Undefined array key "product_id" in D:\xampp\htdocs\hp\storage\modification\catalog\controller\product\product.php on line 728
-2025-06-25 21:16:47 - PHP Warning:  Undefined array key "customer_id" in D:\xampp\htdocs\hp\storage\modification\catalog\controller\product\product.php on line 729
-2025-06-25 21:16:47 - PHP Warning:  Undefined array key "customer_id" in D:\xampp\htdocs\hp\storage\modification\catalog\controller\product\product.php on line 731
-2025-06-25 21:16:47 - PHP Warning:  Undefined array key "product_id" in D:\xampp\htdocs\hp\storage\modification\catalog\controller\product\product.php on line 753
-2025-06-25 21:16:47 - PHP Warning:  Undefined array key "product_id" in D:\xampp\htdocs\hp\storage\modification\catalog\controller\product\product.php on line 760
-2025-06-25 21:20:22 - PHP Warning:  Undefined array key "path" in D:\xampp\htdocs\hp\catalog\controller\product\allreview.php on line 20
-2025-06-25 21:22:03 - PHP Warning:  Trying to access array offset on value of type bool in D:\xampp\htdocs\hp\catalog\controller\product\allreview.php on line 127
-2025-06-25 21:22:03 - PHP Warning:  Undefined variable $url in D:\xampp\htdocs\hp\catalog\controller\product\allreview.php on line 128
-2025-06-25 21:22:03 - PHP Warning:  Undefined array key "product_id" in D:\xampp\htdocs\hp\catalog\controller\product\allreview.php on line 128
-2025-06-25 21:22:03 - PHP Warning:  Trying to access array offset on value of type bool in D:\xampp\htdocs\hp\catalog\controller\product\allreview.php on line 131
-2025-06-25 21:22:03 - PHP Warning:  Trying to access array offset on value of type bool in D:\xampp\htdocs\hp\catalog\controller\product\allreview.php on line 132
-2025-06-25 21:22:03 - PHP Warning:  Trying to access array offset on value of type bool in D:\xampp\htdocs\hp\catalog\controller\product\allreview.php on line 133
-2025-06-25 21:22:03 - PHP Warning:  Undefined array key "product_id" in D:\xampp\htdocs\hp\catalog\controller\product\allreview.php on line 134
-2025-06-25 21:22:03 - PHP Warning:  Trying to access array offset on value of type bool in D:\xampp\htdocs\hp\catalog\controller\product\allreview.php on line 142
-2025-06-25 21:22:03 - PHP Warning:  Trying to access array offset on value of type bool in D:\xampp\htdocs\hp\catalog\controller\product\allreview.php on line 144
-2025-06-25 21:22:03 - PHP Warning:  Trying to access array offset on value of type bool in D:\xampp\htdocs\hp\catalog\controller\product\allreview.php on line 149
-2025-06-25 21:22:03 - PHP Warning:  Undefined array key "product_id" in D:\xampp\htdocs\hp\catalog\controller\product\allreview.php on line 151
-2025-06-25 21:22:03 - PHP Warning:  Trying to access array offset on value of type bool in D:\xampp\htdocs\hp\catalog\controller\product\allreview.php on line 152
-2025-06-25 21:22:03 - PHP Warning:  Trying to access array offset on value of type bool in D:\xampp\htdocs\hp\catalog\controller\product\allreview.php on line 153
-2025-06-25 21:22:03 - PHP Warning:  Trying to access array offset on value of type bool in D:\xampp\htdocs\hp\catalog\controller\product\allreview.php on line 154
-2025-06-25 21:22:03 - PHP Warning:  Trying to access array offset on value of type bool in D:\xampp\htdocs\hp\catalog\controller\product\allreview.php on line 155
-2025-06-25 21:22:03 - PHP Warning:  Trying to access array offset on value of type bool in D:\xampp\htdocs\hp\catalog\controller\product\allreview.php on line 156
-2025-06-25 21:22:03 - PHP Warning:  Trying to access array offset on value of type bool in D:\xampp\htdocs\hp\catalog\controller\product\allreview.php on line 157
-2025-06-25 21:22:03 - PHP Warning:  Trying to access array offset on value of type bool in D:\xampp\htdocs\hp\catalog\controller\product\allreview.php on line 159
-2025-06-25 21:22:03 - PHP Warning:  Trying to access array offset on value of type bool in D:\xampp\htdocs\hp\catalog\controller\product\allreview.php on line 160
-2025-06-25 21:22:03 - PHP Warning:  Trying to access array offset on value of type bool in D:\xampp\htdocs\hp\catalog\controller\product\allreview.php on line 169
-2025-06-25 21:22:03 - PHP Warning:  Trying to access array offset on value of type bool in D:\xampp\htdocs\hp\catalog\controller\product\allreview.php on line 175
-2025-06-25 21:22:03 - PHP Warning:  Undefined array key "product_id" in D:\xampp\htdocs\hp\catalog\controller\product\allreview.php on line 183
-2025-06-25 21:22:03 - PHP Warning:  Trying to access array offset on value of type bool in D:\xampp\htdocs\hp\catalog\controller\product\allreview.php on line 193
-2025-06-25 21:22:03 - PHP Warning:  Trying to access array offset on value of type bool in D:\xampp\htdocs\hp\catalog\controller\product\allreview.php on line 193
-2025-06-25 21:22:03 - PHP Warning:  Trying to access array offset on value of type bool in D:\xampp\htdocs\hp\catalog\controller\product\allreview.php on line 197
-2025-06-25 21:22:03 - PHP Warning:  Trying to access array offset on value of type bool in D:\xampp\htdocs\hp\catalog\controller\product\allreview.php on line 198
-2025-06-25 21:22:03 - PHP Warning:  Trying to access array offset on value of type bool in D:\xampp\htdocs\hp\catalog\controller\product\allreview.php on line 202
-2025-06-25 21:22:03 - PHP Warning:  Trying to access array offset on value of type bool in D:\xampp\htdocs\hp\catalog\controller\product\allreview.php on line 207
-2025-06-25 21:22:03 - PHP Warning:  Undefined array key "product_id" in D:\xampp\htdocs\hp\catalog\controller\product\allreview.php on line 216
-2025-06-25 21:22:03 - PHP Warning:  Undefined array key "product_id" in D:\xampp\htdocs\hp\catalog\controller\product\allreview.php on line 229
-2025-06-25 21:22:03 - PHP Warning:  Trying to access array offset on value of type bool in D:\xampp\htdocs\hp\catalog\controller\product\allreview.php on line 269
-2025-06-25 21:22:03 - PHP Warning:  Trying to access array offset on value of type bool in D:\xampp\htdocs\hp\catalog\controller\product\allreview.php on line 289
-2025-06-25 21:22:03 - PHP Warning:  Trying to access array offset on value of type bool in D:\xampp\htdocs\hp\catalog\controller\product\allreview.php on line 290
-2025-06-25 21:22:03 - PHP Warning:  Undefined array key "product_id" in D:\xampp\htdocs\hp\catalog\controller\product\allreview.php on line 301
-2025-06-25 21:22:03 - PHP Warning:  Undefined array key "product_id" in D:\xampp\htdocs\hp\catalog\controller\product\allreview.php on line 303
-2025-06-25 21:22:03 - PHP Warning:  Trying to access array offset on value of type bool in D:\xampp\htdocs\hp\catalog\controller\product\allreview.php on line 307
-2025-06-25 21:22:03 - PHP Warning:  Trying to access array offset on value of type bool in D:\xampp\htdocs\hp\catalog\controller\product\allreview.php on line 307
-2025-06-25 21:22:03 - PHP Warning:  Undefined array key "product_id" in D:\xampp\htdocs\hp\catalog\controller\product\allreview.php on line 309
-2025-06-25 21:22:03 - PHP Warning:  Trying to access array offset on value of type bool in D:\xampp\htdocs\hp\catalog\controller\product\allreview.php on line 360
-2025-06-25 21:22:03 - PHP Warning:  Undefined array key "product_id" in D:\xampp\htdocs\hp\catalog\controller\product\allreview.php on line 371
-2025-06-25 21:22:03 - PHP Warning:  Undefined array key "customer_id" in D:\xampp\htdocs\hp\catalog\controller\product\allreview.php on line 372
-2025-06-25 21:22:03 - PHP Warning:  Undefined array key "customer_id" in D:\xampp\htdocs\hp\catalog\controller\product\allreview.php on line 375
-2025-06-25 21:22:03 - PHP Warning:  Undefined array key "product_id" in D:\xampp\htdocs\hp\catalog\controller\product\allreview.php on line 377
-2025-06-25 21:22:03 - PHP Warning:  Undefined array key "product_id" in D:\xampp\htdocs\hp\catalog\controller\product\allreview.php on line 379
-2025-06-25 21:22:03 - PHP Warning:  Undefined array key "product_id" in D:\xampp\htdocs\hp\storage\modification\catalog\controller\product\product.php on line 724
-2025-06-25 21:22:03 - PHP Warning:  Undefined array key "product_id" in D:\xampp\htdocs\hp\storage\modification\catalog\controller\product\product.php on line 726
-2025-06-25 21:22:03 - PHP Warning:  Undefined array key "product_id" in D:\xampp\htdocs\hp\storage\modification\catalog\controller\product\product.php on line 728
-2025-06-25 21:22:03 - PHP Warning:  Undefined array key "customer_id" in D:\xampp\htdocs\hp\storage\modification\catalog\controller\product\product.php on line 729
-2025-06-25 21:22:03 - PHP Warning:  Undefined array key "customer_id" in D:\xampp\htdocs\hp\storage\modification\catalog\controller\product\product.php on line 731
-2025-06-25 21:22:03 - PHP Warning:  Undefined array key "product_id" in D:\xampp\htdocs\hp\storage\modification\catalog\controller\product\product.php on line 753
-2025-06-25 21:22:03 - PHP Warning:  Undefined array key "product_id" in D:\xampp\htdocs\hp\storage\modification\catalog\controller\product\product.php on line 760
-2025-06-25 21:23:52 - PHP Warning:  Undefined array key "product_id" in D:\xampp\htdocs\hp\storage\modification\catalog\controller\product\product.php on line 724
-2025-06-25 21:23:52 - PHP Warning:  Undefined array key "product_id" in D:\xampp\htdocs\hp\storage\modification\catalog\controller\product\product.php on line 726
-2025-06-25 21:23:52 - PHP Warning:  Undefined array key "product_id" in D:\xampp\htdocs\hp\storage\modification\catalog\controller\product\product.php on line 728
-2025-06-25 21:23:52 - PHP Warning:  Undefined array key "customer_id" in D:\xampp\htdocs\hp\storage\modification\catalog\controller\product\product.php on line 729
-2025-06-25 21:23:52 - PHP Warning:  Undefined array key "customer_id" in D:\xampp\htdocs\hp\storage\modification\catalog\controller\product\product.php on line 731
-2025-06-25 21:23:52 - PHP Warning:  Undefined array key "product_id" in D:\xampp\htdocs\hp\storage\modification\catalog\controller\product\product.php on line 753
-2025-06-25 21:23:52 - PHP Warning:  Undefined array key "product_id" in D:\xampp\htdocs\hp\storage\modification\catalog\controller\product\product.php on line 760
-2025-06-25 21:24:09 - PHP Warning:  Undefined array key "product_id" in D:\xampp\htdocs\hp\storage\modification\catalog\controller\product\product.php on line 724
-2025-06-25 21:24:09 - PHP Warning:  Undefined array key "product_id" in D:\xampp\htdocs\hp\storage\modification\catalog\controller\product\product.php on line 726
-2025-06-25 21:24:09 - PHP Warning:  Undefined array key "product_id" in D:\xampp\htdocs\hp\storage\modification\catalog\controller\product\product.php on line 728
-2025-06-25 21:24:09 - PHP Warning:  Undefined array key "customer_id" in D:\xampp\htdocs\hp\storage\modification\catalog\controller\product\product.php on line 729
-2025-06-25 21:24:09 - PHP Warning:  Undefined array key "customer_id" in D:\xampp\htdocs\hp\storage\modification\catalog\controller\product\product.php on line 731
-2025-06-25 21:24:09 - PHP Warning:  Undefined array key "product_id" in D:\xampp\htdocs\hp\storage\modification\catalog\controller\product\product.php on line 753
-2025-06-25 21:24:09 - PHP Warning:  Undefined array key "product_id" in D:\xampp\htdocs\hp\storage\modification\catalog\controller\product\product.php on line 760
-2025-06-25 21:24:10 - PHP Warning:  Undefined array key "product_id" in D:\xampp\htdocs\hp\storage\modification\catalog\controller\product\product.php on line 724
-2025-06-25 21:24:10 - PHP Warning:  Undefined array key "product_id" in D:\xampp\htdocs\hp\storage\modification\catalog\controller\product\product.php on line 726
-2025-06-25 21:24:10 - PHP Warning:  Undefined array key "product_id" in D:\xampp\htdocs\hp\storage\modification\catalog\controller\product\product.php on line 728
-2025-06-25 21:24:10 - PHP Warning:  Undefined array key "customer_id" in D:\xampp\htdocs\hp\storage\modification\catalog\controller\product\product.php on line 729
-2025-06-25 21:24:10 - PHP Warning:  Undefined array key "customer_id" in D:\xampp\htdocs\hp\storage\modification\catalog\controller\product\product.php on line 731
-2025-06-25 21:24:10 - PHP Warning:  Undefined array key "product_id" in D:\xampp\htdocs\hp\storage\modification\catalog\controller\product\product.php on line 753
-2025-06-25 21:24:10 - PHP Warning:  Undefined array key "product_id" in D:\xampp\htdocs\hp\storage\modification\catalog\controller\product\product.php on line 760
-2025-06-25 21:24:36 - PHP Warning:  Undefined array key "product_id" in D:\xampp\htdocs\hp\storage\modification\catalog\controller\product\product.php on line 724
-2025-06-25 21:24:36 - PHP Warning:  Undefined array key "product_id" in D:\xampp\htdocs\hp\storage\modification\catalog\controller\product\product.php on line 726
-2025-06-25 21:24:36 - PHP Warning:  Undefined array key "product_id" in D:\xampp\htdocs\hp\storage\modification\catalog\controller\product\product.php on line 728
-2025-06-25 21:24:36 - PHP Warning:  Undefined array key "customer_id" in D:\xampp\htdocs\hp\storage\modification\catalog\controller\product\product.php on line 729
-2025-06-25 21:24:36 - PHP Warning:  Undefined array key "customer_id" in D:\xampp\htdocs\hp\storage\modification\catalog\controller\product\product.php on line 731
-2025-06-25 21:24:36 - PHP Warning:  Undefined array key "product_id" in D:\xampp\htdocs\hp\storage\modification\catalog\controller\product\product.php on line 753
-2025-06-25 21:24:36 - PHP Warning:  Undefined array key "product_id" in D:\xampp\htdocs\hp\storage\modification\catalog\controller\product\product.php on line 760
-2025-06-25 21:28:08 - PHP Warning:  Undefined array key "product_id" in D:\xampp\htdocs\hp\storage\modification\catalog\controller\product\product.php on line 724
-2025-06-25 21:28:08 - PHP Warning:  Undefined array key "product_id" in D:\xampp\htdocs\hp\storage\modification\catalog\controller\product\product.php on line 726
-2025-06-25 21:28:08 - PHP Warning:  Undefined array key "product_id" in D:\xampp\htdocs\hp\storage\modification\catalog\controller\product\product.php on line 728
-2025-06-25 21:28:08 - PHP Warning:  Undefined array key "customer_id" in D:\xampp\htdocs\hp\storage\modification\catalog\controller\product\product.php on line 729
-2025-06-25 21:28:08 - PHP Warning:  Undefined array key "customer_id" in D:\xampp\htdocs\hp\storage\modification\catalog\controller\product\product.php on line 731
-2025-06-25 21:28:08 - PHP Warning:  Undefined array key "product_id" in D:\xampp\htdocs\hp\storage\modification\catalog\controller\product\product.php on line 753
-2025-06-25 21:28:08 - PHP Warning:  Undefined array key "product_id" in D:\xampp\htdocs\hp\storage\modification\catalog\controller\product\product.php on line 760
-2025-06-25 21:28:09 - PHP Warning:  Undefined array key "product_id" in D:\xampp\htdocs\hp\storage\modification\catalog\controller\product\product.php on line 724
-2025-06-25 21:28:09 - PHP Warning:  Undefined array key "product_id" in D:\xampp\htdocs\hp\storage\modification\catalog\controller\product\product.php on line 726
-2025-06-25 21:28:09 - PHP Warning:  Undefined array key "product_id" in D:\xampp\htdocs\hp\storage\modification\catalog\controller\product\product.php on line 728
-2025-06-25 21:28:09 - PHP Warning:  Undefined array key "customer_id" in D:\xampp\htdocs\hp\storage\modification\catalog\controller\product\product.php on line 729
-2025-06-25 21:28:09 - PHP Warning:  Undefined array key "customer_id" in D:\xampp\htdocs\hp\storage\modification\catalog\controller\product\product.php on line 731
-2025-06-25 21:28:09 - PHP Warning:  Undefined array key "product_id" in D:\xampp\htdocs\hp\storage\modification\catalog\controller\product\product.php on line 753
-2025-06-25 21:28:09 - PHP Warning:  Undefined array key "product_id" in D:\xampp\htdocs\hp\storage\modification\catalog\controller\product\product.php on line 760
-2025-06-25 21:28:09 - PHP Warning:  Undefined array key "product_id" in D:\xampp\htdocs\hp\storage\modification\catalog\controller\product\product.php on line 724
-2025-06-25 21:28:09 - PHP Warning:  Undefined array key "product_id" in D:\xampp\htdocs\hp\storage\modification\catalog\controller\product\product.php on line 726
-2025-06-25 21:28:09 - PHP Warning:  Undefined array key "product_id" in D:\xampp\htdocs\hp\storage\modification\catalog\controller\product\product.php on line 728
-2025-06-25 21:28:09 - PHP Warning:  Undefined array key "customer_id" in D:\xampp\htdocs\hp\storage\modification\catalog\controller\product\product.php on line 729
-2025-06-25 21:28:09 - PHP Warning:  Undefined array key "customer_id" in D:\xampp\htdocs\hp\storage\modification\catalog\controller\product\product.php on line 731
-2025-06-25 21:28:09 - PHP Warning:  Undefined array key "product_id" in D:\xampp\htdocs\hp\storage\modification\catalog\controller\product\product.php on line 753
-2025-06-25 21:28:09 - PHP Warning:  Undefined array key "product_id" in D:\xampp\htdocs\hp\storage\modification\catalog\controller\product\product.php on line 760
-2025-06-25 21:28:10 - PHP Warning:  Undefined array key "product_id" in D:\xampp\htdocs\hp\storage\modification\catalog\controller\product\product.php on line 724
-2025-06-25 21:28:10 - PHP Warning:  Undefined array key "product_id" in D:\xampp\htdocs\hp\storage\modification\catalog\controller\product\product.php on line 726
-2025-06-25 21:28:10 - PHP Warning:  Undefined array key "product_id" in D:\xampp\htdocs\hp\storage\modification\catalog\controller\product\product.php on line 728
-2025-06-25 21:28:10 - PHP Warning:  Undefined array key "customer_id" in D:\xampp\htdocs\hp\storage\modification\catalog\controller\product\product.php on line 729
-2025-06-25 21:28:10 - PHP Warning:  Undefined array key "customer_id" in D:\xampp\htdocs\hp\storage\modification\catalog\controller\product\product.php on line 731
-2025-06-25 21:28:10 - PHP Warning:  Undefined array key "product_id" in D:\xampp\htdocs\hp\storage\modification\catalog\controller\product\product.php on line 753
-2025-06-25 21:28:10 - PHP Warning:  Undefined array key "product_id" in D:\xampp\htdocs\hp\storage\modification\catalog\controller\product\product.php on line 760
-2025-06-25 21:28:10 - PHP Warning:  Undefined array key "product_id" in D:\xampp\htdocs\hp\storage\modification\catalog\controller\product\product.php on line 724
-2025-06-25 21:28:10 - PHP Warning:  Undefined array key "product_id" in D:\xampp\htdocs\hp\storage\modification\catalog\controller\product\product.php on line 726
-2025-06-25 21:28:10 - PHP Warning:  Undefined array key "product_id" in D:\xampp\htdocs\hp\storage\modification\catalog\controller\product\product.php on line 728
-2025-06-25 21:28:10 - PHP Warning:  Undefined array key "customer_id" in D:\xampp\htdocs\hp\storage\modification\catalog\controller\product\product.php on line 729
-2025-06-25 21:28:10 - PHP Warning:  Undefined array key "customer_id" in D:\xampp\htdocs\hp\storage\modification\catalog\controller\product\product.php on line 731
-2025-06-25 21:28:10 - PHP Warning:  Undefined array key "product_id" in D:\xampp\htdocs\hp\storage\modification\catalog\controller\product\product.php on line 753
-2025-06-25 21:28:10 - PHP Warning:  Undefined array key "product_id" in D:\xampp\htdocs\hp\storage\modification\catalog\controller\product\product.php on line 760
-2025-06-25 21:28:10 - PHP Warning:  Undefined array key "product_id" in D:\xampp\htdocs\hp\storage\modification\catalog\controller\product\product.php on line 724
-2025-06-25 21:28:10 - PHP Warning:  Undefined array key "product_id" in D:\xampp\htdocs\hp\storage\modification\catalog\controller\product\product.php on line 726
-2025-06-25 21:28:10 - PHP Warning:  Undefined array key "product_id" in D:\xampp\htdocs\hp\storage\modification\catalog\controller\product\product.php on line 728
-2025-06-25 21:28:10 - PHP Warning:  Undefined array key "customer_id" in D:\xampp\htdocs\hp\storage\modification\catalog\controller\product\product.php on line 729
-2025-06-25 21:28:10 - PHP Warning:  Undefined array key "customer_id" in D:\xampp\htdocs\hp\storage\modification\catalog\controller\product\product.php on line 731
-2025-06-25 21:28:10 - PHP Warning:  Undefined array key "product_id" in D:\xampp\htdocs\hp\storage\modification\catalog\controller\product\product.php on line 753
-2025-06-25 21:28:10 - PHP Warning:  Undefined array key "product_id" in D:\xampp\htdocs\hp\storage\modification\catalog\controller\product\product.php on line 760
-2025-06-25 21:28:11 - PHP Warning:  Undefined array key "product_id" in D:\xampp\htdocs\hp\storage\modification\catalog\controller\product\product.php on line 724
-2025-06-25 21:28:11 - PHP Warning:  Undefined array key "product_id" in D:\xampp\htdocs\hp\storage\modification\catalog\controller\product\product.php on line 726
-2025-06-25 21:28:11 - PHP Warning:  Undefined array key "product_id" in D:\xampp\htdocs\hp\storage\modification\catalog\controller\product\product.php on line 728
-2025-06-25 21:28:11 - PHP Warning:  Undefined array key "customer_id" in D:\xampp\htdocs\hp\storage\modification\catalog\controller\product\product.php on line 729
-2025-06-25 21:28:11 - PHP Warning:  Undefined array key "customer_id" in D:\xampp\htdocs\hp\storage\modification\catalog\controller\product\product.php on line 731
-2025-06-25 21:28:11 - PHP Warning:  Undefined array key "product_id" in D:\xampp\htdocs\hp\storage\modification\catalog\controller\product\product.php on line 753
-2025-06-25 21:28:11 - PHP Warning:  Undefined array key "product_id" in D:\xampp\htdocs\hp\storage\modification\catalog\controller\product\product.php on line 760
-2025-06-25 21:28:11 - PHP Warning:  Undefined array key "product_id" in D:\xampp\htdocs\hp\storage\modification\catalog\controller\product\product.php on line 724
-2025-06-25 21:28:11 - PHP Warning:  Undefined array key "product_id" in D:\xampp\htdocs\hp\storage\modification\catalog\controller\product\product.php on line 726
-2025-06-25 21:28:11 - PHP Warning:  Undefined array key "product_id" in D:\xampp\htdocs\hp\storage\modification\catalog\controller\product\product.php on line 728
-2025-06-25 21:28:11 - PHP Warning:  Undefined array key "customer_id" in D:\xampp\htdocs\hp\storage\modification\catalog\controller\product\product.php on line 729
-2025-06-25 21:28:11 - PHP Warning:  Undefined array key "customer_id" in D:\xampp\htdocs\hp\storage\modification\catalog\controller\product\product.php on line 731
-2025-06-25 21:28:11 - PHP Warning:  Undefined array key "product_id" in D:\xampp\htdocs\hp\storage\modification\catalog\controller\product\product.php on line 753
-2025-06-25 21:28:11 - PHP Warning:  Undefined array key "product_id" in D:\xampp\htdocs\hp\storage\modification\catalog\controller\product\product.php on line 760
-2025-06-25 21:28:11 - PHP Warning:  Undefined array key "product_id" in D:\xampp\htdocs\hp\storage\modification\catalog\controller\product\product.php on line 724
-2025-06-25 21:28:11 - PHP Warning:  Undefined array key "product_id" in D:\xampp\htdocs\hp\storage\modification\catalog\controller\product\product.php on line 726
-2025-06-25 21:28:11 - PHP Warning:  Undefined array key "product_id" in D:\xampp\htdocs\hp\storage\modification\catalog\controller\product\product.php on line 728
-2025-06-25 21:28:11 - PHP Warning:  Undefined array key "customer_id" in D:\xampp\htdocs\hp\storage\modification\catalog\controller\product\product.php on line 729
-2025-06-25 21:28:11 - PHP Warning:  Undefined array key "customer_id" in D:\xampp\htdocs\hp\storage\modification\catalog\controller\product\product.php on line 731
-2025-06-25 21:28:11 - PHP Warning:  Undefined array key "product_id" in D:\xampp\htdocs\hp\storage\modification\catalog\controller\product\product.php on line 753
-2025-06-25 21:28:11 - PHP Warning:  Undefined array key "product_id" in D:\xampp\htdocs\hp\storage\modification\catalog\controller\product\product.php on line 760
-2025-06-25 21:28:11 - PHP Warning:  Undefined array key "product_id" in D:\xampp\htdocs\hp\storage\modification\catalog\controller\product\product.php on line 724
-2025-06-25 21:28:11 - PHP Warning:  Undefined array key "product_id" in D:\xampp\htdocs\hp\storage\modification\catalog\controller\product\product.php on line 726
-2025-06-25 21:28:11 - PHP Warning:  Undefined array key "product_id" in D:\xampp\htdocs\hp\storage\modification\catalog\controller\product\product.php on line 728
-2025-06-25 21:28:11 - PHP Warning:  Undefined array key "customer_id" in D:\xampp\htdocs\hp\storage\modification\catalog\controller\product\product.php on line 729
-2025-06-25 21:28:11 - PHP Warning:  Undefined array key "customer_id" in D:\xampp\htdocs\hp\storage\modification\catalog\controller\product\product.php on line 731
-2025-06-25 21:28:11 - PHP Warning:  Undefined array key "product_id" in D:\xampp\htdocs\hp\storage\modification\catalog\controller\product\product.php on line 753
-2025-06-25 21:28:11 - PHP Warning:  Undefined array key "product_id" in D:\xampp\htdocs\hp\storage\modification\catalog\controller\product\product.php on line 760
-2025-06-25 21:28:11 - PHP Warning:  Undefined array key "product_id" in D:\xampp\htdocs\hp\storage\modification\catalog\controller\product\product.php on line 724
-2025-06-25 21:28:11 - PHP Warning:  Undefined array key "product_id" in D:\xampp\htdocs\hp\storage\modification\catalog\controller\product\product.php on line 726
-2025-06-25 21:28:11 - PHP Warning:  Undefined array key "product_id" in D:\xampp\htdocs\hp\storage\modification\catalog\controller\product\product.php on line 728
-2025-06-25 21:28:11 - PHP Warning:  Undefined array key "customer_id" in D:\xampp\htdocs\hp\storage\modification\catalog\controller\product\product.php on line 729
-2025-06-25 21:28:11 - PHP Warning:  Undefined array key "customer_id" in D:\xampp\htdocs\hp\storage\modification\catalog\controller\product\product.php on line 731
-2025-06-25 21:28:11 - PHP Warning:  Undefined array key "product_id" in D:\xampp\htdocs\hp\storage\modification\catalog\controller\product\product.php on line 753
-2025-06-25 21:28:11 - PHP Warning:  Undefined array key "product_id" in D:\xampp\htdocs\hp\storage\modification\catalog\controller\product\product.php on line 760
-2025-06-25 21:28:11 - PHP Warning:  Undefined array key "product_id" in D:\xampp\htdocs\hp\storage\modification\catalog\controller\product\product.php on line 724
-2025-06-25 21:28:11 - PHP Warning:  Undefined array key "product_id" in D:\xampp\htdocs\hp\storage\modification\catalog\controller\product\product.php on line 726
-2025-06-25 21:28:11 - PHP Warning:  Undefined array key "product_id" in D:\xampp\htdocs\hp\storage\modification\catalog\controller\product\product.php on line 728
-2025-06-25 21:28:11 - PHP Warning:  Undefined array key "customer_id" in D:\xampp\htdocs\hp\storage\modification\catalog\controller\product\product.php on line 729
-2025-06-25 21:28:11 - PHP Warning:  Undefined array key "customer_id" in D:\xampp\htdocs\hp\storage\modification\catalog\controller\product\product.php on line 731
-2025-06-25 21:28:11 - PHP Warning:  Undefined array key "product_id" in D:\xampp\htdocs\hp\storage\modification\catalog\controller\product\product.php on line 753
-2025-06-25 21:28:11 - PHP Warning:  Undefined array key "product_id" in D:\xampp\htdocs\hp\storage\modification\catalog\controller\product\product.php on line 760
-2025-06-25 21:28:12 - PHP Warning:  Undefined array key "product_id" in D:\xampp\htdocs\hp\storage\modification\catalog\controller\product\product.php on line 724
-2025-06-25 21:28:12 - PHP Warning:  Undefined array key "product_id" in D:\xampp\htdocs\hp\storage\modification\catalog\controller\product\product.php on line 726
-2025-06-25 21:28:12 - PHP Warning:  Undefined array key "product_id" in D:\xampp\htdocs\hp\storage\modification\catalog\controller\product\product.php on line 728
-2025-06-25 21:28:12 - PHP Warning:  Undefined array key "customer_id" in D:\xampp\htdocs\hp\storage\modification\catalog\controller\product\product.php on line 729
-2025-06-25 21:28:12 - PHP Warning:  Undefined array key "customer_id" in D:\xampp\htdocs\hp\storage\modification\catalog\controller\product\product.php on line 731
-2025-06-25 21:28:12 - PHP Warning:  Undefined array key "product_id" in D:\xampp\htdocs\hp\storage\modification\catalog\controller\product\product.php on line 753
-2025-06-25 21:28:12 - PHP Warning:  Undefined array key "product_id" in D:\xampp\htdocs\hp\storage\modification\catalog\controller\product\product.php on line 760
-2025-06-25 21:28:12 - PHP Warning:  Undefined array key "product_id" in D:\xampp\htdocs\hp\storage\modification\catalog\controller\product\product.php on line 724
-2025-06-25 21:28:12 - PHP Warning:  Undefined array key "product_id" in D:\xampp\htdocs\hp\storage\modification\catalog\controller\product\product.php on line 726
-2025-06-25 21:28:12 - PHP Warning:  Undefined array key "product_id" in D:\xampp\htdocs\hp\storage\modification\catalog\controller\product\product.php on line 728
-2025-06-25 21:28:12 - PHP Warning:  Undefined array key "customer_id" in D:\xampp\htdocs\hp\storage\modification\catalog\controller\product\product.php on line 729
-2025-06-25 21:28:12 - PHP Warning:  Undefined array key "customer_id" in D:\xampp\htdocs\hp\storage\modification\catalog\controller\product\product.php on line 731
-2025-06-25 21:28:12 - PHP Warning:  Undefined array key "product_id" in D:\xampp\htdocs\hp\storage\modification\catalog\controller\product\product.php on line 753
-2025-06-25 21:28:12 - PHP Warning:  Undefined array key "product_id" in D:\xampp\htdocs\hp\storage\modification\catalog\controller\product\product.php on line 760
-2025-06-25 21:28:12 - PHP Warning:  Undefined array key "product_id" in D:\xampp\htdocs\hp\storage\modification\catalog\controller\product\product.php on line 724
-2025-06-25 21:28:12 - PHP Warning:  Undefined array key "product_id" in D:\xampp\htdocs\hp\storage\modification\catalog\controller\product\product.php on line 726
-2025-06-25 21:28:12 - PHP Warning:  Undefined array key "product_id" in D:\xampp\htdocs\hp\storage\modification\catalog\controller\product\product.php on line 728
-2025-06-25 21:28:12 - PHP Warning:  Undefined array key "customer_id" in D:\xampp\htdocs\hp\storage\modification\catalog\controller\product\product.php on line 729
-2025-06-25 21:28:12 - PHP Warning:  Undefined array key "customer_id" in D:\xampp\htdocs\hp\storage\modification\catalog\controller\product\product.php on line 731
-2025-06-25 21:28:12 - PHP Warning:  Undefined array key "product_id" in D:\xampp\htdocs\hp\storage\modification\catalog\controller\product\product.php on line 753
-2025-06-25 21:28:12 - PHP Warning:  Undefined array key "product_id" in D:\xampp\htdocs\hp\storage\modification\catalog\controller\product\product.php on line 760
-2025-06-25 21:46:40 - PHP Warning:  Undefined array key "attachment" in D:\xampp\htdocs\hp\catalog\controller\product\allreview.php on line 27
-2025-06-25 21:46:40 - PHP Warning:  Undefined array key "attachment" in D:\xampp\htdocs\hp\catalog\controller\product\allreview.php on line 27
-2025-06-25 21:46:40 - PHP Warning:  Undefined array key "attachment" in D:\xampp\htdocs\hp\catalog\controller\product\allreview.php on line 27
-2025-06-25 21:46:40 - PHP Warning:  Undefined array key "attachment" in D:\xampp\htdocs\hp\catalog\controller\product\allreview.php on line 27
-2025-06-25 21:46:40 - PHP Warning:  Undefined array key "attachment" in D:\xampp\htdocs\hp\catalog\controller\product\allreview.php on line 27
-2025-06-25 22:16:25 - PHP Warning:  Undefined array key "HTTP_X_REQUESTED_WITH" in D:\xampp\htdocs\hp\catalog\controller\product\allreview.php on line 49
-2025-06-25 22:17:29 - PHP Warning:  Undefined array key "HTTP_X_REQUESTED_WITH" in D:\xampp\htdocs\hp\catalog\controller\product\allreview.php on line 49
-2025-06-25 22:17:30 - PHP Warning:  Undefined array key "HTTP_X_REQUESTED_WITH" in D:\xampp\htdocs\hp\catalog\controller\product\allreview.php on line 49
-2025-06-25 22:17:33 - PHP Warning:  Undefined array key "HTTP_X_REQUESTED_WITH" in D:\xampp\htdocs\hp\catalog\controller\product\allreview.php on line 49
-2025-06-25 22:18:24 - PHP Warning:  Undefined array key "HTTP_X_REQUESTED_WITH" in D:\xampp\htdocs\hp\catalog\controller\product\allreview.php on line 49
-2025-06-26 1:59:03 - PHP Warning:  Trying to access array offset on value of type bool in D:\xampp\htdocs\hp\catalog\controller\product\allreview.php on line 19
-2025-06-26 1:59:03 - PHP Warning:  Undefined array key "product_id" in D:\xampp\htdocs\hp\catalog\controller\product\allreview.php on line 20
-2025-06-26 1:59:16 - PHP Warning:  Trying to access array offset on value of type bool in D:\xampp\htdocs\hp\catalog\controller\product\allreview.php on line 19
-2025-06-26 1:59:16 - PHP Warning:  Undefined array key "product_id" in D:\xampp\htdocs\hp\catalog\controller\product\allreview.php on line 20
-2025-06-27 13:19:02 - PHP Warning:  Trying to access array offset on value of type bool in C:\xampp\htdocs\hp\catalog\controller\extension\flashexpress_api.php on line 378
-2025-06-27 13:19:02 - PHP Warning:  Trying to access array offset on value of type bool in C:\xampp\htdocs\hp\catalog\controller\extension\flashexpress_api.php on line 378
-2025-06-27 13:19:02 - PHP Warning:  Trying to access array offset on value of type bool in C:\xampp\htdocs\hp\catalog\controller\extension\flashexpress_api.php on line 378
-2025-06-27 13:19:02 - PHP Warning:  Trying to access array offset on value of type bool in C:\xampp\htdocs\hp\catalog\controller\extension\flashexpress_api.php on line 494
-2025-06-27 13:19:02 - PHP Warning:  Trying to access array offset on value of type bool in C:\xampp\htdocs\hp\catalog\controller\extension\flashexpress_api.php on line 494
-2025-06-27 13:19:02 - PHP Warning:  Trying to access array offset on value of type bool in C:\xampp\htdocs\hp\catalog\controller\extension\flashexpress_api.php on line 497
-2025-06-27 13:19:02 - PHP Warning:  Trying to access array offset on value of type bool in C:\xampp\htdocs\hp\catalog\controller\extension\flashexpress_api.php on line 498
-2025-06-27 13:19:02 - PHP Warning:  Trying to access array offset on value of type bool in C:\xampp\htdocs\hp\catalog\controller\extension\flashexpress_api.php on line 499
-2025-06-27 13:19:02 - PHP Warning:  Trying to access array offset on value of type bool in C:\xampp\htdocs\hp\catalog\controller\extension\flashexpress_api.php on line 500
-2025-06-27 13:19:02 - PHP Warning:  Trying to access array offset on value of type bool in C:\xampp\htdocs\hp\catalog\controller\extension\flashexpress_api.php on line 504
-2025-06-27 13:19:02 - PHP Warning:  Trying to access array offset on value of type bool in C:\xampp\htdocs\hp\catalog\controller\extension\flashexpress_api.php on line 504
-2025-06-27 13:19:02 - PHP Warning:  Trying to access array offset on value of type null in C:\xampp\htdocs\hp\catalog\controller\extension\flashexpress_api.php on line 185
-2025-06-27 18:02:17 - PHP Warning:  Undefined array key "product_id" in C:\xampp\htdocs\hp\catalog\controller\extension\module\marketplace.php on line 733
-2025-06-27 18:02:17 - 0
-2025-06-27 18:02:17 - PHP Warning:  Undefined array key "product_id" in C:\xampp\htdocs\hp\catalog\controller\extension\module\marketplace.php on line 733
-2025-06-27 18:02:17 - 0
+2025-06-30 0:50:09 - Array
+(
+    [id] => 2
+    [customer_id] => 101
+    [seller_id] => 239
+    [nickname] => Anonymous
+    [summary] => 
+    [review] => anoanonaonomy
+    [status] => 1
+    [createdate] => 2025-06-30 00:44:29
+    [customer_name] => Gabriel Sy
+    [seller_name] => Igris shadow
+)
+
+2025-06-30 0:51:13 - stdClass Object
+(
+    [num_rows] => 0
+    [row] => Array
+        (
+        )
+
+    [rows] => Array
+        (
+        )
+
+)
+
+2025-06-30 0:51:21 - stdClass Object
+(
+    [num_rows] => 2
+    [row] => Array
+        (
+            [id] => 2
+            [customer_id] => 101
+            [seller_id] => 239
+            [nickname] => Anonymous
+            [summary] => 
+            [review] => anoanonaonomy
+            [status] => 0
+            [createdate] => 2025-06-30 00:44:29
+        )
+
+    [rows] => Array
+        (
+            [0] => Array
+                (
+                    [id] => 2
+                    [customer_id] => 101
+                    [seller_id] => 239
+                    [nickname] => Anonymous
+                    [summary] => 
+                    [review] => anoanonaonomy
+                    [status] => 0
+                    [createdate] => 2025-06-30 00:44:29
+                )
+
+            [1] => Array
+                (
+                    [id] => 1
+                    [customer_id] => 155
+                    [seller_id] => 239
+                    [nickname] => Jake Desly
+                    [summary] => 
+                    [review] => test ets test test try
+                    [status] => 0
+                    [createdate] => 2025-06-27 00:23:20
+                )
+
+        )
+
+)
+
+2025-06-30 0:52:01 - stdClass Object
+(
+    [num_rows] => 1
+    [row] => Array
+        (
+            [id] => 2
+            [customer_id] => 101
+            [seller_id] => 239
+            [nickname] => Anonymous
+            [summary] => 
+            [review] => anoanonaonomy
+            [status] => 0
+            [createdate] => 2025-06-30 00:44:29
+        )
+
+    [rows] => Array
+        (
+            [0] => Array
+                (
+                    [id] => 2
+                    [customer_id] => 101
+                    [seller_id] => 239
+                    [nickname] => Anonymous
+                    [summary] => 
+                    [review] => anoanonaonomy
+                    [status] => 0
+                    [createdate] => 2025-06-30 00:44:29
+                )
+
+        )
+
+)
+
+2025-06-30 0:52:47 - stdClass Object
+(
+    [num_rows] => 1
+    [row] => Array
+        (
+            [id] => 2
+            [customer_id] => 101
+            [seller_id] => 239
+            [nickname] => Anonymous
+            [summary] => 
+            [review] => anoanonaonomy
+            [status] => 0
+            [createdate] => 2025-06-30 00:44:29
+        )
+
+    [rows] => Array
+        (
+            [0] => Array
+                (
+                    [id] => 2
+                    [customer_id] => 101
+                    [seller_id] => 239
+                    [nickname] => Anonymous
+                    [summary] => 
+                    [review] => anoanonaonomy
+                    [status] => 0
+                    [createdate] => 2025-06-30 00:44:29
+                )
+
+        )
+
+)
+
+2025-06-30 0:52:55 - stdClass Object
+(
+    [num_rows] => 1
+    [row] => Array
+        (
+            [id] => 2
+            [customer_id] => 101
+            [seller_id] => 239
+            [nickname] => Anonymous
+            [summary] => 
+            [review] => anoanonaonomy
+            [status] => 0
+            [createdate] => 2025-06-30 00:44:29
+        )
+
+    [rows] => Array
+        (
+            [0] => Array
+                (
+                    [id] => 2
+                    [customer_id] => 101
+                    [seller_id] => 239
+                    [nickname] => Anonymous
+                    [summary] => 
+                    [review] => anoanonaonomy
+                    [status] => 0
+                    [createdate] => 2025-06-30 00:44:29
+                )
+
+        )
+
+)
+

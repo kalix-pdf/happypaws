@@ -51,14 +51,7 @@
 {% else %}
   <h3>{{ text_no_reviews }}</h3>
 {% endif %}
-<div class="row">
-  <div class="col-sm-6 text-left">{{ pagination }}</div>
-  <div class="col-sm-6 text-right d-flex justify-content-end">{{ results }}
-    {% if current_page < total_pages %}
-      <a href="{{ pagination_url }}{{ current_page + 1 }}" class="btn btn-outline-primary ms-3">Next</a>
-    {% endif %}
-  </div>
-</div>
+
 
 <script>
   function submitReply(reviewId) {

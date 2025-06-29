@@ -265,6 +265,7 @@ class ControllerCustomerpartnerReview extends Controller {
 		$review_total = $this->model_customerpartner_review->getTotalReviews($filter_data);
 
 		$results = $this->model_customerpartner_review->getReviews($filter_data);
+		// $this->log->write($results);
 
 		foreach ($results as $result) {
 			$data['reviews'][] = array(
@@ -273,7 +274,8 @@ class ControllerCustomerpartnerReview extends Controller {
 				'customer_name'    => $result['customer_name'],
 				'status'           => ($result['status']) ? $this->language->get('text_enabled') : $this->language->get('text_disabled'),
 				'createdate'       => date($this->language->get('date_format_short'), strtotime($result['createdate'])),
-				'edit'             => $this->url->link('customerpartner/review/edit', 'user_token=' . $this->session->data['user_token'] . '&review_id=' . $result['id'] . $url, true)
+				'edit'             => $this->url->link('customerpartner/review/edit', 'user_token=' . $this->session->data['user_token'] . '&review_id=' . $result['id'] . $url, true),
+				'nickname'  	=> 	  $result['nickname']
 			);
 		}
 
@@ -490,6 +492,8 @@ class ControllerCustomerpartnerReview extends Controller {
 		} else {
 			$data['customer'] = '';
 		}
+
+		$data['nickname'] = $review_info['nickname'];
 
 		if (isset($this->request->post['text'])) {
 			$data['text'] = $this->request->post['text'];
