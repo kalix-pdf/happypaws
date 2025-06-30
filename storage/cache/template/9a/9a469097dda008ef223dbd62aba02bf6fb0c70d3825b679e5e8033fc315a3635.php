@@ -34,46 +34,22 @@ class __TwigTemplate_6dc7fa9ee77e1e689625a0c3b64d24db8b9c7cd081055c13b4f375f816e
     {
         $macros = $this->macros;
         // line 1
-        echo "<style>
-.pagination {
-  margin-top: 20px;
-  margin-bottom: 10px;
-}
-
-.pagination .page-link {
-  color: #333;
-  border: 1px solid #ddd;
-  margin: 0 3px;
-}
-
-.pagination .page-link:hover {
-  background-color: #f8f9fa;
-  border-color: #aaa;
-}
-
-.pagination .active .page-link {
-  background-color: #007bff;
-  border-color: #007bff;
-  color: #fff;
-}
-
-</style>
-
+        echo "
 <div class=\"container\">
   <nav class=\"mb-4 mt-4\" aria-label=\"breadcrumb\">
     <ol class=\"breadcrumb\">
       ";
-        // line 29
+        // line 5
         $context['_parent'] = $context;
         $context['_seq'] = twig_ensure_traversable(($context["breadcrumbs"] ?? null));
         foreach ($context['_seq'] as $context["_key"] => $context["breadcrumb"]) {
-            // line 30
+            // line 6
             echo "        <li class=\"breadcrumb-item\">
           <a class=\"text-decoration-none text-dark\" href=\"";
-            // line 31
-            echo twig_get_attribute($this->env, $this->source, $context["breadcrumb"], "href", [], "any", false, false, false, 31);
+            // line 7
+            echo twig_get_attribute($this->env, $this->source, $context["breadcrumb"], "href", [], "any", false, false, false, 7);
             echo "\">";
-            echo twig_get_attribute($this->env, $this->source, $context["breadcrumb"], "text", [], "any", false, false, false, 31);
+            echo twig_get_attribute($this->env, $this->source, $context["breadcrumb"], "text", [], "any", false, false, false, 7);
             echo "</a>
         </li>
       ";
@@ -81,45 +57,45 @@ class __TwigTemplate_6dc7fa9ee77e1e689625a0c3b64d24db8b9c7cd081055c13b4f375f816e
         $_parent = $context['_parent'];
         unset($context['_seq'], $context['_iterated'], $context['_key'], $context['breadcrumb'], $context['_parent'], $context['loop']);
         $context = array_intersect_key($context, $_parent) + $_parent;
-        // line 34
+        // line 10
         echo "    </ol>
   </nav>
 
     ";
-        // line 37
+        // line 13
         $context['_parent'] = $context;
         $context['_seq'] = twig_ensure_traversable(($context["reviews"] ?? null));
         foreach ($context['_seq'] as $context["_key"] => $context["review"]) {
-            // line 38
+            // line 14
             echo "    <div class=\"card mb-3 p-3\">
         <h5>";
-            // line 39
-            echo twig_get_attribute($this->env, $this->source, $context["review"], "author", [], "any", false, false, false, 39);
+            // line 15
+            echo twig_get_attribute($this->env, $this->source, $context["review"], "author", [], "any", false, false, false, 15);
             echo "</h5>
         <p>";
-            // line 40
-            echo twig_get_attribute($this->env, $this->source, $context["review"], "text", [], "any", false, false, false, 40);
+            // line 16
+            echo twig_get_attribute($this->env, $this->source, $context["review"], "text", [], "any", false, false, false, 16);
             echo "</p>
         <strong>Rating: ";
-            // line 41
-            echo twig_get_attribute($this->env, $this->source, $context["review"], "rating", [], "any", false, false, false, 41);
+            // line 17
+            echo twig_get_attribute($this->env, $this->source, $context["review"], "rating", [], "any", false, false, false, 17);
             echo "/5</strong><br />
         <small class=\"text-muted\">";
-            // line 42
-            echo twig_get_attribute($this->env, $this->source, $context["review"], "date_added", [], "any", false, false, false, 42);
+            // line 18
+            echo twig_get_attribute($this->env, $this->source, $context["review"], "date_added", [], "any", false, false, false, 18);
             echo "</small>
 
         ";
-            // line 44
-            if (twig_get_attribute($this->env, $this->source, $context["review"], "filenames", [], "any", false, false, false, 44)) {
-                // line 45
+            // line 20
+            if (twig_get_attribute($this->env, $this->source, $context["review"], "filenames", [], "any", false, false, false, 20)) {
+                // line 21
                 echo "        <div class=\"mt-2\">
             ";
-                // line 46
+                // line 22
                 $context['_parent'] = $context;
-                $context['_seq'] = twig_ensure_traversable(twig_get_attribute($this->env, $this->source, $context["review"], "filenames", [], "any", false, false, false, 46));
+                $context['_seq'] = twig_ensure_traversable(twig_get_attribute($this->env, $this->source, $context["review"], "filenames", [], "any", false, false, false, 22));
                 foreach ($context['_seq'] as $context["_key"] => $context["file"]) {
-                    // line 47
+                    // line 23
                     echo "            <img src=\"image/";
                     echo $context["file"];
                     echo "\" width=\"100\" />
@@ -128,21 +104,21 @@ class __TwigTemplate_6dc7fa9ee77e1e689625a0c3b64d24db8b9c7cd081055c13b4f375f816e
                 $_parent = $context['_parent'];
                 unset($context['_seq'], $context['_iterated'], $context['_key'], $context['file'], $context['_parent'], $context['loop']);
                 $context = array_intersect_key($context, $_parent) + $_parent;
-                // line 49
+                // line 25
                 echo "        </div>
         ";
             }
-            // line 51
+            // line 27
             echo "    </div>
     ";
         }
         $_parent = $context['_parent'];
         unset($context['_seq'], $context['_iterated'], $context['_key'], $context['review'], $context['_parent'], $context['loop']);
         $context = array_intersect_key($context, $_parent) + $_parent;
-        // line 53
+        // line 29
         echo "    <div class=\"pagination-wrapper mt-4 d-flex justify-content-center\">
         ";
-        // line 54
+        // line 30
         echo ($context["pagination"] ?? null);
         echo "
     </div>    
@@ -161,11 +137,11 @@ class __TwigTemplate_6dc7fa9ee77e1e689625a0c3b64d24db8b9c7cd081055c13b4f375f816e
 
     public function getDebugInfo()
     {
-        return array (  146 => 54,  143 => 53,  136 => 51,  132 => 49,  123 => 47,  119 => 46,  116 => 45,  114 => 44,  109 => 42,  105 => 41,  101 => 40,  97 => 39,  94 => 38,  90 => 37,  85 => 34,  74 => 31,  71 => 30,  67 => 29,  37 => 1,);
+        return array (  122 => 30,  119 => 29,  112 => 27,  108 => 25,  99 => 23,  95 => 22,  92 => 21,  90 => 20,  85 => 18,  81 => 17,  77 => 16,  73 => 15,  70 => 14,  66 => 13,  61 => 10,  50 => 7,  47 => 6,  43 => 5,  37 => 1,);
     }
 
     public function getSourceContext()
     {
-        return new Source("", "product/all_review_partial.twig", "D:\\xampp\\htdocs\\hp\\catalog\\view\\theme\\hp\\product\\all_review_partial.twig");
+        return new Source("", "product/all_review_partial.twig", "C:\\xampp\\htdocs\\hp\\catalog\\view\\theme\\hp\\product\\all_review_partial.twig");
     }
 }

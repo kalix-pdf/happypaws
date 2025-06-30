@@ -7,8 +7,8 @@
 {% if feedbacks %}
 	{% for feedback in feedbacks %}
 
-	<div class="review-container feedback">
-		<div class="reviewer-name name" >
+	<div class="review-container feedback" id="feedback-wrapper">
+		<div class="reviewer-name name">
 			<i class="fa fa-user"></i>&nbsp;&nbsp;&nbsp;{{ feedback['nickname'] }}
 					&nbsp;&nbsp;&nbsp;
 			<i class="fa fa-calendar"></i>&nbsp;&nbsp;&nbsp;{{ feedback['createdate'] }}
@@ -23,7 +23,7 @@
 							{{ review_field['field_name'] ~ ' :  ' }}
 						</div>
 						<div class="rating-container">
-							<div class="rating-container fs-4">
+							<div class="rating-container fs-6">
 								{% for i in 1..5 %}
 									{% if i <= feedback['review_attributes'][review_field['field_id']] %}
 										<i class="fa fa-paw stars"></i>
@@ -39,18 +39,17 @@
 				{% endif %}
 		</div>
 
-    <div class="review-content">
-        {{ feedback['review'] }}
-    </div>
+		<div class="review-content">
+			{{ feedback['review'] }}
+		</div>
+		{% endfor %}
+		<div class="row">
+			{% if pagination %}<div class="col-sm-6 pagination-wrapper-feedback">{{ pagination }}</div>
+			{% endif %}
+			<div class="col-sm-6">{{ results }}</div>
+		</div>
 	</div>
-	{% endfor %}
-	<div class="row">
-							<div class="col-sm-6 text-left">{{ pagination }}</div>
-							<div class="col-sm-6 text-right">{{ results }}</div>
-						</div>
+{% else %}
+	<div class="mp-no-location-found">{{ text_no_feedbacks}}</div>
+{% endif %}
 
-
-
-	{% else %}
-		<div class="mp-no-location-found">{{ text_no_feedbacks}}</div>
-	{% endif %}

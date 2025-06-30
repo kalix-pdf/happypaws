@@ -170,10 +170,9 @@ class ModelCustomerpartnerMaster extends Model {
 
 
 	public function getFeedbackListTotal($customerid,$data = array()) {
-		$sql = "SELECT c2f.* FROM " . DB_PREFIX . "customerpartner_to_feedback c2f LEFT JOIN ".DB_PREFIX ."customer c ON (c2f.customer_id = c.customer_id) LEFT JOIN ".DB_PREFIX ."customerpartner_to_customer cpc ON (cpc.customer_id = c.customer_id) where c2f.seller_id = '".(int)$customerid."' AND c2f.status = '1'";
+		$sql = "SELECT c2f.* FROM " . DB_PREFIX . "customerpartner_to_feedback c2f LEFT JOIN ".DB_PREFIX ."customer c ON (c2f.customer_id = c.customer_id) LEFT JOIN ".DB_PREFIX ."customerpartner_to_customer cpc ON (cpc.customer_id = c.customer_id) where c2f.seller_id = '".(int)$customerid."' AND c2f.status = '0'";
 
 		$query = $this->db->query($sql);
-
 		return $query->num_rows;
 	}
 
@@ -208,7 +207,6 @@ class ModelCustomerpartnerMaster extends Model {
 			$sql .= " LIMIT " . (int)$data['start'] . "," . (int)$data['limit'];
 		}
 
-		$this->log->write($this->db->query($sql));
 		$query = $this->db->query($sql);
 
 		return $query->rows;
@@ -221,7 +219,7 @@ class ModelCustomerpartnerMaster extends Model {
 
 	public function getAverageFeedback($customerid, $field_id = 0){
 
-	  $sql = "SELECT cast(AVG(field_value) as decimal(10,1)) avg  FROM `" . DB_PREFIX . "wk_feedback_attribute_values` WHERE feedback_id IN (SELECT id FROM `".DB_PREFIX."customerpartner_to_feedback` WHERE seller_id='".(int)$customerid."' AND status = '1')";
+	  $sql = "SELECT cast(AVG(field_value) as decimal(10,1)) avg  FROM `" . DB_PREFIX . "wk_feedback_attribute_values` WHERE feedback_id IN (SELECT id FROM `".DB_PREFIX."customerpartner_to_feedback` WHERE seller_id='".(int)$customerid."' AND status = '0')";
 
 	  if ($field_id) {
 	    $sql .= " AND field_id = ".(int)$field_id;
@@ -273,7 +271,26 @@ class ModelCustomerpartnerMaster extends Model {
 			$query .= " LIMIT " . (int)$data['start'] . "," . (int)$data['limit'];
 		}
 
-		return $this->db->query($query)->rows;
+		$reviews = $this->db->query($query)->rows;
+
+		$review_ids = array_column($reviews, 'review_id');
+
+        $attachment_query = $this->db->query("
+            SELECT review_id, filename
+            FROM review_attachments
+            WHERE review_id IN (" . implode(',', array_map('intval', $review_ids)) . ")");
+
+        $attachments_by_review = [];
+        foreach ($attachment_query->rows as $row) {
+            $attachments_by_review[$row['review_id']][] = $row['filename'];
+        }
+
+        foreach ($reviews as &$review) {
+            $review['filenames'] = $attachments_by_review[$review['review_id']] ?? [];
+        }
+		
+
+		return $reviews;
 	}
 
 	public function getTotalProductFeedbackList($customerid){

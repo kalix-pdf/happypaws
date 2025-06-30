@@ -257,10 +257,12 @@
 						<div class="card-body p-4">
 								<p class="card-text">
 									{{ text_reviews ~ ' (' ~ (feedback_total ? feedback_total : '0') ~ ')' }}
-									{% if logged %}
-									<a type="button" class="btn text-decoration-underline" data-bs-toggle="modal" data-bs-target="#myModal-seller-review">
-										Write Store Review
-									</a> 
+									{% if seller_logged %}
+										<a>Check Reviews</a>
+									{% elseif logged %}
+										<a type="button" class="btn text-decoration-underline" data-bs-toggle="modal" data-bs-target="#myModal-seller-review">
+											Write Store Review
+										</a> 
 									{% endif %}
 								</p>
 							<hr>
@@ -319,9 +321,9 @@
 					</div>
 				</div>
 
-				<div class="tab-content mt-4">
+				{# <div class="tab-content mt-4">
 					<div class="tab-pane fade show active" id="tab-profile" role="tabpanel">
-					<p class="wk-mp-tab-content-text">{{ text_profile }}</p>
+					<p class="">{{ text_profile }}</p>
 					<div class="category-grid no-scroll-prev" style="flex-flow: wrap; word-break: break-word;">
 						{{ partner['shortprofile'] | raw }}
 						{% if informations is defined and informations %}
@@ -333,7 +335,7 @@
 					</div>
 					</div>
 					
-				</div>
+				</div> #}
 			</div>
 			{# end here #}
 		</div>
@@ -538,7 +540,7 @@
 		$('#category-menu').remove();
 		$('.left-panel').append(categoryMenu);
 
-		let html = '<p class="wk-mp-tab-content-text">{{ text_collection ~ " (" ~ (collection_total ? collection_total : "0") ~ ")" }}</p>' + response;
+		let html = response;
 		$('#tab-collection').html(html);
 
 		if (showMenu) {
@@ -615,12 +617,35 @@
 			url: '{{ product_feedback }}',
 			dataType: 'html',
 			success: function(response) {
-				let html = '<p class="wk-mp-tab-content-text">{{ text_product_reviews ~ " ("  ~ (product_feedback_total ? product_feedback_total : "0") ~ ")" }}</p>' + response;
+				let html = response;
 
 				$('#product-review').html(html);
 			}
 		});
 
+	{# SELLER REVIEW PAGINATION #}
+	$(document).on('click', '.pagination-wrapper-feedback a', function(e) {
+		e.preventDefault();
+		
+		const url = $(this).attr('href');
+
+		const separator = url.includes('?') ? '&' : '?';
+		const uniqueUrl = url + separator + 't=' + new Date().getTime();
+
+		$('#feedback-wrapper').load(uniqueUrl + ' #feedback-wrapper > *');
+	});
+
+	{# PRODUCT REVIEW PAGINATION #}
+	$(document).on('click', '.pagination-wrapper a', function(e) {
+		e.preventDefault();
+		
+		const url = $(this).attr('href');
+
+		const separator = url.includes('?') ? '&' : '?';
+		const uniqueUrl = url + separator + 't=' + new Date().getTime();
+
+		$('#product-review-wrapper').load(uniqueUrl + ' #product-review-wrapper > *');
+	});
 </script>
 
 
@@ -874,10 +899,11 @@
 	         $('#grid-view').trigger('click');
 	       }
 	     });
-	   });*/
+	   });
+	   let html = '<p class="wk-mp-tab-content-text">{{ text_collection ~ " (" ~ (collection_total ? collection_total : "0") ~ ")" }}</p>' + response;
+	   */
+
 	function loadCollection_collection(showMenu, collectionUrl) {
-
-
 		$.ajax({
 			url: collectionUrl,
 			dataType: 'html',
@@ -886,8 +912,7 @@
 				$('#category-menu').remove();
 				$('.left-panel').append(categoryMenu);
 				
-				let html = '<p class="wk-mp-tab-content-text">{{ text_collection ~ " (" ~ (collection_total ? collection_total : "0") ~ ")" }}</p>' + response;
-
+				let html = response;
 				$('#tab-collection').html(html);
 				if (showMenu) {
 					$('#category-menu').show();

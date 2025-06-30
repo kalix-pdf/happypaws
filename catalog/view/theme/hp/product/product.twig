@@ -235,6 +235,11 @@
                       {% endfor %}
                     </div>
                   {% endif %}
+                  
+                  {% for adress_info in address %}s
+                    <div><p>To {{ zone }}, {{ city }} City</p></div>
+                  {% endfor %}
+                  
                   {% if product.price %}
                     <p class="price">
                       {% if not product.special %}

@@ -4,6 +4,8 @@ class ControllerProductAllReview extends Controller {
         $this->load->language('product/product');
         $this->load->model('catalog/review');
         $this->load->model('catalog/product');
+        $this->load->model('getReviews');
+
         $url = '';
         
         $product_id = isset($this->request->get['product_id']) ? (int)$this->request->get['product_id'] : 0;
@@ -30,33 +32,16 @@ class ControllerProductAllReview extends Controller {
 			$page = 1;
 		}
 
-		$data['reviews'] = array();
-
 		$review_total = $this->model_catalog_review->getTotalReviewsByProductId($product_id);
 
-		$results = $this->model_catalog_review->getReviewsByProductId($product_id, ($page - 1) * 3, 3);
+		$results = $this->model_getReviews->getReviewsByProductId($product_id, ($page - 1) * 5, 5);
 
-		foreach ($results as $result) {
-            $review_id = $result['review_id'];
-
-			if (!isset($data['reviews'][$review_id])) {
-                $data['reviews'][$review_id] = array(
-                    'author'     => $result['author'],
-                    'text'       => nl2br($result['text']),
-                    'rating'     => (int)$result['rating'],
-                    'date_added' => date($this->language->get('date_format_short'), strtotime($result['date_added'])),
-                    'filenames'  => array()
-                );
-            }
-            if (!empty($result['filename'])) {
-                $data['reviews'][$review_id]['filenames'][] = $result['filename'];
-            }
-        }
+        $data['reviews'] = $results;
 
 		$pagination = new Pagination();
 		$pagination->total = $review_total;
 		$pagination->page = $page;
-		$pagination->limit = 3;
+		$pagination->limit = 5;
 		$pagination->url = $this->url->link('product/allreview', 'product_id=' . $product_id . '&page={page}');
 
 		$data['pagination'] = $pagination->render();

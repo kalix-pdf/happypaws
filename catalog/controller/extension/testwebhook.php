@@ -2,7 +2,7 @@
 
     define("merchantID", "CA0740");
     define("merchantPW", "4cf1406fb936ae1e680abf174509c454a3254eff5789df3505ce93683aaa3785");
-    define("test", "http://localhost/store/index.php?route=extension/webhookforflash");
+    define("test", "http://localhost/hp/index.php?route=extension/webhookRoutes");
     class ControllerExtensionTestWebhook extends Controller {
 
     function signParam($str)
@@ -95,7 +95,8 @@
 		);
 		$post_str = $this->buildRequestParam($paramArr);
 		$responseStr = $this->postRequest(test, $post_str);
-		return json_decode($responseStr, true);
+		return $responseStr;
+		// return json_decode($responseStr, true);
 	}
     public function index()
     {

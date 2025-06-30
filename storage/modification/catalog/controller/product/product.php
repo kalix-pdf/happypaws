@@ -609,10 +609,20 @@ class ControllerProductProduct extends Controller {
 					);
 				}
 			}
-			
+			$this->load->model('account/customer');
+			$this->load->model('account/address');
+
+			$customer_id = $this->customer->getId();
+
 			$check_seller = $this->model_account_customerpartner->getProductSellerDetails($this->request->get['product_id']);
 			$partner = $this->model_customerpartner_master->getProfile($check_seller['customer_id']);
-			
+
+			$data['seller_city'] = $partner['city'];
+
+			$address_id = $this->model_account_customer->getCustomer($customer_id);
+			$address = $this->model_account_address->getAddress($address_id['address_id']);
+			$data['address'] = $address;
+
 			$data['is_logged'] = $this->customer->isLogged();
 			$data['seller_is_logged'] = $partner['customer_id'];
 

@@ -399,3 +399,65 @@
 .nav-underline a{
   color: black;
 }
+
+/* collection.tiwg */
+.close {
+    margin-right: 1%;
+  }
+  @media (min-width: 1200px) {
+	#seller-collection {
+		display: flex;
+		gap: 20px;
+  	}
+	.row-product {
+		display: flex;
+		flex-wrap: wrap;
+		column-gap: 75px;
+	}
+}
+
+/* pagination */
+.pagination {
+  margin-top: 20px;
+  margin-bottom: 10px;
+}
+
+.pagination .page-link {
+  color: #333;
+  border: 1px solid #ddd;
+  margin: 0 3px;
+}
+
+.pagination .page-link:hover {
+  background-color: #f8f9fa;
+  border-color: #aaa;
+}
+
+.pagination .active .page-link {
+  background-color: #007bff;
+  border-color: #007bff;
+  color: #fff;
+}
+
+
+/* category section */
+.list-group-item:hover {
+    background-color: rgb(255, 224, 162);
+    color: #0d6efd;
+}
+
+.list-group-subitem {
+    padding-left: 2rem;
+    font-size: 0.95rem;
+}
+
+.list-group-item {
+    border: none;
+    color: #162F65;
+}
+
+.list-group-item.active {
+    background-color: #162F65;
+    color: #f6c96d;
+}
+

@@ -1,7 +1,6 @@
 <?php
 
-class ControllerExtensionWebhookForFlash extends Controller {
-
+class ControllerExtensionWebhookRoutes extends Controller {
     private function logWebhook($message)
     {
         $logFile = DIR_LOGS . 'webhook.log'; 
@@ -26,15 +25,13 @@ class ControllerExtensionWebhookForFlash extends Controller {
                 if (json_last_error() === JSON_ERROR_NONE) {
                     $data['data'] = $decodedData; 
                 }
+                $this->logWebhook('Flash Express Webhook Parsed Data: ' . json_encode($data, JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES));
+                // $this->logWebhook('Signature Data: ' . json_encode($data['sign']));
+                // // $this->logWebhook('Merchant Data: ' . json_encode($data['mchId']));
+                $this->logWebhook('Tacking Number: ' . json_encode($data['data']['pno']));
+                $this->logWebhook('Status: ' . json_encode($data['data']['message']));
+                $this->logTrackingUpdate($data['data']['pno'], $data['data']['message']);
             }
-
-            $this->logWebhook('Flash Express Webhook Parsed Data: ' . json_encode($data, JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES));
-            // $this->logWebhook('Signature Data: ' . json_encode($data['sign']));
-            // // $this->logWebhook('Merchant Data: ' . json_encode($data['mchId']));
-            $this->logWebhook('Tacking Number: ' . json_encode($data['data']['pno']));
-            $this->logWebhook('Status: ' . json_encode($data['data']['message']));
-            $this->logTrackingUpdate($data['data']['pno'], $data['data']['message']);
-            
 
             if (!isset($data['mchId'], $data['nonceStr'], $data['sign'])) {
                 http_response_code(400);
@@ -42,13 +39,12 @@ class ControllerExtensionWebhookForFlash extends Controller {
                 return;
             }
     
-            // if (!$this->verifySignature($data['mchId'], $data['nonceStr'], $data['sign'])) {
-            //     http_response_code(401);
-            //     echo json_encode(["errorCode" => "0", "message" => "Invalid signature"]);
-            //     return;
-            // }
+            if (!$this->verifySignature($data['mchId'], $data['nonceStr'], $data['sign'])) {
+                http_response_code(401);
+                echo json_encode(["errorCode" => "0", "message" => "Invalid signature"]);
+                return;
+            }
     
-            // Process webhook data (update order status, save to DB, etc.)
             // $this->processWebhookData($data['data']);
     
             // Respond with success

@@ -1,50 +1,41 @@
-<style>
-  .close {
-    margin-right: 1%;
-  }
-  @media (min-width: 1200px) {
-	#seller-collection {
-		display: flex;
-		gap: 20px;
-  	}
-	.row-product {
-		display: flex;
-		flex-wrap: wrap;
-		column-gap: 75px;
-	}
-  }
-
-</style>
 
 <div id="seller-collection">
-  <!-- Category Sidebar -->
+
   <div class="col-md-3" id="seller-collection-category">
-    {% if (categories) %}
+  {% if categories %}
     <div id="column-left">
-      <div class="list-group">
+      <div class="list-group border-end border-info px-3">
+        <a href="{{ collection_url }}" class="list-group-item list-group-item-action {% if category_id == 0 %}active{% endif %}">
+          All Products
+        </a>
+        
         {% for category in categories %}
           {% if category.category_id == category_id %}
-            <a href="{{ category.href }}" class="list-group-item active">{{ category.name }}</a>
+            <a href="{{ category.href }}" class="list-group-item active">
+              <i class="fa fa-paw me-3"></i> {{ category.name }}
+            </a>
             {% if category.children %}
               {% for child in category.children %}
-                <a href="{{ child.href }}" class="list-group-item {% if child.category_id == child_id %}active{% endif %}">
-                  &nbsp;&nbsp;&nbsp;- {{ child.name }}
+                <a href="{{ child.href }}" class="list-group-item {% if child.category_id == child_id %}active{% endif %} list-group-subitem">
+                  <i class="fa fa-paw me-3"></i> {{ child.name }}
                 </a>
               {% endfor %}
             {% endif %}
           {% else %}
-            <a href="{{ category.href }}" class="list-group-item">{{ category.name }}</a>
+            <a href="{{ category.href }}" class="list-group-item {% if category.category_id == category_id %}active{% endif %}">
+              <i class="fa fa-paw me-3"></i> {{ category.name }}
+            </a>
           {% endif %}
         {% endfor %}
       </div>
     </div>
-    {% endif %}
+  {% endif %}
   </div>
 
-  <!-- Product Grid Section -->
+
   <div class="col-md-9">
     <div class="row mb-3">
-      <!-- Sort Dropdown -->
+
       <div class="col-md-6 col-sm-12 mb-2">
         <div class="form-group input-group input-group-sm">
           <label class="input-group-addon" for="input-sort">{{ text_sort }}</label>
@@ -56,7 +47,6 @@
         </div>
       </div>
 
-      <!-- Limit Dropdown -->
       <div class="col-md-6 col-sm-12 mb-2">
         <div class="form-group input-group input-group-sm">
           <label class="input-group-addon" for="input-limit">{{ text_limit }}</label>
@@ -67,9 +57,18 @@
           </select>
         </div>
       </div>
+
+      <div class="d-flex justify-content-center">
+      <div class="col-md-9 col-sm-12 mb-2">
+        <div class="form-group input-group input-group-sm px-4">
+          <label class="input-group-addon" for="input-sort">{{ text_product_name }}: </label>
+          <input type="text" style="border-bottom: 1px solid #162F65;;" name="input" value="{{ product_name is defined and product_name ? product_name : '' }}"  class="form-control col-sm-3 mx-3"/>
+        </div>
+      </div>
+      </div>
+      
     </div>
 
-    <!-- Product Grid -->
     {% if products %}
 	<div class="container">
 		<div class="row-product">

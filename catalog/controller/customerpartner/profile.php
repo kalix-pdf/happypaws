@@ -97,6 +97,10 @@ class ControllerCustomerpartnerProfile extends Controller
         $data['send_mail'] = $this->url->link('account/customerpartner/sendmail', '', true);
         $data['mail_for'] = '&contact_seller=true';
 
+        $customer_id = $this->customer->getId();
+
+        $data['seller_logged'] = ($seller_id == $customer_id);
+
         $this->document->addStyle('catalog/view/theme/default/stylesheet/MP/profile.css');
 
         if (isset($this->request->get['collection'])) {
@@ -449,6 +453,12 @@ class ControllerCustomerpartnerProfile extends Controller
             }
         }
 
+        $this->document->addScript('catalog/view/javascript/jquery/magnific/jquery.magnific-popup.min.js');
+		$this->document->addStyle('catalog/view/javascript/jquery/magnific/magnific-popup.css');
+		$this->document->addScript('catalog/view/javascript/jquery/datetimepicker/moment/moment.min.js');
+		$this->document->addScript('catalog/view/javascript/jquery/datetimepicker/moment/moment-with-locales.min.js');
+		$this->document->addScript('catalog/view/javascript/jquery/datetimepicker/bootstrap-datetimepicker.min.js');
+		
         $url = '&id=' . $seller_id;
 
         $pagination = new Pagination();
@@ -518,7 +528,7 @@ class ControllerCustomerpartnerProfile extends Controller
         if (isset($this->request->get['limit'])) {
             $limit = $this->request->get['limit'];
         } else {
-            $limit = 10;
+            $limit = 2;
         }
 
         $filter_data = array(
@@ -532,20 +542,7 @@ class ControllerCustomerpartnerProfile extends Controller
         $reviewsTotal = $this->model_customerpartner_master->getProductFeedbackListTotal($seller_id, $filter_data);
         $reviews = $this->model_customerpartner_master->getProductFeedbackList($seller_id, $filter_data);
 
-        $data['reviews'] = array();
-        if ($reviews) {
-            foreach ($reviews as $key => $review) {
-                $d = date_create($review['date_added']);
-                $data['reviews'][] = array(
-                    'author' => $review['author'],
-                    'name' => $review['name'],
-                    'href' => $this->url->link('product/product', 'product_id=' . $review['product_id'], true),
-                    'text' => $review['text'],
-                    'rating' => $review['rating'],
-                    'date_added' => date_format($d, 'F j, Y'),
-                );
-            }
-        }
+        $data['reviews'] = $reviews;
 
         $url = '&id=' . $seller_id;
 

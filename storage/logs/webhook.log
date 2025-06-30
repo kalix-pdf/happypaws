@@ -1,24 +1,4 @@
-2025-04-11 14:07:05 - Flash Express Webhook Parsed Data: {"data":{"orderId":"642e26846ac1770008b69c0f","outTradeNo":"123456789XXXX","pno":"P6125TU7JAY","origPno":"P6125TFBXZZ","recentPno":"P6125TFBXZZ","state":"1","stateText":"Picked up","returned":false,"returnedPno":null,"customaryPno":null,"currentProvince":null,"updateAt":"1680747255","routedAction":"RECEIVED","message":"Your parcel has been picked-up by TEST","markerCategory":null,"staffInfoId":null,"staffInfoPhone":null,"routedAt":"1680747251","eSignature":null},"mchId":"CA0740","nonceStr":"1744351625","sign":"A318F8CDAB81C3EEBB67ECA8043E03C0E5EF8836E1A3975FC08DEB726CEBC02A"}
-2025-04-11 14:07:05 - Tacking Number: "P6125TU7JAY"
-2025-04-11 14:07:05 - Status: "Your parcel has been picked-up by TEST"
-2025-04-11 14:07:05 - Tracking Number: P6125TU7JAY | Status: Your parcel has been picked-up by TEST
-2025-04-11 14:08:13 - Flash Express Webhook Parsed Data: {"data":{"orderId":"642e26846ac1770008b69c0f","outTradeNo":"123456789XXXX","pno":"P6125TU7JAY","origPno":"P6125TFBXZZ","recentPno":"P6125TFBXZZ","state":"1","stateText":"Picked up","returned":false,"returnedPno":null,"customaryPno":null,"currentProvince":null,"updateAt":"1680747255","routedAction":"RECEIVED","message":"Your qghhqwgshqwhghhqhg","markerCategory":null,"staffInfoId":null,"staffInfoPhone":null,"routedAt":"1680747251","eSignature":null},"mchId":"CA0740","nonceStr":"1744351693","sign":"CF39D54683D7310EE40E959F94C6F803D632EB0BDFD221A54D3973A2DCDC13A9"}
-2025-04-11 14:08:13 - Tacking Number: "P6125TU7JAY"
-2025-04-11 14:08:13 - Status: "Your qghhqwgshqwhghhqhg"
-2025-04-11 14:08:13 - Tracking Number: P6125TU7JAY | Status: Your qghhqwgshqwhghhqhg
-2025-04-21 17:05:33 - Tracking Number: P6125TU7JAY | Status: Your parcel has been picked-up by our logistics partner
-2025-04-21 17:06:07 - Tracking Number: P6125TU7JAY | Status: In transit
-2025-04-21 17:08:16 - Tracking Number: P6125TU7JAY | Status: Your parcel has been picked-up by our logistics partner
-2025-04-21 17:08:42 - Tracking Number: P6125TU7JAY | Status: In transit
-2025-04-23 17:16:18 - Tracking Number: P6125TU7JAY | Status: Your parcel has been picked-up by our logistics partner
-2025-04-23 17:38:26 - Tracking Number: P6125TU7JAY | Status: In transit
-2025-04-24 20:39:44 - Tracking Number: P6125TU7JAY | Status: Your parcel has been picked-up by our logistics partner
-2025-04-24 20:39:49 - Tracking Number:  | Status: In transit
-2025-04-24 20:39:56 - Tracking Number: P6125TU7JAY | Status: Delivered
-2025-06-09 19:15:55 - Tracking Number: P1809UDK4ZZ | Status: In transit
-2025-06-09 19:18:20 - Tracking Number: P1809UDK4ZZ | Status: In transit
-2025-06-09 19:18:46 - Tracking Number: P1809UDK4ZZ | Status: In transit
-2025-06-09 19:21:53 - Tracking Number: P1809UDK4ZZ | Status: In transit
-2025-06-09 19:22:15 - Tracking Number: P1809UDK4ZZ | Status: In transit
-2025-06-09 19:23:24 - Tracking Number: P1809UDK4ZZ | Status: In transit
-2025-06-09 19:23:32 - Tracking Number: P1809UDK4ZZ | Status: In transit
+2025-06-30 11:39:13 - Flash Express Webhook Parsed Data: {"data":{"orderId":"642e26846ac1770008b69c0f","outTradeNo":"123456789XXXX","pno":"P6125TU7JAY","origPno":"P6125TFBXZZ","recentPno":"P6125TFBXZZ","state":"1","stateText":"Picked up","returned":false,"returnedPno":null,"customaryPno":null,"currentProvince":null,"updateAt":"1680747255","routedAction":"RECEIVED","message":"Your qghhqwgshqwhghhqhg","markerCategory":null,"staffInfoId":null,"staffInfoPhone":null,"routedAt":"1680747251","eSignature":null},"mchId":"CA0740","nonceStr":"1751254753","sign":"547A4B54B5A977E60ECB0CD8C3D1004CC9179FC4AA632A1D666E7394820C5F10"}
+2025-06-30 11:39:13 - Tacking Number: "P6125TU7JAY"
+2025-06-30 11:39:13 - Status: "Your qghhqwgshqwhghhqhg"
+2025-06-30 11:39:13 - Tracking Number: P6125TU7JAY | Status: Your qghhqwgshqwhghhqhg

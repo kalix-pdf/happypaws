@@ -71,9 +71,10 @@ class ControllerExtensionWebhookAPI extends Controller {
         $data_arr = array(
             "mchId" => merchantID,
             "nonceStr" => time(),
-            "serviceCategory" => 0,
-            "url" => 'https://happypaws.ph/store/index.php?route=extension/webhookforflash',
-            "webhookApiCode" => 4
+            "serviceCategory" => 1,
+            "url" => 'https://happypaws.ph/hp/index.php?route=extension/webhookRoutes',
+            "webhookApiCode" => 4,	
+			"webHookStatusEnabled" => true
         );
 
         $data_infos = array(
