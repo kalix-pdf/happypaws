@@ -166,31 +166,34 @@
 
           <form id="product">
             {% if options %}
+            <div id="original-variation-slot">
               <hr>
               <h4>{{ text_option }}</h4>
-              {% for option in options %}
-                <div class="mb-3 d-flex gap-4">
-                  <label class="form-label">{{ option.name }}:</label>
-                  <input type="hidden" name="option[{{ option.product_option_id }}]" id="selectedOption{{ option.product_option_id }}">
-                  
-                  <div class="d-flex flex-wrap gap-3">
-                    {% for option_value in option.product_option_value %}
-                      <div class="card selectable-option text-center" style="width: 70px; cursor: pointer;"
-                        data-option-id="{{ option.product_option_id }}"
-                        data-option-value-id="{{ option_value.product_option_value_id }}"
-                        data-option-name="{{ option_value.name }}"
-                        data-popup="{{ option_value.popup }}"
-                        data-price="{{ option_value.price }}">
-                        <img src="{{ option_value.image }}" class="card-img-top" style="height: 50px; object-fit: contain;">
-                        <p class="card-text small">{{ option_value.name }}</p>
-                        {# <p class="card-text small">{{ option_value.quantity }}</p> #}
-                      </div>
-                    {% endfor %}
+              <div id="product-variation-wrapper" class="product-variations">
+                {% for option in options %}
+                  <div class="mb-3 d-flex gap-4 product-variations">
+                    <label class="form-label">{{ option.name }}:</label>
+                    <input type="hidden" name="option[{{ option.product_option_id }}]" id="selectedOption{{ option.product_option_id }}">
+                    
+                    <div class="d-flex flex-wrap gap-3">
+                      {% for option_value in option.product_option_value %}
+                        <div class="card selectable-option text-center" style="width: 70px; cursor: pointer;"
+                          data-option-id="{{ option.product_option_id }}"
+                          data-option-value-id="{{ option_value.product_option_value_id }}"
+                          data-option-name="{{ option_value.name }}"
+                          data-popup="{{ option_value.popup }}"
+                          data-price="{{ option_value.price }}">
+                          <img src="{{ option_value.image }}" class="card-img-top" style="height: 50px; object-fit: contain;">
+                          <p class="card-text small">{{ option_value.name }}</p>
+                          {# <p class="card-text small">{{ option_value.quantity }}</p> #}
+                        </div>
+                      {% endfor %}
+                    </div>
                   </div>
-                </div>
-                <div id="selectedPreview{{ option.product_option_id }}" class="mb-2 text-muted">No selection</div>
-
-              {% endfor %}
+                  <div id="selectedPreview{{ option.product_option_id }}" class="mb-2 text-muted">No selection</div>
+                {% endfor %}
+              </div>
+            </div>
             {% endif %}
 
             <div class="mb-3">
@@ -204,8 +207,29 @@
             {% if minimum > 1 %}`
               <div class="alert alert-info mt-2">{{ text_minimum }}</div>
             {% endif %}
-          </form>
 
+            {# MODAL PROMPT VARIATIONS #}
+            <div class="modal fade" id="confirmAddToCartModal" tabindex="-1" role="dialog" aria-labelledby="modalLabel">
+              <div class="modal-dialog" role="document">
+                <div class="modal-content rounded-3">
+                  <div class="modal-header">
+                    <h5 class="modal-title" id="modalLabel">Confirm Add to Cart</h5>
+                  </div>
+                  <div class="modal-body">
+                    <div id="modal-summary">
+                      <strong>Product: </strong> {{ heading_title }}<br>
+                      <strong>Price:</strong> <span id="modal-price">{{ currency_symbol }}{{ special ? special_value : price_value }}</span>
+                    </div> <hr>
+                    <div id="modal-variation-container"></div>
+                  </div>
+                  <div class="modal-footer">
+                    <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Close</button>
+                    <button type="button" id="confirmAddToCartBtn" class="btn">Save changes</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </form>
           
         </div>
       </div>
@@ -371,6 +395,7 @@
       </div>
     {% endif %}
 
+
 </div>
 
 {# OPTIONS! #}
@@ -463,45 +488,47 @@
 
 
 <script>
-function cleanPrice(rawPrice) {
-  return parseFloat(String(rawPrice).replace(/[^0-9.]/g, '')) || 0;
-}
-
-function formatPrice(price) {
-  return '{{ currency_symbol }}' + price.toFixed(2);
-}
-
-$('.selectable-option').on('click', function () {
-  const selectedOption = $(this);
-  const optionId = selectedOption.data('option-id');
-  const optionValueId = selectedOption.data('option-value-id');
-  const rawPrice = $(this).data('price');
-  const priceDelta = cleanPrice(rawPrice);
-
-  const basePrice = {{ special ? special_value : price_value }}; 
-  let lastTotalPrice = basePrice;
-
-  if (!priceDelta) {
-    basePrice = priceDelta
+  function cleanPrice(rawPrice) {
+    return parseFloat(String(rawPrice).replace(/[^0-9.]/g, '')) || 0;
   }
 
-  $('#selectedOption' + optionId).val(optionValueId);
-
-  let totalPrice = 0;
-  let optionprice = 0;
-
-  if (priceDelta !== null) {
-
-    lastTotalPrice = priceDelta;
-    $('#special-price').text(formatPrice(lastTotalPrice));
-    $('#regular-price').text(formatPrice(lastTotalPrice));
-  } else {
-    $('#special-price').text(formatPrice(basePrice));
-    $('#regular-price').text(formatPrice(basePrice));
+  function formatPrice(price) {
+    return '{{ currency_symbol }}' + price.toFixed(2);
   }
 
-  console.log("Total price from options:", totalPrice);
-});
+  $('.selectable-option').on('click', function () {
+    const selectedOption = $(this);
+    const optionId = selectedOption.data('option-id');
+    const optionValueId = selectedOption.data('option-value-id');
+    const rawPrice = $(this).data('price');
+    const priceDelta = cleanPrice(rawPrice);
+
+    const basePrice = {{ special ? special_value : price_value }}; 
+    let lastTotalPrice = basePrice;
+
+    if (!priceDelta) {
+      basePrice = priceDelta
+    }
+
+    $('#selectedOption' + optionId).val(optionValueId);
+
+    let totalPrice = 0;
+    let optionprice = 0;
+
+    if (priceDelta !== null) {
+
+      lastTotalPrice = priceDelta;
+      $('#special-price').text(formatPrice(lastTotalPrice));
+      $('#regular-price').text(formatPrice(lastTotalPrice));
+      $('#modal-price').text(formatPrice(lastTotalPrice));
+    } else {
+      $('#special-price').text(formatPrice(basePrice));
+      $('#regular-price').text(formatPrice(basePrice));
+      $('#modal-price').text(formatPrice(basePrice));
+    }
+
+    console.log("Total price from options:", totalPrice);
+  });
 </script>
 
 
@@ -534,8 +561,89 @@ document.addEventListener('DOMContentLoaded', function () {
 });
 </script>
 
+<script type="text/javascript">
+  $('#button-cart').on('click', function (e) {
+    e.preventDefault();
 
-<script
+    let originalContainer = $('#product-variation-wrapper');
+    var productName = $('#content h1').text(); 
+    var quantity = $('#input-quantity').val();
+
+    $('#modal-variation-container').append(originalContainer);
+
+    $('#confirmAddToCartModal').modal('show');
+  });
+
+
+  $('#confirmAddToCartModal').on('hidden.bs.modal', function () {
+    $('#original-variation-slot').append($('#product-variation-wrapper'));
+  });
+  
+
+  $('#confirmAddToCartBtn').on('click', function () {
+    $('#confirmAddToCartModal').modal('hide');
+    document.activeElement.blur();
+    var specialPrice = $('#special-price').length ? $('#special-price').html() : null;
+
+    $.ajax({
+      url: 'index.php?route=checkout/cart/add',
+      type: 'post',
+      data: $('#product').serialize(),
+      dataType: 'json',
+      beforeSend: function () {
+        $('#button-cart').button('loading');
+      },
+      complete: function () {
+        $('#button-cart').button('reset');
+      },
+      success: function (json) {
+        $('.alert-dismissible, .text-danger').remove();
+        $('.form-group').removeClass('has-error');
+
+        if (json['error']) {
+          if (json['error']['option']) {
+            for (i in json['error']['option']) {
+              var element = $('#input-option' + i.replace('_', '-'));
+
+              if (element.parent().hasClass('input-group')) {
+                element.parent().after('<div class="text-danger">' + json['error']['option'][i] + '</div>');
+              } else {
+                element.after('<div class="text-danger">' + json['error']['option'][i] + '</div>');
+              }
+            }
+          }
+
+          if (json['error']['recurring']) {
+            $('select[name=\'recurring_id\']').after('<div class="text-danger">' + json['error']['recurring'] + '</div>');
+          }
+
+          $('.text-danger').parent().addClass('has-error');
+        }
+
+        if (json['success']) {
+          $('.breadcrumb').after('<div class="alert alert-success alert-dismissible">' + json['success'] + '<button type="button" class="close" data-dismiss="alert">&times;</button></div>');
+
+          $('#cart > button').html('<span id="cart-total"><i class="fa fa-shopping-cart"></i> ' + json['total'] + '</span>');
+
+          $('html, body').animate({ scrollTop: 0 }, 'slow');
+
+          if (specialPrice && !$('#special-price').length) {
+            $('#regular-price').parent().after('<li><h2 id="special-price" class="text-danger">' + specialPrice + '</h2></li>');
+          }
+
+          $('#cart-dropdown').load('index.php?route=common/cart/info #cart-dropdown > *');
+        }
+      },
+      error: function (xhr, ajaxOptions, thrownError) {
+        alert(thrownError + "\r\n" + xhr.statusText + "\r\n" + xhr.responseText);
+      }
+    });
+  });
+
+</script>
+
+
+{# <script
 	type="text/javascript">
 	<!--
 	$('#button-cart').on('click', function () {
@@ -568,13 +676,13 @@ document.addEventListener('DOMContentLoaded', function () {
       }
       }
 
-if (json['error']['recurring']) {
-$('select[name=\'recurring_id\']').after('<div class="text-danger">' + json['error']['recurring'] + '</div>');
-}
+    if (json['error']['recurring']) {
+    $('select[name=\'recurring_id\']').after('<div class="text-danger">' + json['error']['recurring'] + '</div>');
+    }
 
-// Highlight any found errors
-$('.text-danger').parent().addClass('has-error');
-}
+    // Highlight any found errors
+    $('.text-danger').parent().addClass('has-error');
+    }
 
     if (json['success']) {
         $('.breadcrumb').after('<div class="alert alert-success alert-dismissible">' + json['success'] + '<button type="button" class="close" data-dismiss="alert">&times;</button></div>');
@@ -592,14 +700,14 @@ $('.text-danger').parent().addClass('has-error');
         $('#cart-dropdown').load('index.php?route=common/cart/info #cart-dropdown > *');
     }
   },
-error: function (xhr, ajaxOptions, thrownError) {
-alert(thrownError + "\r\n" + xhr.statusText + "\r\n" + xhr.responseText);
-}
-});
-});
-//
+  error: function (xhr, ajaxOptions, thrownError) {
+  alert(thrownError + "\r\n" + xhr.statusText + "\r\n" + xhr.responseText);
+  }
+  });
+  });
+  //
 	-->
-</script>
+</script> #}
 
 <script
 	type="text/javascript">

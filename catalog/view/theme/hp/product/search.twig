@@ -1,93 +1,92 @@
 {{ header }}
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <link href="catalog\view\theme\hp\stylesheet\enhanced-hp\home\category.css" rel="stylesheet" />
-  <link href="catalog\view\theme\hp\stylesheet\enhanced-hp\home\search.css" rel="stylesheet" />
-</head>
+
 <div id="product-search" class="container">
-  <ul class="breadcrumb">
-    {% for breadcrumb in breadcrumbs %}
-    <li><a href="{{ breadcrumb.href }}">{{ breadcrumb.text }}</a></li>
-    {% endfor %}
-  </ul>
-  <div class="row search-main-container">{{ column_left }}
-    {% if column_left and column_right %}
-    {% set class = 'col-sm-6' %}
-    {% elseif column_left or column_right %}
-    {% set class = 'col-sm-9' %}
-    {% else %}
-    {% set class = 'col-sm-12' %}
-    {% endif %}
-    <div id="content" class="{{ class }}">{{ content_top }}
-      <h1>{{ heading_title }}</h1>
-      <label class="control-label" for="input-search">{{ entry_search }}</label>
-      <div class="row row-search-forms">
-        <div class="col-sm-4">
-          <input type="text" name="search" value="{{ search }}" placeholder="{{ text_keyword }}" id="input-search" class="form-control" />
-        </div>
-        <div class="col-sm-3">
-          <select name="category_id" class="form-control">
-            <option value="0">{{ text_category }}</option>
-            {% for category_1 in categories %}
-            {% if category_1.category_id == category_id %}
-            <option value="{{ category_1.category_id }}" selected="selected">{{ category_1.name }}</option>
-            {% else %}
-            <option value="{{ category_1.category_id }}">{{ category_1.name }}</option>
-            {% endif %}
-            {% for category_2 in category_1.children %}
-            {% if category_2.category_id == category_id %}
-            <option value="{{ category_2.category_id }}" selected="selected">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{{ category_2.name }}</option>
-            {% else %}
-            <option value="{{ category_2.category_id }}">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{{ category_2.name }}</option>
-            {% endif %}
-            {% for category_3 in category_2.children %}
-            {% if category_3.category_id == category_id %}
-            <option value="{{ category_3.category_id }}" selected="selected">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{{ category_3.name }}</option>
-            {% else %}
-            <option value="{{ category_3.category_id }}">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{{ category_3.name }}</option>
-            {% endif %}
-            {% endfor %}
-            {% endfor %}
-            {% endfor %}
-          </select>
-        </div>
-        <div class="col-sm-3">
-          <label class="checkbox-inline">
-            {% if sub_category %}
-            <input type="checkbox" name="sub_category" value="1" checked="checked" />
-            {% else %}
-            <input type="checkbox" name="sub_category" value="1" />
-            {% endif %}
-            {{ text_sub_category }}</label>
-        </div>
-      </div>
-      <p class="checkbox-prod-description">
-        <label class="checkbox-inline">
-          {% if description %}
-          <input type="checkbox" name="description" value="1" id="description" checked="checked" />
-          {% else %}
-          <input type="checkbox" name="description" value="1" id="description" />
-          {% endif %}
-          {{ entry_description }}</label>
-      </p>
-      <div class="search-btn-container">
-      <input type="button" value="{{ button_search }}" id="button-search" class="btn btn-primary" />
-      </div>
+  <nav class="mb-4 mt-4" aria-label="breadcrumb">
+    <ol class="breadcrumb">
+      {% for breadcrumb in breadcrumbs %}
+        <li class="breadcrumb-item">
+          <a class="text-decoration-none text-dark" href="{{ breadcrumb.href }}">{{ breadcrumb.text }}</a>
+        </li>
+      {% endfor %}
+    </ol>
+  </nav>
+  
+  <div class="d-flex justify-content-center">
+    <div id="content" class="container">
+      <div class="row justify-content-center">
+        <div class="col-lg-10">
+          <form class="d-flex flex-column gap-4 align-items-center">
+            <h1>{{ heading_title }}</h1>
+            <div class="d-flex flex-wrap justify-content-center gap-3 w-100">
+              <div class="input-group ">
+                <input type="text" name="search" value="{{ search }}" placeholder="{{ text_keyword }}" id="input-search" class="form-control border-bottom border-black" />
+                <label class="control-label" for="input-search">{{ entry_search }}</label>
+                <select name="category_id" class="form-control mx-4" id="category-select">
+                  <option value="0">{{ text_category }}</option>
+                  {% for category_1 in categories %}
+                  {% if category_1.category_id == category_id %}
+                  <option value="{{ category_1.category_id }}" selected="selected">{{ category_1.name }}</option>
+                  {% else %}
+                  <option value="{{ category_1.category_id }}">{{ category_1.name }}</option>
+                  {% endif %}
+                  {% for category_2 in category_1.children %}
+                  {% if category_2.category_id == category_id %}
+                  <option value="{{ category_2.category_id }}" selected="selected">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{{ category_2.name }}</option>
+                  {% else %}
+                  <option value="{{ category_2.category_id }}">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{{ category_2.name }}</option>
+                  {% endif %}
+                  {% for category_3 in category_2.children %}
+                  {% if category_3.category_id == category_id %}
+                  <option value="{{ category_3.category_id }}" selected="selected">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{{ category_3.name }}</option>
+                  {% else %}
+                  <option value="{{ category_3.category_id }}">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{{ category_3.name }}</option>
+                  {% endif %}
+                  {% endfor %}
+                  {% endfor %}
+                  {% endfor %}
+                </select>
+              </div>
+            </div>
+            <div>
+              <input type="button" value="{{ button_search }}" id="button-search" class="btn" />
+            </div>  
+            <div class="d-flex flex-wrap gap-4 my-4">
+              <div>
+                <label class="checkbox-inline">
+                  {% if sub_category %}
+                  <input type="checkbox" name="sub_category" value="1" checked="checked" />
+                  {% else %}
+                  <input type="checkbox" name="sub_category" value="1" />
+                  {% endif %}
+                  {{ text_sub_category }}</label>
+                </div>
+                <div>
+                  <p class="checkbox-prod-description">
+                    <label class="checkbox-inline">
+                    {% if description %}
+                    <input type="checkbox" name="description" value="1" id="description" checked="checked" />
+                    {% else %}
+                    <input type="checkbox" name="description" value="1" id="description" />
+                    {% endif %}
+                    {{ entry_description }}</label>
+                  </p>
+                </div>
+            </div>      
+      </form>
+    </div>
+  </div>
+        
       <h2>{{ text_search }}</h2>
       {% if products %}
-      <div class="row product-row-menu">
-        <div class="col-md-2 col-sm-6 hidden-xs">
+      <div class="row product-row-menu gy-2 mb-4">
+        {# <div class="col-md-3 col-sm-6 hidden-xs">
           <div class="btn-group btn-group-sm">
             <button type="button" id="list-view" class="btn btn-default" data-toggle="tooltip" title="{{ button_list }}"><i class="fa fa-th-list"></i></button>
             <button type="button" id="grid-view" class="btn btn-default" data-toggle="tooltip" title="{{ button_grid }}"><i class="fa fa-th"></i></button>
           </div>
-        </div>
+        </div> #}
         <div class="col-md-3 col-sm-6">
-          <div class="form-group">
-            <a href="{{ compare }}" id="compare-total" class="btn btn-link">{{ text_compare }}</a>
-          </div>
+          <a href="{{ compare }}" id="compare-total" class="text-black text-decoration-none btn btn-link  ">{{ text_compare }}</a>
         </div>
         <div class="col-md-4 col-xs-6 sorting">
           <div class="form-group input-group input-group-sm">
@@ -120,12 +119,12 @@
       </div>
       <div class="row product-row">
         {% for product in products %}
-        <div class="product-layout product-list col-xs-12">
-          <div class="product-thumb">
+        <div class="product-layout col-lg-3 col-md-6 col-sm-12 mb-4">
+          <div class="product-thumb rounded-4 p-3 d-flex flex-column justify-content-between transition w-100">
             <div class="image"><a href="{{ product.href }}"><img src="{{ product.thumb }}" alt="{{ product.name }}" title="{{ product.name }}" class="img-responsive" /></a></div>
             <div class="product-infos-list-group">
               <div class="caption">
-                <h4><a href="{{ product.href }}">{{ product.name }}</a></h4>
+                <h4><a class="text-decoration-none fs-5 text-black" href="{{ product.href }}">{{ product.name }}</a></h4>
                 <p>{{ product.description }}</p>
                 {% if product.price %}
                 <p class="price">

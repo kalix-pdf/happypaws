@@ -142,6 +142,6 @@ class __TwigTemplate_6dc7fa9ee77e1e689625a0c3b64d24db8b9c7cd081055c13b4f375f816e
 
     public function getSourceContext()
     {
-        return new Source("", "product/all_review_partial.twig", "C:\\xampp\\htdocs\\hp\\catalog\\view\\theme\\hp\\product\\all_review_partial.twig");
+        return new Source("", "product/all_review_partial.twig", "D:\\xampp\\htdocs\\hp\\catalog\\view\\theme\\hp\\product\\all_review_partial.twig");
     }
 }

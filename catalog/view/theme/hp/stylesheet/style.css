@@ -42,7 +42,7 @@
 
 .input-group {
   background-color: #fff;
-  display: flex;
+  display: flex !important;
   align-items: center;
   padding: 8px 12px;
   box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1);
@@ -461,3 +461,10 @@
     color: #f6c96d;
 }
 
+
+/* SEARCH PRODUCT */
+#button-search,
+#category-select {
+  background-color: #162F65;
+  color: #f6c96d;
+} 
