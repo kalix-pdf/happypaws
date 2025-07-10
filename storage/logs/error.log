@@ -1,3 +1,4 @@
 2025-07-02 20:35:14 - PHP Warning:  Undefined array key "address_id" in D:\xampp\htdocs\hp\storage\modification\catalog\controller\product\product.php on line 623
 2025-07-02 20:37:00 - PHP Warning:  Undefined array key "address_id" in D:\xampp\htdocs\hp\storage\modification\catalog\controller\product\product.php on line 623
 2025-07-02 20:44:51 - PHP Warning:  Undefined array key "address_id" in D:\xampp\htdocs\hp\storage\modification\catalog\controller\product\product.php on line 623
+2025-07-09 22:35:45 - PHP Warning:  fopen(D:/xampp/htdocs/hp/storage/cache/cache.store.1752075345): Failed to open stream: No such file or directory in D:\xampp\htdocs\hp\system\library\cache\file.php on line 28

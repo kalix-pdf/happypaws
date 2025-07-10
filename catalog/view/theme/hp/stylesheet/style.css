@@ -56,7 +56,7 @@
 
 .input-group input {
   border: none;
-  outline: none;
+  text-align: center !important;
   width: 100%;
 }
 
@@ -468,3 +468,21 @@
   background-color: #162F65;
   color: #f6c96d;
 } 
+
+/* LOGIN AREA */
+#account-login .login-container {
+  box-shadow: 0 0 7px 1px black;
+  background-color: white;
+  border-radius: 50px;
+} 
+
+#account-login .login-container input {
+  border-radius: 50px;
+  padding: 10px;
+  margin: 10px 0;
+}
+#account-login .login-container a {
+  border-radius: 50px;
+  padding: 10px;
+  margin: 10px 0;
+}

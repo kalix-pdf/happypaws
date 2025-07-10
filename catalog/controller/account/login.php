@@ -152,6 +152,11 @@ class ControllerAccountLogin extends Controller {
 		$data['footer'] = $this->load->controller('common/footer');
 		$data['header'] = $this->load->controller('common/header');
 
+		$data['bg'] = HTTP_SERVER . 'image/catalog/paw-bg.png';
+		$data['momdad'] = HTTP_SERVER . 'image/catalog/momdad1.png';
+		$data['logo'] = HTTP_SERVER . 'image/catalog/icon.png';
+		$data['register'] = $this->url->link('account/register');
+
 		$this->response->setOutput($this->load->view('account/login', $data));
 	}
 

@@ -19,7 +19,7 @@
             <h1>{{ heading_title }}</h1>
             <div class="d-flex flex-wrap justify-content-center gap-3 w-100">
               <div class="input-group ">
-                <input type="text" name="search" value="{{ search }}" placeholder="{{ text_keyword }}" id="input-search" class="form-control border-bottom border-black" />
+                <input type="text" name="search" value="{{ search }}" placeholder="{{ text_keyword }}" id="input-search" class="form-control border-bottom border-black text-align-center" />
                 <label class="control-label" for="input-search">{{ entry_search }}</label>
                 <select name="category_id" class="form-control mx-4" id="category-select">
                   <option value="0">{{ text_category }}</option>
@@ -91,7 +91,7 @@
         <div class="col-md-4 col-xs-6 sorting">
           <div class="form-group input-group input-group-sm">
             <label class="input-group-addon" for="input-sort">{{ text_sort }}</label>
-            <select id="input-sort" class="form-control" onchange="location = this.value;">
+            <select id="input-sort" class="form-control mx-4" onchange="location = this.value;">
               {% for sorts in sorts %}
               {% if sorts.value == '%s-%s'|format(sort, order) %}
               <option value="{{ sorts.href }}" selected="selected">{{ sorts.text }}</option>
@@ -105,7 +105,7 @@
         <div class="col-md-3 col-xs-6 showing">
           <div class="form-group input-group input-group-sm">
             <label class="input-group-addon" for="input-limit">{{ text_limit }}</label>
-            <select id="input-limit" class="form-control" onchange="location = this.value;">
+            <select id="input-limit" class="form-control mx-4" onchange="location = this.value;">
               {% for limits in limits %}
               {% if limits.value == limit %}
               <option value="{{ limits.href }}" selected="selected">{{ limits.text }}</option>
@@ -139,13 +139,13 @@
                 </p>
                 {% endif %}
                 {% if product.rating %}
-                <div class="rating">
+                <div class="rating d-flex gap-3 fs-4">
                   {% for i in 1..5 %}
-                  {% if product.rating < i %}
-                  <span class="fa fa-stack"><i class="fa fa-star-o fa-stack-2x"></i></span>
-                  {% else %}
-                  <span class="fa fa-stack"><i class="fa fa-star fa-stack-2x"></i><i class="fa fa-star-o fa-stack-2x"></i></span>
-                  {% endif %}
+                    {% if product.rating < i %}
+                    <i class="fa fa-paw text-muted"></i>
+                      {% else %}
+                    <i class="fa fa-paw stars"></i>
+                    {% endif %}
                   {% endfor %}
                 </div>
                 {% endif %}
