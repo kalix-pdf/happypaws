@@ -48,8 +48,7 @@
 {{ analytic }}
 {% endfor %}  
 </head>
-
-<body style="background-image: url({{ bg }});">
+<body style="background: url({{ bg }});">
 <div id="account-login">
   
   {% if success %}
@@ -61,7 +60,7 @@
   <div class="mb-5">
     <div id="content" class="d-flex px-5 gap-4 flex-wrap justify-content-center align-items-center my-5">
       
-        <div><h1 style="color: #162F65;">Welcome back!</h1>
+        <div><h1 style="color: #162F65; font-weight: 600;">Welcome back!</h1>
           <img class="img-fluid" src="{{ momdad }}" alt="" width="600px">
                 
         </div>
@@ -85,7 +84,7 @@
               <input type="hidden" name="redirect" value="{{ redirect }}" />
               {% endif %}
               <div class="d-flex justify-content-center my-3">
-                <a href="{{ forgotten }}" class="text-align-center text-black">{{ text_forgotten }}</a></div>
+                <a href="{{ forgotten }}" class="text-align-center text-black">Forgot Password</a></div>
               </div>
             </form>
           </div>
@@ -94,5 +93,5 @@
     </div>
   </div>
 </div>
-{{ footer }}
 </body>
+{{ footer }}

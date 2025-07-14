@@ -118,7 +118,7 @@ class ControllerAccountCustomerpartnerProfile extends Controller
 				$partner['companylogo'] = '';
 			}
 
-			$partner['countrylogo'] = $partner['countrylogo'];
+			// $partner['countrylogo'] = $partner['countrylogo'];
 			$data['storeurl'] = $this->url->link('customerpartner/profile&seller_id=' . $this->customer->getId(), '', true);
 		}
 

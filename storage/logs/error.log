@@ -2,3 +2,10 @@
 2025-07-02 20:37:00 - PHP Warning:  Undefined array key "address_id" in D:\xampp\htdocs\hp\storage\modification\catalog\controller\product\product.php on line 623
 2025-07-02 20:44:51 - PHP Warning:  Undefined array key "address_id" in D:\xampp\htdocs\hp\storage\modification\catalog\controller\product\product.php on line 623
 2025-07-09 22:35:45 - PHP Warning:  fopen(D:/xampp/htdocs/hp/storage/cache/cache.store.1752075345): Failed to open stream: No such file or directory in D:\xampp\htdocs\hp\system\library\cache\file.php on line 28
+2025-07-10 23:25:59 - PHP Warning:  Undefined array key "marketplace_separate_view" in D:\xampp\htdocs\hp\catalog\controller\extension\module\marketplace.php on line 791
+2025-07-10 23:25:59 - PHP Warning:  Undefined array key "marketplace_separate_view" in D:\xampp\htdocs\hp\catalog\controller\extension\module\marketplace.php on line 791
+2025-07-10 23:25:59 - PHP Warning:  Undefined array key "marketplace_separate_view" in D:\xampp\htdocs\hp\catalog\controller\account\customerpartner\profile.php on line 335
+2025-07-10 23:26:42 - PHP Warning:  Undefined array key "marketplace_separate_view" in D:\xampp\htdocs\hp\catalog\controller\extension\module\marketplace.php on line 790
+2025-07-10 23:26:42 - PHP Warning:  Undefined array key "marketplace_separate_view" in D:\xampp\htdocs\hp\catalog\controller\extension\module\marketplace.php on line 790
+2025-07-10 23:27:31 - PHP Warning:  Undefined array key "view" in D:\xampp\htdocs\hp\catalog\controller\extension\module\marketplace.php on line 789
+2025-07-10 23:27:32 - PHP Warning:  Undefined array key "view" in D:\xampp\htdocs\hp\catalog\controller\extension\module\marketplace.php on line 789

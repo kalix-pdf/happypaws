@@ -48,14 +48,19 @@ class ControllerProductAllReview extends Controller {
 
 		$data['results'] = sprintf($this->language->get('text_pagination'), ($review_total) ? (($page - 1) * 5) + 1 : 0, ((($page - 1) * 5) > ($review_total - 5)) ? $review_total : ((($page - 1) * 5) + 5), $review_total, ceil($review_total / 5));
        
-		if (isset($this->request->server['HTTP_X_REQUESTED_WITH']) && $this->request->server['HTTP_X_REQUESTED_WITH'] == 'XMLHttpRequest') {
-           $this->response->setOutput($this->load->view('product/all_review_partial', $data));
-        } else {
-            // Normal full page request
-            $data['header'] = $this->load->controller('common/header');
+		// echo DIR_TEMPLATE . $this->config->get('config_theme') . '/template/product/all_review_partial.twig';
+		// echo $this->config->get('config_theme');
+		// exit();
+		$data['header'] = $this->load->controller('common/header');
             $data['footer'] = $this->load->controller('common/footer');
-            $this->response->setOutput($this->load->view('product/all_review', $data));
-        }
+		// if (isset($this->request->server['HTTP_X_REQUESTED_WITH']) && $this->request->server['HTTP_X_REQUESTED_WITH'] == 'XMLHttpRequest') {
+           $this->response->setOutput($this->load->view('product/all_review_partial', $data));
+        // } else {
+        //     // Normal full page request
+        //     $data['header'] = $this->load->controller('common/header');
+        //     $data['footer'] = $this->load->controller('common/footer');
+        //     $this->response->setOutput($this->load->view('product/all_review', $data));
+        // }
 
     }
 }
