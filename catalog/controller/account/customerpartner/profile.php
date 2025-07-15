@@ -312,19 +312,7 @@ class ControllerAccountCustomerpartnerProfile extends Controller
 			}
 		}
 
-		$data['column_left'] = $this->load->controller('common/column_left');
-		$data['column_right'] = $this->load->controller('common/column_right');
-		$data['content_top'] = $this->load->controller('common/content_top');
-		$data['content_bottom'] = $this->load->controller('common/content_bottom');
-		$data['footer'] = $this->load->controller('common/footer');
-		$data['header'] = $this->load->controller('common/header');
-
-		$data['separate_view'] = false;
-
-		$data['separate_column_left'] = '';
-
-		if ($this->config->get('marketplace_separate_view') && isset($this->session->data['marketplace_separate_view']) && $this->session->data['marketplace_separate_view'] == 'separate') {
-			$data['separate_view'] = true;
+		$data['separate_view'] = true;
 			$data['column_left'] = '';
 			$data['column_right'] = '';
 			$data['content_top'] = '';
@@ -332,7 +320,7 @@ class ControllerAccountCustomerpartnerProfile extends Controller
 			$data['separate_column_left'] = $this->load->controller('account/customerpartner/column_left');
 			$data['footer'] = $this->load->controller('account/customerpartner/footer');
 			$data['header'] = $this->load->controller('account/customerpartner/header');
-		}
+		
 
 		$this->response->setOutput($this->load->view('account/customerpartner/profile', $data));
 	}
