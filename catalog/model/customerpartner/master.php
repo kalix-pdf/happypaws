@@ -366,15 +366,11 @@ class ModelCustomerpartnerMaster extends Model {
 	public function addSubscription($sbstype, $product_id, $amount)
 	{
 		$date_added = date('Y-m-d H:i:s');
+		// Calculate the expiration date by adding the duration (in days) to the date_added
+		$date_expired = date('Y-m-d H:i:s', strtotime($date_added . ' + ' . (int)$amount . ' days'));
+
 		$this->db->query("INSERT INTO `product_subscription` SET `subs_type` = '" . (int)$sbstype . "', 
-			`product_id` = '" . (int)$product_id . "', `duration` = '". (int)$amount . "', `date_added` = '" . $this->db->escape($date_added) . "'");
-	}
-
-	public function checkCustomerBought($seller_id){
-
-         $query = $this->db->query("SELECT * FROM `" . DB_PREFIX . "order` o LEFT JOIN " . DB_PREFIX . "customerpartner_to_order c2o ON (o.order_id = c2o.order_id) where  o.customer_id = '" .$this->db->escape((int)$this->customer->getId())."' AND c2o.customer_id = '" . (int)$this->db->escape($seller_id) . "'")->row;
-
-         return $query;
+			`product_id` = '" . (int)$product_id . "', `duration` = '". (int)$amount . "', `date_added` = '" . $this->db->escape($date_added) . "', `date_expired` = '" . $this->db->escape($date_expired) . "'");
 	}
 
     /**

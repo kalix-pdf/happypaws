@@ -9,3 +9,48 @@
 2025-07-10 23:26:42 - PHP Warning:  Undefined array key "marketplace_separate_view" in D:\xampp\htdocs\hp\catalog\controller\extension\module\marketplace.php on line 790
 2025-07-10 23:27:31 - PHP Warning:  Undefined array key "view" in D:\xampp\htdocs\hp\catalog\controller\extension\module\marketplace.php on line 789
 2025-07-10 23:27:32 - PHP Warning:  Undefined array key "view" in D:\xampp\htdocs\hp\catalog\controller\extension\module\marketplace.php on line 789
+2025-07-16 14:25:17 - PHP Warning:  mysqli::query(): (42S02/1146): Table 'smesoftc_hp.oc_product_subscription' doesn't exist in C:\xampp\htdocs\hp\system\library\db\mysqli.php on line 25
+2025-07-16 14:25:21 - PHP Warning:  mysqli::query(): (42S02/1146): Table 'smesoftc_hp.oc_product_subscription' doesn't exist in C:\xampp\htdocs\hp\system\library\db\mysqli.php on line 25
+2025-07-16 14:28:57 - PHP Warning:  mysqli::query(): (42S02/1146): Table 'smesoftc_hp.oc_product_subscription' doesn't exist in C:\xampp\htdocs\hp\system\library\db\mysqli.php on line 25
+2025-07-16 14:51:08 - PHP Warning:  mysqli::query(): (42S02/1146): Table 'smesoftc_hp.oc_product_subscription' doesn't exist in C:\xampp\htdocs\hp\system\library\db\mysqli.php on line 25
+2025-07-16 14:51:09 - PHP Warning:  mysqli::query(): (42S02/1146): Table 'smesoftc_hp.oc_product_subscription' doesn't exist in C:\xampp\htdocs\hp\system\library\db\mysqli.php on line 25
+2025-07-16 14:51:09 - PHP Warning:  mysqli::query(): (42S02/1146): Table 'smesoftc_hp.oc_product_subscription' doesn't exist in C:\xampp\htdocs\hp\system\library\db\mysqli.php on line 25
+2025-07-16 14:51:09 - PHP Warning:  mysqli::query(): (42S02/1146): Table 'smesoftc_hp.oc_product_subscription' doesn't exist in C:\xampp\htdocs\hp\system\library\db\mysqli.php on line 25
+2025-07-16 14:51:09 - PHP Warning:  mysqli::query(): (42S02/1146): Table 'smesoftc_hp.oc_product_subscription' doesn't exist in C:\xampp\htdocs\hp\system\library\db\mysqli.php on line 25
+2025-07-16 14:51:10 - PHP Warning:  mysqli::query(): (42S02/1146): Table 'smesoftc_hp.oc_product_subscription' doesn't exist in C:\xampp\htdocs\hp\system\library\db\mysqli.php on line 25
+2025-07-16 14:51:10 - PHP Warning:  mysqli::query(): (42S02/1146): Table 'smesoftc_hp.oc_product_subscription' doesn't exist in C:\xampp\htdocs\hp\system\library\db\mysqli.php on line 25
+2025-07-16 14:51:10 - PHP Warning:  mysqli::query(): (42S02/1146): Table 'smesoftc_hp.oc_product_subscription' doesn't exist in C:\xampp\htdocs\hp\system\library\db\mysqli.php on line 25
+2025-07-16 14:51:10 - PHP Warning:  mysqli::query(): (42S02/1146): Table 'smesoftc_hp.oc_product_subscription' doesn't exist in C:\xampp\htdocs\hp\system\library\db\mysqli.php on line 25
+2025-07-16 14:51:10 - PHP Warning:  mysqli::query(): (42S02/1146): Table 'smesoftc_hp.oc_product_subscription' doesn't exist in C:\xampp\htdocs\hp\system\library\db\mysqli.php on line 25
+2025-07-16 14:51:11 - PHP Warning:  mysqli::query(): (42S02/1146): Table 'smesoftc_hp.oc_product_subscription' doesn't exist in C:\xampp\htdocs\hp\system\library\db\mysqli.php on line 25
+2025-07-16 14:51:11 - PHP Warning:  mysqli::query(): (42S02/1146): Table 'smesoftc_hp.oc_product_subscription' doesn't exist in C:\xampp\htdocs\hp\system\library\db\mysqli.php on line 25
+2025-07-16 14:51:11 - PHP Warning:  mysqli::query(): (42S02/1146): Table 'smesoftc_hp.oc_product_subscription' doesn't exist in C:\xampp\htdocs\hp\system\library\db\mysqli.php on line 25
+2025-07-16 14:51:11 - PHP Warning:  mysqli::query(): (42S02/1146): Table 'smesoftc_hp.oc_product_subscription' doesn't exist in C:\xampp\htdocs\hp\system\library\db\mysqli.php on line 25
+2025-07-16 14:51:12 - PHP Warning:  mysqli::query(): (42S02/1146): Table 'smesoftc_hp.oc_product_subscription' doesn't exist in C:\xampp\htdocs\hp\system\library\db\mysqli.php on line 25
+2025-07-16 14:51:12 - PHP Warning:  mysqli::query(): (42S02/1146): Table 'smesoftc_hp.oc_product_subscription' doesn't exist in C:\xampp\htdocs\hp\system\library\db\mysqli.php on line 25
+2025-07-16 14:51:13 - PHP Warning:  mysqli::query(): (42S02/1146): Table 'smesoftc_hp.oc_product_subscription' doesn't exist in C:\xampp\htdocs\hp\system\library\db\mysqli.php on line 25
+2025-07-16 15:14:24 - PHP Warning:  Undefined array key 155 in C:\xampp\htdocs\hp\catalog\controller\account\customerpartner\productlist.php on line 269
+2025-07-16 15:14:24 - PHP Warning:  Undefined array key 156 in C:\xampp\htdocs\hp\catalog\controller\account\customerpartner\productlist.php on line 269
+2025-07-16 15:14:24 - PHP Warning:  Undefined array key 157 in C:\xampp\htdocs\hp\catalog\controller\account\customerpartner\productlist.php on line 269
+2025-07-16 15:14:24 - PHP Warning:  Undefined array key 154 in C:\xampp\htdocs\hp\catalog\controller\account\customerpartner\productlist.php on line 269
+2025-07-16 15:14:24 - PHP Warning:  Undefined array key 158 in C:\xampp\htdocs\hp\catalog\controller\account\customerpartner\productlist.php on line 269
+2025-07-16 15:14:24 - PHP Warning:  Undefined array key 159 in C:\xampp\htdocs\hp\catalog\controller\account\customerpartner\productlist.php on line 269
+2025-07-16 15:21:32 - PHP Warning:  Undefined array key 155 in C:\xampp\htdocs\hp\catalog\controller\account\customerpartner\productlist.php on line 268
+2025-07-16 15:21:32 - PHP Warning:  Undefined array key 156 in C:\xampp\htdocs\hp\catalog\controller\account\customerpartner\productlist.php on line 268
+2025-07-16 15:21:32 - PHP Warning:  Undefined array key 154 in C:\xampp\htdocs\hp\catalog\controller\account\customerpartner\productlist.php on line 268
+2025-07-16 15:21:32 - PHP Warning:  Undefined array key 157 in C:\xampp\htdocs\hp\catalog\controller\account\customerpartner\productlist.php on line 268
+2025-07-16 15:21:32 - PHP Warning:  Undefined array key 158 in C:\xampp\htdocs\hp\catalog\controller\account\customerpartner\productlist.php on line 268
+2025-07-16 15:21:32 - PHP Warning:  Undefined array key 159 in C:\xampp\htdocs\hp\catalog\controller\account\customerpartner\productlist.php on line 268
+2025-07-16 15:21:36 - PHP Warning:  Undefined array key 155 in C:\xampp\htdocs\hp\catalog\controller\account\customerpartner\productlist.php on line 268
+2025-07-16 15:21:36 - PHP Warning:  Undefined array key 156 in C:\xampp\htdocs\hp\catalog\controller\account\customerpartner\productlist.php on line 268
+2025-07-16 15:21:36 - PHP Warning:  Undefined array key 154 in C:\xampp\htdocs\hp\catalog\controller\account\customerpartner\productlist.php on line 268
+2025-07-16 15:21:36 - PHP Warning:  Undefined array key 157 in C:\xampp\htdocs\hp\catalog\controller\account\customerpartner\productlist.php on line 268
+2025-07-16 15:21:36 - PHP Warning:  Undefined array key 158 in C:\xampp\htdocs\hp\catalog\controller\account\customerpartner\productlist.php on line 268
+2025-07-16 15:21:36 - PHP Warning:  Undefined array key 159 in C:\xampp\htdocs\hp\catalog\controller\account\customerpartner\productlist.php on line 268
+2025-07-16 15:21:37 - PHP Warning:  Undefined array key 155 in C:\xampp\htdocs\hp\catalog\controller\account\customerpartner\productlist.php on line 268
+2025-07-16 15:21:37 - PHP Warning:  Undefined array key 156 in C:\xampp\htdocs\hp\catalog\controller\account\customerpartner\productlist.php on line 268
+2025-07-16 15:21:37 - PHP Warning:  Undefined array key 157 in C:\xampp\htdocs\hp\catalog\controller\account\customerpartner\productlist.php on line 268
+2025-07-16 15:21:37 - PHP Warning:  Undefined array key 154 in C:\xampp\htdocs\hp\catalog\controller\account\customerpartner\productlist.php on line 268
+2025-07-16 15:21:37 - PHP Warning:  Undefined array key 158 in C:\xampp\htdocs\hp\catalog\controller\account\customerpartner\productlist.php on line 268
+2025-07-16 15:21:37 - PHP Warning:  Undefined array key 159 in C:\xampp\htdocs\hp\catalog\controller\account\customerpartner\productlist.php on line 268
+2025-07-16 15:43:51 - PHP Warning:  A non-numeric value encountered in C:\xampp\htdocs\hp\catalog\model\customerpartner\master.php on line 370

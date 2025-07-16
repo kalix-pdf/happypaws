@@ -150,6 +150,7 @@
                 <td class="text-right">Subscription type</td>
                 <td class="text-right">Duration</td>
                 <td class="text-right">Date Added</td>
+                <td class="text-right">Date Expired</td>
                 {# <td class="text-right">{{ column_action }}</td> #}
               </tr>
             </thead>
@@ -241,6 +242,7 @@
                                 </td>
                                 <td class="text-center">{{ subscription.duration }} Days</td>
                                 <td>{{ subscription.date_added }}</td>
+                                <td>{{ subscription.date_expired }}</td>
                             {% endfor %}
                         {% else %}
                             <td colspan="3">No subscription</td>
