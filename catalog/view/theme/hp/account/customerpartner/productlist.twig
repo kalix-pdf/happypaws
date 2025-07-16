@@ -227,68 +227,24 @@
                 <td class="text-right">
                   <span class="text-success">{{ product['totalearn'] }}</span>
                 </td>
-                  {% for subscription in subscriptions %}
-                      <td class="text-center">
-                          {% if subscription.subs_type == 1 %}
-                              Piso Per Day
-                          {% elseif subscription.subs_type == 2 %}
-                              Piso Per Month
-                          {% else %}
-                              Unknown
-                          {% endif %}
-                      </td>
-                        <td class="text-center">{{ subscription.duration }} Days</td>
-                        <td>{{ subscription.date_added }}</td>
-                  {% endfor %}
-                <!-- membership codes starts here -->
-                {# <td class="text-right">
-                  {% if (module_wk_seller_group_status is defined) %}
-                  <div class="btn-group">
-                    {% if (product['action']) %}
-                      {% for action in product['action'] %}
-                        <a {% if (product['current_status'] == 'expired') %} {{ "href='" ~ action['href_relist'] ~ "'" }} {% endif %} class="btn btn-primary relist-button" {% if (product['current_status'] != 'expired') %} {{ 'disabled' }} {% endif %}>
-                          <span data-toggle="tooltip" title="{{ action['text_relist'] }}">
-                            <i class="fa fa-refresh"></i>
-                          </span>
-                        </a>
-                        {% if (module_wk_seller_group_publish_unpublish_product is defined and module_wk_seller_group_publish_unpublish_product) %}
-                          {% if (product['current_status'] == 'inactive') %}
-                            <a {{ "href='" ~ action['href_publish'] ~ "'" }} class="btn btn-success">
-                              <span data-toggle="tooltip" title="{{ action['text_publish'] }}">
-                                <i class="fa fa-thumbs-o-up"></i>
-                              </span>
-                            </a>
-                          {% else %}
-                            <a {% if (product['current_status'] != 'inactive') %} {{ "href='" ~ action['href_unpublish'] ~ "'" }} {% endif %} class="btn btn-danger">
-                              <span data-toggle="tooltip" title="{{ action['text_unpublish'] }}">
-                                <i class="fa fa-thumbs-o-down"></i>
-                              </span>
-                            </button>
-                          {% endif %}
+                        {% set product_subs = subscriptions[product.product_id] %}
+                        {% if product_subs is not empty %}
+                            {% for subscription in product_subs %}
+                                <td class="text-center">
+                                    {% if subscription.subs_type == 1 %}
+                                        Piso Per Day
+                                    {% elseif subscription.subs_type == 2 %}
+                                        Piso Per Month
+                                    {% else %}
+                                        Unknown
+                                    {% endif %}
+                                </td>
+                                <td class="text-center">{{ subscription.duration }} Days</td>
+                                <td>{{ subscription.date_added }}</td>
+                            {% endfor %}
+                        {% else %}
+                            <td colspan="3">No subscription</td>
                         {% endif %}
-                        <a href="{{ action['href_clone'] }}" class="btn btn-default" {% if (product['current_status'] == 'expired' or product['current_status'] == 'disabled') %} {{ 'disabled' }} style = "pointer-events:none;"  {% endif %}>
-                          <span data-toggle="tooltip" title="{{ action['text_clone_product'] }}">
-                            <i class="fa fa-copy"></i>
-                          </span>
-                        </a>
-                        <a {% if (product['current_status'] != 'expired') %} {{ "href='" ~ action['href_edit'] ~ "'" }} {% endif %} class="btn btn-info" {% if (product['current_status'] == 'expired' or product['current_status'] == 'disabled') %} {{ 'disabled' }} {% endif %} >
-                          <span data-toggle="tooltip" title="{{ action['text_edit'] }}">
-                            <i class="fa fa-pencil"></i>
-                          </span>
-                        </a>
-                      {% endfor %}
-                    {% endif %}
-                    </div>
-                  {% elseif (product['action']) %}
-                      {% for action in product['action'] %}
-                        <a href="{{ action['href'] }}" class="btn btn-info"><span data-toggle="tooltip" title="{{ action['text'] }}"><i class="fa fa-pencil"></i></span></a>
-                      {% endfor %}
-                    {% endif %}
-                    {% if (not product['status']) %}
-                        <a href="{{ product['productPreviewLink'] }}" target="_blank" class="btn btn-info"><span data-toggle="tooltip" title="{{ text_product_preview }}"><i class="fa fa-television"></i></span></a>
-                    {% endif %}
-                </td> #}
-                 <!-- membership codes ends here -->
               </tr>
               {% endfor %}
               {% else %}

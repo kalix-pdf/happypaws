@@ -204,6 +204,9 @@ class ControllerAccountCustomerpartnerProductlist extends Controller
 
 		$this->data = array_merge($this->data, $this->load->language('account/customerpartner/restriction'));
 
+		
+		$this->data['subscriptions'] = [];
+
 		foreach ($results as $key => $result) {
 
 			if (!$results[$key]['product_id'])
@@ -262,8 +265,9 @@ class ControllerAccountCustomerpartnerProductlist extends Controller
 			$results[$key]['action'] = $action;
 			$results[$key]['productLink'] = $this->url->link('product/product', 'product_id=' . $key, true);
 			$results[$key]['productPreviewLink'] = $this->url->link('product/product', 'product_id=' . $key . "&product_token=" . $this->session->data['product_token'], true);
-		
-			$this->data['subscriptions'] = $this->model_account_customerpartner->getSubscriptionByProductId($result['product_id']);
+	
+			$this->data['subscriptions'][$result['product_id']] = $this->model_account_customerpartner->getSubscriptionByProductId($result['product_id']);
+
 		}
 
 		$this->data['products'] = $results;
