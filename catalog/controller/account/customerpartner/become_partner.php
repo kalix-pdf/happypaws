@@ -118,7 +118,7 @@ class ControllerAccountCustomerpartnerBecomePartner extends Controller
 				$this->data['error_description'] = '';
 			}
 
-			if (isset($this->request->post['SBSTYPE'])) {
+			if (isset($this->error['SBSTYPE'])) {
 				$this->data['error_SBSTYPE'] = $this->error['error_SBSTYPE'];
 			} else {
 				$this->data['error_SBSTYPE'] = '';

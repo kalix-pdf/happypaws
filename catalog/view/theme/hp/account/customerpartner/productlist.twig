@@ -238,19 +238,25 @@
                         {% set product_subs = subscriptions[product.product_id] %}
                         {% if product_subs is not empty %}
                             {% for subscription in product_subs %}
-                                <td class="text-center">
                                     {% if subscription.subs_type == 1 %}
-                                        Piso Per Day
+                                      <td class="text-center"> Piso Per Day </td>
+                                      <td class="text-center">{{ subscription.duration }} Days</td>
+                                      <td class="text-center">{{ subscription.date_added }}</td>
+                                      <td class="text-center">{{ subscription.date_approved }}</td>
+                                      <td class="text-center">{{ subscription.date_expired }}</td>
                                     {% elseif subscription.subs_type == 2 %}
-                                        Piso Per Month
+                                      <td class="text-center"> Piso Per Month </td>
+                                      <td class="text-center">{{ subscription.duration }} Days</td>
+                                      <td class="text-center">{{ subscription.date_added }}</td>
+                                      <td class="text-center">{{ subscription.date_approved }}</td>
+                                      <td class="text-center">{{ subscription.date_expired }}</td>
                                     {% else %}
-                                        Unknown
+                                        <td class="text-center"> Commission Type </td>
+                                          <td class="text-center">Commission Type</td>
+                                          <td class="text-center">{{ subscription.date_added }}</td>
+                                          <td class="text-center">{{ subscription.date_approved }}</td>
+                                          <td class="text-center">Commission Type</td>
                                     {% endif %}
-                                </td>
-                                <td class="text-center">{{ subscription.duration }} Days</td>
-                                <td class="text-center">{{ subscription.date_added }}</td>
-                                <td class="text-center">{{ subscription.date_approved }}</td>
-                                <td class="text-center">{{ subscription.date_expired }}</td>
                             {% endfor %}
                         {% else %}
                             <td colspan="3">No subscription</td>
