@@ -422,6 +422,9 @@ class ControllerCustomerpartnerProduct extends Controller {
 
 			$this->model_customerpartner_product->addProduct($this->request->get);
 
+			// DATE APPROVAL
+			$this->model_customerpartner_product->addSubscription($this->request->get['product_id']);
+
 			$this->session->data['success'] = $this->language->get('text_success');
 		}
 

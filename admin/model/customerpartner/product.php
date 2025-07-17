@@ -24,6 +24,21 @@ class ModelCustomerpartnerProduct extends Model {
 		}
 	}
 
+
+	public function addSubscription($product_id) {
+		$date_approved = date('Y-m-d H:i:s');
+		
+		$query = $this->db->query("SELECT * FROM product_subscription WHERE product_id = '" . (int)$product_id . "'");
+		$subscription = $query->row;
+
+		$amount = $subscription['duration'];
+
+		$date_expired = date('Y-m-d H:i:s', strtotime($date_approved . ' + ' . (int)$amount . ' days'));
+
+		$this->db->query("UPDATE product_subscription SET date_approved = '" . $this->db->escape($date_approved) ."',
+			 date_expired = '" . $this->db->escape($date_expired) . "' WHERE product_id = '" . (int)$product_id . "'");
+	}
+
 	public function addProduct($data) {
 
 	  $this->db->query("UPDATE " . DB_PREFIX . "product SET status = 1 WHERE product_id = '".(int)$data['product_id']."'");

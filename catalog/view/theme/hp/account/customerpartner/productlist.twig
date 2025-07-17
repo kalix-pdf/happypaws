@@ -150,6 +150,7 @@
                 <td class="text-right">Subscription type</td>
                 <td class="text-right">Duration</td>
                 <td class="text-right">Date Added</td>
+                <td class="text-right">Date Approved</td>
                 <td class="text-right">Date Expired</td>
                 {# <td class="text-right">{{ column_action }}</td> #}
               </tr>
@@ -211,7 +212,13 @@
                   </td>
 
                 {% else %}
-                <td class="text-left">{{ product['status'] ? 'Approved' : 'Approval Pending' }}</td>
+                <td class="text-left">
+                  {% if product['status'] %}
+                    <span class="badge text-success">Approved</span>
+                  {% else %}
+                    <span class="badge text-danger">Approval Pending</span>
+                  {% endif %}
+                </td>
                 {% endif %}
                 <!--  -->
                 <td class="text-right">
@@ -241,8 +248,9 @@
                                     {% endif %}
                                 </td>
                                 <td class="text-center">{{ subscription.duration }} Days</td>
-                                <td>{{ subscription.date_added }}</td>
-                                <td>{{ subscription.date_expired }}</td>
+                                <td class="text-center">{{ subscription.date_added }}</td>
+                                <td class="text-center">{{ subscription.date_approved }}</td>
+                                <td class="text-center">{{ subscription.date_expired }}</td>
                             {% endfor %}
                         {% else %}
                             <td colspan="3">No subscription</td>
