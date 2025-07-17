@@ -144,8 +144,10 @@ class ControllerCustomerpartnerProfile extends Controller
         $this->load->model('localisation/zone');
 
         $province = $this->model_localisation_zone->getZone($partner['zone_id']);
-        $data['province'] = $province['name'];
-
+        if ($province) {
+            $data['province'] = $province['name'];
+        }
+        
         $data['admin_analytic_id'] = $this->config->get('marketplace_google_analytic_id');
         if (isset($partner['google_analytic_id']) && $partner['google_analytic_id']) {
             $data['seller_analytic_id'] = $partner['google_analytic_id'];
@@ -796,7 +798,7 @@ class ControllerCustomerpartnerProfile extends Controller
             if ($result['image'] && is_file(DIR_IMAGE . $result['image'])) {
                 $image = $this->model_tool_image->resize($result['image'], $this->config->get('theme_' . $this->config->get('config_theme') . '_image_product_width'), $this->config->get('theme_' . $this->config->get('config_theme') . '_image_product_height'));
             } else {
-                $image = $this->model_tool_image->resize('placeholder.png', $this->config->get('theme_' . $this->config->get('config_theme') . '_image_product_width'), $this->config->get('theme_' . $this->config->get('config_theme') . '_image_product_height'));
+                $image = $this->model_tool_image->resize('no_image.png', $this->config->get('theme_' . $this->config->get('config_theme') . '_image_product_width'), $this->config->get('theme_' . $this->config->get('config_theme') . '_image_product_height'));
             }
 
             if (($this->config->get('config_customer_price') && $this->customer->isLogged()) || !$this->config->get('config_customer_price')) {
