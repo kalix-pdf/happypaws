@@ -9,6 +9,21 @@ class ControllerCommonHome extends Controller {
 			$this->document->addLink($this->config->get('config_url'), 'canonical');
 		}
 
+		$this->load->model('account/customerpartner');
+		$subs_data = $this->model_account_customerpartner->getAllProductSubscriptions();
+
+		date_default_timezone_set('Asia/Manila');
+		$current_time = date('Y-m-d H:i:s');
+
+		foreach ($subs_data as $sub) {
+			if (isset($sub['date_expired']) && $sub['date_expired'] < $current_time) {
+				$product = $this->model_account_customerpartner->getProduct($sub['product_id']);
+				if ($product && isset($product['status']) && $product['status'] == 1) {
+					$this->db->query("UPDATE " . DB_PREFIX . "product SET status = 0 WHERE product_id = '" . (int)$sub['product_id'] . "'");
+				}
+			}
+		}
+
 		$data['sellmenu'] = $this->load->controller('extension/module/marketplace/sellmenu');
 		$data['menu'] = $this->load->controller('common/menu');
 		$data['shopping_cart'] = $this->url->link('checkout/cart');

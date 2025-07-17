@@ -1,0 +1,278 @@
+/* === Reset & Base === */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  font-family: 'Poppins';
+}
+
+/* === Container & Layout === */
+#account-register.container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+}
+
+#account {
+  border: none;
+}
+
+#content {
+  background: white;
+  padding: 2.5rem;
+  border-radius: 20px;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
+  border: 2px solid #1C2A56;
+  max-width: 1000px;
+  width: 100%;
+  margin: auto;
+}
+
+#content h1 {
+  text-align: center;
+  color: #1C2A56;
+  font-weight: 700;
+  margin-bottom: 1rem;
+}
+
+#content p {
+  text-align: center;
+  margin-bottom: 2rem;
+  font-size: 0.8rem;
+}
+
+/* === Form Styling === */
+legend {
+  color: #162F65;
+  font-weight: bold;
+}
+
+.form-horizontal .form-group {
+  display: flex;
+  justify-content: center;
+  gap: 0.5rem;
+  margin-bottom: 1rem;
+}
+
+.form-horizontal .form-group.required label::after {
+  content: ' *';
+  color: red;
+}
+
+.form-horizontal .form-group .form-control {
+  border: none;
+  border-radius: 20px;
+  background-color: #f1eff0;
+  padding: 5px 15px;
+  width: 100%;
+  max-width: 250px;
+  margin: 5px;
+}
+
+.input-wrapper {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  min-height: 40px;
+}
+
+.input-wrapper .text-danger {
+  color: #ff4d4d;
+  font-size: 9px;
+  margin-top: 4px;
+  line-height: 1.2;
+}
+
+.input-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+
+.input-row .form-control {
+  flex: 1;
+}
+
+.form-row.two-col {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+}
+
+.form-row .col {
+  display: flex;
+  min-width: 200px;
+}
+
+.form-group label {
+  display: block;
+  font-weight: 500;
+  font-size: 10px;
+}
+
+.form-group .form-control {
+  width: 100%;
+}
+
+.radio-inline,
+.form-group label {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+}
+
+/* === Buttons === */
+.buttons {
+  display: flex;
+  justify-content: center;
+  margin-top: 2rem;
+}
+
+.btn-primary {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #1C2A56;
+  color: #f6c96d;
+  width: 150px;
+  border: none;
+  border-radius: 10px;
+  padding: 10px 25px;
+  font-size: 1rem;
+  cursor: pointer;
+}
+
+/* === Alerts & Messages === */
+.alert-danger {
+  color: red;
+  font-size: 9px;
+}
+
+/* === Misc === */
+.breadcrumb {
+  display: none;
+}
+
+.register-logo {
+  padding: 0;
+  text-align: center;
+}
+
+.register-logo img {
+  width: 100px;
+}
+
+/* === Footer === */
+.footer-wrapper {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+  gap: 1rem;
+  padding: 2rem 1rem;
+  background-color: #162F65;
+  font-size: smaller;
+}
+
+.footer-column {
+  flex: 1 1 200px;
+  max-width: 250px;
+  margin-left: 10px;
+}
+
+.footer-column h5 {
+  font-size: 20px;
+  color: white;
+  font-weight: bold;
+  margin-bottom: 1rem;
+}
+
+.footer-column ul {
+  padding: 0;
+  list-style: none;
+}
+
+.footer-column ul li a {
+  text-decoration: none;
+  color: #ddd;
+}
+
+.footer-column ul li a:hover {
+  text-decoration: underline;
+}
+
+.footer-logo {
+  max-height: 100px;
+  margin-bottom: 1rem;
+}
+
+.footer-bottom {
+  padding: 1rem;
+  font-size: 0.875rem;
+  color: #ddd;
+  background-color: #162F65;
+}
+
+/* === Responsive: Mobile Optimization === */
+@media screen and (max-width: 750px) {
+  #content {
+    padding: 1rem;
+    max-width: 90%;
+    margin: 20px auto;
+  }
+
+  #content p {
+    font-size: 10px;
+  }
+
+  legend {
+    font-size: 14px;
+  }
+
+  .form-row.two-col {
+    flex-direction: column;
+    gap: 0.5rem;
+    margin-top: 0.5rem;
+    margin-bottom: 0.5rem;
+  }
+
+  .form-horizontal .form-group {
+    flex-direction: column;
+    margin-bottom: 0.3rem;
+    gap: 0.2rem;
+  }
+
+  .form-horizontal .form-group .form-control {
+    margin: 2px 0;
+    width: 100%;
+    max-width: 100%;
+  }
+
+  .input-wrapper {
+    min-height: 25px;
+  }
+
+  .input-wrapper .text-danger {
+    font-size: 8px;
+    margin-top: 1px;
+  }
+
+  .buttons {
+    flex-direction: column;
+  }
+
+  .btn-primary {
+    width: 100%;
+  }
+
+  .footer-wrapper {
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+  }
+
+  .footer-column {
+    max-width: 100%;
+    margin: 1rem 0;
+  }
+}
