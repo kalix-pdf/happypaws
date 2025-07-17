@@ -779,6 +779,12 @@ class ModelAccountCustomerpartner extends Model
     	return $query->rows;
 	}
 
+	public function getAllProductSubscriptions()
+	{
+		$query = $this->db->query("SELECT * FROM `product_subscription`");
+		return $query->rows;
+	}
+
 	/**
 	 * [getSellerCommission to get seller's commission]
 	 * @param  [integer] $seller_id [particular seller id]
