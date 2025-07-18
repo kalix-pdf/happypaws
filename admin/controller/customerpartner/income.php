@@ -10,6 +10,7 @@ class ControllerCustomerpartnerincome extends Controller
 		// loading model
 		$this->load->model("customerpartner/income");
 		$this->load->model('customerpartner/partner');
+		$this->load->model('customerpartner/product');
 
 		$this->document->setTitle($this->language->get('heading_title'));
 
@@ -181,8 +182,12 @@ class ControllerCustomerpartnerincome extends Controller
 		$total_row = 0;
 		$this->model_customerpartner_income->getDetails();
 		$sellers = $this->model_customerpartner_income->getSellerList($filter_data);
+		
+		$data['subscriptions'] = [];
+
 		foreach ($sellers as $key => $seller) {
 			$partner_amount = $this->model_customerpartner_partner->getPartnerTotal($seller['customer_id'], $filter_data);
+			
 			if (!$partner_amount) {
 				continue;
 			}
@@ -206,6 +211,9 @@ class ControllerCustomerpartnerincome extends Controller
 			if ($rem) {
 				$button_status = false;
 			}
+			$subscriptions = $this->model_customerpartner_product->getSubscriptionBySellerId($seller['customer_id']);
+			$latest_subscription = end($subscriptions); 
+
 			$data['income_details'][] = array(
 				'seller_id' => $seller['customer_id'],
 				'firstname' => $seller['firstname'],
@@ -221,7 +229,12 @@ class ControllerCustomerpartnerincome extends Controller
 				'pay' => $this->language->get('button_pay') . " " . $this->currency->format($rem, $this->config->get('config_currency')),
 				'button_status' => $button_status,
 				'unpaid_listing_commission' => isset($unpaid_commission['commission_amount']) ? $unpaid_commission['commission_amount'] : 0.00,
+				'subscriptions' => $latest_subscription
 			);
+
+			// echo "<pre>";
+			// print_r($data['income_details']);
+			// echo "</pre>";
 
 			$data['grand_total'] = $data['grand_total'] + $total;
 			$data['grand_total_seller'] = $data['grand_total_seller'] + $selleramount;

@@ -233,6 +233,8 @@ class ControllerCustomerpartnerProduct extends Controller {
 
 		$results = $this->model_customerpartner_product->getProducts($filterData);
 
+		$data['subscriptions'] = [];
+
 		foreach ($results as $result) {
 
 			$action = array();
@@ -278,7 +280,9 @@ class ControllerCustomerpartnerProduct extends Controller {
 				'action'     => $action,
 				'seller'	 => $customername
 			);
-    	}
+			$data['subscriptions'][$result['product_id']] = $this->model_customerpartner_product->getSubscription($result['product_id']);
+			
+		}
 
  		$data['user_token'] = $this->session->data['user_token'];
 

@@ -870,7 +870,8 @@ class ControllerCustomerpartnerPartner extends Controller {
 		$this->data['balance'] = $this->currency->format($this->model_customerpartner_transaction->getTransactionTotal($this->request->get['customer_id']), $this->config->get('config_currency'));
 
 		$transaction_total = $this->model_customerpartner_transaction->getTotalTransactions($this->request->get['customer_id']);
-
+		$url = '';
+		
 		$pagination = new Pagination();
 		$pagination->total = $transaction_total;
 		$pagination->page = $page;

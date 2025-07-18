@@ -140,7 +140,7 @@ class ControllerAccountCustomerpartnerAddproduct extends Controller
 				$amount = 5;
 			}
 			if (!empty($amount)) {
-				$this->model_customerpartner_master->addSubscription($sbstype, $product_id, $amount);
+				$this->model_customerpartner_master->addSubscription($sbstype, $product_id, $amount, $seller_id);
 			}
 		
 		}
@@ -1258,15 +1258,15 @@ class ControllerAccountCustomerpartnerAddproduct extends Controller
 					$this->error['warning_subs'] = $this->language->get('error_subscription_required');
 				} 
 			}
-			// else {
-			// 	$this->model_customerpartner_master->addSubscription($sbstype, (int)$product_id, $amount);
-			// 	// 	$this->response->redirect(
-			// // 		$this->url->link(
-			// // 			'extension/payment/xendit/subscription',
-			// // 			'sbs_type=' . $sbstype . '&days=' . $amount
-			// // 		)
-			// // 	);
-			// }
+			 
+			// $this->model_customerpartner_master->addSubscription($sbstype, (int)$product_id, $amount);
+			// 	$this->response->redirect(
+			// 	$this->url->link(
+			// 		'extension/payment/xendit/subscription',
+			// 		'sbs_type=' . $sbstype . '&days=' . $amount
+			// 	)
+			// );
+			 
 		} else {
 			$this->error['warning_subs'] = $this->language->get('error_subscription_missing');
 		}		

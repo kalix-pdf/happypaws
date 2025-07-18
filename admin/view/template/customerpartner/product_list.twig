@@ -180,7 +180,8 @@
                   </td>
                   <td width="12%" class="text-center">Subscription Type</td>
                   <td width="12%" class="text-center">Date Added</td>
-                  <td width="12%" class="text-center">Date Approved</td>
+                  <td width="12%" class="text-center">Duration</td>
+                  <td width="12%" class="text-center">Date Expired</td>
                   <td width="12%" class="text-center">{{ column_action}}</td>
                 </tr>
               </thead>
@@ -199,10 +200,13 @@
                       {% if partners %}
                         <div class="form-group">
                           <div class="input-group">
-                            <span class="input-group-addon" style="width: auto;" data-toggle="tooltip" title="{{ text_seller_info}}">
                               <span class="fa fa-user"></span>
-                            </span>
-                            <select class="form-control partner_change">
+                              {% for partner in partners %}
+                                {% if product['customer_id'] == partner['customer_id'] %}
+                                  {{ partner['name'] }}
+                                {% endif %}
+                              {% endfor %}
+                            {# <select class="form-control partner_change">
                               <option></option>
                               {% for partner in partners %}
                                 {% if product['customer_id'] == partner['customer_id'] %}
@@ -211,7 +215,7 @@
                                   <option value="{{ partner['customer_id'] }}">{{ partner['name'] }}</option>
                                 {% endif %}
                               {% endfor %}
-                            </select>
+                            </select> #}
                           </div>
                         </div>
                       {% endif %}
@@ -247,6 +251,25 @@
                       </a>
                       {% endif %}
                     </td>
+                      {% set product_subs = subscriptions[product.product_id] %}
+                      {% for subscription in product_subs %}                    
+                      <td class="text-center">
+                        {% if subscription.subs_type == 1 %}
+                          Piso Per Day
+                        {% elseif subscription.subs_type == 2 %}
+                          Piso Per Month
+                        {% else %}
+                          Commission
+                        {% endif %}
+                      </td>
+                      <td class="text-center">{{ subscription.date_added }}</td>
+                      {% if subscription.subs_type == 3 %}
+                        <td class="text-center">{{ subscription.duration }}% commission</td>
+                      {% else %}
+                        <td class="text-center">{{ subscription.duration }} days</td>
+                      {% endif %}
+                      <td class="text-center">{{ subscription.date_expired }}</td>
+                    {% endfor %}
                     <td class="text-center">
                       <button type="button" data-toggle="tooltip" title="Product preview" class="btn btn-warning previewButton" data-product-id="{{ product['product_id']}}" data-product-status="{{ product['status']}}">
                         <i class="fa fa-eye"></i>

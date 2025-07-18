@@ -45,6 +45,18 @@ class ModelCustomerpartnerProduct extends Model {
 			
 	}
 
+	public function getSubscription($product_id){
+		$query = $this->db->query("SELECT * FROM `product_subscription` WHERE `product_id` = '" . (int)$product_id ."'");
+
+		return $query->rows;
+	}
+
+	public function getSubscriptionBySellerId($seller_id){
+		$query = $this->db->query("SELECT * FROM `product_subscription` WHERE `seller_id` = '" . (int)$seller_id ."'");
+
+		return $query->rows;
+	}
+
 	public function addProduct($data) {
 
 	  $this->db->query("UPDATE " . DB_PREFIX . "product SET status = 1 WHERE product_id = '".(int)$data['product_id']."'");

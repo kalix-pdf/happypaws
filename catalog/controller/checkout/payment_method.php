@@ -120,6 +120,9 @@ class ControllerCheckoutPaymentMethod extends Controller {
 		} else {
 			$data['agree'] = '';
 		}
+		echo "<pre>";
+		print_r($data);
+		echo "</pre>";
 
 		return $this->load->view('checkout/payment_method', $data);
 	}

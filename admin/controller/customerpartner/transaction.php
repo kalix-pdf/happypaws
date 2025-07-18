@@ -395,14 +395,20 @@ class ControllerCustomerpartnerTransaction extends Controller {
 		$this->load->model('customerpartner/partner');
 
 		$this->data['customers'] = $this->model_customerpartner_partner->getCustomer($this->request->get['seller_id']);
+		$partner_info = $this->model_customerpartner_partner->getPartner($this->data['customer_id']);
 
+		$this->data['seller_payment'] = $partner_info['otherpayment'];
+		
 		$total_orders = $this->model_customerpartner_partner->getTotalSellerOrders($this->request->get['seller_id'],$filter_data);
 
 		$orders = $this->model_customerpartner_partner->getSellerOrdersList($this->request->get['seller_id'],$filter_data);
 
 		$this->load->model('tool/image');
 
-		$this->data['amount'] = 0;
+		if (!isset($this->data['amount'])) {
+			$this->data['amount'] = 0.0;
+		}
+		
 		$this->data['currency_symbol'] = $this->config->get('config_currency');
 		$this->data['orders'] = array();
 
@@ -414,7 +420,13 @@ class ControllerCustomerpartnerTransaction extends Controller {
 				} else {
 					$paid_status = $this->language->get('text_not_paid');
 					if($order['orderstatus']==$this->data['marketplace_complete_order_status'])
-						$this->data['amount'] = round( ($this->data['amount'] + $order['need_to_pay']),2 );
+					{
+						$this->data['amount'] = round( ((float)$this->data['amount'] + (float)$order['need_to_pay']),2 );
+						
+						// echo "<pre>";
+						// print_r($this->data['amount']);
+						// echo "</pre>";
+					}
 				}
 
 				$this->data['orders'][] = array(
@@ -473,6 +485,8 @@ class ControllerCustomerpartnerTransaction extends Controller {
 		$this->data['header'] = $this->load->controller('common/header');
 		$this->data['footer'] = $this->load->controller('common/footer');
 		$this->data['column_left'] = $this->load->controller('common/column_left');
+		// echo "<pre>Final amount: " . print_r($this->data['amount'], true) . "</pre>";
+
 		$this->response->setOutput($this->load->view('customerpartner/transaction_form',$this->data));
 
 	}

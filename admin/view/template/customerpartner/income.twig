@@ -174,6 +174,11 @@
 											{{ text_seller_amount}}
 										</a>
 									</th>
+									
+									<td class="text-center">Platform Fee</td>
+									<td class="text-center">Commission Fee</td>
+									<td class="text-center">Subscription Type</td>
+
 									<th class="text-center">
 										<a href="{{ admin_url}}" class="{% if order is defined and order == 'admin' %}{{ sort }}{%endif %}">
 											{{ text_admin_amount}}
@@ -215,6 +220,20 @@
 									<td class="text-center">
 										{{ income_detail['seller_total']}}
 									</td>
+
+									<td class="text-center">{{ income_detail['commission'] }}</td>
+									<td class="text-center"></td>
+									<td class="text-center">
+										{% set subs = income_detail.subscriptions %}
+										{% if subs.subs_type == 3 %}
+											Commission Type
+										{% elseif subs.subs_type == 2 %}
+											Piso Per Month
+										{% elseif subs.subs_type == 1 %}
+											Piso Per Day
+										{% endif %}
+									</td>
+
 									<td class="text-center">
 										{{ income_detail['admin_total']}}
 									</td>
@@ -241,6 +260,12 @@
 									<td class="text-center">
 										{{ grand_total_seller}}
 									</td>
+									
+									<td class="text-center">{{ income_detail['commission'] }}</td>
+									<td class="text-center">
+										
+									</td>
+
 									<td class="text-center">
 										{{ grand_total_admin}}
 									</td>

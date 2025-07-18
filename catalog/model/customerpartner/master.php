@@ -364,12 +364,13 @@ class ModelCustomerpartnerMaster extends Model {
         }
     }
 
-	public function addSubscription($sbstype, $product_id, $amount)
+	public function addSubscription($sbstype, $product_id, $amount, $seller_id)
 	{
 		$date_added = date('Y-m-d H:i:s');
 		
 		$this->db->query("INSERT INTO `product_subscription` SET `subs_type` = '" . (int)$sbstype . "', 
-			`product_id` = '" . (int)$product_id . "', `duration` = '". (int)$amount . "', `date_added` = '" . $this->db->escape($date_added) . "'");
+			`product_id` = '" . (int)$product_id . "', `duration` = '". (int)$amount . "', `date_added` = '" . $this->db->escape($date_added) . "', 
+			`seller_id` = '" . (int)$seller_id . "'");
 	}
 
     /**
