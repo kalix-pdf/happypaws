@@ -250,7 +250,7 @@
                                       <td class="text-center">{{ subscription.date_added }}</td>
                                       <td class="text-center">{{ subscription.date_approved }}</td>
                                       <td class="text-center">{{ subscription.date_expired }}</td>
-                                    {% else %}
+                                    {% elseif subscription.subs_type == 3 %}
                                         <td class="text-center"> Commission Type </td>
                                           <td class="text-center">Commission Type</td>
                                           <td class="text-center">{{ subscription.date_added }}</td>

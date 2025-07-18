@@ -265,7 +265,7 @@ class ControllerAccountCustomerpartnerProductlist extends Controller
 			$results[$key]['action'] = $action;
 			$results[$key]['productLink'] = $this->url->link('product/product', 'product_id=' . $key, true);
 			$results[$key]['productPreviewLink'] = $this->url->link('product/product', 'product_id=' . $key . "&product_token=" . $this->session->data['product_token'], true);
-	
+
 			$this->data['subscriptions'][$result['product_id']] = $this->model_account_customerpartner->getSubscriptionByProductId($result['product_id']);
 
 		}

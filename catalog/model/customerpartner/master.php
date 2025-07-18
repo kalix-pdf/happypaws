@@ -274,21 +274,22 @@ class ModelCustomerpartnerMaster extends Model {
 		$reviews = $this->db->query($query)->rows;
 
 		$review_ids = array_column($reviews, 'review_id');
-
-        $attachment_query = $this->db->query("
+		
+		if ($review_ids){
+			$attachment_query = $this->db->query("
             SELECT review_id, filename
             FROM review_attachments
             WHERE review_id IN (" . implode(',', array_map('intval', $review_ids)) . ")");
 
-        $attachments_by_review = [];
-        foreach ($attachment_query->rows as $row) {
-            $attachments_by_review[$row['review_id']][] = $row['filename'];
-        }
+			$attachments_by_review = [];
+			foreach ($attachment_query->rows as $row) {
+				$attachments_by_review[$row['review_id']][] = $row['filename'];
+			}
 
-        foreach ($reviews as &$review) {
-            $review['filenames'] = $attachments_by_review[$review['review_id']] ?? [];
-        }
-		
+			foreach ($reviews as &$review) {
+				$review['filenames'] = $attachments_by_review[$review['review_id']] ?? [];
+			}
+		}
 
 		return $reviews;
 	}

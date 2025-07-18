@@ -24,6 +24,7 @@
 </style>
 
 <div class="container" id="product-review-wrapper">
+  {% if reviews %}
     {% for review in reviews %}
     <div class="card mb-3 p-3">
         <h5>{{ review.author }}</h5>
@@ -40,6 +41,9 @@
         {% endif %}
     </div>
     {% endfor %}
+  {% else %}
+    <h1>No Reviews!</h1>
+  {% endif %}
     <div class="pagination-wrapper mt-4 d-flex justify-content-center">
         {{ pagination }}
     </div>    

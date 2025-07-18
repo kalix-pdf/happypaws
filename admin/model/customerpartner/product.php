@@ -31,13 +31,16 @@ class ModelCustomerpartnerProduct extends Model {
 		$query = $this->db->query("SELECT * FROM product_subscription WHERE product_id = '" . (int)$product_id . "'");
 		$subscription = $query->row;
 
-		$amount = $subscription['duration'];
+		if ($subscription['subs_type'] == 1 || $subscription['subs_type'] == 2)
+		{
+			$amount = $subscription['duration'];
+			$date_expired = date('Y-m-d H:i:s', strtotime($date_approved . ' + ' . (int)$amount . ' days'));
 
-		$date_expired = date('Y-m-d H:i:s', strtotime($date_approved . ' + ' . (int)$amount . ' days'));
-
-		$this->db->query("UPDATE product_subscription SET date_approved = '" . $this->db->escape($date_approved) ."',
-			 date_expired = '" . $this->db->escape($date_expired) . "' WHERE product_id = '" . (int)$product_id . "'");
-	}
+			$this->db->query("UPDATE product_subscription SET date_approved = '" . $this->db->escape($date_approved) ."',
+				date_expired = '" . $this->db->escape($date_expired) . "' WHERE product_id = '" . (int)$product_id . "'");
+		
+			}
+		}
 
 	public function addProduct($data) {
 
