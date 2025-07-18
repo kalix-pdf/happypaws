@@ -39,8 +39,11 @@ class ModelCustomerpartnerProduct extends Model {
 			$this->db->query("UPDATE product_subscription SET date_approved = '" . $this->db->escape($date_approved) ."',
 				date_expired = '" . $this->db->escape($date_expired) . "' WHERE product_id = '" . (int)$product_id . "'");
 		
-			}
+		} else {
+			$this->db->query("UPDATE product_subscription SET date_approved = '" . $this->db->escape($date_approved) ."' WHERE product_id = '" . (int)$product_id . "'");
 		}
+			
+	}
 
 	public function addProduct($data) {
 

@@ -117,7 +117,6 @@ class ControllerAccountCustomerpartnerAddproduct extends Controller
 
 			if (isset($this->request->post['clone']) && $this->request->post['clone']) {
 				$product_id = $this->model_account_customerpartner->addProduct($this->request->post);
-				$this->log->write("prod: ", (int)$product_id);	
 			} else if (!isset($this->request->get['product_id'])) {
 				$product_id = $this->model_account_customerpartner->addProduct($this->request->post);
 				$this->session->data['success'] = $this->language->get('text_success');
@@ -126,8 +125,7 @@ class ControllerAccountCustomerpartnerAddproduct extends Controller
 				$this->model_account_customerpartner->editProduct($this->request->post);
 				$this->session->data['success'] = $this->language->get('text_success_update');
 			}
-			$this->log->write($this->request->post['subs_cms']);
-			
+
 			if (isset($this->request->post['subs_ppd']) || isset($this->request->post['subs_ppm']) || isset($this->request->post['subs_cms'])) {		
 				if ($sbstype == 1 && isset($this->request->post['subs_ppd'])) {
 					$days = (int)$this->request->post['subs_ppd'];
@@ -137,14 +135,13 @@ class ControllerAccountCustomerpartnerAddproduct extends Controller
 					$days = (int)$this->request->post['subs_ppm'];
 					$amount = $days * 30;
 				} 
-				if ($sbstype == 3 && isset($this->request->post['subs_cms'])) {
-					$amount = 5;
-				}
-
-				if (!empty($amount)) {
-					$this->model_customerpartner_master->addSubscription($sbstype, $product_id, $amount);
-				}
 			} 
+			if ($sbstype == 3) {
+				$amount = 5;
+			}
+			if (!empty($amount)) {
+				$this->model_customerpartner_master->addSubscription($sbstype, $product_id, $amount);
+			}
 		
 		}
 
@@ -803,7 +800,6 @@ class ControllerAccountCustomerpartnerAddproduct extends Controller
 			$product_options = $this->request->post['product_option'];
 		} elseif (isset($this->request->get['product_id'])) {
 			$product_options = $this->model_account_customerpartner->getProductOptions($this->request->get['product_id']);
-			$this->log->write($product_options);
 		if (!isset($product_info['product_id']) && !isset($this->request->get['product_id'])) {
 			$this->response->redirect($this->url->link('account/customerpartner/addproduct', '', true));
 		}
@@ -1429,7 +1425,6 @@ class ControllerAccountCustomerpartnerAddproduct extends Controller
 
 			if (isset($this->request->get['product_id'])) {
 				$this->request->get['product_id'] = (int)$this->request->get['product_id'];
-				$this->log->write($this->request->get['product_id']);
 			}
 
 			if (isset($this->request->get['product_id']) && !$this->model_account_customerpartner->chkSellerProductAccess($this->request->get['product_id'])) {
