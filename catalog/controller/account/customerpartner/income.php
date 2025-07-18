@@ -37,7 +37,7 @@ class ControllerAccountCustomerpartnerIncome extends Controller
 
     public function index()
     {
-
+        
         $this->load->model('account/customerpartner');
 
         $this->data['chkIsPartner'] = $this->model_account_customerpartner->chkIsPartner();
@@ -141,10 +141,12 @@ class ControllerAccountCustomerpartnerIncome extends Controller
             $income_result = $this->income->orderWiseEarning($this->customer->getId(), $filter_array);
             $total_income = $this->income->orderWiseEarning($this->customer->getId(), $filter_array, true);
 
+
             if ($income_result) {
                 $total = $admin = $seller = $shipping_total = 0;
 
                 foreach ($income_result as $key => $value) {
+                    
                     $total += $value['order_total'];
                     $admin += $value['admin_amount'];
                     $seller += $value['seller_amount'];
@@ -178,7 +180,6 @@ class ControllerAccountCustomerpartnerIncome extends Controller
 
             $income_result = $this->income->getProductWiseEarnng($this->customer->getId(), $filter_array);
             $total_income = $this->income->getProductWiseEarnng($this->customer->getId(), $filter_array, true);
-
             if ($income_result) {
                 $product_total = $order_total = $shipping_total = $admin = $seller = 0;
 

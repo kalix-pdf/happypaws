@@ -1,0 +1,82 @@
+2025-07-18 13:49:54 - Email was sent
+2025-07-18 14:10:00 - PHP Warning:  mysqli::query(): (42000/1064): You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near '..., comission_applied FROM ...SELECT DATE_FORMAT(c2o.date_added,'%b %Y') as ...' at line 1 in C:\xampp\htdocs\hp\system\library\db\mysqli.php on line 25
+2025-07-18 14:48:41 - PHP Warning:  Undefined array key "address_id" in C:\xampp\htdocs\hp\catalog\controller\checkout\place_order.php on line 16
+2025-07-18 14:48:41 - PHP Warning:  Trying to access array offset on value of type bool in C:\xampp\htdocs\hp\catalog\controller\checkout\place_order.php on line 47
+2025-07-18 14:48:41 - PHP Warning:  Trying to access array offset on value of type bool in C:\xampp\htdocs\hp\catalog\controller\checkout\place_order.php on line 48
+2025-07-18 14:48:41 - PHP Warning:  Trying to access array offset on value of type bool in C:\xampp\htdocs\hp\catalog\controller\checkout\place_order.php on line 49
+2025-07-18 14:48:41 - PHP Warning:  Trying to access array offset on value of type bool in C:\xampp\htdocs\hp\catalog\controller\checkout\place_order.php on line 50
+2025-07-18 14:48:41 - PHP Warning:  Trying to access array offset on value of type bool in C:\xampp\htdocs\hp\catalog\controller\checkout\place_order.php on line 51
+2025-07-18 14:48:41 - PHP Warning:  Trying to access array offset on value of type bool in C:\xampp\htdocs\hp\catalog\controller\checkout\place_order.php on line 52
+2025-07-18 14:48:41 - PHP Warning:  Trying to access array offset on value of type bool in C:\xampp\htdocs\hp\catalog\controller\checkout\place_order.php on line 53
+2025-07-18 14:48:41 - PHP Warning:  Trying to access array offset on value of type bool in C:\xampp\htdocs\hp\catalog\controller\checkout\place_order.php on line 54
+2025-07-18 14:48:41 - PHP Warning:  Trying to access array offset on value of type bool in C:\xampp\htdocs\hp\catalog\controller\checkout\place_order.php on line 55
+2025-07-18 14:48:41 - PHP Warning:  Trying to access array offset on value of type bool in C:\xampp\htdocs\hp\catalog\controller\checkout\place_order.php on line 56
+2025-07-18 14:48:41 - PHP Warning:  Trying to access array offset on value of type bool in C:\xampp\htdocs\hp\catalog\controller\checkout\place_order.php on line 57
+2025-07-18 14:48:41 - PHP Warning:  Trying to access array offset on value of type bool in C:\xampp\htdocs\hp\catalog\controller\checkout\place_order.php on line 62
+2025-07-18 14:48:41 - PHP Warning:  Trying to access array offset on value of type bool in C:\xampp\htdocs\hp\catalog\controller\checkout\place_order.php on line 63
+2025-07-18 14:48:41 - PHP Warning:  Trying to access array offset on value of type bool in C:\xampp\htdocs\hp\catalog\controller\checkout\place_order.php on line 64
+2025-07-18 14:48:41 - PHP Warning:  Trying to access array offset on value of type bool in C:\xampp\htdocs\hp\catalog\controller\checkout\place_order.php on line 65
+2025-07-18 14:48:41 - PHP Warning:  Trying to access array offset on value of type bool in C:\xampp\htdocs\hp\catalog\controller\checkout\place_order.php on line 66
+2025-07-18 14:48:41 - PHP Warning:  Trying to access array offset on value of type bool in C:\xampp\htdocs\hp\catalog\controller\checkout\place_order.php on line 67
+2025-07-18 14:48:41 - PHP Warning:  Trying to access array offset on value of type bool in C:\xampp\htdocs\hp\catalog\controller\checkout\place_order.php on line 68
+2025-07-18 14:48:41 - PHP Warning:  Trying to access array offset on value of type bool in C:\xampp\htdocs\hp\catalog\controller\checkout\place_order.php on line 69
+2025-07-18 14:48:41 - PHP Warning:  Trying to access array offset on value of type bool in C:\xampp\htdocs\hp\catalog\controller\checkout\place_order.php on line 70
+2025-07-18 14:48:41 - PHP Warning:  Trying to access array offset on value of type bool in C:\xampp\htdocs\hp\catalog\controller\checkout\place_order.php on line 71
+2025-07-18 14:48:41 - PHP Warning:  Trying to access array offset on value of type bool in C:\xampp\htdocs\hp\catalog\controller\checkout\place_order.php on line 72
+2025-07-18 14:48:41 - PHP Warning:  mysqli::query(): (42S02/1146): Table 'smesoftc_hp.oc_product_subscription' doesn't exist in C:\xampp\htdocs\hp\system\library\db\mysqli.php on line 25
+2025-07-18 14:54:49 - PHP Warning:  Undefined array key "address_id" in C:\xampp\htdocs\hp\catalog\controller\checkout\place_order.php on line 16
+2025-07-18 14:54:49 - PHP Warning:  Trying to access array offset on value of type bool in C:\xampp\htdocs\hp\catalog\controller\checkout\place_order.php on line 47
+2025-07-18 14:54:49 - PHP Warning:  Trying to access array offset on value of type bool in C:\xampp\htdocs\hp\catalog\controller\checkout\place_order.php on line 48
+2025-07-18 14:54:49 - PHP Warning:  Trying to access array offset on value of type bool in C:\xampp\htdocs\hp\catalog\controller\checkout\place_order.php on line 49
+2025-07-18 14:54:49 - PHP Warning:  Trying to access array offset on value of type bool in C:\xampp\htdocs\hp\catalog\controller\checkout\place_order.php on line 50
+2025-07-18 14:54:49 - PHP Warning:  Trying to access array offset on value of type bool in C:\xampp\htdocs\hp\catalog\controller\checkout\place_order.php on line 51
+2025-07-18 14:54:49 - PHP Warning:  Trying to access array offset on value of type bool in C:\xampp\htdocs\hp\catalog\controller\checkout\place_order.php on line 52
+2025-07-18 14:54:49 - PHP Warning:  Trying to access array offset on value of type bool in C:\xampp\htdocs\hp\catalog\controller\checkout\place_order.php on line 53
+2025-07-18 14:54:49 - PHP Warning:  Trying to access array offset on value of type bool in C:\xampp\htdocs\hp\catalog\controller\checkout\place_order.php on line 54
+2025-07-18 14:54:49 - PHP Warning:  Trying to access array offset on value of type bool in C:\xampp\htdocs\hp\catalog\controller\checkout\place_order.php on line 55
+2025-07-18 14:54:49 - PHP Warning:  Trying to access array offset on value of type bool in C:\xampp\htdocs\hp\catalog\controller\checkout\place_order.php on line 56
+2025-07-18 14:54:49 - PHP Warning:  Trying to access array offset on value of type bool in C:\xampp\htdocs\hp\catalog\controller\checkout\place_order.php on line 57
+2025-07-18 14:54:49 - PHP Warning:  Trying to access array offset on value of type bool in C:\xampp\htdocs\hp\catalog\controller\checkout\place_order.php on line 62
+2025-07-18 14:54:49 - PHP Warning:  Trying to access array offset on value of type bool in C:\xampp\htdocs\hp\catalog\controller\checkout\place_order.php on line 63
+2025-07-18 14:54:49 - PHP Warning:  Trying to access array offset on value of type bool in C:\xampp\htdocs\hp\catalog\controller\checkout\place_order.php on line 64
+2025-07-18 14:54:49 - PHP Warning:  Trying to access array offset on value of type bool in C:\xampp\htdocs\hp\catalog\controller\checkout\place_order.php on line 65
+2025-07-18 14:54:49 - PHP Warning:  Trying to access array offset on value of type bool in C:\xampp\htdocs\hp\catalog\controller\checkout\place_order.php on line 66
+2025-07-18 14:54:49 - PHP Warning:  Trying to access array offset on value of type bool in C:\xampp\htdocs\hp\catalog\controller\checkout\place_order.php on line 67
+2025-07-18 14:54:49 - PHP Warning:  Trying to access array offset on value of type bool in C:\xampp\htdocs\hp\catalog\controller\checkout\place_order.php on line 68
+2025-07-18 14:54:49 - PHP Warning:  Trying to access array offset on value of type bool in C:\xampp\htdocs\hp\catalog\controller\checkout\place_order.php on line 69
+2025-07-18 14:54:49 - PHP Warning:  Trying to access array offset on value of type bool in C:\xampp\htdocs\hp\catalog\controller\checkout\place_order.php on line 70
+2025-07-18 14:54:49 - PHP Warning:  Trying to access array offset on value of type bool in C:\xampp\htdocs\hp\catalog\controller\checkout\place_order.php on line 71
+2025-07-18 14:54:49 - PHP Warning:  Trying to access array offset on value of type bool in C:\xampp\htdocs\hp\catalog\controller\checkout\place_order.php on line 72
+2025-07-18 14:54:49 - PHP Warning:  mysqli::query(): (42S22/1054): Unknown column 'cms_comission_fee' in 'field list' in C:\xampp\htdocs\hp\system\library\db\mysqli.php on line 25
+2025-07-18 15:39:08 - PHP Warning:  mysqli::query(): (42S02/1146): Table 'smesoftc_hp.oc_product_subscription' doesn't exist in C:\xampp\htdocs\hp\system\library\db\mysqli.php on line 25
+2025-07-18 15:39:32 - PHP Warning:  mysqli::query(): (42S02/1146): Table 'smesoftc_hp.oc_product_subscription' doesn't exist in C:\xampp\htdocs\hp\system\library\db\mysqli.php on line 25
+2025-07-18 15:42:48 - PHP Warning:  mysqli::query(): (42S02/1146): Table 'smesoftc_hp.oc_product_subscription' doesn't exist in C:\xampp\htdocs\hp\system\library\db\mysqli.php on line 25
+2025-07-18 15:43:00 - PHP Warning:  mysqli::query(): (42S02/1146): Table 'smesoftc_hp.oc_product_subscription' doesn't exist in C:\xampp\htdocs\hp\system\library\db\mysqli.php on line 25
+2025-07-18 15:47:33 - Email was sent
+2025-07-18 15:51:57 - Email was sent
+2025-07-18 15:57:07 - Email was sent
+2025-07-18 15:59:23 - Email was sent
+2025-07-18 16:03:26 - Email was sent
+2025-07-18 16:03:27 - PHP Warning:  mysqli::query(): (42S22/1054): Unknown column 'cms_comission_fee' in 'field list' in C:\xampp\htdocs\hp\system\library\db\mysqli.php on line 25
+2025-07-18 16:03:43 - Email was sent
+2025-07-18 16:14:26 - Array
+(
+    [subs_type] => 3
+)
+
+2025-07-18 16:14:26 - PHP Warning:  mysqli::query(): (42S22/1054): Unknown column 'cms_comission_fee' in 'field list' in C:\xampp\htdocs\hp\system\library\db\mysqli.php on line 25
+2025-07-18 16:15:11 - Array
+(
+    [subs_type] => 3
+)
+
+2025-07-18 16:15:11 - PHP Warning:  Undefined variable $cms_comission_fee in C:\xampp\htdocs\hp\catalog\model\checkout\order.php on line 36
+2025-07-18 16:15:11 - PHP Warning:  mysqli::query(): (42S22/1054): Unknown column 'cms_comission_fee' in 'field list' in C:\xampp\htdocs\hp\system\library\db\mysqli.php on line 25
+2025-07-18 16:16:01 - Array
+(
+    [subs_type] => 3
+)
+
+2025-07-18 16:16:05 - Email was sent
+2025-07-18 16:38:57 - Email was sent
+2025-07-18 17:06:26 - Email was sent

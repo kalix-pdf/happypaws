@@ -33,7 +33,7 @@ class ModelAccountCustomerpartnerIncome extends Model {
                 break;
         }    
 
-        $sql .= "SELECT DATE_FORMAT(c2o.date_added,'".$format."') as date_display,c2o.date_added as date_start,pd.name,p.product_id,SUM(c2o.price) as product_total,SUM(c2o.admin) as admin_amount,SUM((c2o.customer)) as seller_amount, SUM(c2o.shipping_applied) as shipping_total, (SUM(c2o.admin) + SUM(c2o.customer)) as order_total FROM " . DB_PREFIX . "customerpartner_to_order c2o LEFT JOIN " . DB_PREFIX . "product p ON(p.product_id = c2o.product_id) LEFT JOIN " . DB_PREFIX. "product_description pd  ON (p.product_id = pd.product_id) LEFT JOIN " . DB_PREFIX .  "customerpartner_to_product c2p ON(p.product_id=c2p.product_id) WHERE c2p.customer_id='" . $partner_id . "'";
+        $sql .= "SELECT DATE_FORMAT(c2o.date_added,'".$format."') as date_display,c2o.date_added as date_start,pd.name,p.product_id,SUM(c2o.price) as product_total,SUM(c2o.admin) as admin_amount,SUM((c2o.customer)) as seller_amount, SUM(c2o.shipping_applied) as shipping_total, SUM(c2o.commission_applied) as comission_applied, (SUM(c2o.admin) + SUM(c2o.customer)) as order_total FROM " . DB_PREFIX . "customerpartner_to_order c2o LEFT JOIN " . DB_PREFIX . "product p ON(p.product_id = c2o.product_id) LEFT JOIN " . DB_PREFIX. "product_description pd  ON (p.product_id = pd.product_id) LEFT JOIN " . DB_PREFIX .  "customerpartner_to_product c2p ON(p.product_id=c2p.product_id) WHERE c2p.customer_id='" . $partner_id . "'";
 
         if(!empty($filter_data['filter_custom_start']) && !empty($filter_data['filter_custom_end'])) {
             $sql .=" AND DATE(c2o.date_added) >= '".$this->db->escape($filter_data['filter_custom_start'])."' AND DATE(c2o.date_added) <= '".$this->db->escape($filter_data['filter_custom_end'])."'";
@@ -61,7 +61,8 @@ class ModelAccountCustomerpartnerIncome extends Model {
          'product_total',
          'admin_amount',
          'seller_amount',
-         'shipping_total'
+         'shipping_total',
+         'comission_applied',
 		);
 
 		if (isset($filter_data['sort']) && in_array($filter_data['sort'], $sort_data)) {
@@ -118,7 +119,7 @@ class ModelAccountCustomerpartnerIncome extends Model {
                 break;
         }
 
-        $sql .= "SELECT DATE_FORMAT(c2o.date_added,'".$format."') as date_display,c2o.date_added as date_start,SUM(c2o.admin) as admin_amount,SUM(c2o.customer) as seller_amount,SUM(c2o.shipping_applied) as shipping_total,(SUM(c2o.admin) + SUM(c2o.customer)) as order_total FROM " . DB_PREFIX . "customerpartner_to_order c2o LEFT JOIN " . DB_PREFIX .  "order o ON(o.order_id=c2o.order_id) WHERE c2o.customer_id='" . $partner_id . "'";
+        $sql .= "SELECT DATE_FORMAT(c2o.date_added,'".$format."') as date_display,c2o.date_added as date_start,SUM(c2o.admin) as admin_amount,SUM(c2o.customer) as seller_amount,SUM(c2o.shipping_applied) as shipping_total, SUM(c2o.comission_applied) as comission_applied, (SUM(c2o.admin) + SUM(c2o.customer)) as order_total FROM " . DB_PREFIX . "customerpartner_to_order c2o LEFT JOIN " . DB_PREFIX .  "order o ON(o.order_id=c2o.order_id) WHERE c2o.customer_id='" . $partner_id . "'";
         
         if(!empty($filter_data['filter_custom_start']) && !empty($filter_data['filter_custom_end'])) {
             $sql .=" AND DATE(c2o.date_added) >= '".$this->db->escape($filter_data['filter_custom_start'])."' AND DATE(c2o.date_added) <= '".$this->db->escape($filter_data['filter_custom_end'])."'";
@@ -145,6 +146,7 @@ class ModelAccountCustomerpartnerIncome extends Model {
          'admin_amount',
          'seller_amount',
          'shipping_total',
+         'comission_applied',
 		);
 
 
