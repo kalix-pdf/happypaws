@@ -1,0 +1,66 @@
+#common-success {
+    height: 70vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+
+#content h1 {
+    font-size: 35px;
+    font-weight: 600;
+    color: #162F65;
+    margin-bottom: 15px;
+}
+
+#content p {
+    font-size: 15px;
+}
+
+.view-order {
+    font-size: 15px;
+}
+
+.contact-hr {
+    justify-self: center;
+    width: 95%;
+    border-width: 2px;
+    background-color: black;
+    padding: 0;
+    margin: 0;
+}
+
+.success-content {
+    display: flex;
+    flex-direction: column;
+}
+
+.button-group {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 30px;
+}
+
+.button-group a {
+    color: black;
+}
+
+.buttons {
+    display: flex;
+    justify-content: center;
+}
+
+.buttons a {
+    background-color: #162F65;
+    border-radius: 10px;
+    padding: 10px;
+    width: 100px;
+    font-size: 15px;
+    cursor: pointer;
+    text-decoration: none;
+    color: white;
+}
+
