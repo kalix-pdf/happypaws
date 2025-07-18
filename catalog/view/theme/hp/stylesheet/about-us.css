@@ -1,0 +1,143 @@
+/* === Upper Section of About Us Page === */
+.upper-section {
+  display: flex;
+  flex-wrap: wrap;
+  width: 100%;
+  height: 80vh;
+  background-color: #162F65;
+}
+
+.left-pannel {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 50%;
+  padding: 20px;
+}
+
+.text-container {
+  width: 60%;
+}
+
+.left-pannel h1 {
+  font-family: 'Poppins', sans-serif;
+  font-weight: 900;
+  font-size: 4rem;
+  color: #FFC766;
+  margin: 0;
+}
+
+.left-pannel h6 {
+  color: white;
+  font-size: 1rem;
+  font-weight: 500;
+  margin-top: 20px;
+}
+
+.right-pannel {
+  display: flex;
+  justify-content: end;
+  align-items: start;
+  width: 50%;
+}
+
+.right-pannel img {
+  max-width: 80%;
+  height: auto;
+}
+
+
+/* === Bottom Section === */
+.bottom-section {
+  display: flex;
+  flex-wrap: wrap;
+  width: 100%;
+  background-color: #FFC766;
+  padding: 40px 20px;
+}
+
+.content-container {
+  flex: 1 1 300px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 20px;
+  gap: 10px;
+  text-align: center;
+}
+
+.content-container img {
+  width: 80px;
+  height: 80px;
+}
+
+.content-container h1 {
+  color: #162F65;
+  font-size: 1.5rem;
+  font-weight: 900;
+  margin: 10px 0;
+}
+
+.content-container p {
+  max-width: 400px;
+  color: #162F65;
+  font-size: 0.9rem;
+  font-weight: 600;
+  text-align: justify;
+}
+
+
+/* === Responsive Styles === */
+@media (max-width: 992px) {
+  .upper-section,
+  .bottom-section {
+    flex-direction: column;
+    height: auto;
+    padding: 30px 10px;
+  }
+
+  .left-pannel,
+  .right-pannel {
+    width: 100%;
+  }
+
+  .left-pannel h1 {
+    font-size: 3rem;
+  }
+
+  .text-container {
+    width: 80%;
+  }
+
+  .content-container {
+    flex: 1 1 100%;
+  }
+
+  .right-pannel img {
+    display: none;
+  }
+}
+
+@media (max-width: 576px) {
+  .left-pannel h1 {
+    font-size: 2.5rem;
+  }
+
+  .left-pannel h6 {
+    font-size: 0.9rem;
+  }
+
+  .content-container h1 {
+    font-size: 1.2rem;
+  }
+
+  .content-container p {
+    font-size: 0.85rem;
+    padding: 0 10px;
+  }
+
+  .right-pannel img {
+    display: none;
+  }
+}
