@@ -2,3 +2,2863 @@
 2025-07-21 9:31:44 - PHP Warning:  Undefined variable $comission in C:\xampp\htdocs\hp\admin\model\customerpartner\partner.php on line 1121
 2025-07-21 9:31:44 - PHP Warning:  Attempt to read property "row" on null in C:\xampp\htdocs\hp\admin\model\customerpartner\partner.php on line 1121
 2025-07-21 10:21:29 - Email was sent
+2025-07-21 11:26:57 - Email was sent
+2025-07-21 11:40:15 - message was sent
+2025-07-21 11:40:31 - message was sent
+2025-07-21 11:40:40 - message was sent
+2025-07-21 11:40:47 - message was sent
+2025-07-21 11:40:57 - message was sent
+2025-07-21 11:42:23 - message was sent
+2025-07-21 11:42:34 - message was sent
+2025-07-21 11:45:06 - message was sent
+2025-07-21 14:18:47 - PHP Warning:  Undefined array key "cms_commission_fee" in C:\xampp\htdocs\hp\catalog\controller\account\customerpartner\income.php on line 197
+2025-07-21 14:18:47 - PHP Warning:  Undefined variable $cms_commission_fee in C:\xampp\htdocs\hp\catalog\controller\account\customerpartner\income.php on line 197
+2025-07-21 14:18:47 - PHP Warning:  Undefined array key "cms_commission_fee" in C:\xampp\htdocs\hp\catalog\controller\account\customerpartner\income.php on line 207
+2025-07-21 14:18:47 - PHP Warning:  Undefined array key "cms_commission_fee" in C:\xampp\htdocs\hp\catalog\controller\account\customerpartner\income.php on line 218
+2025-07-21 14:21:06 - PHP Warning:  Undefined array key "cms_commission_fee" in C:\xampp\htdocs\hp\catalog\controller\account\customerpartner\income.php on line 197
+2025-07-21 14:21:06 - PHP Warning:  Undefined array key "cms_commission_fee" in C:\xampp\htdocs\hp\catalog\controller\account\customerpartner\income.php on line 207
+2025-07-21 14:21:06 - PHP Warning:  Undefined array key "cms_commission_fee" in C:\xampp\htdocs\hp\catalog\controller\account\customerpartner\income.php on line 218
+2025-07-21 14:21:09 - PHP Warning:  Undefined array key "cms_commission_fee" in C:\xampp\htdocs\hp\catalog\controller\account\customerpartner\income.php on line 197
+2025-07-21 14:21:09 - PHP Warning:  Undefined array key "cms_commission_fee" in C:\xampp\htdocs\hp\catalog\controller\account\customerpartner\income.php on line 207
+2025-07-21 14:21:09 - PHP Warning:  Undefined array key "cms_commission_fee" in C:\xampp\htdocs\hp\catalog\controller\account\customerpartner\income.php on line 218
+2025-07-21 14:23:22 - PHP Warning:  mysqli::query(): (42S22/1054): Unknown column 'c2o.comission_applied' in 'field list' in C:\xampp\htdocs\hp\system\library\db\mysqli.php on line 25
+2025-07-21 14:23:23 - PHP Warning:  mysqli::query(): (42S22/1054): Unknown column 'c2o.comission_applied' in 'field list' in C:\xampp\htdocs\hp\system\library\db\mysqli.php on line 25
+2025-07-21 14:23:23 - PHP Warning:  mysqli::query(): (42S22/1054): Unknown column 'c2o.comission_applied' in 'field list' in C:\xampp\htdocs\hp\system\library\db\mysqli.php on line 25
+2025-07-21 14:23:24 - PHP Warning:  mysqli::query(): (42S22/1054): Unknown column 'c2o.comission_applied' in 'field list' in C:\xampp\htdocs\hp\system\library\db\mysqli.php on line 25
+2025-07-21 14:23:24 - PHP Warning:  mysqli::query(): (42S22/1054): Unknown column 'c2o.comission_applied' in 'field list' in C:\xampp\htdocs\hp\system\library\db\mysqli.php on line 25
+2025-07-21 15:52:26 - Seller subscription type: Array
+(
+    [0] => Array
+        (
+            [sbsType] => 0
+        )
+
+    [1] => Array
+        (
+            [sbsType] => 0
+        )
+
+    [2] => Array
+        (
+            [sbsType] => 0
+        )
+
+    [3] => Array
+        (
+            [sbsType] => 0
+        )
+
+    [4] => Array
+        (
+            [sbsType] => 0
+        )
+
+    [5] => Array
+        (
+            [sbsType] => 0
+        )
+
+    [6] => Array
+        (
+            [sbsType] => 0
+        )
+
+    [7] => Array
+        (
+            [sbsType] => 0
+        )
+
+    [8] => Array
+        (
+            [sbsType] => 0
+        )
+
+    [9] => Array
+        (
+            [sbsType] => 0
+        )
+
+    [10] => Array
+        (
+            [sbsType] => 0
+        )
+
+    [11] => Array
+        (
+            [sbsType] => 0
+        )
+
+    [12] => Array
+        (
+            [sbsType] => 0
+        )
+
+    [13] => Array
+        (
+            [sbsType] => 0
+        )
+
+    [14] => Array
+        (
+            [sbsType] => 0
+        )
+
+    [15] => Array
+        (
+            [sbsType] => 0
+        )
+
+    [16] => Array
+        (
+            [sbsType] => 0
+        )
+
+    [17] => Array
+        (
+            [sbsType] => 0
+        )
+
+    [18] => Array
+        (
+            [sbsType] => 0
+        )
+
+    [19] => Array
+        (
+            [sbsType] => 0
+        )
+
+    [20] => Array
+        (
+            [sbsType] => 0
+        )
+
+    [21] => Array
+        (
+            [sbsType] => 0
+        )
+
+    [22] => Array
+        (
+            [sbsType] => 0
+        )
+
+    [23] => Array
+        (
+            [sbsType] => 0
+        )
+
+    [24] => Array
+        (
+            [sbsType] => 0
+        )
+
+    [25] => Array
+        (
+            [sbsType] => 0
+        )
+
+    [26] => Array
+        (
+            [sbsType] => 0
+        )
+
+    [27] => Array
+        (
+            [sbsType] => 0
+        )
+
+    [28] => Array
+        (
+            [sbsType] => 0
+        )
+
+    [29] => Array
+        (
+            [sbsType] => 0
+        )
+
+    [30] => Array
+        (
+            [sbsType] => 0
+        )
+
+    [31] => Array
+        (
+            [sbsType] => 0
+        )
+
+    [32] => Array
+        (
+            [sbsType] => 0
+        )
+
+    [33] => Array
+        (
+            [sbsType] => 0
+        )
+
+    [34] => Array
+        (
+            [sbsType] => 1
+        )
+
+    [35] => Array
+        (
+            [sbsType] => 3
+        )
+
+    [36] => Array
+        (
+            [sbsType] => 2
+        )
+
+)
+
+2025-07-21 15:53:42 - Seller subscription type: Array
+(
+    [0] => Array
+        (
+            [sbsType] => 0
+        )
+
+    [1] => Array
+        (
+            [sbsType] => 0
+        )
+
+    [2] => Array
+        (
+            [sbsType] => 0
+        )
+
+    [3] => Array
+        (
+            [sbsType] => 0
+        )
+
+    [4] => Array
+        (
+            [sbsType] => 0
+        )
+
+    [5] => Array
+        (
+            [sbsType] => 0
+        )
+
+    [6] => Array
+        (
+            [sbsType] => 0
+        )
+
+    [7] => Array
+        (
+            [sbsType] => 0
+        )
+
+    [8] => Array
+        (
+            [sbsType] => 0
+        )
+
+    [9] => Array
+        (
+            [sbsType] => 0
+        )
+
+    [10] => Array
+        (
+            [sbsType] => 0
+        )
+
+    [11] => Array
+        (
+            [sbsType] => 0
+        )
+
+    [12] => Array
+        (
+            [sbsType] => 0
+        )
+
+    [13] => Array
+        (
+            [sbsType] => 0
+        )
+
+    [14] => Array
+        (
+            [sbsType] => 0
+        )
+
+    [15] => Array
+        (
+            [sbsType] => 0
+        )
+
+    [16] => Array
+        (
+            [sbsType] => 0
+        )
+
+    [17] => Array
+        (
+            [sbsType] => 0
+        )
+
+    [18] => Array
+        (
+            [sbsType] => 0
+        )
+
+    [19] => Array
+        (
+            [sbsType] => 0
+        )
+
+    [20] => Array
+        (
+            [sbsType] => 0
+        )
+
+    [21] => Array
+        (
+            [sbsType] => 0
+        )
+
+    [22] => Array
+        (
+            [sbsType] => 0
+        )
+
+    [23] => Array
+        (
+            [sbsType] => 0
+        )
+
+    [24] => Array
+        (
+            [sbsType] => 0
+        )
+
+    [25] => Array
+        (
+            [sbsType] => 0
+        )
+
+    [26] => Array
+        (
+            [sbsType] => 0
+        )
+
+    [27] => Array
+        (
+            [sbsType] => 0
+        )
+
+    [28] => Array
+        (
+            [sbsType] => 0
+        )
+
+    [29] => Array
+        (
+            [sbsType] => 0
+        )
+
+    [30] => Array
+        (
+            [sbsType] => 0
+        )
+
+    [31] => Array
+        (
+            [sbsType] => 0
+        )
+
+    [32] => Array
+        (
+            [sbsType] => 0
+        )
+
+    [33] => Array
+        (
+            [sbsType] => 0
+        )
+
+    [34] => Array
+        (
+            [sbsType] => 1
+        )
+
+    [35] => Array
+        (
+            [sbsType] => 3
+        )
+
+    [36] => Array
+        (
+            [sbsType] => 2
+        )
+
+)
+
+2025-07-21 15:53:58 - Seller subscription type: Array
+(
+    [0] => Array
+        (
+            [sbsType] => 0
+        )
+
+    [1] => Array
+        (
+            [sbsType] => 0
+        )
+
+    [2] => Array
+        (
+            [sbsType] => 0
+        )
+
+    [3] => Array
+        (
+            [sbsType] => 0
+        )
+
+    [4] => Array
+        (
+            [sbsType] => 0
+        )
+
+    [5] => Array
+        (
+            [sbsType] => 0
+        )
+
+    [6] => Array
+        (
+            [sbsType] => 0
+        )
+
+    [7] => Array
+        (
+            [sbsType] => 0
+        )
+
+    [8] => Array
+        (
+            [sbsType] => 0
+        )
+
+    [9] => Array
+        (
+            [sbsType] => 0
+        )
+
+    [10] => Array
+        (
+            [sbsType] => 0
+        )
+
+    [11] => Array
+        (
+            [sbsType] => 0
+        )
+
+    [12] => Array
+        (
+            [sbsType] => 0
+        )
+
+    [13] => Array
+        (
+            [sbsType] => 0
+        )
+
+    [14] => Array
+        (
+            [sbsType] => 0
+        )
+
+    [15] => Array
+        (
+            [sbsType] => 0
+        )
+
+    [16] => Array
+        (
+            [sbsType] => 0
+        )
+
+    [17] => Array
+        (
+            [sbsType] => 0
+        )
+
+    [18] => Array
+        (
+            [sbsType] => 0
+        )
+
+    [19] => Array
+        (
+            [sbsType] => 0
+        )
+
+    [20] => Array
+        (
+            [sbsType] => 0
+        )
+
+    [21] => Array
+        (
+            [sbsType] => 0
+        )
+
+    [22] => Array
+        (
+            [sbsType] => 0
+        )
+
+    [23] => Array
+        (
+            [sbsType] => 0
+        )
+
+    [24] => Array
+        (
+            [sbsType] => 0
+        )
+
+    [25] => Array
+        (
+            [sbsType] => 0
+        )
+
+    [26] => Array
+        (
+            [sbsType] => 0
+        )
+
+    [27] => Array
+        (
+            [sbsType] => 0
+        )
+
+    [28] => Array
+        (
+            [sbsType] => 0
+        )
+
+    [29] => Array
+        (
+            [sbsType] => 0
+        )
+
+    [30] => Array
+        (
+            [sbsType] => 0
+        )
+
+    [31] => Array
+        (
+            [sbsType] => 0
+        )
+
+    [32] => Array
+        (
+            [sbsType] => 0
+        )
+
+    [33] => Array
+        (
+            [sbsType] => 0
+        )
+
+    [34] => Array
+        (
+            [sbsType] => 1
+        )
+
+    [35] => Array
+        (
+            [sbsType] => 3
+        )
+
+    [36] => Array
+        (
+            [sbsType] => 2
+        )
+
+)
+
+2025-07-21 15:54:06 - Seller subscription type: Array
+(
+    [0] => Array
+        (
+            [sbsType] => 0
+        )
+
+    [1] => Array
+        (
+            [sbsType] => 0
+        )
+
+    [2] => Array
+        (
+            [sbsType] => 0
+        )
+
+    [3] => Array
+        (
+            [sbsType] => 0
+        )
+
+    [4] => Array
+        (
+            [sbsType] => 0
+        )
+
+    [5] => Array
+        (
+            [sbsType] => 0
+        )
+
+    [6] => Array
+        (
+            [sbsType] => 0
+        )
+
+    [7] => Array
+        (
+            [sbsType] => 0
+        )
+
+    [8] => Array
+        (
+            [sbsType] => 0
+        )
+
+    [9] => Array
+        (
+            [sbsType] => 0
+        )
+
+    [10] => Array
+        (
+            [sbsType] => 0
+        )
+
+    [11] => Array
+        (
+            [sbsType] => 0
+        )
+
+    [12] => Array
+        (
+            [sbsType] => 0
+        )
+
+    [13] => Array
+        (
+            [sbsType] => 0
+        )
+
+    [14] => Array
+        (
+            [sbsType] => 0
+        )
+
+    [15] => Array
+        (
+            [sbsType] => 0
+        )
+
+    [16] => Array
+        (
+            [sbsType] => 0
+        )
+
+    [17] => Array
+        (
+            [sbsType] => 0
+        )
+
+    [18] => Array
+        (
+            [sbsType] => 0
+        )
+
+    [19] => Array
+        (
+            [sbsType] => 0
+        )
+
+    [20] => Array
+        (
+            [sbsType] => 0
+        )
+
+    [21] => Array
+        (
+            [sbsType] => 0
+        )
+
+    [22] => Array
+        (
+            [sbsType] => 0
+        )
+
+    [23] => Array
+        (
+            [sbsType] => 0
+        )
+
+    [24] => Array
+        (
+            [sbsType] => 0
+        )
+
+    [25] => Array
+        (
+            [sbsType] => 0
+        )
+
+    [26] => Array
+        (
+            [sbsType] => 0
+        )
+
+    [27] => Array
+        (
+            [sbsType] => 0
+        )
+
+    [28] => Array
+        (
+            [sbsType] => 0
+        )
+
+    [29] => Array
+        (
+            [sbsType] => 0
+        )
+
+    [30] => Array
+        (
+            [sbsType] => 0
+        )
+
+    [31] => Array
+        (
+            [sbsType] => 0
+        )
+
+    [32] => Array
+        (
+            [sbsType] => 0
+        )
+
+    [33] => Array
+        (
+            [sbsType] => 0
+        )
+
+    [34] => Array
+        (
+            [sbsType] => 1
+        )
+
+    [35] => Array
+        (
+            [sbsType] => 3
+        )
+
+    [36] => Array
+        (
+            [sbsType] => 2
+        )
+
+)
+
+2025-07-21 15:58:51 - Seller subscription type: Array
+(
+    [0] => Array
+        (
+            [sbsType] => 0
+        )
+
+    [1] => Array
+        (
+            [sbsType] => 0
+        )
+
+    [2] => Array
+        (
+            [sbsType] => 0
+        )
+
+    [3] => Array
+        (
+            [sbsType] => 0
+        )
+
+    [4] => Array
+        (
+            [sbsType] => 0
+        )
+
+    [5] => Array
+        (
+            [sbsType] => 0
+        )
+
+    [6] => Array
+        (
+            [sbsType] => 0
+        )
+
+    [7] => Array
+        (
+            [sbsType] => 0
+        )
+
+    [8] => Array
+        (
+            [sbsType] => 0
+        )
+
+    [9] => Array
+        (
+            [sbsType] => 0
+        )
+
+    [10] => Array
+        (
+            [sbsType] => 0
+        )
+
+    [11] => Array
+        (
+            [sbsType] => 0
+        )
+
+    [12] => Array
+        (
+            [sbsType] => 0
+        )
+
+    [13] => Array
+        (
+            [sbsType] => 0
+        )
+
+    [14] => Array
+        (
+            [sbsType] => 0
+        )
+
+    [15] => Array
+        (
+            [sbsType] => 0
+        )
+
+    [16] => Array
+        (
+            [sbsType] => 0
+        )
+
+    [17] => Array
+        (
+            [sbsType] => 0
+        )
+
+    [18] => Array
+        (
+            [sbsType] => 0
+        )
+
+    [19] => Array
+        (
+            [sbsType] => 0
+        )
+
+    [20] => Array
+        (
+            [sbsType] => 0
+        )
+
+    [21] => Array
+        (
+            [sbsType] => 0
+        )
+
+    [22] => Array
+        (
+            [sbsType] => 0
+        )
+
+    [23] => Array
+        (
+            [sbsType] => 0
+        )
+
+    [24] => Array
+        (
+            [sbsType] => 0
+        )
+
+    [25] => Array
+        (
+            [sbsType] => 0
+        )
+
+    [26] => Array
+        (
+            [sbsType] => 0
+        )
+
+    [27] => Array
+        (
+            [sbsType] => 0
+        )
+
+    [28] => Array
+        (
+            [sbsType] => 0
+        )
+
+    [29] => Array
+        (
+            [sbsType] => 0
+        )
+
+    [30] => Array
+        (
+            [sbsType] => 0
+        )
+
+    [31] => Array
+        (
+            [sbsType] => 0
+        )
+
+    [32] => Array
+        (
+            [sbsType] => 0
+        )
+
+    [33] => Array
+        (
+            [sbsType] => 0
+        )
+
+    [34] => Array
+        (
+            [sbsType] => 1
+        )
+
+    [35] => Array
+        (
+            [sbsType] => 3
+        )
+
+    [36] => Array
+        (
+            [sbsType] => 2
+        )
+
+)
+
+2025-07-21 16:04:49 - Seller subscription type: Array
+(
+    [0] => Array
+        (
+            [sbsType] => 0
+        )
+
+    [1] => Array
+        (
+            [sbsType] => 0
+        )
+
+    [2] => Array
+        (
+            [sbsType] => 0
+        )
+
+    [3] => Array
+        (
+            [sbsType] => 0
+        )
+
+    [4] => Array
+        (
+            [sbsType] => 0
+        )
+
+    [5] => Array
+        (
+            [sbsType] => 0
+        )
+
+    [6] => Array
+        (
+            [sbsType] => 0
+        )
+
+    [7] => Array
+        (
+            [sbsType] => 0
+        )
+
+    [8] => Array
+        (
+            [sbsType] => 0
+        )
+
+    [9] => Array
+        (
+            [sbsType] => 0
+        )
+
+    [10] => Array
+        (
+            [sbsType] => 0
+        )
+
+    [11] => Array
+        (
+            [sbsType] => 0
+        )
+
+    [12] => Array
+        (
+            [sbsType] => 0
+        )
+
+    [13] => Array
+        (
+            [sbsType] => 0
+        )
+
+    [14] => Array
+        (
+            [sbsType] => 0
+        )
+
+    [15] => Array
+        (
+            [sbsType] => 0
+        )
+
+    [16] => Array
+        (
+            [sbsType] => 0
+        )
+
+    [17] => Array
+        (
+            [sbsType] => 0
+        )
+
+    [18] => Array
+        (
+            [sbsType] => 0
+        )
+
+    [19] => Array
+        (
+            [sbsType] => 0
+        )
+
+    [20] => Array
+        (
+            [sbsType] => 0
+        )
+
+    [21] => Array
+        (
+            [sbsType] => 0
+        )
+
+    [22] => Array
+        (
+            [sbsType] => 0
+        )
+
+    [23] => Array
+        (
+            [sbsType] => 0
+        )
+
+    [24] => Array
+        (
+            [sbsType] => 0
+        )
+
+    [25] => Array
+        (
+            [sbsType] => 0
+        )
+
+    [26] => Array
+        (
+            [sbsType] => 0
+        )
+
+    [27] => Array
+        (
+            [sbsType] => 0
+        )
+
+    [28] => Array
+        (
+            [sbsType] => 0
+        )
+
+    [29] => Array
+        (
+            [sbsType] => 0
+        )
+
+    [30] => Array
+        (
+            [sbsType] => 0
+        )
+
+    [31] => Array
+        (
+            [sbsType] => 0
+        )
+
+    [32] => Array
+        (
+            [sbsType] => 0
+        )
+
+    [33] => Array
+        (
+            [sbsType] => 0
+        )
+
+    [34] => Array
+        (
+            [sbsType] => 1
+        )
+
+    [35] => Array
+        (
+            [sbsType] => 3
+        )
+
+    [36] => Array
+        (
+            [sbsType] => 2
+        )
+
+)
+
+2025-07-21 16:07:22 - Seller subscription type: Array
+(
+    [0] => Array
+        (
+            [sbsType] => 0
+        )
+
+    [1] => Array
+        (
+            [sbsType] => 0
+        )
+
+    [2] => Array
+        (
+            [sbsType] => 0
+        )
+
+    [3] => Array
+        (
+            [sbsType] => 0
+        )
+
+    [4] => Array
+        (
+            [sbsType] => 0
+        )
+
+    [5] => Array
+        (
+            [sbsType] => 0
+        )
+
+    [6] => Array
+        (
+            [sbsType] => 0
+        )
+
+    [7] => Array
+        (
+            [sbsType] => 0
+        )
+
+    [8] => Array
+        (
+            [sbsType] => 0
+        )
+
+    [9] => Array
+        (
+            [sbsType] => 0
+        )
+
+    [10] => Array
+        (
+            [sbsType] => 0
+        )
+
+    [11] => Array
+        (
+            [sbsType] => 0
+        )
+
+    [12] => Array
+        (
+            [sbsType] => 0
+        )
+
+    [13] => Array
+        (
+            [sbsType] => 0
+        )
+
+    [14] => Array
+        (
+            [sbsType] => 0
+        )
+
+    [15] => Array
+        (
+            [sbsType] => 0
+        )
+
+    [16] => Array
+        (
+            [sbsType] => 0
+        )
+
+    [17] => Array
+        (
+            [sbsType] => 0
+        )
+
+    [18] => Array
+        (
+            [sbsType] => 0
+        )
+
+    [19] => Array
+        (
+            [sbsType] => 0
+        )
+
+    [20] => Array
+        (
+            [sbsType] => 0
+        )
+
+    [21] => Array
+        (
+            [sbsType] => 0
+        )
+
+    [22] => Array
+        (
+            [sbsType] => 0
+        )
+
+    [23] => Array
+        (
+            [sbsType] => 0
+        )
+
+    [24] => Array
+        (
+            [sbsType] => 0
+        )
+
+    [25] => Array
+        (
+            [sbsType] => 0
+        )
+
+    [26] => Array
+        (
+            [sbsType] => 0
+        )
+
+    [27] => Array
+        (
+            [sbsType] => 0
+        )
+
+    [28] => Array
+        (
+            [sbsType] => 0
+        )
+
+    [29] => Array
+        (
+            [sbsType] => 0
+        )
+
+    [30] => Array
+        (
+            [sbsType] => 0
+        )
+
+    [31] => Array
+        (
+            [sbsType] => 0
+        )
+
+    [32] => Array
+        (
+            [sbsType] => 0
+        )
+
+    [33] => Array
+        (
+            [sbsType] => 0
+        )
+
+    [34] => Array
+        (
+            [sbsType] => 1
+        )
+
+    [35] => Array
+        (
+            [sbsType] => 3
+        )
+
+    [36] => Array
+        (
+            [sbsType] => 2
+        )
+
+)
+
+2025-07-21 16:26:52 - Email was sent
+2025-07-21 16:27:17 - Seller subscription type: Array
+(
+    [0] => Array
+        (
+            [sbsType] => 0
+        )
+
+    [1] => Array
+        (
+            [sbsType] => 0
+        )
+
+    [2] => Array
+        (
+            [sbsType] => 0
+        )
+
+    [3] => Array
+        (
+            [sbsType] => 0
+        )
+
+    [4] => Array
+        (
+            [sbsType] => 0
+        )
+
+    [5] => Array
+        (
+            [sbsType] => 0
+        )
+
+    [6] => Array
+        (
+            [sbsType] => 0
+        )
+
+    [7] => Array
+        (
+            [sbsType] => 0
+        )
+
+    [8] => Array
+        (
+            [sbsType] => 0
+        )
+
+    [9] => Array
+        (
+            [sbsType] => 0
+        )
+
+    [10] => Array
+        (
+            [sbsType] => 0
+        )
+
+    [11] => Array
+        (
+            [sbsType] => 0
+        )
+
+    [12] => Array
+        (
+            [sbsType] => 0
+        )
+
+    [13] => Array
+        (
+            [sbsType] => 0
+        )
+
+    [14] => Array
+        (
+            [sbsType] => 0
+        )
+
+    [15] => Array
+        (
+            [sbsType] => 0
+        )
+
+    [16] => Array
+        (
+            [sbsType] => 0
+        )
+
+    [17] => Array
+        (
+            [sbsType] => 0
+        )
+
+    [18] => Array
+        (
+            [sbsType] => 0
+        )
+
+    [19] => Array
+        (
+            [sbsType] => 0
+        )
+
+    [20] => Array
+        (
+            [sbsType] => 0
+        )
+
+    [21] => Array
+        (
+            [sbsType] => 0
+        )
+
+    [22] => Array
+        (
+            [sbsType] => 0
+        )
+
+    [23] => Array
+        (
+            [sbsType] => 0
+        )
+
+    [24] => Array
+        (
+            [sbsType] => 0
+        )
+
+    [25] => Array
+        (
+            [sbsType] => 0
+        )
+
+    [26] => Array
+        (
+            [sbsType] => 0
+        )
+
+    [27] => Array
+        (
+            [sbsType] => 0
+        )
+
+    [28] => Array
+        (
+            [sbsType] => 0
+        )
+
+    [29] => Array
+        (
+            [sbsType] => 0
+        )
+
+    [30] => Array
+        (
+            [sbsType] => 0
+        )
+
+    [31] => Array
+        (
+            [sbsType] => 0
+        )
+
+    [32] => Array
+        (
+            [sbsType] => 0
+        )
+
+    [33] => Array
+        (
+            [sbsType] => 0
+        )
+
+    [34] => Array
+        (
+            [sbsType] => 1
+        )
+
+    [35] => Array
+        (
+            [sbsType] => 3
+        )
+
+    [36] => Array
+        (
+            [sbsType] => 2
+        )
+
+)
+
+2025-07-21 16:35:01 - Seller subscription type: Array
+(
+    [0] => Array
+        (
+            [sbsType] => 0
+        )
+
+    [1] => Array
+        (
+            [sbsType] => 0
+        )
+
+    [2] => Array
+        (
+            [sbsType] => 0
+        )
+
+    [3] => Array
+        (
+            [sbsType] => 0
+        )
+
+    [4] => Array
+        (
+            [sbsType] => 0
+        )
+
+    [5] => Array
+        (
+            [sbsType] => 0
+        )
+
+    [6] => Array
+        (
+            [sbsType] => 0
+        )
+
+    [7] => Array
+        (
+            [sbsType] => 0
+        )
+
+    [8] => Array
+        (
+            [sbsType] => 0
+        )
+
+    [9] => Array
+        (
+            [sbsType] => 0
+        )
+
+    [10] => Array
+        (
+            [sbsType] => 0
+        )
+
+    [11] => Array
+        (
+            [sbsType] => 0
+        )
+
+    [12] => Array
+        (
+            [sbsType] => 0
+        )
+
+    [13] => Array
+        (
+            [sbsType] => 0
+        )
+
+    [14] => Array
+        (
+            [sbsType] => 0
+        )
+
+    [15] => Array
+        (
+            [sbsType] => 0
+        )
+
+    [16] => Array
+        (
+            [sbsType] => 0
+        )
+
+    [17] => Array
+        (
+            [sbsType] => 0
+        )
+
+    [18] => Array
+        (
+            [sbsType] => 0
+        )
+
+    [19] => Array
+        (
+            [sbsType] => 0
+        )
+
+    [20] => Array
+        (
+            [sbsType] => 0
+        )
+
+    [21] => Array
+        (
+            [sbsType] => 0
+        )
+
+    [22] => Array
+        (
+            [sbsType] => 0
+        )
+
+    [23] => Array
+        (
+            [sbsType] => 0
+        )
+
+    [24] => Array
+        (
+            [sbsType] => 0
+        )
+
+    [25] => Array
+        (
+            [sbsType] => 0
+        )
+
+    [26] => Array
+        (
+            [sbsType] => 0
+        )
+
+    [27] => Array
+        (
+            [sbsType] => 0
+        )
+
+    [28] => Array
+        (
+            [sbsType] => 0
+        )
+
+    [29] => Array
+        (
+            [sbsType] => 0
+        )
+
+    [30] => Array
+        (
+            [sbsType] => 0
+        )
+
+    [31] => Array
+        (
+            [sbsType] => 0
+        )
+
+    [32] => Array
+        (
+            [sbsType] => 0
+        )
+
+    [33] => Array
+        (
+            [sbsType] => 0
+        )
+
+    [34] => Array
+        (
+            [sbsType] => 1
+        )
+
+    [35] => Array
+        (
+            [sbsType] => 3
+        )
+
+    [36] => Array
+        (
+            [sbsType] => 2
+        )
+
+)
+
+2025-07-21 16:35:04 - Seller subscription type: Array
+(
+    [0] => Array
+        (
+            [sbsType] => 0
+        )
+
+    [1] => Array
+        (
+            [sbsType] => 0
+        )
+
+    [2] => Array
+        (
+            [sbsType] => 0
+        )
+
+    [3] => Array
+        (
+            [sbsType] => 0
+        )
+
+    [4] => Array
+        (
+            [sbsType] => 0
+        )
+
+    [5] => Array
+        (
+            [sbsType] => 0
+        )
+
+    [6] => Array
+        (
+            [sbsType] => 0
+        )
+
+    [7] => Array
+        (
+            [sbsType] => 0
+        )
+
+    [8] => Array
+        (
+            [sbsType] => 0
+        )
+
+    [9] => Array
+        (
+            [sbsType] => 0
+        )
+
+    [10] => Array
+        (
+            [sbsType] => 0
+        )
+
+    [11] => Array
+        (
+            [sbsType] => 0
+        )
+
+    [12] => Array
+        (
+            [sbsType] => 0
+        )
+
+    [13] => Array
+        (
+            [sbsType] => 0
+        )
+
+    [14] => Array
+        (
+            [sbsType] => 0
+        )
+
+    [15] => Array
+        (
+            [sbsType] => 0
+        )
+
+    [16] => Array
+        (
+            [sbsType] => 0
+        )
+
+    [17] => Array
+        (
+            [sbsType] => 0
+        )
+
+    [18] => Array
+        (
+            [sbsType] => 0
+        )
+
+    [19] => Array
+        (
+            [sbsType] => 0
+        )
+
+    [20] => Array
+        (
+            [sbsType] => 0
+        )
+
+    [21] => Array
+        (
+            [sbsType] => 0
+        )
+
+    [22] => Array
+        (
+            [sbsType] => 0
+        )
+
+    [23] => Array
+        (
+            [sbsType] => 0
+        )
+
+    [24] => Array
+        (
+            [sbsType] => 0
+        )
+
+    [25] => Array
+        (
+            [sbsType] => 0
+        )
+
+    [26] => Array
+        (
+            [sbsType] => 0
+        )
+
+    [27] => Array
+        (
+            [sbsType] => 0
+        )
+
+    [28] => Array
+        (
+            [sbsType] => 0
+        )
+
+    [29] => Array
+        (
+            [sbsType] => 0
+        )
+
+    [30] => Array
+        (
+            [sbsType] => 0
+        )
+
+    [31] => Array
+        (
+            [sbsType] => 0
+        )
+
+    [32] => Array
+        (
+            [sbsType] => 0
+        )
+
+    [33] => Array
+        (
+            [sbsType] => 0
+        )
+
+    [34] => Array
+        (
+            [sbsType] => 1
+        )
+
+    [35] => Array
+        (
+            [sbsType] => 3
+        )
+
+    [36] => Array
+        (
+            [sbsType] => 2
+        )
+
+)
+
+2025-07-21 16:35:09 - Seller subscription type: Array
+(
+    [0] => Array
+        (
+            [sbsType] => 0
+        )
+
+    [1] => Array
+        (
+            [sbsType] => 0
+        )
+
+    [2] => Array
+        (
+            [sbsType] => 0
+        )
+
+    [3] => Array
+        (
+            [sbsType] => 0
+        )
+
+    [4] => Array
+        (
+            [sbsType] => 0
+        )
+
+    [5] => Array
+        (
+            [sbsType] => 0
+        )
+
+    [6] => Array
+        (
+            [sbsType] => 0
+        )
+
+    [7] => Array
+        (
+            [sbsType] => 0
+        )
+
+    [8] => Array
+        (
+            [sbsType] => 0
+        )
+
+    [9] => Array
+        (
+            [sbsType] => 0
+        )
+
+    [10] => Array
+        (
+            [sbsType] => 0
+        )
+
+    [11] => Array
+        (
+            [sbsType] => 0
+        )
+
+    [12] => Array
+        (
+            [sbsType] => 0
+        )
+
+    [13] => Array
+        (
+            [sbsType] => 0
+        )
+
+    [14] => Array
+        (
+            [sbsType] => 0
+        )
+
+    [15] => Array
+        (
+            [sbsType] => 0
+        )
+
+    [16] => Array
+        (
+            [sbsType] => 0
+        )
+
+    [17] => Array
+        (
+            [sbsType] => 0
+        )
+
+    [18] => Array
+        (
+            [sbsType] => 0
+        )
+
+    [19] => Array
+        (
+            [sbsType] => 0
+        )
+
+    [20] => Array
+        (
+            [sbsType] => 0
+        )
+
+    [21] => Array
+        (
+            [sbsType] => 0
+        )
+
+    [22] => Array
+        (
+            [sbsType] => 0
+        )
+
+    [23] => Array
+        (
+            [sbsType] => 0
+        )
+
+    [24] => Array
+        (
+            [sbsType] => 0
+        )
+
+    [25] => Array
+        (
+            [sbsType] => 0
+        )
+
+    [26] => Array
+        (
+            [sbsType] => 0
+        )
+
+    [27] => Array
+        (
+            [sbsType] => 0
+        )
+
+    [28] => Array
+        (
+            [sbsType] => 0
+        )
+
+    [29] => Array
+        (
+            [sbsType] => 0
+        )
+
+    [30] => Array
+        (
+            [sbsType] => 0
+        )
+
+    [31] => Array
+        (
+            [sbsType] => 0
+        )
+
+    [32] => Array
+        (
+            [sbsType] => 0
+        )
+
+    [33] => Array
+        (
+            [sbsType] => 0
+        )
+
+    [34] => Array
+        (
+            [sbsType] => 1
+        )
+
+    [35] => Array
+        (
+            [sbsType] => 3
+        )
+
+    [36] => Array
+        (
+            [sbsType] => 2
+        )
+
+)
+
+2025-07-21 16:35:12 - Seller subscription type: Array
+(
+    [0] => Array
+        (
+            [sbsType] => 0
+        )
+
+    [1] => Array
+        (
+            [sbsType] => 0
+        )
+
+    [2] => Array
+        (
+            [sbsType] => 0
+        )
+
+    [3] => Array
+        (
+            [sbsType] => 0
+        )
+
+    [4] => Array
+        (
+            [sbsType] => 0
+        )
+
+    [5] => Array
+        (
+            [sbsType] => 0
+        )
+
+    [6] => Array
+        (
+            [sbsType] => 0
+        )
+
+    [7] => Array
+        (
+            [sbsType] => 0
+        )
+
+    [8] => Array
+        (
+            [sbsType] => 0
+        )
+
+    [9] => Array
+        (
+            [sbsType] => 0
+        )
+
+    [10] => Array
+        (
+            [sbsType] => 0
+        )
+
+    [11] => Array
+        (
+            [sbsType] => 0
+        )
+
+    [12] => Array
+        (
+            [sbsType] => 0
+        )
+
+    [13] => Array
+        (
+            [sbsType] => 0
+        )
+
+    [14] => Array
+        (
+            [sbsType] => 0
+        )
+
+    [15] => Array
+        (
+            [sbsType] => 0
+        )
+
+    [16] => Array
+        (
+            [sbsType] => 0
+        )
+
+    [17] => Array
+        (
+            [sbsType] => 0
+        )
+
+    [18] => Array
+        (
+            [sbsType] => 0
+        )
+
+    [19] => Array
+        (
+            [sbsType] => 0
+        )
+
+    [20] => Array
+        (
+            [sbsType] => 0
+        )
+
+    [21] => Array
+        (
+            [sbsType] => 0
+        )
+
+    [22] => Array
+        (
+            [sbsType] => 0
+        )
+
+    [23] => Array
+        (
+            [sbsType] => 0
+        )
+
+    [24] => Array
+        (
+            [sbsType] => 0
+        )
+
+    [25] => Array
+        (
+            [sbsType] => 0
+        )
+
+    [26] => Array
+        (
+            [sbsType] => 0
+        )
+
+    [27] => Array
+        (
+            [sbsType] => 0
+        )
+
+    [28] => Array
+        (
+            [sbsType] => 0
+        )
+
+    [29] => Array
+        (
+            [sbsType] => 0
+        )
+
+    [30] => Array
+        (
+            [sbsType] => 0
+        )
+
+    [31] => Array
+        (
+            [sbsType] => 0
+        )
+
+    [32] => Array
+        (
+            [sbsType] => 0
+        )
+
+    [33] => Array
+        (
+            [sbsType] => 0
+        )
+
+    [34] => Array
+        (
+            [sbsType] => 1
+        )
+
+    [35] => Array
+        (
+            [sbsType] => 3
+        )
+
+    [36] => Array
+        (
+            [sbsType] => 2
+        )
+
+)
+
+2025-07-21 16:35:20 - Seller subscription type: Array
+(
+    [0] => Array
+        (
+            [sbsType] => 0
+        )
+
+    [1] => Array
+        (
+            [sbsType] => 0
+        )
+
+    [2] => Array
+        (
+            [sbsType] => 0
+        )
+
+    [3] => Array
+        (
+            [sbsType] => 0
+        )
+
+    [4] => Array
+        (
+            [sbsType] => 0
+        )
+
+    [5] => Array
+        (
+            [sbsType] => 0
+        )
+
+    [6] => Array
+        (
+            [sbsType] => 0
+        )
+
+    [7] => Array
+        (
+            [sbsType] => 0
+        )
+
+    [8] => Array
+        (
+            [sbsType] => 0
+        )
+
+    [9] => Array
+        (
+            [sbsType] => 0
+        )
+
+    [10] => Array
+        (
+            [sbsType] => 0
+        )
+
+    [11] => Array
+        (
+            [sbsType] => 0
+        )
+
+    [12] => Array
+        (
+            [sbsType] => 0
+        )
+
+    [13] => Array
+        (
+            [sbsType] => 0
+        )
+
+    [14] => Array
+        (
+            [sbsType] => 0
+        )
+
+    [15] => Array
+        (
+            [sbsType] => 0
+        )
+
+    [16] => Array
+        (
+            [sbsType] => 0
+        )
+
+    [17] => Array
+        (
+            [sbsType] => 0
+        )
+
+    [18] => Array
+        (
+            [sbsType] => 0
+        )
+
+    [19] => Array
+        (
+            [sbsType] => 0
+        )
+
+    [20] => Array
+        (
+            [sbsType] => 0
+        )
+
+    [21] => Array
+        (
+            [sbsType] => 0
+        )
+
+    [22] => Array
+        (
+            [sbsType] => 0
+        )
+
+    [23] => Array
+        (
+            [sbsType] => 0
+        )
+
+    [24] => Array
+        (
+            [sbsType] => 0
+        )
+
+    [25] => Array
+        (
+            [sbsType] => 0
+        )
+
+    [26] => Array
+        (
+            [sbsType] => 0
+        )
+
+    [27] => Array
+        (
+            [sbsType] => 0
+        )
+
+    [28] => Array
+        (
+            [sbsType] => 0
+        )
+
+    [29] => Array
+        (
+            [sbsType] => 0
+        )
+
+    [30] => Array
+        (
+            [sbsType] => 0
+        )
+
+    [31] => Array
+        (
+            [sbsType] => 0
+        )
+
+    [32] => Array
+        (
+            [sbsType] => 0
+        )
+
+    [33] => Array
+        (
+            [sbsType] => 0
+        )
+
+    [34] => Array
+        (
+            [sbsType] => 1
+        )
+
+    [35] => Array
+        (
+            [sbsType] => 3
+        )
+
+    [36] => Array
+        (
+            [sbsType] => 2
+        )
+
+)
+
+2025-07-21 16:41:50 - Seller subscription type: Array
+(
+    [0] => Array
+        (
+            [sbsType] => 0
+        )
+
+    [1] => Array
+        (
+            [sbsType] => 0
+        )
+
+    [2] => Array
+        (
+            [sbsType] => 0
+        )
+
+    [3] => Array
+        (
+            [sbsType] => 0
+        )
+
+    [4] => Array
+        (
+            [sbsType] => 0
+        )
+
+    [5] => Array
+        (
+            [sbsType] => 0
+        )
+
+    [6] => Array
+        (
+            [sbsType] => 0
+        )
+
+    [7] => Array
+        (
+            [sbsType] => 0
+        )
+
+    [8] => Array
+        (
+            [sbsType] => 0
+        )
+
+    [9] => Array
+        (
+            [sbsType] => 0
+        )
+
+    [10] => Array
+        (
+            [sbsType] => 0
+        )
+
+    [11] => Array
+        (
+            [sbsType] => 0
+        )
+
+    [12] => Array
+        (
+            [sbsType] => 0
+        )
+
+    [13] => Array
+        (
+            [sbsType] => 0
+        )
+
+    [14] => Array
+        (
+            [sbsType] => 0
+        )
+
+    [15] => Array
+        (
+            [sbsType] => 0
+        )
+
+    [16] => Array
+        (
+            [sbsType] => 0
+        )
+
+    [17] => Array
+        (
+            [sbsType] => 0
+        )
+
+    [18] => Array
+        (
+            [sbsType] => 0
+        )
+
+    [19] => Array
+        (
+            [sbsType] => 0
+        )
+
+    [20] => Array
+        (
+            [sbsType] => 0
+        )
+
+    [21] => Array
+        (
+            [sbsType] => 0
+        )
+
+    [22] => Array
+        (
+            [sbsType] => 0
+        )
+
+    [23] => Array
+        (
+            [sbsType] => 0
+        )
+
+    [24] => Array
+        (
+            [sbsType] => 0
+        )
+
+    [25] => Array
+        (
+            [sbsType] => 0
+        )
+
+    [26] => Array
+        (
+            [sbsType] => 0
+        )
+
+    [27] => Array
+        (
+            [sbsType] => 0
+        )
+
+    [28] => Array
+        (
+            [sbsType] => 0
+        )
+
+    [29] => Array
+        (
+            [sbsType] => 0
+        )
+
+    [30] => Array
+        (
+            [sbsType] => 0
+        )
+
+    [31] => Array
+        (
+            [sbsType] => 0
+        )
+
+    [32] => Array
+        (
+            [sbsType] => 0
+        )
+
+    [33] => Array
+        (
+            [sbsType] => 0
+        )
+
+    [34] => Array
+        (
+            [sbsType] => 1
+        )
+
+    [35] => Array
+        (
+            [sbsType] => 3
+        )
+
+    [36] => Array
+        (
+            [sbsType] => 2
+        )
+
+)
+
+2025-07-21 16:41:52 - Seller subscription type: Array
+(
+    [0] => Array
+        (
+            [sbsType] => 0
+        )
+
+    [1] => Array
+        (
+            [sbsType] => 0
+        )
+
+    [2] => Array
+        (
+            [sbsType] => 0
+        )
+
+    [3] => Array
+        (
+            [sbsType] => 0
+        )
+
+    [4] => Array
+        (
+            [sbsType] => 0
+        )
+
+    [5] => Array
+        (
+            [sbsType] => 0
+        )
+
+    [6] => Array
+        (
+            [sbsType] => 0
+        )
+
+    [7] => Array
+        (
+            [sbsType] => 0
+        )
+
+    [8] => Array
+        (
+            [sbsType] => 0
+        )
+
+    [9] => Array
+        (
+            [sbsType] => 0
+        )
+
+    [10] => Array
+        (
+            [sbsType] => 0
+        )
+
+    [11] => Array
+        (
+            [sbsType] => 0
+        )
+
+    [12] => Array
+        (
+            [sbsType] => 0
+        )
+
+    [13] => Array
+        (
+            [sbsType] => 0
+        )
+
+    [14] => Array
+        (
+            [sbsType] => 0
+        )
+
+    [15] => Array
+        (
+            [sbsType] => 0
+        )
+
+    [16] => Array
+        (
+            [sbsType] => 0
+        )
+
+    [17] => Array
+        (
+            [sbsType] => 0
+        )
+
+    [18] => Array
+        (
+            [sbsType] => 0
+        )
+
+    [19] => Array
+        (
+            [sbsType] => 0
+        )
+
+    [20] => Array
+        (
+            [sbsType] => 0
+        )
+
+    [21] => Array
+        (
+            [sbsType] => 0
+        )
+
+    [22] => Array
+        (
+            [sbsType] => 0
+        )
+
+    [23] => Array
+        (
+            [sbsType] => 0
+        )
+
+    [24] => Array
+        (
+            [sbsType] => 0
+        )
+
+    [25] => Array
+        (
+            [sbsType] => 0
+        )
+
+    [26] => Array
+        (
+            [sbsType] => 0
+        )
+
+    [27] => Array
+        (
+            [sbsType] => 0
+        )
+
+    [28] => Array
+        (
+            [sbsType] => 0
+        )
+
+    [29] => Array
+        (
+            [sbsType] => 0
+        )
+
+    [30] => Array
+        (
+            [sbsType] => 0
+        )
+
+    [31] => Array
+        (
+            [sbsType] => 0
+        )
+
+    [32] => Array
+        (
+            [sbsType] => 0
+        )
+
+    [33] => Array
+        (
+            [sbsType] => 0
+        )
+
+    [34] => Array
+        (
+            [sbsType] => 1
+        )
+
+    [35] => Array
+        (
+            [sbsType] => 3
+        )
+
+    [36] => Array
+        (
+            [sbsType] => 2
+        )
+
+)
+

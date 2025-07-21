@@ -99,6 +99,16 @@
                                             <a href="{{ sort_admin_amount }}">{{ entry_admin_amount }}</a>
                                         {% endif %}
                                     </td>
+                                    
+                                    <td>
+                                        Commission Fee
+                                        {% if sort == 'cms_Commission_fee' %}
+                                            <a href="{{ sort_commission_fee }}" class="{{ order | lower }}">{{ entry_commission_fee }}</a>
+                                        {% else %}
+                                            <a href="{{ sort_commission_fee }}">{{ entry_commission_fee }}</a>
+                                        {% endif %}
+                                    </td>
+                                    
                                 </tr>
                             </thead>
                             <tbody>
@@ -110,6 +120,9 @@
                                            <td>{{ income_list.product_total }}</td>
                                            <td>{{ income_list.seller_amount }}</td>
                                            <td>{{ income_list.admin_amount }}</td>
+                                           
+                                           <td>{{ income_list.cms_commission_fee }}</td>
+                                           
                                        </tr> 
                                     {% endfor %}
                                 {% endif %}
@@ -147,6 +160,7 @@
                                             <a href="{{ sort_admin_amount }}">{{ entry_admin_amount }}</a>
                                         {% endif %}
                                     </td>
+                                    <td>try</td>
                                 </tr>
                             </thead>
                             <tbody>

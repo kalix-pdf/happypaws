@@ -785,6 +785,12 @@ class ModelAccountCustomerpartner extends Model
 		return $query->rows;
 	}
 
+	public function getSellerSubsType() 
+	{
+		$query = $this->db->query("SELECT sbsType FROM `customer_to_documents`");
+		return $query->rows;
+	}
+
 	/**
 	 * [getSellerCommission to get seller's commission]
 	 * @param  [integer] $seller_id [particular seller id]
