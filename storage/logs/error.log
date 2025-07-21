@@ -1,0 +1,4 @@
+2025-07-18 17:48:24 - PHP Warning:  mysqli::query(): (42S22/1054): Unknown column 'seller_id' in 'where clause' in C:\xampp\htdocs\hp\system\library\db\mysqli.php on line 25
+2025-07-21 9:31:44 - PHP Warning:  Undefined variable $comission in C:\xampp\htdocs\hp\admin\model\customerpartner\partner.php on line 1121
+2025-07-21 9:31:44 - PHP Warning:  Attempt to read property "row" on null in C:\xampp\htdocs\hp\admin\model\customerpartner\partner.php on line 1121
+2025-07-21 10:21:29 - Email was sent
