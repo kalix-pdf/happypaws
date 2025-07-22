@@ -99,8 +99,6 @@ class ControllerAccountCustomerpartnerAddproduct extends Controller
 		///Subscription type here!!!
 		$this->load->model('customerpartner/master');
 		$seller_id = $this->customer->getId();
-		$sbstype = $this->model_customerpartner_master->getSubscriptionType($seller_id);
-		$data['sbsType'] = $sbstype;
 		
 		if (($this->request->server['REQUEST_METHOD'] == 'POST') and $this->validateForm()) {
 			if ($this->config->get('module_wk_seller_group_status')) {
@@ -125,24 +123,27 @@ class ControllerAccountCustomerpartnerAddproduct extends Controller
 				$this->model_account_customerpartner->editProduct($this->request->post);
 				$this->session->data['success'] = $this->language->get('text_success_update');
 			}
-
+			
+			$amount = 0;
 			if (isset($this->request->post['subs_ppd']) || isset($this->request->post['subs_ppm']) || isset($this->request->post['subs_cms'])) {		
-				if ($sbstype == 1 && isset($this->request->post['subs_ppd'])) {
+				if (isset($this->request->post['subs_ppd'])) {
 					$days = (int)$this->request->post['subs_ppd'];
 					$amount = $days;
+					$sbstype = 1;
 				} 
-				if ($sbstype == 2 && isset($this->request->post['subs_ppm'])) {
+				if (isset($this->request->post['subs_ppm'])) {
 					$days = (int)$this->request->post['subs_ppm'];
 					$amount = $days * 30;
+					$sbstype = 2;
 				} 
-			} 
-			if ($sbstype == 3) {
-				$amount = 5;
+				if (isset($this->request->post['subs_cms'])) {
+					$amount = (float)$this->request->post['subs_cms'];
+					$sbstype = 3;
+				}
 			}
-			if (!empty($amount)) {
+			if (!empty($amount) && $amount > 0) {
 				$this->model_customerpartner_master->addSubscription($sbstype, $product_id, $amount, $seller_id);
 			}
-		
 		}
 
 		$data['entry_image'] = ' <span data-toggle="tooltip" title="' . $this->config->get('marketplace_imageex') . '">' . $this->language->get('entry_image') . '</span>';
@@ -1233,42 +1234,33 @@ class ControllerAccountCustomerpartnerAddproduct extends Controller
 		}
 
 		//SUBS TYPE HERE
-		
-		if (isset($this->request->post['subs_ppd']) || isset($this->request->post['subs_ppm']) || $this->request->post['subs_cms']) {
-			$this->load->model('customerpartner/master');
-			$seller_id = $this->customer->getId();
-
-			$sbstype = $this->model_customerpartner_master->getSubscriptionType($seller_id);
+		$days = 0;
+		$sbstype = 0;
+		$valid_days = [];
+		if (!empty($this->request->post['subscription'])) 
+		{
+			if (isset($this->request->post['subs_cms'])) {
+				$sbstype = 3;
+			}
 			
-			if ($sbstype == 1 && isset($this->request->post['subs_ppd'])) {
+			if (isset($this->request->post['subs_ppd'])) {
 				$days = (int)$this->request->post['subs_ppd'];
 				$valid_days = [1, 5, 10, 15, 20, 25, 30];
-	
-			} elseif ($sbstype == 2 && isset($this->request->post['subs_ppm'])) {
+				$sbstype = 1;
+			} 
+			
+			if (isset($this->request->post['subs_ppm'])) {
 				$days = (int)$this->request->post['subs_ppm'];
 				$valid_days = [1, 2, 3, 4, 5, 6];
-	
-			} elseif ($sbstype == 3 && isset($this->request->post['subs_cms'])) {
-				$commission = (float)$this->request->post['subs_cms'];
-				
+				$sbstype = 2;
 			}
-			
-			if ($sbstype == 2 || $sbstype == 1) {
-				if ($days <= 0 || !in_array($days, $valid_days)) {
-					$this->error['warning_subs'] = $this->language->get('error_subscription_required');
-				} 
+
+			if (($sbstype == 1 || $sbstype == 2) && ($days <= 0 || !in_array($days, $valid_days))) {
+				$this->error['warning_subs'] = $this->language->get('error_subscription_required');
 			}
-			 
-			// $this->model_customerpartner_master->addSubscription($sbstype, (int)$product_id, $amount);
-			// 	$this->response->redirect(
-			// 	$this->url->link(
-			// 		'extension/payment/xendit/subscription',
-			// 		'sbs_type=' . $sbstype . '&days=' . $amount
-			// 	)
-			// );
 			 
 		} else {
-			$this->error['warning_subs'] = $this->language->get('error_subscription_missing');
+			$this->error['warning_subs'] = $this->language->get('Choose subscription type');
 		}		
 		
 		//custom-options
