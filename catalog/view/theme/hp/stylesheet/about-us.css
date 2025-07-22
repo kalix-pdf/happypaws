@@ -16,6 +16,9 @@
   padding: 20px;
 }
 
+.main {
+  width: 100%;
+}
 .text-container {
   width: 60%;
 }
@@ -55,6 +58,8 @@
   width: 100%;
   background-color: #FFC766;
   padding: 40px 20px;
+  height: 80%;
+  align-items: center;
 }
 
 .content-container {
