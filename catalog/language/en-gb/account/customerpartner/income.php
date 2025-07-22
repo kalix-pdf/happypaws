@@ -13,14 +13,14 @@ $_['button_filter']         = "Filter";
 $_['button_reset']          = "Reset";
 
 //product table column
-$_['entry_admin_amount']    = "Admin Amount";
-$_['entry_seller_amount']   = "Seller Amount (inc. shipping)";
+$_['entry_admin_amount']    = "Platform Fee";
+$_['entry_seller_amount']   = "Seller Income";
 $_['entry_total_order']     = "Total Order";
 $_['entry_total_shipping']     = "Shipping";
 $_['entry_date_added']      = "Date";
 $_['entry_order_total']     = "Total Amount";
 $_['entry_product_name']    = "Product Name";
-$_['entry_product_total']   = "Product Price";
+$_['entry_product_total']   = "Gross Income";
 
 
 //entry text
