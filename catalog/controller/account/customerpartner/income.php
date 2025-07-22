@@ -167,6 +167,13 @@ class ControllerAccountCustomerpartnerIncome extends Controller
                         'shipping_total'  => $this->currency->format($this->currency->convert($value['shipping_total'], $this->config->get('config_currency'), $this->session->data['currency']), $this->session->data['currency']),
                         'seller_amount' => $this->currency->format($this->currency->convert($value['seller_amount'], $this->config->get('config_currency'), $this->session->data['currency']), $this->session->data['currency']),
                         'cms_commission_fee' => $this->currency->format($this->currency->convert($value['cms_commission_fee'], $this->config->get('config_currency'), $this->session->data['currency']), $this->session->data['currency']),
+                        'date_start'      => $value['date_display'],
+                        'name'            => $value['name'],
+                        'product_total'   => $this->currency->format($value['product_total'], $this->session->data['currency']),
+                        'commission'      => $this->currency->format($value['commission'], $this->session->data['currency']),
+                        'platform_fee'    => $this->currency->format($value['platform_fee'], $this->session->data['currency']),
+                        'seller_income'   => $this->currency->format($value['seller_income'], $this->session->data['currency']),
+                        'admin_amount'    => $this->currency->format($value['admin_amount'], $this->session->data['currency']),
                     );
 
                     $income_report[] = array(
@@ -194,7 +201,7 @@ class ControllerAccountCustomerpartnerIncome extends Controller
             if ($income_result) {
                 $product_total = $order_total = $shipping_total = $admin = $seller = $cms_commission_fee = 0;
 
-                foreach ($income_result as $key => $value) {
+                foreach ($income_result as $key => $value)  {
 
                     $product_total += $value['product_total'];
                     $order_total += $value['order_total'];
@@ -213,6 +220,17 @@ class ControllerAccountCustomerpartnerIncome extends Controller
                         'seller_amount' => $this->currency->format($this->currency->convert($value['seller_amount'], $this->config->get('config_currency'), $this->session->data['currency']), $this->session->data['currency']),
                         'cms_commission_fee' => $this->currency->format($this->currency->convert($value['cms_commission_fee'], $this->config->get('config_currency'), $this->session->data['currency']), $this->session->data['currency']),
                     );
+                    'name'          => $value['name'],
+                    'date_start'    => $value['date_display'],
+                    'product_total' => $this->currency->format($this->currency->convert($value['product_total'], $this->config->get('config_currency'), $this->session->data['currency']), $this->session->data['currency']),
+                    'commission'    => $this->currency->format($this->currency->convert($value['commission'], $this->config->get('config_currency'), $this->session->data['currency']), $this->session->data['currency']),
+                    'platform_fee'  => $this->currency->format($this->currency->convert($value['platform_fee'], $this->config->get('config_currency'), $this->session->data['currency']), $this->session->data['currency']),
+                    'seller_income' => $this->currency->format($this->currency->convert($value['seller_income'], $this->config->get('config_currency'), $this->session->data['currency']), $this->session->data['currency']),
+                    'order_total'   => $this->currency->format($this->currency->convert($value['order_total'], $this->config->get('config_currency'), $this->session->data['currency']), $this->session->data['currency']),
+                    'admin_amount'  => $this->currency->format($this->currency->convert($value['admin_amount'], $this->config->get('config_currency'), $this->session->data['currency']), $this->session->data['currency']),
+                    'shipping_total'  => $this->currency->format($this->currency->convert($value['shipping_total'], $this->config->get('config_currency'), $this->session->data['currency']), $this->session->data['currency']),
+                    'seller_amount' => $this->currency->format($this->currency->convert($value['seller_amount'], $this->config->get('config_currency'), $this->session->data['currency']), $this->session->data['currency']),
+                );
 
                     $income_report[] = array(
                         'label'         => $value['date_display'],

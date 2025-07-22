@@ -60,9 +60,9 @@
                     </div>
                 </fieldset>
                 <div class="table-responsive">
-                    {% if filter_display_type is defined and  filter_display_type == 'product'%}
+                    {% if filter_display_type is defined and filter_display_type == 'product' %}
                         <table class="table table-bordered table-hover" id="table-product">
-                            <thead>
+                           <thead>
                                 <tr>
                                     <td>
                                         {% if sort == 'c2o.date_added' %}
@@ -122,9 +122,13 @@
                                            <td>{{ income_list.cms_commission_fee }}</td>
                                        </tr> 
                                     {% endfor %}
+                                {% else %}
+                                    <tr>
+                                        <td colspan="6" class="text-center">{{ text_no_results }}</td>
+                                    </tr>
                                 {% endif %}
                             </tbody>
-                        </table>  
+                        </table>
                     {% else %}
                         <table class="table table-bordered table-hover" id="table-order">
                             <thead>
@@ -163,17 +167,21 @@
                             <tbody>
                                 {% if income_lists is defined and income_lists %}
                                     {% for income_list in income_lists %}
-                                       <tr>
-                                           <td>{{ income_list.date_start }}</td>
-                                           <td>{{ income_list.order_total }}</td>
-                                           <td>{{ income_list.seller_amount }}</td>
-                                           <td>{{ income_list.admin_amount}}</td>
-                                       </tr> 
+                                        <tr>
+                                            <td>{{ income_list.date_start }}</td>
+                                            <td>{{ income_list.order_total }}</td>
+                                            <td>{{ income_list.seller_amount }}</td>
+                                            <td>{{ income_list.admin_amount}}</td>
+                                        </tr>
                                     {% endfor %}
-                                {% endif %}          
+                                {% else %}
+                                    <tr>
+                                        <td colspan="4" class="text-center">{{ text_no_results }}</td>
+                                    </tr>
+                                {% endif %}
                             </tbody>
                         </table>
-                    {% endif %}                    
+                    {% endif %}
                 </div>
                 <div class="row">
                     <div class="col-sm-6 text-left">{{ pagination }}</div>
