@@ -1,63 +1,6 @@
-<style>
-  .custom-dropdown {
-    overflow: hidden;
-    max-height: 0;
-    transition: max-height 0.5s ease;
-  }
+<link rel="stylesheet" href="catalog/view/theme/hp/stylesheet/sidebar-nav.css">
 
-  .custom-dropdown.show {
-    max-height: 500px; /* enough to show all content */
-  }
-
-  .dropdown-content {
-    border-radius: 0.375rem;
-    background-color: white;
-    padding: 0.5rem 0;
-    box-shadow: 0 0.5rem 1rem rgba(0,0,0,0.15);
-  }
-
-  .dropdown-item {
-    padding: 0.5rem 1rem;
-    display: block;
-    color: #000;
-    text-decoration: none;
-    transition: background-color 0.3s ease;
-  }
-
-  .dropdown-item:hover {
-    background-color: #f8f9fa;
-  }
-
-  .drop-tog {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    cursor: pointer;
-    width: 100%;
-    background: none;
-    border: none;
-    font-weight: 600;
-    padding: 0.5rem 1rem;
-  }
-
-  .arrow {
-    transition: transform 0.3s ease;
-  }
-
-  .arrow.rotate {
-    transform: rotate(180deg);
-  }
-
-  .list-group-item.active a {
-    color: #ffc766;
-    font-weight: bold;
-  }
-  .list-group-item.active {
-    background-color: #162F65;
-  }
-</style>
-
-<div class="container my-5">
+<div id="main-content" class="container my-5">
   <ul class="list-group">
     {% if not logged %}
     <li class="list-group-item">
@@ -84,32 +27,32 @@
     </li>
     {% endif %}
 
-    <li class="list-group-item list-group-item-action {% if route == 'account/account' %}active text-white{% endif %}">
+    <li id="list-content" class="list-group-item list-group-item-action {% if route == 'account/account' %}active text-white{% endif %}">
       <a class="btn" href="{{ account }}">
         My Purchase
       </a>
     </li>
-    <li class="list-group-item list-group-item-action ">
+    <li id="list-content" class="list-group-item list-group-item-action ">
       {{ sellmenu }}
     </li>
-    <li class="list-group-item list-group-item-action {% if route == 'account/wishlist' %}active text-white{% endif %}">
+    <li id="list-content" class="list-group-item list-group-item-action {% if route == 'account/wishlist' %}active text-white{% endif %}">
       <a class="btn" href="{{ wishlist }}">
         {{ text_wishlist }}
       </a>
     </li>
-     <li class="list-group-item list-group-item-action {% if route == 'account/order' or route == 'account/order/info' %}active text-white{% endif %}">
+     <li id="list-content" class="list-group-item list-group-item-action {% if route == 'account/order' or route == 'account/order/info' %}active text-white{% endif %}">
       <a class="btn" href="{{ order }}">
         {{ text_order }}
       </a>
     </li>
-    <li class="list-group-item list-group-item-action {% if route == 'account/transaction' %}active text-white{% endif %}">
+    <li id="list-content" class="list-group-item list-group-item-action {% if route == 'account/transaction' %}active text-white{% endif %}">
       <a class="btn" href="{{ transaction }}">
         {{ text_transaction }}
       </a>
     </li>
 
     {% if logged %}
-    <li class="list-group-item list-group-item-action">
+    <li id="list-content" class="list-group-item list-group-item-action">
       <a href="{{ logout }}" class="btn">{{ text_logout }}</a>
     </li>
     {% endif %}
