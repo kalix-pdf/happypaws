@@ -226,34 +226,14 @@ class ModelAccountCustomerpartnerOrder extends Model
 
 				$check_order_exists = $this->db->query("SELECT * FROM " . DB_PREFIX . "customerpartner_to_order WHERE order_id = '" . (int)$order_id . "' AND product_id = '" . (int)$product['product_id'] . "' AND customer_id = '" . (int)$mpSellers['customer_id'] . "' AND option_data = '" . json_encode($option_data) . "'")->row;
 
-					$query = $this->db->query("SELECT subs_type, duration FROM `product_subscription` WHERE product_id = '" . (int)$product['product_id'] . "' LIMIT 1");
+					$query = $this->db->query("SELECT subs_type FROM `product_subscription` WHERE product_id = '" . (int)$product['product_id'] . "' LIMIT 1");
 					$subs_type = (int)$query->row['subs_type'];
-					$duration = (int)$query->row['duration'];
 					$price = (float)$product['price'];
 
 					if ($subs_type === 3) {
 
 						$cms_commission_fee = $price * 0.05;
 						
-					} else if ($subs_type === 2) {
-
-						if ($duration === 30) {
-							$cms_commission_fee = $price * 0.02;
-						} else if ($duration === 60 || $duration === 90) {
-							$cms_commission_fee = $price * 0.04;
-						} else if ($duration === 120 || $duration === 150) {
-							$cms_commission_fee = $price * 0.05;
-						} else if ($duration === 180 || $duration === 210) {
-							$cms_commission_fee = $price * 0.06;
-						} else if ($duration === 240 || $duration === 270) {
-							$cms_commission_fee = $price * 0.07;
-						} else if ($duration === 300 || $duration === 330) {
-							$cms_commission_fee = $price * 0.08;
-						} else if ($duration === 360 ) {
-							$cms_commission_fee = $price * 0.010;
-						} else {
-							$cms_commission_fee = $price * 0.13;
-						}
 					}
 
 				if ($check_order_exists) {

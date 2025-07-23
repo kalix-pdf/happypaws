@@ -64,63 +64,25 @@
                         <table class="table table-bordered table-hover" id="table-product">
                            <thead>
                                 <tr>
-                                    <td>
-                                        {% if sort == 'c2o.date_added' %}
-                                            <a href="{{ sort_date }}" class="{{ order | lower }}">{{ entry_date_added }}</a>
-                                        {% else %}
-                                            <a href="{{ sort_date }}">{{ entry_date_added }}</a>
-                                        {% endif %}
-                                    </td>
-                                    <td>
-                                        {% if sort == 'pd.name' %}
-                                            <a href="{{ sort_name }}" class="{{ order | lower }}">{{ entry_product_name }}</a>
-                                        {% else %}
-                                            <a href="{{ sort_name }}">{{ entry_product_name }}</a>
-                                        {% endif %}
-                                    </td>
-                                    <td>
-                                        {% if sort == 'product_total' %}
-                                            <a href="{{ sort_product_total }}" class="{{ order | lower }}">{{ entry_product_total }}</a>
-                                        {% else %}
-                                            <a href="{{ sort_product_total }}">{{ entry_product_total }}</a>
-                                        {% endif %}
-                                    </td>
-                                    <td>
-                                        {% if sort == 'seller_amount' %}
-                                            <a href="{{ sort_seller_amount }}" class="{{ order | lower }}">{{ entry_seller_amount }}</a>
-                                        {% else %}
-                                            <a href="{{ sort_seller_amount }}">{{ entry_seller_amount }}</a>
-                                        {% endif %}
-                                    </td>
-                                    <td>
-                                        {% if sort == 'admin_amount' %}
-                                            <a href="{{ sort_admin_amount }}" class="{{ order | lower }}">{{ entry_admin_amount }}</a>
-                                        {% else %}
-                                            <a href="{{ sort_admin_amount }}">{{ entry_admin_amount }}</a>
-                                        {% endif %}
-                                    </td>
-                                    <td>
-                                        Commission Fee
-                                        {% if sort == 'cms_Commission_fee' %}
-                                            <a href="{{ sort_commission_fee }}" class="{{ order | lower }}">{{ entry_commission_fee }}</a>
-                                        {% else %}
-                                            <a href="{{ sort_commission_fee }}">{{ entry_commission_fee }}</a>
-                                        {% endif %}
-                                    </td>
-                                    
+                                    <th>{{ entry_date_added }}</th>
+                                    <th>{{ entry_product_name }}</th>
+                                    <th>{{ entry_product_total }}</th>
+                                    <th>Commission</th>
+                                    <th>Platform Fee</th>
+                                    <th>Seller Income</th>
                                 </tr>
                             </thead>
                             <tbody>
                                 {% if income_lists is defined and income_lists %}
                                     {% for income_list in income_lists %}
-                                       <tr>
-                                           <td>{{ income_list.date_start }}</td>
-                                           <td>{{ income_list.name }}</td>
-                                           <td>{{ income_list.product_total }}</td>
-                                           <td>{{ income_list.seller_amount }}</td>
-                                           <td>{{ income_list.admin_amount }}</td>
-                                           <td>{{ income_list.cms_commission_fee }}</td>
-                                       </tr> 
+                                        <tr>
+                                            <td>{{ income_list.date_start }}</td>
+                                            <td>{{ income_list.name }}</td>
+                                            <td>{{ income_list.product_total }}</td>
+                                            <td>{{ income_list.commission }}</td>
+                                            <td>{{ income_list.platform_fee }}</td>
+                                            <td>{{ income_list.seller_income }}</td>
+                                        </tr>
                                     {% endfor %}
                                 {% else %}
                                     <tr>

@@ -92,18 +92,22 @@ class ControllerAccountCustomerpartnerBecomePartner extends Controller
 			$this->data['success'] = '';
 		}
 
-		$this->data['in_process'] = false;
+		$this->data['in_process'] = 0;
 
 		$hasApplied = $this->model_account_customerpartner->IsApplyForSellership();
 
 		if ($hasApplied) {
 
-			if ($this->model_account_customerpartner->chkIsPartner())
+			if ($this->model_account_customerpartner->chkIsPartner() == 1) {
 				$this->response->redirect($this->url->link('account/customerpartner/dashboard', '', true));
-			else {
-				$this->data['in_process'] = true;
+			} elseif ($this->model_account_customerpartner->chkIsPartner() == 2) {
+				$this->data['in_process'] = 'rejected';
+				$this->data['text_delay'] = $this->language->get('your application is rejected');
+			} elseif ($this->model_account_customerpartner->chkIsPartner() == 0) {
+				$this->data['in_process'] = 'pending';
 				$this->data['text_delay'] = $this->language->get('text_delay');
 			}
+
 		} else {
 
 			if (isset($this->error['error_shoppartner'])) {
