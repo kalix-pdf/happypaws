@@ -796,9 +796,12 @@ class ControllerExtensionModuleMarketplace extends Controller
 
 		$data['notification_total'] = 0;
 
+
+
 		if ($this->config->get('module_marketplace_status')) {
 			$data['logged'] = $this->customer->isLogged() ? 1 : 0;
 			$data['chkIsPartner'] = $this->model_account_customerpartner->chkIsPartner();
+			// print_r($this->model_account_customerpartner->chkIsPartner());
 			$data['marketplace_seller_mode'] = isset($this->session->data['marketplace_seller_mode']) ? $this->session->data['marketplace_seller_mode'] : 1;
 
 			if ($data['chkIsPartner'] == 1 && $data['marketplace_seller_mode']) {

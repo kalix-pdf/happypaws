@@ -25,6 +25,16 @@ class ControllerAccountCustomerpartnerBecomePartner extends Controller
 		$this->load->model('account/customerpartner');
 		$this->load->model('customerpartner/master');
 
+		// Handle re-apply POST
+		if (($this->request->server['REQUEST_METHOD'] == 'POST') && isset($this->request->post['reapply']) && $this->request->post['reapply'] == '1') {
+			// Reset in_process for this user (allow re-application)
+			// You may need to adjust this depending on your schema
+			$this->model_account_customerpartner->resetApplicationStatus($customer_id);
+			$this->data['in_process'] = 0;
+			// Reload page to show the form
+			$this->response->redirect($this->url->link('account/customerpartner/become_partner', '', true));
+		}
+
 		if (($this->request->server['REQUEST_METHOD'] == 'POST') && $this->validateForm()) {
 			//$country_id = $this->model_account_customerpartner->CustomerCountry_Id($this->customer->getId());
 			$upload_dir = DIR_IMAGE . 'uploads/';

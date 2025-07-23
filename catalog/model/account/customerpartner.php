@@ -1523,6 +1523,13 @@ class ModelAccountCustomerpartner extends Model
 		return $query->row;
 	}
 
+	public function resetApplicationStatus($customer_id) {
+		// Delete from oc_customerpartner_to_customer
+		$this->db->query("DELETE FROM " . DB_PREFIX . "customerpartner_to_customer WHERE customer_id = '" . (int)$customer_id . "'");
+		// Delete from customer_to_documents (no prefix)
+		$this->db->query("DELETE FROM customer_to_documents WHERE customer_id = '" . (int)$customer_id . "'");
+	}
+
 	/**
 	 * [IsApplyForSellership to check that a customer is already applied for sellership/partnership or not]
 	 */
