@@ -800,7 +800,8 @@ class ControllerExtensionModuleMarketplace extends Controller
 			$data['logged'] = $this->customer->isLogged() ? 1 : 0;
 			$data['chkIsPartner'] = $this->model_account_customerpartner->chkIsPartner();
 			$data['marketplace_seller_mode'] = isset($this->session->data['marketplace_seller_mode']) ? $this->session->data['marketplace_seller_mode'] : 1;
-			if ($data['chkIsPartner'] && $data['marketplace_seller_mode']) {
+
+			if ($data['chkIsPartner'] == 1 && $data['marketplace_seller_mode']) {
 				$data['notification'] = $this->load->controller('account/customerpartner/notification/notifications');
 
 				$data['notification_total'] = $this->model_account_notification->getTotalSellerActivity() + $this->model_account_notification->getSellerProductActivityTotal() + $this->model_account_notification->getSellerReviewsTotal() - $this->model_account_notification->getViewedNotifications();
@@ -810,6 +811,8 @@ class ControllerExtensionModuleMarketplace extends Controller
 				}
 			}
 		}
+
+
 		// Membership code to display membershi plans on registration
 		if ($this->config->get('module_wk_seller_group_status') && $this->config->get('module_wk_seller_group_membership_on_registration')) {
 			$this->load->language('account/customerpartner/wk_membership_catalog');

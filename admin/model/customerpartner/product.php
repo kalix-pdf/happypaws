@@ -12,6 +12,64 @@ class ModelCustomerpartnerProduct extends Model {
 		}
 	}
 
+	// Function to reject a product
+	public function rejectProduct($data) {
+		// Get product details BEFORE deletion
+		$this->load->model('catalog/product');
+		$product_data = $this->model_catalog_product->getProduct($data['product_id']);
+		
+		// Add seller id with product data
+		$product_data['customer_id'] = $this->getSellerbasedonProduct($data['product_id']);
+		
+		if(!$product_data['customer_id'])
+			return;
+		
+		// Send rejection notification BEFORE deletion
+		$this->load->model('customerpartner/notification');
+		
+		$activity_data = array(
+			'id'           => $product_data['product_id'],
+			'product_id'   => $product_data['product_id'],
+			'seller_id'    => $product_data['customer_id'],
+			'product_name' => $product_data['name'],
+		);
+		
+		// Add rejection notification
+		$this->model_customerpartner_notification->addActivity('product_reject', $activity_data);
+		
+		// Send rejection email if enabled
+		if($this->config->get('marketplace_mail_product_reject')) {
+			$this->load->model('customerpartner/mail');
+			$this->load->model('customerpartner/partner');
+			
+			$seller_info = $this->model_customerpartner_partner->getPartnerCustomerInfo($product_data['customer_id']);
+			
+			$mail_data = array(
+				'mail_id'   => $this->config->get('marketplace_mail_product_reject'),
+				'mail_from' => $this->config->get('marketplace_adminmail'),
+				'mail_to'   => $seller_info['email'],
+			);
+			
+			$value_index = array(
+				'commission'   => $seller_info['commission'],
+				'product_name' => $product_data['name'],
+			);
+			
+			$this->model_customerpartner_mail->mail($mail_data, $value_index);
+		}
+		
+		// DELETE PRODUCT COMPLETELY FROM DATABASE
+		$this->deleteProduct($data['product_id']);
+		
+		// Also delete from main product table
+		$this->db->query("DELETE FROM " . DB_PREFIX . "product WHERE product_id = '" . (int)$data['product_id'] . "'");
+		$this->db->query("DELETE FROM " . DB_PREFIX . "product_description WHERE product_id = '" . (int)$data['product_id'] . "'");
+		$this->db->query("DELETE FROM " . DB_PREFIX . "product_to_category WHERE product_id = '" . (int)$data['product_id'] . "'");
+		$this->db->query("DELETE FROM " . DB_PREFIX . "product_image WHERE product_id = '" . (int)$data['product_id'] . "'");
+		$this->db->query("DELETE FROM " . DB_PREFIX . "product_option WHERE product_id = '" . (int)$data['product_id'] . "'");
+		$this->db->query("DELETE FROM product_subscription WHERE product_id = '" . (int)$data['product_id'] . "'");
+	}
+
 	private $data = array();
 
 	//to clear products which are not in product table (currently code adding using xml file so used return)
