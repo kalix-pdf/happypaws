@@ -2,43 +2,26 @@
   <div class="slideshow swiper-viewport">
     <div id="slideshow{{ module }}" class="swiper swiper-container">
       <div class="swiper-wrapper">
-
-      <!-- {% for banner in banners %}
+        {% for banner in banners %}
           <div class="swiper-slide text-center">
             {% if banner.link %}
               <a href="{{ banner.link }}">
-                <img src="catalog/view/theme/hp/image/perDay.png" alt="{{ banner.title }}" class="img-fluid w-100" />
+                <img src="{{ banner.image }}" alt="{{ banner.title }}" class="img-fluid w-100" />
               </a>
             {% else %}
-              <img src="catalog/view/theme/hp/image/perDay.png" alt="{{ banner.title }}" class="img-fluid w-100" />
+              <img src="{{ banner.image }}" alt="{{ banner.title }}" class="img-fluid w-100" />
             {% endif %}
           </div>
-        {% endfor %} --> 
+        {% endfor %}
+      </div>
 
-      <div class="swiper-slide text-center">
-        <a href="https://example.com/banner1">
-          <img src="catalog/view/theme/hp/image/perDay.png" alt="Banner 1" class="img-fluid w-100" />
-        </a>
-      </div>
-      <div class="swiper-slide text-center">
-        <a href="https://example.com/banner2">
-          <img src="catalog/view/theme/hp/image/perMonth.png" alt="Banner 2" class="img-fluid w-100" />
-        </a>
-      </div>
-      <div class="swiper-slide text-center">
-        <a href="https://example.com/banner2">
-          <img src="catalog/view/theme/hp/image/AboutUs.png" alt="Banner 2" class="img-fluid w-100" />
-        </a>
-      </div>
-    </div>
-      <!-- If pagination is needed -->
       <div class="swiper-pagination slideshow{{ module }}"></div>
-      <!-- Navigation buttons -->
       <div class="swiper-button-next"></div>
       <div class="swiper-button-prev"></div>
     </div>
   </div>
 </div>
+
 
 <script type="text/javascript">
   $('#slideshow{{ module }}').swiper({
@@ -49,7 +32,7 @@
 	nextButton: '.slideshow .swiper-button-next',
     prevButton: '.slideshow .swiper-button-prev',
     spaceBetween: 30,
-	autoplay: 5000,
+	autoplay: 1000,
     autoplayDisableOnInteraction: true,
 	loop: true
 });

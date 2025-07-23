@@ -130,16 +130,7 @@
               <li><a href="#tab-pricealert" data-toggle="tab">{{ tab_palert }}</a></li>
               {% endif %}
 
-              {# <li><a href="#tab-custom-option" data-toggle="tab">Option</a></li> #}
-
-              {% if sbsType == 1 %}
-                <li><a href="#tab-ppd" data-toggle="tab">Piso Per Day Per Product</a></li>
-              {% elseif sbsType == 2 %}
-                <li><a href="#tab-ppm" data-toggle="tab">Piso Per Month Per Product</a></li>
-              {% elseif sbsType == 3 %}
-                <li><a href="#tab-cms" data-toggle="tab">Commission Type</a></li>
-              {% endif %}
-
+              <li><a href="#tab-subscription" data-toggle="tab">Subscription Type</a></li>
               <!--<li><a href="#tab-update-reason" data-toggle="tab">{#{{ tab_reason }}#}</a></li>-->
 
             </ul>
@@ -820,71 +811,53 @@
 
 
               {# SUBSCRIPTION TYPE HERE #}
-              <div class="tab-pane" id="tab-ppd">
-                <h3>You choose Piso per day per product type of subscription</h3>
-                <div class="text-danger">{{ warning_subs }}</div>
-                <label>Choose how many days your product will be displayed
-                <select class="form-control required" id="subs" name="subs_ppd">
-                  <option value="">
-                  Choose how many days
-                  </option>
-                  <option value="1">
-                  1 minute
-                  </option>
-                  <option value="5">
-                  5 days
-                  </option>
-                  <option value="10">
-                  10 days
-                  </option>
-                  <option value="15">
-                  15 days
-                  </option>
-                  <option value="20">
-                  20 days
-                  </option>
-                  <option value="25">
-                  25 days
-                  </option>
-                  <option value="30">
-                  30 days
-                  </option>
-                </select>
-              </label>
-              </div>
 
-              <div class="tab-pane" id="tab-ppm">
-                <h3>You choose Piso per product per month type of subscription</h3>
-                <div class="text-danger">{{ warning_subs }}</div>
-                <label>Choose how many Months your product will be displayed
-                <select class="form-control required" id="subs" name="subs_ppm">
-                  <option value="">
-                  Choose how many Months
-                  </option>
-                  <option value="1">
-                  1 Month
-                  </option>
-                  <option value="2">
-                  2 Months
-                  </option>
-                  <option value="3">
-                  3 Months
-                  </option>
-                  <option value="4">
-                  4 Months
-                  </option>
-                  <option value="5">
-                  5 Months
-                  </option>
-                  <option value="6">
-                  6 Months
-                  </option>
+              <div class="tab-pane" id="tab-subscription">
+                <div class="text-danger"> {{ warning_subs }} </div>
+                <div class="text-danger"> {{ warning }} </div>
+                <h2>Select Subscription Type</h2>
+                <select class="form-control required" id="subs" name="subscription">
+                  <option value="">-- Select Subscription --</option>
+                  <option value="ppd">Piso Per Day Per Product</option>
+                  <option value="ppm">Piso Per Product Per Month</option>
+                  <option value="commission">Commission Type</option>
                 </select>
-              </label>
-              </div>
+              
+                <div id="ppd-section" class="subscription-section" style="display: none;">
+                  <h3>You choose Piso per day per product type of subscription</h3>
+                  <div class="text-danger">{{ warning_subs }}</div>
+                  <label>Choose how many days your product will be displayed
+                    <select class="form-control required" id="subs_for_ppd" name="subs_ppd">
+                      <option value="">Choose how many days</option>
+                      <option value="5">5 days</option>
+                      <option value="10">10 days</option>
+                      <option value="15">15 days</option>
+                      <option value="20">20 days</option>
+                      <option value="25">25 days</option>
+                    </select>
+                  </label>
+                </div>
 
-              <div class="tab-pane" id="tab-cms">
-                </h3>Your commission is 5%</h3>
+                <div id="ppm-section" class="subscription-section" style="display: none;">
+                  <h3>You choose Piso per product per month type of subscription</h3>
+                  <div class="text-danger">{{ warning_subs }}</div>
+                  <label>Choose how many Months your product will be displayed
+                    <select class="form-control required" id="subs_for_ppm" name="subs_ppm">
+                      <option value="">Choose how many Months</option>
+                      <option value="1">1 Month</option>
+                      <option value="2">2 Months</option>
+                      <option value="3">3 Months</option>
+                      <option value="4">4 Months</option>
+                      <option value="5">5 Months</option>
+                      <option value="6">6 Months</option>
+                    </select>
+                  </label>
+                </div>
+
+                <div id="commission-section" class="subscription-section" style="display: none;">
+                  <label class="control-label" for="cms">Your commission is 5% for every successful transition</label>
+                  <input type="hidden" class="form-group" value="5" name="subs_cms"/>
+                </div>
               </div>
 
               <!-- attribute tab -->
@@ -3035,6 +3008,34 @@ function addOptionValue(option_row) {
 
 //-->
 </script>
+
+<script>
+  document.getElementById('subs').addEventListener('change', function () {
+    const value = this.value;
+
+    document.querySelectorAll('.subscription-section').forEach(section => {
+      section.style.display = 'none';
+      section.querySelectorAll('select, input').forEach(el => el.disabled = true);
+    });
+
+    if (value === 'ppd') {
+      const section = document.getElementById('ppd-section');
+      section.style.display = 'block';
+      section.querySelectorAll('select, input').forEach(el => el.disabled = false);
+    } else if (value === 'ppm') {
+      const section = document.getElementById('ppm-section');
+      section.style.display = 'block';
+      section.querySelectorAll('select, input').forEach(el => el.disabled = false);
+    } else if (value === 'commission') {
+      const section = document.getElementById('commission-section');
+      section.style.display = 'block';
+      section.querySelectorAll('input').forEach(el => el.disabled = false);
+    }
+  });
+</script>
+
+
+
 
 
 <style type="text/css">

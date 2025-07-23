@@ -801,7 +801,7 @@ class ControllerExtensionModuleMarketplace extends Controller
 			$data['chkIsPartner'] = $this->model_account_customerpartner->chkIsPartner();
 			$data['marketplace_seller_mode'] = isset($this->session->data['marketplace_seller_mode']) ? $this->session->data['marketplace_seller_mode'] : 1;
 
-			if ($data['chkIsPartner'] == 1 && $data['marketplace_seller_mode']) {
+			if ($data['chkIsPartner'] && $data['marketplace_seller_mode']) {
 				$data['notification'] = $this->load->controller('account/customerpartner/notification/notifications');
 
 				$data['notification_total'] = $this->model_account_notification->getTotalSellerActivity() + $this->model_account_notification->getSellerProductActivityTotal() + $this->model_account_notification->getSellerReviewsTotal() - $this->model_account_notification->getViewedNotifications();

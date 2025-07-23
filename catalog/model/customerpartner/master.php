@@ -337,7 +337,7 @@ class ModelCustomerpartnerMaster extends Model {
 
 	//uploaded documents here
 
-	public function addShopData($customer_id, $file_paths, $SBSTYPE) {
+	public function addShopData($customer_id, $file_paths) {
 		$bir_file = isset($file_paths['birfile']) ? $this->db->escape($file_paths['birfile']) : '';
 		$dti_file = isset($file_paths['dtifile']) ? $this->db->escape($file_paths['dtifile']) : '';
 		$mayor_file = isset($file_paths['mayorfile']) ? $this->db->escape($file_paths['mayorfile']) : '';
@@ -348,8 +348,7 @@ class ModelCustomerpartnerMaster extends Model {
 			uploadedFileBIR = '" . $bir_file . "',
 			uploadedFileDTI = '" . $dti_file . "', 
 			uploadedFileMayorPermit = '" . $mayor_file . "', 
-			uploadedFileValidID = '" . $valid_id . "', 
-			sbsType = '" . $SBSTYPE . "'");
+			uploadedFileValidID = '" . $valid_id . "'");
 	}
 
 

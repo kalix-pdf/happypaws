@@ -83,22 +83,12 @@ class ControllerAccountLogin extends Controller {
 			}
 		}
 
-		$data['breadcrumbs'] = array();
-
-		$data['breadcrumbs'][] = array(
-			'text' => $this->language->get('text_home'),
-			'href' => $this->url->link('common/home')
-		);
-
-		$data['breadcrumbs'][] = array(
-			'text' => $this->language->get('text_account'),
-			'href' => $this->url->link('account/account', '', true)
-		);
-
-		$data['breadcrumbs'][] = array(
-			'text' => $this->language->get('text_login'),
-			'href' => $this->url->link('account/login', '', true)
-		);
+		$data['title'] = $this->document->getTitle();
+		$data['description'] = $this->document->getDescription();
+		$data['keywords'] = $this->document->getKeywords();
+		$data['links'] = $this->document->getLinks();
+		$data['lang'] = $this->language->get('code');
+		$data['logo'] = HTTP_SERVER . 'image/catalog/icon.png';
 
 		if (isset($this->session->data['error'])) {
 			$data['error_warning'] = $this->session->data['error'];

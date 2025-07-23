@@ -207,6 +207,9 @@ class ControllerAccountRegister extends Controller {
 			$data['agree'] = false;
 		}
 
+		$data['title'] = $this->document->getTitle();
+		$data['logo'] = HTTP_SERVER . 'image/catalog/icon.png';
+		
 		$data['column_left'] = $this->load->controller('common/column_left');
 		$data['column_right'] = $this->load->controller('common/column_right');
 		$data['content_top'] = $this->load->controller('common/content_top');
