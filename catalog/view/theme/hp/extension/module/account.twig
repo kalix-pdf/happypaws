@@ -5,6 +5,20 @@
     transition: max-height 0.5s ease;
   }
 
+  #list-content {
+    border-radius: 15px;
+    width: 200px;
+    margin-bottom: 10px;
+  }
+
+  #list-content a {
+    border: none;
+    border-radius: 15px;
+    width: 100%;
+    height: 100%;
+    text-align: left;
+  }
+
   .custom-dropdown.show {
     max-height: 500px; /* enough to show all content */
   }
@@ -57,7 +71,7 @@
   }
 </style>
 
-<div class="container my-5">
+<div id="main-content" class="container my-5">
   <ul class="list-group">
     {% if not logged %}
     <li class="list-group-item">
@@ -84,32 +98,32 @@
     </li>
     {% endif %}
 
-    <li class="list-group-item list-group-item-action {% if route == 'account/account' %}active text-white{% endif %}">
+    <li id="list-content" class="list-group-item list-group-item-action {% if route == 'account/account' %}active text-white{% endif %}">
       <a class="btn" href="{{ account }}">
         My Purchase
       </a>
     </li>
-    <li class="list-group-item list-group-item-action ">
+    <li id="list-content" class="list-group-item list-group-item-action ">
       {{ sellmenu }}
     </li>
-    <li class="list-group-item list-group-item-action {% if route == 'account/wishlist' %}active text-white{% endif %}">
+    <li id="list-content" class="list-group-item list-group-item-action {% if route == 'account/wishlist' %}active text-white{% endif %}">
       <a class="btn" href="{{ wishlist }}">
         {{ text_wishlist }}
       </a>
     </li>
-     <li class="list-group-item list-group-item-action {% if route == 'account/order' or route == 'account/order/info' %}active text-white{% endif %}">
+     <li id="list-content" class="list-group-item list-group-item-action {% if route == 'account/order' or route == 'account/order/info' %}active text-white{% endif %}">
       <a class="btn" href="{{ order }}">
         {{ text_order }}
       </a>
     </li>
-    <li class="list-group-item list-group-item-action {% if route == 'account/transaction' %}active text-white{% endif %}">
+    <li id="list-content" class="list-group-item list-group-item-action {% if route == 'account/transaction' %}active text-white{% endif %}">
       <a class="btn" href="{{ transaction }}">
         {{ text_transaction }}
       </a>
     </li>
 
     {% if logged %}
-    <li class="list-group-item list-group-item-action">
+    <li id="list-content" class="list-group-item list-group-item-action">
       <a href="{{ logout }}" class="btn">{{ text_logout }}</a>
     </li>
     {% endif %}
