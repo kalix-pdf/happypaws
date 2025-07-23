@@ -821,7 +821,8 @@ class ControllerExtensionModuleMarketplace extends Controller
 			$data['register_view'] = true;
 			$data['membership_groups'] = $this->load->view('account/customerpartner/wk_membership_groups', $data);
 		}
-
+		
+		$data['route'] = $this->request->get['route'];
 
 		return $this->load->view('customerpartner/sellmenu', $data);
 	}

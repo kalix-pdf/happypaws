@@ -1,189 +1,130 @@
 {{ header }}
-{# {{ separate_column_left }} #}
+<link href="catalog/view/theme/hp/stylesheet/become_partner.css" rel="stylesheet" type="text/css" />
 
-<style>
- .radio-card {
-    cursor: pointer;
-    border: 1px solid black;
-    transition: 0.3s;
-    border-radius: 12px;
-    width: 50%;
-    box-shadow: 5px 5px 8px;
-  }
-  .radio-card input {
-    display: none;
-  }
-  .card {
-    padding: 20px;
-    
-  }
-  .radio-card input:checked + .card {
-    background-color: rgba(0, 217, 255, 0.23);
-    box-shadow: 0 0 10px rgba(0, 123, 255, 0.5);
-  }
-</style>
-
+<div style="display: flex; flex-direction: column; min-height: 100vh;">
+<nav id="checkout-checkout" class="container mb-4 mt-4" style="--bs-breadcrumb-divider: '>';" aria-label="breadcrumb">
+    <ol class="breadcrumb">
+      {% for breadcrumb in breadcrumbs %}
+        <li class="breadcrumb-item">
+          <a class="text-decoration-none text-black" href="{{ breadcrumb.href }}">{{ breadcrumb.text }}</a>
+        </li>
+      {% endfor %}
+    </ol>
+  </nav>
 {% if separate_view is defined and separate_view %}
   <div class="container-fluid" id="content">
 {% else %}
-  <div class="container">
+  <div class="container d-flex" id="content">
 {% endif %}
-  <ul class="breadcrumb">
-    {% for breadcrumb in breadcrumbs %}
-    <li><a href="{{ breadcrumb.href }}">{{ breadcrumb.text }}</a></li>
-    {% endfor %}
-  </ul>
 
-  {% if success %}
-    <div class="alert alert-success"><i class="fa fa-exclamation-circle"></i> {{ success}}</div>
-  {% endif %}
-  {% if error_warning %}
-    <div class="alert alert-danger"><i class="fa fa-exclamation-circle"></i> {{ error_warning}}</div>
-  {% endif %}
-
-  <div class="row">{{ column_left }}
-    {% if column_left and column_right %}
-    {% set class = 'col-sm-6' %}
-    {% elseif column_left or column_right %}
-    {% set class = 'col-sm-9' %}
-    {% else %}
-    {% set class = 'col-sm-12' %}
+  {{ column_right }}
+    {% if success %}
+      <div class="alert alert-success"><i class="fa fa-exclamation-circle"></i> {{ success }}</div>
+    {% endif %}
+    {% if error_warning %}
+      <div class="alert alert-danger"><i class="fa fa-exclamation-circle"></i> {{ error_warning }}</div>
     {% endif %}
 
-    <div id="content" class="{{ class}}">
-      {{ content_top}}
-      <h1>
-        Be a Meowchant
-        <div class="pull-right">
-          <a href="{{ back}}" data-toggle="tooltip" title="{{ button_back}}" class="btn btn-default"><i class="fa fa-reply"></i></a>
-        </div>
-      </h1>
+    <div class="row col-sm-8">
+      <div class="d-flex justify-content-center">
 
-      <fieldset>
-        <legend><i class="fa fa-list"></i> Be a Meowchant </legend>
-        {% if customer_id %}
-        <p>Customer ID: {{ customer_id }}</p>
-        {% else %}
-            <p>Error: Customer ID not found!</p>
-        {% endif %}
-      {% if isMember %}
-        {% if not in_process %}
-        <form action="{{ action}}" method="post" enctype="multipart/form-data"  class="form-horizontal">
+        <form action="{{ action }}" method="post" enctype="multipart/form-data" class="form-horizontal">
+          <h1>Be a MeowChant</h1>
+          {% if customer_id %}
+            <p class="mb-4">Customer ID: {{ customer_id }}</p>
+          {% endif %}
 
           <div class="form-group required">
-            <label class="col-sm-2 control-label" for="input-shoppartner"><span data-toggle="tooltip" title="{{ text_shop_name_info}}">{{ text_shop_name}}</span></label>
-            <div class="col-sm-10">
-
+            <label class="col-sm-12" for="input-shoppartner">Shop name</label>
+            <div class="col-sm-12">
               <div class="input-group">
                 <span class="input-group-addon"><i class="fa fa-search"></i></span>
-                <input type="text" name="shoppartner" value="{{ shoppartner}}" id="input-shoppartner" class="form-control" />
-                
+                <input type="text" name="shoppartner" value="{{ shoppartner }}" id="input-shoppartner" class="form-control" />
               </div>
-
-              {% if error_shoppartner %}
-              <div class="text-danger">{{ error_shoppartner}}</div>
-              {% endif %}
+              {% if error_shoppartner %}<div class="text-danger">{{ error_shoppartner }}</div>{% endif %}
             </div>
           </div>
 
           <div class="form-group required">
-            <label class="col-sm-2 control-label" for="input-entry"><span data-toggle="tooltip" title="{{ text_say_info}}">Store Desciption</span></label>
-            <div class="col-sm-10">
-              <textarea id="input-entry" name="description" class="form-control" rows="3">{{ description}}</textarea>
-              {% if error_description %}
-              <div class="text-danger">{{ error_description}}</div>
-              {% endif %}
+            <label class="col-sm-12" for="input-entry">Store Description</label>
+            <div class="col-sm-12">
+              <textarea id="input-entry" name="description" class="form-control" rows="3">{{ description }}</textarea>
+              {% if error_description %}<div class="text-danger">{{ error_description }}</div>{% endif %}
             </div>
           </div>
-{#           
-          Upload Documents #}
-          <legend>Upload your Documents: </legend>        
-            <div class="form-group required">  
-              <label class="col-sm-2 control-label" for="input-dtifile"><span data-toggle="tooltip" title="{{ text_dti }}">DTI/SEC Registration: </span> </label>
-              <div class="col-sm-10 mt-3">
-                  <div class="input-group">
-                    <input type="file" name="dtifile" value="dtifile" id="dtifile" class="form-control">
-                    {% if error_dtifile %}
-                    <div class="text-danger">{{ error_dtifile }}</div>
-                    {% endif %}
-                  </div>  
-              </div>
 
-              <label class="col-sm-2 control-label"><span data-toggle="tooltip" title="{{ text_bir }}">BIR 2303/TIN: </label>
-              <div class="col-sm-10 mt-3">
-                  <div class="input-group">
-                    <input type="file" name="birfile" value="birfile" id="birfile" class="form-control mt-3">
-                  </div>
-                  {% if error_birfile %}
-                  <div class="text-danger">{{ error_birfile }}</div>
-                  {% endif %}
-              </div>
+          <h3 class="mt-5 mb-4">Upload your Documents:</h3>
 
-              <label class="col-sm-2 control-label"><span data-toggle="tooltip" title="{{ text_mayor }}">Mayor's Permit:</span></label>
-              <div class="col-sm-10 mt-3">
-                  <div class="input-group">
-                    <input type="file" name="mayorfile" value="mayorfile" id="mayorfile" class="form-control mt-3">
-                  </div>
-                  {% if error_mayorfile %}
-                  <div class="text-danger">{{ error_mayorfile }}</div>
-                  {% endif %}
-              </div>
+          <div class="document-upload-section">
+            {% set uploads = [
+              { id: 'dtifile', label: 'DTI/SEC Certificate', error: error_dtifile },
+              { id: 'birfile', label: 'BIR 2303/TIN', error: error_birfile },
+              { id: 'mayorfile', label: "Mayor's Permit", error: error_mayorfile },
+              { id: 'validid', label: "Government Valid ID", error: error_validid }
+            ] %}
 
-              <label class="col-sm-2 control-label"><span data-toggle="tooltip" title="{{ text_validid }}">Government Valid ID: </span></label>
-              <div class="col-sm-10 mt-3">
-                  <div class="input-group">
-                    <input type="file" name="validid" value="validid" id="validid" class="form-control mt-3">
-                  </div>
-                  {% if error_validid %}
-                  <div class="text-danger">{{ error_validid }}</div>
-                  {% endif %}
+            {% for doc in uploads %}
+            <div class="form-group required">
+              <label class="control-label" for="{{ doc.id }}">{{ doc.label }}:</label>
+              <div class="custom-file-upload">
+                <input type="file" name="{{ doc.id }}" id="{{ doc.id }}">
+                <label for="{{ doc.id }}" class="file-upload-button">Choose File</label>
+                <span class="file-name">No file chosen</span>
               </div>
+              {% if doc.error %}<div class="text-danger w-100 mt-2">{{ doc.error }}</div>{% endif %}
             </div>
-
-          <div class="text-center">
-            <input type="submit" value="{{ button_continue}}" class="btn btn-primary"/>
+            {% endfor %}
           </div>
 
+          <div class="text-center mt-5 mb-3">
+            <input type="submit" value="Continue" class="btn btn-primary btn-lg" style="background-color: #162F65; border-color: #162F65; border-radius: 25px; padding: 10px 40px;"/>
+          </div>
         </form>
 
-        {% else %}
-          <div class="alert alert-info"><i class="fa fa-exclamation-circle"></i> {{ text_delay}}</div>
-        {% endif %}
-      {% else %}
-        <div class="text-danger">
-          {{ error_warning_authenticate}}
-        </div>
-      {% endif %}
-    </fieldset>
+        {{ content_bottom }}
+      </div>
+    </div>
   </div>
-{{ column_right}}</div>
 </div>
 
-{% if not in_process %}
 <script>
-$( "#input-shoppartner" ).change(function() {
-  thisshop = this;
-  shop = $(thisshop).val();
-  if(shop){
-    jQuery(thisshop).prev().html('<i class="fa fa-spinner fa-spin"></i>');
-    $.ajax({
-           type: 'POST',
-           data: ({shop: shop}),
-           dataType: 'json',
-           url: 'index.php?route=customerpartner/sell/wkmpregistation',
-           success: function(data){
-             console.log(data);
-              jQuery('fa-spinner').remove();
-              if(data['success']){
-                jQuery(thisshop).prev().html('<span data-toggle="tooltip" class="text-success" title="{{ text_avaiable}}"><i class="fa fa-thumbs-o-up"></i></span>');
-              }else if(data['error']){
-                jQuery(thisshop).prev().html('<span data-toggle="tooltip" class="text-danger" title="{{ text_no_avaiable}}"><i class="fa fa-thumbs-o-down"></i></span>');
-              }
+$(document).ready(function() {
+    // Display selected filename
+    $('.custom-file-upload input[type="file"]').on('change', function() {
+        const fileName = $(this).val().split('\\').pop();
+        const $fileNameSpan = $(this).siblings('.file-name');
+        $fileNameSpan.text(fileName || 'No file chosen');
+    });
 
-            }
-        });
-  }
+    // Shop name availability check
+    $('#input-shoppartner').on('change', function() {
+        var $this = $(this);
+        var shop = $this.val();
+
+        if (shop) {
+            var $addon = $this.closest('.input-group').find('.input-group-addon');
+            $addon.html('<i class="fa fa-spinner fa-spin"></i>');
+
+            $.ajax({
+                type: 'POST',
+                url: 'index.php?route=customerpartner/sell/wkmpregistation',
+                data: { shop: shop },
+                dataType: 'json',
+                success: function(data) {
+                    if (data.success) {
+                        $addon.html('<span data-toggle="tooltip" class="text-success" title="{{ text_avaiable }}"><i class="fa fa-thumbs-o-up"></i></span>');
+                    } else {
+                        $addon.html('<span data-toggle="tooltip" class="text-danger" title="{{ text_no_avaiable }}"><i class="fa fa-thumbs-o-down"></i></span>');
+                    }
+                },
+                error: function(xhr, ajaxOptions, thrownError) {
+                    alert(thrownError + "\r\n" + xhr.statusText + "\r\n" + xhr.responseText);
+                    $addon.html('<i class="fa fa-search"></i>');
+                }
+            });
+        }
+    });
 });
 </script>
-{% endif %}
-{{ footer}}
+
+{{ footer }}

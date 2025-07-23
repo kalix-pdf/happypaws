@@ -187,7 +187,17 @@ class ControllerCustomerpartnerincome extends Controller
 
 		foreach ($sellers as $key => $seller) {
 			$partner_amount = $this->model_customerpartner_partner->getPartnerTotal($seller['customer_id'], $filter_data);
+			$cms_fee = $this->model_customerpartner_income->getcommission($seller['customer_id']);
 			
+			$total_cms_fee = 0;
+
+			foreach($cms_fee as $row){
+				if (!empty($row['cms_commission_fee'])) {
+					$cms_fee = $row['cms_commission_fee'];
+					$total_cms_fee += $cms_fee;
+				}
+			}
+
 			if (!$partner_amount) {
 				continue;
 			}
@@ -213,6 +223,7 @@ class ControllerCustomerpartnerincome extends Controller
 			}
 			$subscriptions = $this->model_customerpartner_product->getSubscriptionBySellerId($seller['customer_id']);
 			$latest_subscription = end($subscriptions); 
+			$total_cms_pfee = $total_cms_fee + $admin;
 
 			$data['income_details'][] = array(
 				'seller_id' => $seller['customer_id'],
@@ -223,6 +234,8 @@ class ControllerCustomerpartnerincome extends Controller
 				'total' => $this->currency->format($total, $this->config->get('config_currency')),
 				'seller_total' => $this->currency->format($selleramount, $this->config->get('config_currency')),
 				'admin_total' => $this->currency->format($admin, $this->config->get('config_currency')),
+				'pfee_cfee' => $this->currency->format($total_cms_pfee, $this->config->get('config_currency')),
+
 				'paid_total' => $this->currency->format($paid, $this->config->get('config_currency')),
 				'amount_to_pay' => $this->currency->format($rem, $this->config->get('config_currency')),
 				'pay_link' => $this->url->link("customerpartner/transaction/addtransaction", "user_token=" . $this->session->data['user_token'] . "&seller_id=" . $seller['customer_id'], true),

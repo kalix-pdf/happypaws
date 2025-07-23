@@ -162,16 +162,16 @@ class ControllerAccountCustomerpartnerBecomePartner extends Controller
 
 		$this->data['separate_column_left'] = '';
 
-		if ($this->config->get('marketplace_separate_view') && isset($this->session->data['marketplace_separate_view']) && $this->session->data['marketplace_separate_view'] == 'separate') {
-			$this->data['separate_view'] = true;
-			$this->data['column_left'] = '';
-			$this->data['column_right'] = '';
-			$this->data['content_top'] = '';
-			$this->data['content_bottom'] = '';
-			$this->data['separate_column_left'] = $this->load->controller('account/customerpartner/column_left');
-			$this->data['footer'] = $this->load->controller('account/customerpartner/footer');
-			$this->data['header'] = $this->load->controller('account/customerpartner/header');
-		}
+		// if ($this->config->get('marketplace_separate_view') && isset($this->session->data['marketplace_separate_view']) && $this->session->data['marketplace_separate_view'] == 'separate') {
+		// 	$this->data['separate_view'] = true;
+		// 	$this->data['column_left'] = '';
+		// 	$this->data['column_right'] = '';
+		// 	$this->data['content_top'] = '';
+		// 	$this->data['content_bottom'] = '';
+		// 	$this->data['separate_column_left'] = $this->load->controller('account/customerpartner/column_left');
+		// 	$this->data['footer'] = $this->load->controller('account/customerpartner/footer');
+		// 	$this->data['header'] = $this->load->controller('account/customerpartner/header');
+		// }
 
 		$this->response->setOutput($this->load->view('account/customerpartner/become_partner', $this->data));
 	}

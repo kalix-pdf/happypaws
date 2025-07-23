@@ -150,140 +150,233 @@
 				</div>
 				<form action="{{ masspayout}}" method="post" enctype="multipart/form-data" id="form-income">
 					<div class="table-responsive">
-						<table class="table table-bordered table-hover">
-							<thead>
-								<tr>
-									<th width="1" style="text-align: center;"><input type="checkbox" onclick="$('input[name*=\'selected\']').prop('checked', this.checked);" /></th>
-									<th class="text-center">
-										<a href="{{ seller_name_url}}" class="{% if order is defined and order == 'c.firstname' %}{{ sort }}{%endif %}">
-											{{ text_seller_name}}
-										</a>
-									</th>
-									<!-- <th class="text-center">
-										<a href="{{ seller_commission_url}}" class="{% if order is defined and order == 'c.commission' %}{{ sort }}{%endif %}">
-											{{ text_commission}}
-										</a>
-									</th> -->
-									<th class="text-center">
-										<a href="{{ total_url}}" class="{% if order is defined and order == 'total' %}{{ sort }}{%endif %}">
-											{{ text_total_amount}}
-										</a>
-									</th>
-									<th class="text-center">
-										<a href="{{ customer_url}}" class="{% if order is defined and order == 'customer' %}{{ sort }}{%endif %}">
-											{{ text_seller_amount}}
-										</a>
-									</th>
+						{% if income_details %}
+							{% for key, income_detail in income_details %}
+								{% set subs = income_detail.subscriptions %}
+								{% if subs.subs_type == 3 %} <legend>Commission Type</legend>
+									<table class="table table-bordered table-hover">
+										<thead>
+											<tr>
+												<th width="1" style="text-align: center;"><input type="checkbox" onclick="$('input[name*=\'selected\']').prop('checked', this.checked);" /></th>
+												<th class="text-center">{{ text_seller_name}}</th>
+												<!-- <th class="text-center">
+													<a href="{{ seller_commission_url}}" class="{% if order is defined and order == 'c.commission' %}{{ sort }}{%endif %}">
+														{{ text_commission}}
+													</a>
+												</th> -->
+												<th class="text-center">Seller Gross Income</th>												
+												<td class="text-center">Platform Fee</td>
+												<td class="text-center">Commission Fee</td>
+												<th class="text-center">Seller Total Income</th>
+
+												<th class="text-center">{{ text_admin_amount}}</th>
+												<th class="text-center">{{ text_paid_to_seller}}</th>
+												<th class="text-center">{{ text_rem_amount}}</th>
+												<th class="text-center">{{ text_action}}</th>
+											</tr>
+										</thead>
 									
-									<td class="text-center">Platform Fee</td>
-									<td class="text-center">Commission Fee</td>
-									<td class="text-center">Subscription Type</td>
+											<tr>
+												<td style="text-align: center;">
+													<input type="checkbox" name="selected[]" value="{{ income_detail['seller_id']}}" />
+												</td>
 
-									<th class="text-center">
-										<a href="{{ admin_url}}" class="{% if order is defined and order == 'admin' %}{{ sort }}{%endif %}">
-											{{ text_admin_amount}}
-										</a>
-									</th>
-									<th class="text-center">
-										<!-- <a > -->
-											{{ text_paid_to_seller}}
-										<!-- </a> -->
-									</th>
-									<th class="text-center">
-										<!-- <a > -->
-											{{ text_rem_amount}}
-										<!-- </a> -->
-									</th>
-									<th class="text-center">
-										{{ text_action}}
-									</th>
-								</tr>
-							</thead>
-							{% if income_details %}
-								{% for key, income_detail in income_details %}
-								<tr>
-									<td style="text-align: center;">
-				                    	<input type="checkbox" name="selected[]" value="{{ income_detail['seller_id']}}" />
-				                    </td>
+												<td class="text-center">
+													<a href="{{ income_detail['dashborad_url']}}" target="_blank" data-toggle="tooltip" data-original-title="{{ income_detail['firstname'] ~ text_dashboard}}" >
+														{{ income_detail['seller_name'] }}
+													</a>
+												</td>
+												<!-- <td class="text-center">
+													{{ income_detail['commission']}}
+												</td> -->
+												<td class="text-center">
+													{{ income_detail['total']}}
+												</td>
 
-									<td class="text-center">
-										<a href="{{ income_detail['dashborad_url']}}" target="_blank" data-toggle="tooltip" data-original-title="{{ income_detail['firstname'] ~ text_dashboard}}" >
-											{{ income_detail['seller_name'] }}
-										</a>
-									</td>
-									<!-- <td class="text-center">
-										{{ income_detail['commission']}}
-									</td> -->
-									<td class="text-center">
-										{{ income_detail['total']}}
-									</td>
-									<td class="text-center">
-										{{ income_detail['seller_total']}}
-									</td>
+												<td class="text-center">{{ income_detail['commission'] }}</td>
+												<td class="text-center">5.00%</td>
+												<td class="text-center">{{ income_detail['seller_total']}}</td>
 
-									<td class="text-center">{{ income_detail['commission'] }}</td>
-									<td class="text-center"></td>
-									<td class="text-center">
-										{% set subs = income_detail.subscriptions %}
-										{% if subs.subs_type == 3 %}
-											Commission Type
-										{% elseif subs.subs_type == 2 %}
-											Piso Per Month
-										{% elseif subs.subs_type == 1 %}
-											Piso Per Day
-										{% endif %}
-									</td>
+												<td class="text-center">
+													{{ income_detail['pfee_cfee']}}
+												</td>
+												<td class="text-center">
+													{{ income_detail['paid_total']}}
+												</td>
+												<td class="text-center">
+													{{ income_detail['amount_to_pay']}}
+												</td>
+												<td class="text-center">
+													<a href="{{ income_detail['pay_link']}}" class="btn btn-primary" {% if income_detail['button_status'] %}{{ 'disabled' }}{%endif %} >
+														{{ income_detail['pay']}}
+													</a>
+												</td>
+											</tr>
+											<tr>
+												<td class="text-center" colspan="2">
+													<b>{{ text_grand_total}}</b>
+												</td>
+												<td class="text-center">
+													{{ grand_total}}
+												</td>
+												<td class="text-center">
+													{{ grand_total_seller}}
+												</td>
+												
+												<td class="text-center">{{ income_detail['commission'] }}</td>
+												<td class="text-center">
+													
+												</td>
 
-									<td class="text-center">
-										{{ income_detail['admin_total']}}
-									</td>
-									<td class="text-center">
-										{{ income_detail['paid_total']}}
-									</td>
-									<td class="text-center">
-										{{ income_detail['amount_to_pay']}}
-									</td>
-									<td class="text-center">
-										<a href="{{ income_detail['pay_link']}}" class="btn btn-primary" {% if income_detail['button_status'] %}{{ 'disabled' }}{%endif %} >
-											{{ income_detail['pay']}}
-										</a>
-									</td>
-								</tr>
+												<td class="text-center">
+													{{ grand_total_admin}}
+												</td>
+												<td class="text-center">
+													{{ grand_total_paid}}
+												</td>
+												<td class="text-center">
+													{{ grand_total_rem}}
+												</td>
+												<td class="text-center"></td>
+											</tr>
+										{% else %}
+										<tr>
+											<td colspan="9" class="text-center">{{ no_records}}</td>
+										</tr>
+									</table>
+								{% endif %}
 							{% endfor %}
-								<tr>
-									<td class="text-center" colspan="2">
-										<b>{{ text_grand_total}}</b>
-									</td>
-									<td class="text-center">
-										{{ grand_total}}
-									</td>
-									<td class="text-center">
-										{{ grand_total_seller}}
-									</td>
-									
-									<td class="text-center">{{ income_detail['commission'] }}</td>
-									<td class="text-center">
-										
-									</td>
-
-									<td class="text-center">
-										{{ grand_total_admin}}
-									</td>
-									<td class="text-center">
-										{{ grand_total_paid}}
-									</td>
-									<td class="text-center">
-										{{ grand_total_rem}}
-									</td>
-									<td class="text-center"></td>
-								</tr>
-							{% else %}
-							<tr>
-								<td colspan="9" class="text-center">{{ no_records}}</td>
-							</tr>
-							{% endif %}
-						</table>
+						{% endif %}
 					</div>
+
+					{# {% if income_details %}
+						{% for key, income_detail in income_details %}
+							{% set subs = income_detail.subscriptions %}
+							{% if subs.subs_type == 3 %} <legend>Commission Type</legend>
+								<div class="table-responsive">
+									<table class="table table-bordered table-hover">
+										<thead>
+											<tr>
+												<th width="1" style="text-align: center;"><input type="checkbox" onclick="$('input[name*=\'selected\']').prop('checked', this.checked);" /></th>
+												<th class="text-center">
+													<a href="{{ seller_name_url}}" class="{% if order is defined and order == 'c.firstname' %}{{ sort }}{%endif %}">
+														{{ text_seller_name}}
+													</a>
+												</th>
+												<!-- <th class="text-center">
+													<a href="{{ seller_commission_url}}" class="{% if order is defined and order == 'c.commission' %}{{ sort }}{%endif %}">
+														{{ text_commission}}
+													</a>
+												</th> -->
+												<th class="text-center">
+													<a href="{{ total_url}}" class="{% if order is defined and order == 'total' %}{{ sort }}{%endif %}">
+														{{ text_total_amount}}
+													</a>
+												</th>
+												<th class="text-center">
+													<a href="{{ customer_url}}" class="{% if order is defined and order == 'customer' %}{{ sort }}{%endif %}">
+														{{ text_seller_amount}}
+													</a>
+												</th>
+												
+												<td class="text-center">Platform Fee</td>
+												
+												<th class="text-center">
+													<a href="{{ admin_url}}" class="{% if order is defined and order == 'admin' %}{{ sort }}{%endif %}">
+														{{ text_admin_amount}}
+													</a>
+												</th>
+												<th class="text-center">
+													<!-- <a > -->
+														{{ text_paid_to_seller}}
+													<!-- </a> -->
+												</th>
+												<th class="text-center">
+													<!-- <a > -->
+														{{ text_rem_amount}}
+													<!-- </a> -->
+												</th>
+												<th class="text-center">
+													{{ text_action}}
+												</th>
+											</tr>
+										</thead>
+											<tr>
+												<td style="text-align: center;">
+													<input type="checkbox" name="selected[]" value="{{ income_detail['seller_id']}}" />
+												</td>
+
+												<td class="text-center">
+													<a href="{{ income_detail['dashborad_url']}}" target="_blank" data-toggle="tooltip" data-original-title="{{ income_detail['firstname'] ~ text_dashboard}}" >
+														{{ income_detail['seller_name'] }}
+													</a>
+												</td>
+												<!-- <td class="text-center">
+													{{ income_detail['commission']}}
+												</td> -->
+												<td class="text-center">
+													{{ income_detail['total']}}
+												</td>
+												<td class="text-center">
+													{{ income_detail['seller_total']}}
+												</td>
+
+												<td class="text-center">{{ income_detail['commission'] }}</td>
+												<td class="text-center"></td>
+												<td class="text-center">
+													
+												</td>
+
+												<td class="text-center">
+													{{ income_detail['admin_total']}}
+												</td>
+												<td class="text-center">
+													{{ income_detail['paid_total']}}
+												</td>
+												<td class="text-center">
+													{{ income_detail['amount_to_pay']}}
+												</td>
+												<td class="text-center">
+													<a href="{{ income_detail['pay_link']}}" class="btn btn-primary" {% if income_detail['button_status'] %}{{ 'disabled' }}{%endif %} >
+														{{ income_detail['pay']}}
+													</a>
+												</td>
+											</tr>
+											<tr>
+												<td class="text-center" colspan="2">
+													<b>{{ text_grand_total}}</b>
+												</td>
+												<td class="text-center">
+													{{ grand_total}}
+												</td>
+												<td class="text-center">
+													{{ grand_total_seller}}
+												</td>
+												
+												<td class="text-center">{{ income_detail['commission'] }}</td>
+												<td class="text-center">
+													
+												</td>
+
+												<td class="text-center">
+													{{ grand_total_admin}}
+												</td>
+												<td class="text-center">
+													{{ grand_total_paid}}
+												</td>
+												<td class="text-center">
+													{{ grand_total_rem}}
+												</td>
+												<td class="text-center"></td>
+											</tr>
+										{% else %}
+										<tr>
+											<td colspan="9" class="text-center">{{ no_records}}</td>
+										</tr>
+										{% endif %}
+									</table>
+								{% endif %}	
+						</div> #}
 				</form>
 				<div class="row">
 					<div class="col-sm-6 text-left">{{ pagination}}</div>
@@ -395,5 +488,3 @@
 
 	});
 </script>
-
-{{ footer}}

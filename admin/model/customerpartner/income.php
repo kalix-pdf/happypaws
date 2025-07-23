@@ -2,6 +2,13 @@
 
 class ModelCustomerpartnerIncome extends Model
 {
+	public function getcommission($customer_id)
+	{
+		$query = $this->db->query("SELECT cms_commission_fee FROM " . DB_PREFIX ."customerpartner_to_order WHERE customer_id = '" . (int)$customer_id . "'");
+		return $query->rows; // this returns an array
+	}
+
+
 
 	public function getIncomeDetails(){
 		$sql = "SELECT cp2o.*,pd.name as product_name FROM ".DB_PREFIX."customerpartner_to_order cp2o LEFT JOIN ".DB_PREFIX."product p ON p.product_id = cp2o.product_id LEFT JOIN ".DB_PREFIX."product_description pd ON  cp2o.product_id = pd.product_id WHERE pd.language_id = ".$this->config->get('config_language_id')." ";
