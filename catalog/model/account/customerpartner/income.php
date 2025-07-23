@@ -32,7 +32,23 @@ class ModelAccountCustomerpartnerIncome extends Model {
                 break;
         }   
 
-        $sql .= "SELECT DATE_FORMAT(c2o.date_added,'".$format."') as date_display,c2o.date_added as date_start,pd.name,p.product_id,SUM(c2o.price) as product_total,SUM(c2o.admin) as admin_amount,SUM((c2o.customer)) as seller_amount, SUM(c2o.shipping_applied) as shipping_total, SUM(c2o.commission_applied) as comission_applied, (SUM(c2o.admin) + SUM(c2o.customer)) as order_total FROM " . DB_PREFIX . "customerpartner_to_order c2o LEFT JOIN " . DB_PREFIX . "product p ON(p.product_id = c2o.product_id) LEFT JOIN " . DB_PREFIX. "product_description pd  ON (p.product_id = pd.product_id) LEFT JOIN " . DB_PREFIX .  "customerpartner_to_product c2p ON(p.product_id=c2p.product_id) WHERE c2p.customer_id='" . $partner_id . "'";
+        $sql .= "SELECT DATE_FORMAT(c2o.date_added,'".$format."') as date_display,
+            c2o.date_added as date_start,
+            pd.name,
+            p.product_id,
+            ps.subs_type, 
+            SUM(c2o.price) as product_total,
+            SUM(c2o.admin) as admin_amount,
+            SUM((c2o.customer)) as seller_amount,
+            SUM(c2o.shipping_applied) as shipping_total,
+            SUM(c2o.commission_applied) as comission_applied,
+            (SUM(c2o.admin) + SUM(c2o.customer)) as order_total
+            FROM " . DB_PREFIX . "customerpartner_to_order c2o
+            LEFT JOIN " . DB_PREFIX . "product p ON(p.product_id = c2o.product_id)
+            LEFT JOIN " . DB_PREFIX . "product_description pd ON (p.product_id = pd.product_id)
+            LEFT JOIN " . DB_PREFIX . "customerpartner_to_product c2p ON(p.product_id=c2p.product_id)
+            LEFT JOIN product_subscription ps ON (p.product_id = ps.product_id)
+            WHERE c2p.customer_id='" . $partner_id . "'";
 
         if(!empty($filter_data['filter_custom_start']) && !empty($filter_data['filter_custom_end'])) {
             $sql .=" AND DATE(c2o.date_added) >= '".$this->db->escape($filter_data['filter_custom_start'])."' AND DATE(c2o.date_added) <= '".$this->db->escape($filter_data['filter_custom_end'])."'";
@@ -94,18 +110,25 @@ class ModelAccountCustomerpartnerIncome extends Model {
         } 
         
         $income_result = $this->db->query($sql)->rows;
-            foreach ($income_result as &$value) {
+           foreach ($income_result as &$value) {
                 $product_price = (float)$value['product_total'];
-                $commission = $product_price * 0.05;
                 $platform_fee = $product_price * 0.03;
+                $subs_type = isset($value['subs_type']) ? (int)$value['subs_type'] : 0;
+
+                if ($subs_type == 3) {
+                    $commission = $product_price * 0.05;
+                } else {
+                    $commission = 0;
+                }
+
                 $seller_income = $product_price - ($commission + $platform_fee);
 
                 $value['commission'] = $commission;
                 $value['platform_fee'] = $platform_fee;
                 $value['seller_income'] = $seller_income;
             }
-    return $income_result;
-}
+        return $income_result;
+    }
     public function orderWiseEarning($partner_id = 0,$filter_data = array(), $type = false) {
         
         $sql = '';
