@@ -246,8 +246,11 @@
                         <i class="fa fa-thumbs-o-up"></i>
                       </a>
                       {% else %}
-                       <a data-toggle="tooltip" title="{{ text_disapprove}}" class="btn btn-warning cp-pro-status" cp-pro-id="{{ product['product_id']}}">
+                       <a data-toggle="tooltip" title="Approve" class="btn btn-warning cp-pro-status" cp-pro-id="{{ product['product_id']}}">
                         <i class="fa fa-thumbs-o-up"></i>
+                      </a>
+                      <a data-toggle="tooltip" title="Reject" class="btn btn-danger cp-pro-reject" cp-pro-id="{{ product['product_id']}}">
+                        <i class="fa fa-thumbs-o-down"></i>
                       </a>
                       {% endif %}
                     </td>
@@ -502,6 +505,24 @@
           return false;
         }
       });
+
+      (function($wk_jq) {
+          $wk_jq('.cp-pro-status').on('click', function(){
+              if(confirm("{{ text_confirm_approve}}")){
+                url = '{{ approve}}&product_id='+$wk_jq(this).attr('cp-pro-id');
+            $wk_jq('#insert').attr('href',url).trigger('click');
+            location = url;
+              }
+          });
+          
+          // ADD REJECT FUNCTIONALITY HERE
+          $wk_jq('.cp-pro-reject').on('click', function(){
+              if(confirm("{{ text_confirm_reject}}")){
+                url = '{{ reject}}&product_id='+$wk_jq(this).attr('cp-pro-id');
+            location = url;
+              }
+          });
+      })(jQuery);
 
       $('input[name=\'filter_seller\']').autocomplete({
         delay: 0,

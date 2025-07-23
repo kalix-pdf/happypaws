@@ -203,22 +203,27 @@
                 <td class="text-center">
                   {% if customer['is_partner'] == "Normal customer" %}
                   <a onclick="$(this).parents('tr').find('input[type=\'checkbox\']').prop('checked',true);$('form').attr('action', '{{ approve}}&set_status=1'); $('form').submit();" data-toggle="tooltip" title="{{ button_approve}}" class="btn btn-success"><i class="fa fa-thumbs-o-up"></i></a>
+                  <a onclick="$(this).parents('tr').find('input[type=\'checkbox\']').prop('checked',true);$('form').attr('action', '{{ approve}}&set_status=2'); $('form').submit();" data-toggle="tooltip" title="Reject Seller" class="btn btn-danger"><i class="fa fa-thumbs-o-down"></i></a>
                   {% else %}
                     <button type="button" class="btn btn-success" disabled><i class="fa fa-thumbs-o-up"></i></button>
+                    
                   {% endif %}
                   <div class="btn-group" data-toggle="tooltip" title="{{ text_login}}">
                     <button type="button" data-toggle="dropdown" class="btn btn-info dropdown-toggle"><i class="fa fa-lock"></i></button>
+                    
                     <ul class="dropdown-menu pull-right">
                       <li><a href="index.php?route=customer/customer/login&user_token={{ user_token}}&customer_id={{ customer['customer_id']}}&store_id=0" target="_blank">{{ text_default}}</a></li>
 
                       {% for store in stores %}
                         <li><a href="index.php?route=customer/customer/login&user_token={{ user_token}}&customer_id={{ customer['customer_id']}}&store_id={{ store['store_id']}}" target="_blank">{{ store['name']}}</a></li>
+                        {# <li>try</li> #}
                       {% endfor %}
                     </ul>
                   </div>
                   {% if customer['is_partner'] != "Normal customer" %}
                     {% for action in customer['action'] %}
                       <a href="{{ action['href']}}" data-toggle="tooltip" title="{{ action['text']}}" class="btn btn-primary" > <i class="fa fa-pencil"></i></a>
+                      
                     {% endfor %}
                   {% endif %}
                 </td>

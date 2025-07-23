@@ -785,6 +785,12 @@ class ModelAccountCustomerpartner extends Model
 		return $query->rows;
 	}
 
+	public function getSellerSubsType() 
+	{
+		$query = $this->db->query("SELECT sbsType FROM `customer_to_documents`");
+		return $query->rows;
+	}
+
 	/**
 	 * [getSellerCommission to get seller's commission]
 	 * @param  [integer] $seller_id [particular seller id]
@@ -1522,7 +1528,7 @@ class ModelAccountCustomerpartner extends Model
 	 */
 	public function IsApplyForSellership()
 	{
-		$query = $this->db->query("SELECT customer_id FROM " . DB_PREFIX . "customerpartner_to_customer WHERE customer_id = '" . (int)$this->customer->getId() . "'")->row;
+		$query = $this->db->query("SELECT customer_id, is_partner FROM " . DB_PREFIX . "customerpartner_to_customer WHERE customer_id = '" . (int)$this->customer->getId() . "'")->row;
 
 		if ($query) {
 			return true;
@@ -1541,9 +1547,11 @@ class ModelAccountCustomerpartner extends Model
 		$sql = $this->db->query("SELECT * FROM " . DB_PREFIX . "customerpartner_to_customer WHERE customer_id = '" . (int)$this->customer->getId() . "'");
 
 		if (count($sql->row) && $sql->row['is_partner'] == 1) {
-			return true;
+			return 1;
+		} elseif (count($sql->row) && $sql->row['is_partner'] == 2) {
+			return 2;
 		} else {
-			return false;
+			return 0;
 		}
 	}
 

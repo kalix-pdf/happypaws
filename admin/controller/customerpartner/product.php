@@ -196,7 +196,11 @@ class ControllerCustomerpartnerProduct extends Controller {
 		$data['insert'] = $this->url->link('catalog/product/add', 'user_token=' . $this->session->data['user_token'] . $url . '&mpcheck=1', true);
 		$data['copy'] = $this->url->link('customerpartner/product/copy', 'user_token=' . $this->session->data['user_token'] . $url, true);
 		$data['approve'] = html_entity_decode($this->url->link('customerpartner/product/approve','user_token=' . $this->session->data['user_token'] . $url, true));
-		$data['delete'] = $this->url->link('customerpartner/product/delete', 'user_token=' . $this->session->data['user_token'] . $url, true);
+		//reject product link
+		$data['reject'] = html_entity_decode($this->url->link('customerpartner/product/reject','user_token=' . $this->session->data['user_token'] . $url, true));
+  		$data['text_reject'] = 'Reject Product';
+    	$data['text_confirm_reject'] = 'Are you sure you want to reject this product? This will permanently delete it.';
+    	$data['delete'] = $this->url->link('customerpartner/product/delete', 'user_token=' . $this->session->data['user_token'] . $url, true);
 
 		$data['products'] = array();
 
@@ -473,6 +477,23 @@ class ControllerCustomerpartnerProduct extends Controller {
 		$this->response->redirect($this->url->link('customerpartner/product', 'user_token=' . $this->session->data['user_token'] . $url, true));
 
   	}
+
+	//added a function to reject the product
+	public function reject() {
+		$this->load->language('customerpartner/product');
+		$this->document->setTitle($this->language->get('heading_title'));
+		$this->load->model('customerpartner/product');
+		
+		if ($this->validateDelete() AND isset($this->request->get['product_id'])) {
+			// Call the model reject method
+			$this->model_customerpartner_product->rejectProduct($this->request->get);
+			
+			$this->session->data['success'] = $this->language->get('text_success');
+		}
+		
+		// Redirect logic here...
+		$this->response->redirect($this->url->link('customerpartner/product', 'user_token=' . $this->session->data['user_token'], true));
+	}
 
   	private function validateDelete() {
     	if (!$this->user->hasPermission('modify', 'customerpartner/product')) {
