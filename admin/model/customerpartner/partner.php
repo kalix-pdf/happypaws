@@ -1302,7 +1302,25 @@ class ModelCustomerpartnerPartner extends Model {
 			$sub_query .= " )";
 		}
 
-		$sql = "SELECT SUM(c2o.quantity) quantity,(SUM(c2o.customer) + SUM(c2o.admin)) as total,SUM(c2o.admin) admin,SUM(c2o.customer) as customer, ".$sub_query." as paid FROM ".DB_PREFIX ."customerpartner_to_order c2o WHERE c2o.customer_id ='".(int)$partner_id."' ";
+		$sql = "SELECT 
+    SUM(c2o.quantity) AS quantity,
+    (SUM(c2o.customer) + SUM(c2o.admin)) AS total,
+    SUM((c2o.price * c2o.commission_applied) / 100) AS platfee,
+    SUM((c2o.price * c2o.cms_commission_fee) / 100) AS cms_commission_fee,
+    " . $sub_query . " AS paid,
+    AVG(c2o.commission_applied) AS commission_applied, 
+    (
+      ((AVG(c2o.commission_applied) / 100) * (SUM(c2o.customer) + SUM(c2o.admin))) + SUM((c2o.price * c2o.cms_commission_fee) / 100)
+    ) AS total_fee, 
+    (
+      (SUM(c2o.customer) + SUM(c2o.admin)) - 
+      (
+        ((AVG(c2o.commission_applied) / 100) * (SUM(c2o.customer) + SUM(c2o.admin))) + SUM((c2o.price * c2o.cms_commission_fee) / 100)
+      )
+    ) AS customer
+FROM " . DB_PREFIX . "customerpartner_to_order c2o 
+WHERE c2o.customer_id = '" . (int)$partner_id . "'";
+
 
 		if ($this->config->get('marketplace_complete_order_status')) {
 		  $sql .= " AND c2o.order_id IN (SELECT DISTINCT order_id FROM `" . DB_PREFIX . "order` o LEFT JOIN `" . DB_PREFIX . "order_status` os ON (o.order_status_id = os.order_status_id) WHERE os.order_status_id = '". $this->config->get('marketplace_complete_order_status') ."') ";
@@ -1351,7 +1369,7 @@ class ModelCustomerpartnerPartner extends Model {
 		}
 
 		$total = $this->db->query($sql)->row;
-
+		
 		return($total);
 	}
 
@@ -1407,6 +1425,9 @@ class ModelCustomerpartnerPartner extends Model {
 				$sql .= " AND o.date_added <= '".$filter_data['date_added_to']."' ";
 			}
 		}
+		// echo "<pre>";
+		// print_r($this->db->query($sql));
+		// echo "</pre>";
 
 		if($filter_data['order_id']) {
 			$sql .= " AND op.order_id = '".$filter_data['order_id']."' " ;

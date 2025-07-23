@@ -232,7 +232,7 @@ class ModelAccountCustomerpartnerOrder extends Model
 
 					if ($subs_type === 3) {
 
-						$cms_commission_fee = $price * 0.05;
+						$cms_commission_fee = 5.00;
 						
 					}
 
@@ -618,8 +618,11 @@ if(isset($this->session->data['order_id']) && $this->config->get('marketplace_ma
 
 						default: //just get all amount and process on that (precentage based)
 							$customer_commission = $this->getCustomerCommission($customer_id);
+							$cms_commission = $this->getCmsCommissionFee($customer_id);
+							$this->log->write("cms fee: " . $cms_commission);
 							if ($customer_commission) {
 								$commission_amount += $customer_commission['commission'] ? ($customer_commission['commission'] * $product['product_total'] / 100) : 0;
+								$cms_commission = ($cms_commission * $product['product_total'] / 100);
 							}
 
 							$commission_type = 'Partner Fixed Based';
@@ -644,13 +647,22 @@ if(isset($this->session->data['order_id']) && $this->config->get('marketplace_ma
 					$commission_type = 'Membership Based';
 				}
 			}
-			$customer = $this->config->get('marketplace_commission_unit_price') ? $product['product_total'] : $product['product_total'] - $commission_amount;
+			$total_fee = $cms_commission + $commission_amount ;
+			$this->log->write("total fee: " . $total_fee);
+			$this->log->write("platform fee: " . $commission_amount);
+			$this->log->write("commission fee: " . $cms_commission);
+
+			$customer = $this->config->get('marketplace_commission_unit_price')
+				? $product['product_total']
+				: $product['product_total'] - $total_fee;
+
+
 			if ($customer < 0) {
 				$commission_amount = $commission_amount + $customer;
 				$customer = 0;
 			}
 			$return_array = array(
-				'commission' => $commission_amount,
+				'commission' => $total_fee,
 				'customer' => $customer,
 				'type' => $commission_type,
 			);
@@ -877,6 +889,15 @@ if(isset($this->session->data['order_id']) && $this->config->get('marketplace_ma
 	{
 		$query = $this->db->query("SELECT * FROM " . DB_PREFIX . "customerpartner_commission_category WHERE category_id = '" . (int)$category_id . "'");
 		return $query->row;
+	}
+
+	public function getCmsCommissionFee($customer_id)
+	{
+		$query = $this->db->query("SELECT * FROM `product_subscription` WHERE seller_id = '" . (int)$customer_id ."'");
+		if ($query->row['subs_type'] == 3) {
+			return $query->row['duration'];
+		}
+		
 	}
 
 	public function getCustomerCommission($customer_id)

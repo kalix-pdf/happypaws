@@ -150,10 +150,6 @@
 				</div>
 				<form action="{{ masspayout}}" method="post" enctype="multipart/form-data" id="form-income">
 					<div class="table-responsive">
-						{% if income_details %}
-							{% for key, income_detail in income_details %}
-								{% set subs = income_detail.subscriptions %}
-								{% if subs.subs_type == 3 %} <legend>Commission Type</legend>
 									<table class="table table-bordered table-hover">
 										<thead>
 											<tr>
@@ -165,8 +161,8 @@
 													</a>
 												</th> -->
 												<th class="text-center">Seller Gross Income</th>												
-												<td class="text-center">Platform Fee</td>
-												<td class="text-center">Commission Fee</td>
+												<td class="text-center">Platform Fee 3%</td>
+												<td class="text-center">Commission Fee 5%</td>
 												<th class="text-center">Seller Total Income</th>
 
 												<th class="text-center">{{ text_admin_amount}}</th>
@@ -175,7 +171,9 @@
 												<th class="text-center">{{ text_action}}</th>
 											</tr>
 										</thead>
-									
+										{% if income_details %}
+											{% for key, income_detail in income_details %}
+											{% set subs = income_detail.subscriptions %}
 											<tr>
 												<td style="text-align: center;">
 													<input type="checkbox" name="selected[]" value="{{ income_detail['seller_id']}}" />
@@ -193,12 +191,12 @@
 													{{ income_detail['total']}}
 												</td>
 
-												<td class="text-center">{{ income_detail['commission'] }}</td>
-												<td class="text-center">5.00%</td>
+												<td class="text-center">{{ income_detail['platform_fee'] }}</td>
+												<td class="text-center">{{ income_detail['commission_fee'] }}</td>
 												<td class="text-center">{{ income_detail['seller_total']}}</td>
 
 												<td class="text-center">
-													{{ income_detail['pfee_cfee']}}
+													{{ income_detail['admin_total']}}
 												</td>
 												<td class="text-center">
 													{{ income_detail['paid_total']}}
@@ -212,6 +210,7 @@
 													</a>
 												</td>
 											</tr>
+											{% endfor %}
 											<tr>
 												<td class="text-center" colspan="2">
 													<b>{{ text_grand_total}}</b>
@@ -219,11 +218,9 @@
 												<td class="text-center">
 													{{ grand_total}}
 												</td>
-												<td class="text-center">
-													{{ grand_total_seller}}
-												</td>
+												<td class="text-center">{{ grand_total_platform_fee }}</td>
 												
-												<td class="text-center">{{ income_detail['commission'] }}</td>
+												<td class="text-center">{{ grand_total_commission }}</td>
 												<td class="text-center">
 													
 												</td>
@@ -243,10 +240,8 @@
 										<tr>
 											<td colspan="9" class="text-center">{{ no_records}}</td>
 										</tr>
-									</table>
-								{% endif %}
-							{% endfor %}
-						{% endif %}
+									</table>				
+								{% endif %}		
 					</div>
 
 					{# {% if income_details %}

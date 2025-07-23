@@ -5,9 +5,8 @@ class ModelCustomerpartnerIncome extends Model
 	public function getcommission($customer_id)
 	{
 		$query = $this->db->query("SELECT cms_commission_fee FROM " . DB_PREFIX ."customerpartner_to_order WHERE customer_id = '" . (int)$customer_id . "'");
-		return $query->rows; // this returns an array
+		return $query->rows; 
 	}
-
 
 
 	public function getIncomeDetails(){
