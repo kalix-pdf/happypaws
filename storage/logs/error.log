@@ -5698,3 +5698,5 @@
 )
 
 2025-07-22 16:04:23 - PHP Warning:  mysqli::query(): (42S02/1146): Table 'smesoftc_hp.oc_product_subscription' doesn't exist in C:\xampp\htdocs\hp\system\library\db\mysqli.php on line 25
+2025-07-23 13:20:57 - PHP Warning:  Undefined variable $comission in C:\xampp\htdocs\hp\admin\model\customerpartner\partner.php on line 1121
+2025-07-23 13:20:57 - PHP Warning:  Attempt to read property "row" on null in C:\xampp\htdocs\hp\admin\model\customerpartner\partner.php on line 1121
