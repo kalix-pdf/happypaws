@@ -800,6 +800,7 @@ class ControllerExtensionModuleMarketplace extends Controller
 			$data['logged'] = $this->customer->isLogged() ? 1 : 0;
 			$data['chkIsPartner'] = $this->model_account_customerpartner->chkIsPartner();
 			$data['marketplace_seller_mode'] = isset($this->session->data['marketplace_seller_mode']) ? $this->session->data['marketplace_seller_mode'] : 1;
+
 			if ($data['chkIsPartner'] && $data['marketplace_seller_mode']) {
 				$data['notification'] = $this->load->controller('account/customerpartner/notification/notifications');
 
