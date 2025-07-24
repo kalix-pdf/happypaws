@@ -198,8 +198,8 @@ class ControllerCustomerpartnerProduct extends Controller {
 		$data['approve'] = html_entity_decode($this->url->link('customerpartner/product/approve','user_token=' . $this->session->data['user_token'] . $url, true));
 		//reject product link
 		$data['reject'] = html_entity_decode($this->url->link('customerpartner/product/reject','user_token=' . $this->session->data['user_token'] . $url, true));
-  		$data['text_reject'] = 'Reject Product';
-    	$data['text_confirm_reject'] = 'Are you sure you want to reject this product? This will permanently delete it.';
+		$data['text_reject'] = 'Reject Product';
+		$data['text_confirm_reject'] = 'Are you sure you want to reject this product? It will be marked as rejected but kept in the database.';
     	$data['delete'] = $this->url->link('customerpartner/product/delete', 'user_token=' . $this->session->data['user_token'] . $url, true);
 
 		$data['products'] = array();
@@ -419,23 +419,21 @@ class ControllerCustomerpartnerProduct extends Controller {
 
 
   	public function approve() {
-
-    	$this->load->language('customerpartner/product');
-
-    	$this->document->setTitle($this->language->get('heading_title'));
-
+		$this->load->language('customerpartner/product');
+		$this->document->setTitle($this->language->get('heading_title'));
 		$this->load->model('customerpartner/product');
 
-    	if ($this->validateDelete() AND isset($this->request->get['product_id'])) {
-
+		// Remove the validateDelete() check or replace it
+		if (isset($this->request->get['product_id'])) {
 			$this->model_customerpartner_product->addProduct($this->request->get);
-
+			
 			// DATE APPROVAL
 			$this->model_customerpartner_product->addSubscription($this->request->get['product_id']);
-
+			
 			$this->session->data['success'] = $this->language->get('text_success');
 		}
 
+		// Build redirect URL
 		$url = '';
 
 		if (isset($this->request->get['filter_name'])) {
@@ -475,8 +473,7 @@ class ControllerCustomerpartnerProduct extends Controller {
 		}
 
 		$this->response->redirect($this->url->link('customerpartner/product', 'user_token=' . $this->session->data['user_token'] . $url, true));
-
-  	}
+	}
 
 	//added a function to reject the product
 	public function reject() {
@@ -484,29 +481,20 @@ class ControllerCustomerpartnerProduct extends Controller {
 		$this->document->setTitle($this->language->get('heading_title'));
 		$this->load->model('customerpartner/product');
 		
-		if ($this->validateDelete() AND isset($this->request->get['product_id'])) {
-			// Call the model reject method
-			$this->model_customerpartner_product->rejectProduct($this->request->get);
+		// Simple validation - just check if product_id exists
+		if (isset($this->request->get['product_id'])) {
+			// Get rejection reason if provided
+			$reason = isset($this->request->get['reason']) ? $this->request->get['reason'] : '';
 			
-			$this->session->data['success'] = $this->language->get('text_success');
+			// Call the model reject method with proper parameters
+			$this->model_customerpartner_product->rejectProduct((int)$this->request->get['product_id'], $reason);
+			
+			$this->session->data['success'] = 'Product has been rejected successfully!';
 		}
 		
-		// Redirect logic here...
+		// Redirect back to the product list
 		$this->response->redirect($this->url->link('customerpartner/product', 'user_token=' . $this->session->data['user_token'], true));
 	}
-
-  	private function validateDelete() {
-    	if (!$this->user->hasPermission('modify', 'customerpartner/product')) {
-      		$this->error['warning'] = $this->language->get('error_permission');
-					$this->session->data['warning'] = $this->language->get('error_permission');
-    	}
-
-		if (!$this->error) {
-	  		return true;
-		} else {
-	  		return false;
-		}
-  	}
 
 	public function autocomplete() {
 

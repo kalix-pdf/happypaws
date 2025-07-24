@@ -36,6 +36,8 @@ $_['text_order_return_mp']             	= '<b>%s</b> has requested for order ret
 $_['text_product_review_mp']	            = 'New review: #%s has been placed by <b>%s</b> For product <a href="index.php?route=catalog/review&user_token=%s&filter_product=%s" target="_blank">#%s</a> - <b>%s ago</b>';
 $_['text_seller_review_mp']	            = 'New review: #%s has been placed by <a href="index.php?route=customerpartner/review&user_token=%s&filter_customer=%s" target="_blank"><b>%s</b></a> - <b>%s ago</b>';
 $_['text_order_status_mp']	              = 'Order: <a href="index.php?route=sale/order/info&user_token=%s&order_id=%s" target="_blank">#%s</a> status has been changed to <b>%s</b> - <b>%s ago</b>';
+$_['text_product_reject'] = 'Product <a href="index.php?route=catalog/product/edit&user_token=%s&product_id=%s">%s</a> has been rejected%s - %s ago';
+$_['text_product_reject_mp'] = 'Product %s rejected - %s ago';
 
 //tab
 $_['tab_order']						             = 'Order';

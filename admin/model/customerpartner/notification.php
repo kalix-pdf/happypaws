@@ -180,6 +180,12 @@ class ModelCustomerpartnerNotification extends Model {
 		return $query;
 	}
 
+	public function getProductRejectTotal() {
+		$sql = "SELECT * FROM ".DB_PREFIX."mp_customer_activity mca WHERE mca.key = 'product_reject'";
+		$query = $this->db->query($sql)->num_rows;
+		return $query;
+	}
+
 	/**
 	 * [getProductActivity is used to get the product activity details]
 	 * @param  array  $options [description]
@@ -198,6 +204,59 @@ class ModelCustomerpartnerNotification extends Model {
 
 			$query = $this->db->query($sql)->rows;
 			return $query;
+	}
+
+	/**
+	 * [getProductRejectActivity is used to get the product rejection activity details]
+	 * @param  array  $options [description]
+	 * @return [array]          [array of product rejection activities]
+	 */
+	public function getProductRejectActivity($options = array(), $limit = 10) {
+		$sql = "SELECT DISTINCT mca.* FROM ".DB_PREFIX."mp_customer_activity mca WHERE mca.key = 'product_reject'";
+
+		$start = 0;
+
+		if (isset($this->request->get['page_reject']) && $this->request->get['page_reject'] != '{page}') {
+			$start = ($this->request->get['page_reject']-1)*10;
+		}
+
+		$sql .= " ORDER BY mca.date_added DESC LIMIT ".$start.",".$limit;
+
+		$query = $this->db->query($sql)->rows;
+		return $query;
+	}
+
+	/**
+	 * [getSellerProductRejectActivity is used to get product rejection activities for a specific seller]
+	 * @param  integer $seller_id [seller customer id]
+	 * @param  integer $limit     [limit of results]
+	 * @return [array]            [array of rejection activities for the seller]
+	 */
+	public function getSellerProductRejectActivity($seller_id, $limit = 10) {
+		$sql = "SELECT mca.* FROM ".DB_PREFIX."mp_customer_activity mca 
+				LEFT JOIN ".DB_PREFIX."seller_activity sa ON (mca.activity_id = sa.activity_id) 
+				WHERE mca.key = 'product_reject' AND sa.seller_id = '" . (int)$seller_id . "'";
+
+		$sql .= " ORDER BY mca.date_added DESC LIMIT " . (int)$limit;
+
+		$query = $this->db->query($sql)->rows;
+		
+		// Parse the data for easier use
+		$activities = array();
+		foreach ($query as $row) {
+			$data = json_decode($row['data'], true);
+			$activities[] = array(
+				'activity_id' => $row['activity_id'],
+				'product_id' => isset($data['product_id']) ? $data['product_id'] : $row['id'],
+				'product_name' => isset($data['product_name']) ? $data['product_name'] : '',
+				'reason' => isset($data['reason']) ? $data['reason'] : '',
+				'date_rejected' => isset($data['date_rejected']) ? $data['date_rejected'] : '',
+				'date_added' => $row['date_added'],
+				'ip' => $row['ip']
+			);
+		}
+		
+		return $activities;
 	}
 
 	/**

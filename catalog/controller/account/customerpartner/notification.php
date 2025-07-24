@@ -237,6 +237,56 @@ class ControllerAccountCustomerpartnerNotification extends Controller
 			}
 		}
 
+		$seller_product_rejections = $this->model_account_notification->getSellerProductRejectActivity($this->customer->getId());
+
+		$seller_product_rejections_total = $this->model_account_notification->getSellerProductRejectActivityTotal($this->customer->getId());
+
+		$data['seller_product_rejections'] = array();
+
+		if ($seller_product_rejections) {
+			foreach ($seller_product_rejections as $key => $seller_product_rejection) {
+				
+				$date_diff = (array)(new DateTime($seller_product_rejection['date_added']))->diff(new DateTime());
+
+				if (isset($date_diff['y']) && $date_diff['y']) {
+					$seller_product_rejection['date_added'] = $date_diff['y'] . ' ' . $this->language->get('text_years');
+				} elseif (isset($date_diff['m']) && $date_diff['m']) {
+					$seller_product_rejection['date_added'] = $date_diff['m'] . ' ' . $this->language->get('text_months');
+				} elseif (isset($date_diff['d']) && $date_diff['d']) {
+					$seller_product_rejection['date_added'] = $date_diff['d'] . ' ' . $this->language->get('text_days');
+				} elseif (isset($date_diff['h']) && $date_diff['h']) {
+					$seller_product_rejection['date_added'] = $date_diff['h'] . ' ' . $this->language->get('text_hours');
+				} elseif (isset($date_diff['i']) && $date_diff['i']) {
+					$seller_product_rejection['date_added'] = $date_diff['i'] . ' ' . $this->language->get('text_minutes');
+				} else {
+					$seller_product_rejection['date_added'] = $date_diff['s'] . ' ' . $this->language->get('text_seconds');
+				}
+
+				$rejection_data = json_decode($seller_product_rejection['data'], true);
+				
+				if ($seller_product_rejection['key'] == 'product_reject') {
+					$reason_text = !empty($rejection_data['reason']) ? 
+						' (Reason: ' . $rejection_data['reason'] . ')' : '';
+					
+					$data['seller_product_rejections'][] = sprintf(
+						'Your product <strong>%s</strong> has been rejected%s - %s ago',
+						isset($rejection_data['product_name']) ? $rejection_data['product_name'] : 'Unknown Product',
+						$reason_text,
+						$seller_product_rejection['date_added']
+					);
+				}
+			}
+		}
+
+		$data['product_reject_total'] = $seller_product_rejections_total;
+
+		// Add pagination for product rejections
+		if (isset($this->request->get['page_reject'])) {
+			$page_reject = $this->request->get['page_reject'];
+		} else {
+			$page_reject = 1;
+		}
+
 		$data['seller_reviews'] = array();
 
 		$seller_reviews = $this->model_account_notification->getSellerReviews();
@@ -296,22 +346,48 @@ class ControllerAccountCustomerpartnerNotification extends Controller
 			}
 		}
 
-		if (isset($this->request->get['page'])) {
-			$page = $this->request->get['page'];
+		if (isset($this->request->get['page']) && is_numeric($this->request->get['page'])) {
+			$page = (int)$this->request->get['page'];
 		} else {
 			$page = 1;
 		}
 
-		if (isset($this->request->get['page_product'])) {
-			$page_product = $this->request->get['page_product'];
+		if (isset($this->request->get['page_product']) && is_numeric($this->request->get['page_product'])) {
+			$page_product = (int)$this->request->get['page_product'];
 		} else {
 			$page_product = 1;
 		}
 
-		if (isset($this->request->get['page_seller'])) {
-			$page_seller = $this->request->get['page_seller'];
+		if (isset($this->request->get['page_seller']) && is_numeric($this->request->get['page_seller'])) {
+			$page_seller = (int)$this->request->get['page_seller'];
 		} else {
 			$page_seller = 1;
+		}
+
+		if (isset($this->request->get['page_reject']) && is_numeric($this->request->get['page_reject'])) {
+			$page_reject = (int)$this->request->get['page_reject'];
+		} else {
+			$page_reject = 1;
+		}
+
+		$page = max(1, $page);
+		$page_product = max(1, $page_product);
+		$page_seller = max(1, $page_seller);
+		$page_reject = max(1, $page_reject);
+
+		$seller_notifications_total = (int)$this->model_account_notification->getTotalSellerActivity($data['selected']);
+		$seller_product_reviews_total = (int)$this->model_account_notification->getSellerProductActivityTotal();
+		$seller_product_rejections_total = (int)$this->model_account_notification->getSellerProductRejectActivityTotal($this->customer->getId());
+		$seller_reviews_total = (int)$this->model_account_notification->getSellerReviewsTotal();
+
+		$seller_product_rejections_total = (int)$seller_product_rejections_total;
+
+		$data['page'] = $page;
+
+		$url = '';
+
+		if (isset($this->request->get['options'])) {
+			$url = '&options=' . $this->request->get['options'];
 		}
 
 		$data['page'] = $page;
@@ -335,16 +411,51 @@ class ControllerAccountCustomerpartnerNotification extends Controller
 
 		//Pagination For Product Tab
 		$pagination_product = new Pagination();
-		$pagination_product->total = $seller_product_reviews_total;
-		$pagination_product->page = $page_product;
+		$pagination_product->total = (int)$seller_product_reviews_total;
+		$pagination_product->page = (int)$page_product;
 		$pagination_product->limit = 10;
-		$pagination_product->url = $this->url->link('account/customerpartner/notification', $url . '&page_product={page}&page=' . $page . '&page_seller=' . $page_seller . 'tab=product', true);
+		$pagination_product->url = $this->url->link('account/customerpartner/notification', $url . '&page_product={page}&page=' . $page . '&page_seller=' . $page_seller . '&tab=product', true);
 
 		$data['pagination_product'] = $pagination_product->render();
 
-		$data['results_product'] = sprintf($this->language->get('text_pagination'), ($seller_product_reviews_total) ? (($page - 1) * 10) + 1 : 0, ((($page - 1) * 10) > ($seller_product_reviews_total - 10)) ? $seller_product_reviews_total : ((($page - 1) * 10) + 10), $seller_product_reviews_total, ceil($seller_product_reviews_total / 10));
+		if ($seller_product_reviews_total > 0) {
+			$start_result = (($page_product - 1) * 10) + 1;
+			$end_result = min($page_product * 10, $seller_product_reviews_total);
+		} else {
+			$start_result = 0;
+			$end_result = 0;
+		}
 
-		$seller_reviews_total = $seller_reviews_total + $categories_total;
+		$data['results_product'] = sprintf($this->language->get('text_pagination'), 
+			$start_result, 
+			$end_result, 
+			$seller_product_reviews_total, 
+			ceil($seller_product_reviews_total / 10)
+		);
+
+		//Pagination For Product Rejection Tab
+		$pagination_reject = new Pagination();
+		$pagination_reject->total = $seller_product_rejections_total;
+		$pagination_reject->page = $page_reject;
+		$pagination_reject->limit = 10;
+		$pagination_reject->url = $this->url->link('account/customerpartner/notification', $url . '&page_reject={page}&page=' . $page . '&page_product=' . $page_product . '&page_seller=' . $page_seller . '&tab=product-reject', true);
+
+		$data['pagination_reject'] = $pagination_reject->render();
+
+		if ($seller_product_rejections_total > 0) {
+			$start_result = (($page_reject - 1) * 10) + 1;
+			$end_result = min($page_reject * 10, $seller_product_rejections_total);
+		} else {
+			$start_result = 0;
+			$end_result = 0;
+		}
+
+		$data['results_reject'] = sprintf($this->language->get('text_pagination'), 
+			$start_result, 
+			$end_result, 
+			$seller_product_rejections_total, 
+			ceil($seller_product_rejections_total / 10)
+		);
 
 		//Pagination For Seller Tab
 		$pagination_seller = new Pagination();
@@ -541,6 +652,48 @@ class ControllerAccountCustomerpartnerNotification extends Controller
 					}
 				}
 			}
+
+			$data['product_reject_total'] = $this->model_account_notification->getSellerProductRejectActivityTotal($this->customer->getId());
+
+			$seller_product_rejections = $this->model_account_notification->getSellerProductRejectActivity($this->customer->getId(), 3);
+
+			if ($seller_product_rejections) {
+				foreach ($seller_product_rejections as $key => $seller_product_rejection) {
+					
+					$date_diff = (array)(new DateTime($seller_product_rejection['date_added']))->diff(new DateTime());
+
+					if (isset($date_diff['y']) && $date_diff['y']) {
+						$seller_product_rejection['date_added'] = $date_diff['y'] . ' ' . $this->language->get('text_years');
+					} elseif (isset($date_diff['m']) && $date_diff['m']) {
+						$seller_product_rejection['date_added'] = $date_diff['m'] . ' ' . $this->language->get('text_months');
+					} elseif (isset($date_diff['d']) && $date_diff['d']) {
+						$seller_product_rejection['date_added'] = $date_diff['d'] . ' ' . $this->language->get('text_days');
+					} elseif (isset($date_diff['h']) && $date_diff['h']) {
+						$seller_product_rejection['date_added'] = $date_diff['h'] . ' ' . $this->language->get('text_hours');
+					} elseif (isset($date_diff['i']) && $date_diff['i']) {
+						$seller_product_rejection['date_added'] = $date_diff['i'] . ' ' . $this->language->get('text_minutes');
+					} else {
+						$seller_product_rejection['date_added'] = $date_diff['s'] . ' ' . $this->language->get('text_seconds');
+					}
+
+					$rejection_data = json_decode($seller_product_rejection['data'], true);
+					
+					if ($seller_product_rejection['key'] == 'product_reject') {
+						$data['seller_product_reviews'][] = sprintf(
+							'Product %s rejected - %s ago',
+							isset($rejection_data['product_name']) ? $rejection_data['product_name'] : 'Unknown Product',
+							$seller_product_rejection['date_added']
+						);
+					}
+				}
+			}
+
+			// Update the notification total calculation to include rejections
+			$data['notification_total'] = $this->model_account_notification->getTotalSellerActivity() + 
+										$this->model_account_notification->getSellerProductActivityTotal() + 
+										$this->model_account_notification->getSellerReviewsTotal() + 
+										$data['product_reject_total'] - 
+										$this->model_account_notification->getViewedNotifications();
 
 			$categories = $this->model_account_notification->getSellerCategoryActivity();
 

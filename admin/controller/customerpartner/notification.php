@@ -158,6 +158,48 @@ class ControllerCustomerpartnerNotification extends Controller {
 			}
 		}
 
+		$data['seller_product_rejections'] = array();
+
+		$seller_product_rejections = $this->model_customerpartner_notification->getProductRejectActivity();
+
+		$seller_product_rejections_total = $this->model_customerpartner_notification->getProductRejectTotal();
+
+		if ($seller_product_rejections) {
+			foreach ($seller_product_rejections as $key => $seller_product_rejection) {
+				
+				$date_diff = (array)(new DateTime($seller_product_rejection['date_added']))->diff(new DateTime());
+
+				if (isset($date_diff['y']) && $date_diff['y']) {
+					$seller_product_rejection['date_added'] = $date_diff['y'].' year(s)';
+				} elseif (isset($date_diff['m']) && $date_diff['m']) {
+					$seller_product_rejection['date_added'] = $date_diff['m'].' month(s)';
+				} elseif (isset($date_diff['d']) && $date_diff['d']) {
+					$seller_product_rejection['date_added'] = $date_diff['d'].' day(s)';
+				} elseif (isset($date_diff['h']) && $date_diff['h']) {
+					$seller_product_rejection['date_added'] = $date_diff['h'].' hour(s)';
+				} elseif (isset($date_diff['i']) && $date_diff['i']) {
+					$seller_product_rejection['date_added'] = $date_diff['i'].' minute(s)';
+				} else {
+					$seller_product_rejection['date_added'] = $date_diff['s'].' second(s)';
+				}
+
+				$seller_product_rejection['data'] = json_decode($seller_product_rejection['data'], true);
+				
+				if ($seller_product_rejection['key'] == 'product_reject') {
+					$reason_text = !empty($seller_product_rejection['data']['reason']) ? 
+						' (Reason: ' . $seller_product_rejection['data']['reason'] . ')' : '';
+					
+					$data['seller_product_rejections'][] = sprintf(
+						'Product <a href="%s">%s</a> has been rejected%s - %s ago',
+						$this->url->link('catalog/product/edit', 'user_token=' . $this->session->data['user_token'] . '&product_id=' . $seller_product_rejection['data']['product_id'], true),
+						$seller_product_rejection['data']['product_name'],
+						$reason_text,
+						$seller_product_rejection['date_added']
+					);
+				}
+			}
+		}
+
 		$data['seller_reviews'] = array();
 
 		$seller_reviews = $this->model_customerpartner_notification->getSellerReviews();
@@ -415,6 +457,48 @@ class ControllerCustomerpartnerNotification extends Controller {
 						}
 					}
 				}
+
+				$data['product_reject_total'] = $this->model_customerpartner_notification->getProductRejectTotal();
+
+				$seller_product_rejections = $this->model_customerpartner_notification->getProductRejectActivity(array(), 3);
+
+				if ($seller_product_rejections) {
+					foreach ($seller_product_rejections as $key => $seller_product_rejection) {
+						
+						$date_diff = (array)(new DateTime($seller_product_rejection['date_added']))->diff(new DateTime());
+
+						if (isset($date_diff['y']) && $date_diff['y']) {
+							$seller_product_rejection['date_added'] = $date_diff['y'].' year(s)';
+						} elseif (isset($date_diff['m']) && $date_diff['m']) {
+							$seller_product_rejection['date_added'] = $date_diff['m'].' month(s)';
+						} elseif (isset($date_diff['d']) && $date_diff['d']) {
+							$seller_product_rejection['date_added'] = $date_diff['d'].' day(s)';
+						} elseif (isset($date_diff['h']) && $date_diff['h']) {
+							$seller_product_rejection['date_added'] = $date_diff['h'].' hour(s)';
+						} elseif (isset($date_diff['i']) && $date_diff['i']) {
+							$seller_product_rejection['date_added'] = $date_diff['i'].' minute(s)';
+						} else {
+							$seller_product_rejection['date_added'] = $date_diff['s'].' second(s)';
+						}
+
+						$seller_product_rejection['data'] = json_decode($seller_product_rejection['data'], true);
+						
+						if ($seller_product_rejection['key'] == 'product_reject') {
+							$data['seller_product_reviews'][] = sprintf(
+								'Product %s rejected - %s ago',
+								$seller_product_rejection['data']['product_name'],
+								$seller_product_rejection['date_added']
+							);
+						}
+					}
+				}
+
+				// Update the alerts count to include rejections
+				$data['alerts'] = $this->model_customerpartner_notification->getActivityCount() + 
+								$data['product_review_total'] + 
+								$data['seller_review_total'] + 
+								$data['product_reject_total'] + 
+								$categories_total;
 
 				$data['seller_reviews'] = array();
 

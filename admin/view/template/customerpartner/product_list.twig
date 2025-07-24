@@ -118,6 +118,11 @@
                   {% else %}
                     <option value="0">{{ text_disabled}}</option>
                   {% endif %}
+                  {% if filter_status == '-1' %}
+                    <option value="-1" selected="selected">Rejected</option>
+                  {% else %}
+                    <option value="-1">Rejected</option>
+                  {% endif %}
                 </select>
               </div>
 
@@ -245,13 +250,17 @@
                       <a data-toggle="tooltip" title="{{ text_approve}}" class="btn btn-success">
                         <i class="fa fa-thumbs-o-up"></i>
                       </a>
+                      {% elseif product['status'] == -1 %}
+                        <a data-toggle="tooltip" title="Rejected" class="btn btn-danger disabled">
+                          <i class="fa fa-ban"></i>
+                        </a>
                       {% else %}
-                       <a data-toggle="tooltip" title="Approve" class="btn btn-warning cp-pro-status" cp-pro-id="{{ product['product_id']}}">
-                        <i class="fa fa-thumbs-o-up"></i>
-                      </a>
-                      <a data-toggle="tooltip" title="Reject" class="btn btn-danger cp-pro-reject" cp-pro-id="{{ product['product_id']}}">
-                        <i class="fa fa-thumbs-o-down"></i>
-                      </a>
+                        <a data-toggle="tooltip" title="Approve" class="btn btn-warning cp-pro-status" cp-pro-id="{{ product['product_id']}}">
+                          <i class="fa fa-thumbs-o-up"></i>
+                        </a>
+                        <a data-toggle="tooltip" title="Reject" class="btn btn-danger cp-pro-reject" cp-pro-id="{{ product['product_id']}}">
+                          <i class="fa fa-thumbs-o-down"></i>
+                        </a>
                       {% endif %}
                     </td>
                       {% set product_subs = subscriptions[product.product_id] %}
@@ -408,37 +417,31 @@
         url = 'index.php?route=customerpartner/product&user_token={{ user_token}}';
 
         var filter_name = $('input[name=\'filter_name\']').val();
-
         if (filter_name) {
           url += '&filter_name=' + encodeURIComponent(filter_name);
         }
 
         var filter_seller = $('input[name=\'filter_seller\']').val();
-
         if (filter_seller) {
           url += '&filter_seller=' + encodeURIComponent(filter_seller);
         }
 
         var filter_model = $('input[name=\'filter_model\']').val();
-
         if (filter_model) {
           url += '&filter_model=' + encodeURIComponent(filter_model);
         }
 
         var filter_price = $('input[name=\'filter_price\']').val();
-
         if (filter_price) {
           url += '&filter_price=' + encodeURIComponent(filter_price);
         }
 
         var filter_quantity = $('input[name=\'filter_quantity\']').val();
-
         if (filter_quantity) {
           url += '&filter_quantity=' + encodeURIComponent(filter_quantity);
         }
 
         var filter_status = $('select[name=\'filter_status\']').val();
-
         if (filter_status != '*') {
           url += '&filter_status=' + encodeURIComponent(filter_status);
         }
@@ -507,21 +510,25 @@
       });
 
       (function($wk_jq) {
-          $wk_jq('.cp-pro-status').on('click', function(){
-              if(confirm("{{ text_confirm_approve}}")){
-                url = '{{ approve}}&product_id='+$wk_jq(this).attr('cp-pro-id');
+        $wk_jq('.cp-pro-status').on('click', function(){
+          if(confirm("{{ text_confirm_approve}}")){
+            url = '{{ approve}}&product_id='+$wk_jq(this).attr('cp-pro-id');
             $wk_jq('#insert').attr('href',url).trigger('click');
             location = url;
-              }
-          });
-          
-          // ADD REJECT FUNCTIONALITY HERE
-          $wk_jq('.cp-pro-reject').on('click', function(){
-              if(confirm("{{ text_confirm_reject}}")){
-                url = '{{ reject}}&product_id='+$wk_jq(this).attr('cp-pro-id');
+          }
+        });
+        
+        // Updated reject functionality
+        $wk_jq('.cp-pro-reject').on('click', function(){
+          var reason = prompt("Please enter rejection reason (optional):");
+          if(reason !== null && confirm("{{ text_confirm_reject}}")){
+            url = '{{ reject}}&product_id='+$wk_jq(this).attr('cp-pro-id');
+            if(reason.trim() !== '') {
+              url += '&reason=' + encodeURIComponent(reason);
+            }
             location = url;
-              }
-          });
+          }
+        });
       })(jQuery);
 
       $('input[name=\'filter_seller\']').autocomplete({
@@ -580,15 +587,6 @@
     </script>
     <script>
       <!--//
-(function($wk_jq) {
-	$wk_jq('.cp-pro-status').on('click', function(){
-		if(confirm("{{ text_confirm_approve}}")){
-  		url = '{{ approve}}&product_id='+$wk_jq(this).attr('cp-pro-id');
-      $wk_jq('#insert').attr('href',url).trigger('click');
-      location = url;
-		}
-	});
-})(jQuery);
 //-->
     </script>
     {{ footer}}

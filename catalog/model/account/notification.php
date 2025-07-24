@@ -452,10 +452,18 @@ class ModelAccountNotification extends Model {
 
 		$this->db->query("INSERT INTO `" . DB_PREFIX . "mp_customer_activity` SET `id` = '" . (int)$id . "', `key` = '" . $this->db->escape($key) . "', `data` = '" . $this->db->escape(json_encode($data)) . "', `ip` = '" . $this->db->escape($this->request->server['REMOTE_ADDR']) . "', `date_added` = NOW()");
 
+		$activity_id = $this->db->getLastId();
+
+		// Handle seller activity mapping
 		if (isset($data['product_id'])) {
-			$this->addSellerActivity($this->db->getLastId(),$data['product_id'],'product');
+			$this->addSellerActivity($activity_id, $data['product_id'], 'product');
 		} elseif (isset($data['order_id'])) {
-			$this->addSellerActivity($this->db->getLastId(),$data['order_id'],'order');
+			$this->addSellerActivity($activity_id, $data['order_id'], 'order');
+		}
+		
+		// For product rejection, also add direct seller mapping if provided
+		if ($key == 'product_reject' && isset($data['seller_id'])) {
+			$this->db->query("INSERT INTO `" . DB_PREFIX . "seller_activity` SET `activity_id` = '" . (int)$activity_id . "', `seller_id` = '" . (int)$data['seller_id'] ."'");
 		}
 	}
 
@@ -528,5 +536,83 @@ class ModelAccountNotification extends Model {
 	    $query = $this->db->query($sql)->rows;
 	    return $query;
 	  }
+	}
+
+	/**
+	 * [getSellerProductRejectActivityTotal is used to get the total product rejection activities for a specific seller]
+	 * @param  integer $seller_id [seller customer id - optional, uses current customer if not provided]
+	 * @return [integer]          [number of product rejection activities]
+	 */
+	public function getSellerProductRejectActivityTotal($seller_id = 0) {
+		if (!$seller_id) {
+			$seller_id = (int)$this->customer->getId();
+		}
+		
+		if ($seller_id) {
+			$sql = "SELECT COUNT(*) as total FROM " . DB_PREFIX . "mp_customer_activity mca 
+					LEFT JOIN " . DB_PREFIX . "seller_activity sa ON (mca.customer_activity_id = sa.activity_id) 
+					WHERE mca.key = 'product_reject' AND sa.seller_id = '" . (int)$seller_id . "'";
+
+			$query = $this->db->query($sql);
+			return $query->row['total'];
+		}
+		
+		return 0;
+	}
+
+	/**
+	 * [getSellerProductRejectActivity is used to get product rejection activities for a specific seller]
+	 * @param  integer $seller_id [seller customer id - optional, uses current customer if not provided]
+	 * @param  integer $limit     [limit of results]
+	 * @return [array]            [array of rejection activities for the seller]
+	 */
+	public function getSellerProductRejectActivity($seller_id = 0, $limit = 10) {
+		if (!$seller_id) {
+			$seller_id = (int)$this->customer->getId();
+		}
+		
+		if ($seller_id) {
+			$sql = "SELECT mca.* FROM " . DB_PREFIX . "mp_customer_activity mca 
+					LEFT JOIN " . DB_PREFIX . "seller_activity sa ON (mca.customer_activity_id = sa.activity_id) 
+					WHERE mca.key = 'product_reject' AND sa.seller_id = '" . (int)$seller_id . "'";
+
+			$start = 0;
+			if (isset($this->request->get['page_reject']) && $this->request->get['page_reject'] != '{page}') {
+				$start = ($this->request->get['page_reject'] - 1) * $limit;
+			}
+
+			$sql .= " ORDER BY mca.date_added DESC LIMIT " . (int)$start . "," . (int)$limit;
+
+			$query = $this->db->query($sql);
+			return $query->rows;
+		}
+		
+		return array();
+	}
+
+	/**
+	 * [productRejectActivity is used to add the product rejection activity]
+	 * @param  integer $product_id [product id]
+	 * @param  string  $reason     [rejection reason]
+	 * @return [type]              [description]
+	 */
+	public function productRejectActivity($product_id = 0, $reason = '') {
+		if ($product_id) {
+			$this->load->model('catalog/product');
+
+			$product_info = $this->model_catalog_product->getProduct($product_id);
+			
+			if ($product_info) {
+				$activity_data = array(
+					'id' => $product_id,
+					'product_id' => $product_id,
+					'product_name' => $product_info['name'],
+					'reason' => $reason,
+					'date_rejected' => date('Y-m-d H:i:s')
+				);
+
+				$this->addActivity('product_reject', $activity_data);
+			}
+		}
 	}
 }

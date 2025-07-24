@@ -12,64 +12,6 @@ class ModelCustomerpartnerProduct extends Model {
 		}
 	}
 
-	// Function to reject a product
-	public function rejectProduct($data) {
-		// Get product details BEFORE deletion
-		$this->load->model('catalog/product');
-		$product_data = $this->model_catalog_product->getProduct($data['product_id']);
-		
-		// Add seller id with product data
-		$product_data['customer_id'] = $this->getSellerbasedonProduct($data['product_id']);
-		
-		if(!$product_data['customer_id'])
-			return;
-		
-		// Send rejection notification BEFORE deletion
-		$this->load->model('customerpartner/notification');
-		
-		$activity_data = array(
-			'id'           => $product_data['product_id'],
-			'product_id'   => $product_data['product_id'],
-			'seller_id'    => $product_data['customer_id'],
-			'product_name' => $product_data['name'],
-		);
-		
-		// Add rejection notification
-		$this->model_customerpartner_notification->addActivity('product_reject', $activity_data);
-		
-		// Send rejection email if enabled
-		if($this->config->get('marketplace_mail_product_reject')) {
-			$this->load->model('customerpartner/mail');
-			$this->load->model('customerpartner/partner');
-			
-			$seller_info = $this->model_customerpartner_partner->getPartnerCustomerInfo($product_data['customer_id']);
-			
-			$mail_data = array(
-				'mail_id'   => $this->config->get('marketplace_mail_product_reject'),
-				'mail_from' => $this->config->get('marketplace_adminmail'),
-				'mail_to'   => $seller_info['email'],
-			);
-			
-			$value_index = array(
-				'commission'   => $seller_info['commission'],
-				'product_name' => $product_data['name'],
-			);
-			
-			$this->model_customerpartner_mail->mail($mail_data, $value_index);
-		}
-		
-		// DELETE PRODUCT COMPLETELY FROM DATABASE
-		$this->deleteProduct($data['product_id']);
-		
-		// Also delete from main product table
-		$this->db->query("DELETE FROM " . DB_PREFIX . "product WHERE product_id = '" . (int)$data['product_id'] . "'");
-		$this->db->query("DELETE FROM " . DB_PREFIX . "product_description WHERE product_id = '" . (int)$data['product_id'] . "'");
-		$this->db->query("DELETE FROM " . DB_PREFIX . "product_to_category WHERE product_id = '" . (int)$data['product_id'] . "'");
-		$this->db->query("DELETE FROM " . DB_PREFIX . "product_image WHERE product_id = '" . (int)$data['product_id'] . "'");
-		$this->db->query("DELETE FROM " . DB_PREFIX . "product_option WHERE product_id = '" . (int)$data['product_id'] . "'");
-		$this->db->query("DELETE FROM product_subscription WHERE product_id = '" . (int)$data['product_id'] . "'");
-	}
-
 	private $data = array();
 
 	//to clear products which are not in product table (currently code adding using xml file so used return)
@@ -165,12 +107,57 @@ class ModelCustomerpartnerProduct extends Model {
 	}
 
 	public function deleteProduct($product_id) {
+		// Set product status to -1 (rejected)
+		$this->db->query("UPDATE " . DB_PREFIX . "product SET status = -1 WHERE product_id = '" . (int)$product_id . "'");
+		
+		$this->db->query("DELETE FROM " . DB_PREFIX . "mp_customer_activity WHERE id = '" . (int)$product_id . "' AND `key` = 'product_stock'");
+	}
 
-       $this->db->query("DELETE FROM " . DB_PREFIX . "customerpartner_to_product WHERE product_id = '" . (int)$product_id . "'");
-
-$this->db->query("DELETE FROM " . DB_PREFIX . "mp_customer_activity WHERE id = '" . (int)$product_id . "' AND `key` = 'product_stock'");
-       $this->db->query("DELETE FROM " . DB_PREFIX . "customerpartner_sold_tracking WHERE product_id = '" . (int)$product_id . "'");
-
+	public function rejectProduct($product_id, $reason = '') {
+		// Set product status to -1 (rejected)
+		$this->db->query("UPDATE " . DB_PREFIX . "product SET status = -1 WHERE product_id = '" . (int)$product_id . "'");
+		
+		// Get product details for notification
+		$this->load->model('catalog/product');
+		$data = $this->model_catalog_product->getProduct($product_id);
+		
+		// Add seller id with product data
+		$data['customer_id'] = $this->getSellerbasedonProduct($product_id);
+		
+		if ($data['customer_id']) {
+			$this->load->model('customerpartner/notification');
+			
+			$activity_data = array(
+				'id' => $product_id,
+				'product_id' => $product_id,
+				'seller_id' => $data['customer_id'],
+				'product_name' => $data['name'],
+				'reason' => $reason
+			);
+			
+			$this->model_customerpartner_notification->addActivity('product_reject', $activity_data);
+			
+			// Send rejection email if configured
+			if ($this->config->get('marketplace_mail_product_reject')) {
+				$this->load->model('customerpartner/mail');
+				$this->load->model('customerpartner/partner');
+				
+				$seller_info = $this->model_customerpartner_partner->getPartnerCustomerInfo($data['customer_id']);
+				
+				$mail_data = array(
+					'mail_id' => $this->config->get('marketplace_mail_product_reject'),
+					'mail_from' => $this->config->get('marketplace_adminmail'),
+					'mail_to' => $seller_info['email']
+				);
+				
+				$value_index = array(
+					'product_name' => $data['name'],
+					'rejection_reason' => $reason
+				);
+				
+				$this->model_customerpartner_mail->mail($mail_data, $value_index);
+			}
+		}
 	}
 
 	public function getProducts($data = array()) {
@@ -207,7 +194,16 @@ $this->db->query("DELETE FROM " . DB_PREFIX . "mp_customer_activity WHERE id = '
 
 
 			if (isset($data['filter_status']) && !is_null($data['filter_status'])) {
-				$sql .= " AND p.status = '" . (int)$data['filter_status'] . "'";
+				if ($data['filter_status'] == -1) {
+					// Show only rejected products
+					$sql .= " AND p.status = -1";
+				} else {
+					// Exclude rejected products from normal listings unless specifically requested
+					$sql .= " AND p.status = '" . (int)$data['filter_status'] . "'";
+				}
+			} else {
+				// By default, exclude rejected products from listings
+				$sql .= " AND p.status != -1";
 			}
 
 			$sql .= " GROUP BY p.product_id";
