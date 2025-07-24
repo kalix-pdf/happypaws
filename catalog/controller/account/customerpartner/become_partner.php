@@ -28,7 +28,6 @@ class ControllerAccountCustomerpartnerBecomePartner extends Controller
 		// Handle re-apply POST
 		if (($this->request->server['REQUEST_METHOD'] == 'POST') && isset($this->request->post['reapply']) && $this->request->post['reapply'] == '1') {
 			// Reset in_process for this user (allow re-application)
-			// You may need to adjust this depending on your schema
 			$this->model_account_customerpartner->resetApplicationStatus($customer_id);
 			$this->data['in_process'] = 0;
 			// Reload page to show the form
@@ -62,7 +61,6 @@ class ControllerAccountCustomerpartnerBecomePartner extends Controller
 
 				$this->model_customerpartner_master->addShopData(
 					$customer_id, $file_paths,
-					$this->request->post['SBSTYPE']
 				);
 			} 
 			//else {
@@ -199,7 +197,6 @@ class ControllerAccountCustomerpartnerBecomePartner extends Controller
 	{
 		$this->request->post['shoppartner'] = isset($this->request->post['shoppartner']) ? trim($this->request->post['shoppartner']) : '';
 		$this->request->post['description'] = isset($this->request->post['description']) ? trim($this->request->post['description']) : '';
-		$this->request->post['SBSTYPE'] = isset($this->request->post['SBSTYPE']) ? trim($this->request->post['SBSTYPE']) : '';
 
 		$allowed_extensions = ['jpg', 'jpeg', 'png', 'pdf'];
 		$max_size = 5 * 1024 * 1024; // 5MB limit
@@ -237,11 +234,6 @@ class ControllerAccountCustomerpartnerBecomePartner extends Controller
 			if ($this->model_customerpartner_master->getShopData($this->request->post['shoppartner'])) {
 				$this->error['error_shoppartner'] = $this->language->get('error_message');
 			}
-		}
-
-		if (empty($this->request->post['SBSTYPE']))
-		{
-			$this->error['error_SBSTYPE'] = "Please select a pricing option.";
 		}
 
 		if (!$this->error) {
