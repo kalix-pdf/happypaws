@@ -231,9 +231,9 @@ class ModelAccountCustomerpartnerOrder extends Model
 					$price = (float)$product['price'];
 
 					if ($subs_type === 3) {
-
 						$cms_commission_fee = 5.00;
-						
+					} else {
+						$cms_commission_fee = 0;
 					}
 
 				if ($check_order_exists) {
@@ -618,8 +618,8 @@ if(isset($this->session->data['order_id']) && $this->config->get('marketplace_ma
 
 						default: //just get all amount and process on that (precentage based)
 							$customer_commission = $this->getCustomerCommission($customer_id);
-							$cms_commission = $this->getCmsCommissionFee($customer_id);
-							$this->log->write("cms fee: " . $cms_commission);
+							$cms_commission = $this->getCmsCommissionFee($product['product_id']);
+
 							if ($customer_commission) {
 								$commission_amount += $customer_commission['commission'] ? ($customer_commission['commission'] * $product['product_total'] / 100) : 0;
 								$cms_commission = ($cms_commission * $product['product_total'] / 100);
@@ -648,9 +648,6 @@ if(isset($this->session->data['order_id']) && $this->config->get('marketplace_ma
 				}
 			}
 			$total_fee = $cms_commission + $commission_amount ;
-			$this->log->write("total fee: " . $total_fee);
-			$this->log->write("platform fee: " . $commission_amount);
-			$this->log->write("commission fee: " . $cms_commission);
 
 			$customer = $this->config->get('marketplace_commission_unit_price')
 				? $product['product_total']
@@ -891,17 +888,16 @@ if(isset($this->session->data['order_id']) && $this->config->get('marketplace_ma
 		return $query->row;
 	}
 
-	public function getCmsCommissionFee($customer_id)
+	public function getCmsCommissionFee($product_id)
 	{
-		$query = $this->db->query("SELECT * FROM `product_subscription` WHERE seller_id = '" . (int)$customer_id . "'");
+		$query = $this->db->query("SELECT * FROM `product_subscription` WHERE product_id = '" . (int)$product_id . "'");
 
-		foreach ($query->rows as $row) {
-			if ($row['subs_type'] == 3) {
-				return $row['duration']; 
-			}
+		if ($query->num_rows && $query->row['subs_type'] == 3) {
+			return $query->row['duration'];
+		} else {
+			return 0;
 		}
-
-		return null;	
+	
 	}
 
 	public function getCustomerCommission($customer_id)
