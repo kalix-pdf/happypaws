@@ -47,8 +47,8 @@ $_['text_order_status_mp']	              = 'Order: <a href="%s" target="_blank">
 
 //tab
 $_['tab_order']						             = 'Order';
-$_['tab_product']					             = 'Product';
-$_['tab_seller']					             = 'Vendor';
+$_['tab_product']					             = 'Product Approval';
+$_['tab_seller']					             = 'Reviews';
 
 //warning
 $_['error_warning_authenticate']       = 'Warning: You are not authorised to view this page, Please contact to site administrator!';
