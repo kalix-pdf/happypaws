@@ -3932,4 +3932,13 @@ class ModelAccountCustomerpartner extends Model
 		}
 		return false;
 	}
+
+	public function getRejectionComment($customer_id) 
+	{
+		$query = $this->db->query("SELECT is_partner, comment FROM " . DB_PREFIX . "customerpartner_to_customer WHERE customer_id = '" . (int)$customer_id . "'");
+		if ($query->num_rows && isset($query->row['is_partner']) && $query->row['is_partner'] == 2) {
+			return array('comment' => $query->row['comment']);
+		}
+		return null;
+	}
 }

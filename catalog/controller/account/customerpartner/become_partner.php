@@ -113,6 +113,10 @@ class ControllerAccountCustomerpartnerBecomePartner extends Controller
 			} elseif ($this->model_account_customerpartner->chkIsPartner() == 2) {
 				$this->data['in_process'] = 'rejected';
 				$this->data['text_delay'] = $this->language->get('your application is rejected');
+
+				$this->load->model('account/customerpartner');
+				$rejection_info = $this->model_account_customerpartner->getRejectionComment($customer_id);
+				$this->data['rejection_comment'] = isset($rejection_info['comment']) ? $rejection_info['comment'] : '';
 			} elseif ($this->model_account_customerpartner->chkIsPartner() == 0) {
 				$this->data['in_process'] = 'pending';
 				$this->data['text_delay'] = $this->language->get('text_delay');

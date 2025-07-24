@@ -109,6 +109,7 @@
         </div>
 
         <form action="{{ delete}}" method="post" enctype="multipart/form-data" id="form-seller">
+          <input type="hidden" name="comment" value="" />
           <div class="table-responsive">
             <table class="table table-bordered table-hover">
               <thead>
@@ -203,7 +204,19 @@
                 <td class="text-center">
                   {% if customer['is_partner'] == "Normal customer" %}
                   <a onclick="$(this).parents('tr').find('input[type=\'checkbox\']').prop('checked',true);$('form').attr('action', '{{ approve}}&set_status=1'); $('form').submit();" data-toggle="tooltip" title="{{ button_approve}}" class="btn btn-success"><i class="fa fa-thumbs-o-up"></i></a>
-                  <a onclick="$(this).parents('tr').find('input[type=\'checkbox\']').prop('checked',true);$('form').attr('action', '{{ approve}}&set_status=2'); $('form').submit();" data-toggle="tooltip" title="Reject Seller" class="btn btn-danger"><i class="fa fa-thumbs-o-down"></i></a>
+                  <a onclick="
+                    var reason = prompt('Please enter the reason for rejection:');
+                    if (reason !== null && reason !== '') {
+                      $(this).parents('tr').find('input[type=\'checkbox\']').prop('checked',true);
+                      var form = $(this).closest('form');
+                      if (form.find('input[name=\'comment\']').length === 0) {
+                        form.append('<input type=\'hidden\' name=\'comment\' />');
+                      }
+                      form.find('input[name=\'comment\']').val(reason);
+                      form.attr('action', '{{ approve}}&set_status=2');
+                      form.submit();
+                    }
+                  " data-toggle="tooltip" title="Reject Seller" class="btn btn-danger"><i class="fa fa-thumbs-o-down"></i></a>
                   {% else %}
                     <button type="button" class="btn btn-success" disabled><i class="fa fa-thumbs-o-up"></i></button>
                     

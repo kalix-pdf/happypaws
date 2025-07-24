@@ -1792,5 +1792,10 @@ class ModelCustomerpartnerPartner extends Model {
 
 	}
 
+// Reject sellership and store comment
+	public function rejectSellership($customer_id, $setstatus, $comment) {
+		// Update is_partner and comment for the customer
+		$this->db->query("UPDATE " . DB_PREFIX . "customerpartner_to_customer SET is_partner='" . (int)$setstatus . "', comment='" . $this->db->escape($comment) . "' WHERE customer_id = '" . (int)$customer_id . "'");
+	}
 }
 ?>

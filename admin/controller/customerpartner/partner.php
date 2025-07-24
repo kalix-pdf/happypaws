@@ -453,7 +453,12 @@ class ControllerCustomerpartnerPartner extends Controller {
 				if(isset($this->request->get['set_status']))
 					$setstatus = $this->request->get['set_status'];
 
-				$customer_info = $this->model_customerpartner_partner->approve($customer_id,$setstatus);
+				if ($setstatus == 2) {
+					$comment = isset($this->request->post['comment']) ? $this->request->post['comment'] : '';
+					$this->model_customerpartner_partner->rejectSellership($customer_id, $setstatus, $comment);
+				} else {
+					$customer_info = $this->model_customerpartner_partner->approve($customer_id, $setstatus);
+				}
 
 				$approved++;
 
