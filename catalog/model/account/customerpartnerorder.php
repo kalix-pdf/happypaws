@@ -893,11 +893,15 @@ if(isset($this->session->data['order_id']) && $this->config->get('marketplace_ma
 
 	public function getCmsCommissionFee($customer_id)
 	{
-		$query = $this->db->query("SELECT * FROM `product_subscription` WHERE seller_id = '" . (int)$customer_id ."'");
-		if ($query->row['subs_type'] == 3) {
-			return $query->row['duration'];
+		$query = $this->db->query("SELECT * FROM `product_subscription` WHERE seller_id = '" . (int)$customer_id . "'");
+
+		foreach ($query->rows as $row) {
+			if ($row['subs_type'] == 3) {
+				return $row['duration']; 
+			}
 		}
-		
+
+		return null;	
 	}
 
 	public function getCustomerCommission($customer_id)
