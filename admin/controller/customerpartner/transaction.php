@@ -423,9 +423,6 @@ class ControllerCustomerpartnerTransaction extends Controller {
 					{
 						$this->data['amount'] = round( ((float)$this->data['amount'] + (float)$order['need_to_pay']),2 );
 						
-						// echo "<pre>";
-						// print_r($this->data['amount']);
-						// echo "</pre>";
 					}
 				}
 

@@ -40,14 +40,14 @@
 
         <td class="text-left">
           <div class="input-group btn-block" style="max-width: 200px;">
-            <input type="text" name="quantity[{{ product.cart_id }}]" value="{{ product.quantity }}" size="1" class="form-control" />
+            <input type="text" name="quantity[{{ product.cart_id }}]" value="{{ product.quantity }}" size="1" class="form-control" disabled/>
             <span class="input-group-btn">
-              <button type="submit" data-toggle="tooltip" title="{{ button_update }}" class="btn btn-primary">
+              {# <button type="submit" data-toggle="tooltip" title="{{ button_update }}" class="btn btn-primary">
                 <i class="fa fa-refresh"></i>
               </button>
               <button type="button" data-toggle="tooltip" title="{{ button_remove }}" class="btn btn-danger" onclick="cart.remove('{{ product.cart_id }}');">
                 <i class="fa fa-times-circle"></i>
-              </button>
+              </button> #}
             </span>
           </div>
         </td>

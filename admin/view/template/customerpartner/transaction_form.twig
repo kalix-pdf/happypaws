@@ -206,9 +206,9 @@
                         {% endif %}
                       </td>
                       <td class="text-center">{{ order['commission_applied'] ~ '%' }}</td>
-                      <td class="text-center">
-                      <input type="hidden" value="{{ order['price'] }}" id="price-{{ order['order_product_id'] }}" />
-                        {{ order['price'] }}
+                      <td class="text-center"> {# PAYABLE AMOUNT #}
+                        <input type="hidden" value="{{ order['price'] }}" id="price-{{ order['order_product_id'] }}" />
+                          {{ order['price'] }}
                       </td>
                       <td class="text-center">{{ order['quantity'] }}</td>
                       <td class="text-center">{{ order['date_added'] }}</td>

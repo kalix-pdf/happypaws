@@ -176,7 +176,9 @@ class ControllerCustomerpartnerincome extends Controller
 		$data['grand_total_admin'] = 0;
 		$data['grand_total_paid'] = 0;
 		$data['grand_total_rem'] = 0;
-		$data['grand_total_seller'] = 0;
+		$data['grand_total_platform_fee'] = 0;
+		$data['grand_total_commission'] = 0;
+
 		$data['grand_total'] = 0;
 		$data['grand_unpaid_listing_commission'] = 0;
 		$total_row = 0;
@@ -187,17 +189,7 @@ class ControllerCustomerpartnerincome extends Controller
 
 		foreach ($sellers as $key => $seller) {
 			$partner_amount = $this->model_customerpartner_partner->getPartnerTotal($seller['customer_id'], $filter_data);
-			$cms_fee = $this->model_customerpartner_income->getcommission($seller['customer_id']);
 			
-			$total_cms_fee = 0;
-
-			foreach($cms_fee as $row){
-				if (!empty($row['cms_commission_fee'])) {
-					$cms_fee = $row['cms_commission_fee'];
-					$total_cms_fee += $cms_fee;
-				}
-			}
-
 			if (!$partner_amount) {
 				continue;
 			}
@@ -213,18 +205,20 @@ class ControllerCustomerpartnerincome extends Controller
 				}
 			}
 			$total = $partner_amount['total'];
-			$admin = $partner_amount['admin'];
+			$admin = $partner_amount['platfee'];
+			$total_fee = $partner_amount['total_fee'];
+			$commission_fee = $partner_amount['cms_commission_fee'];
+
 			$selleramount = $partner_amount['customer'];
 			$paid = $partner_amount['paid'];
-			$rem = round($total - ($paid + $admin), 2);
+			$rem = round($total - ($paid + $total_fee), 2);
 			$button_status = true;
 			if ($rem) {
 				$button_status = false;
 			}
 			$subscriptions = $this->model_customerpartner_product->getSubscriptionBySellerId($seller['customer_id']);
 			$latest_subscription = end($subscriptions); 
-			$total_cms_pfee = $total_cms_fee + $admin;
-
+			
 			$data['income_details'][] = array(
 				'seller_id' => $seller['customer_id'],
 				'firstname' => $seller['firstname'],
@@ -233,8 +227,9 @@ class ControllerCustomerpartnerincome extends Controller
 				'commission' => $seller['commission'] . "%",
 				'total' => $this->currency->format($total, $this->config->get('config_currency')),
 				'seller_total' => $this->currency->format($selleramount, $this->config->get('config_currency')),
-				'admin_total' => $this->currency->format($admin, $this->config->get('config_currency')),
-				'pfee_cfee' => $this->currency->format($total_cms_pfee, $this->config->get('config_currency')),
+				'admin_total' => $this->currency->format($total_fee, $this->config->get('config_currency')),
+				'platform_fee' => $this->currency->format($admin, $this->config->get('config_currency')),
+				'commission_fee' => $this->currency->format($commission_fee, $this->config->get('config_currency')),
 
 				'paid_total' => $this->currency->format($paid, $this->config->get('config_currency')),
 				'amount_to_pay' => $this->currency->format($rem, $this->config->get('config_currency')),
@@ -245,14 +240,12 @@ class ControllerCustomerpartnerincome extends Controller
 				'subscriptions' => $latest_subscription
 			);
 
-			// echo "<pre>";
-			// print_r($data['income_details']);
-			// echo "</pre>";
-
 			$data['grand_total'] = $data['grand_total'] + $total;
-			$data['grand_total_seller'] = $data['grand_total_seller'] + $selleramount;
+			$data['grand_total_platform_fee'] = $data['grand_total_platform_fee'] + $admin;
+			$data['grand_total_commission'] = $data['grand_total_commission'] + $commission_fee;
+
 			$data['grand_total_paid'] = $data['grand_total_paid'] + $paid;
-			$data['grand_total_admin'] = $data['grand_total_admin'] + $admin;
+			$data['grand_total_admin'] = $data['grand_total_admin'] + $total_fee;
 			$data['grand_total_rem'] = $data['grand_total_rem'] + $rem;
 			$data['grand_unpaid_listing_commission'] = $data['grand_unpaid_listing_commission'] + isset($unpaid_commission['commission_amount']) ? $unpaid_commission['commission_amount'] : 0.00;
 
@@ -268,7 +261,9 @@ class ControllerCustomerpartnerincome extends Controller
 		}
 
 		$data['grand_total'] = $this->currency->format($data['grand_total'], $this->config->get('config_currency'));
-		$data['grand_total_seller'] = $this->currency->format($data['grand_total_seller'], $this->config->get('config_currency'));
+		$data['grand_total_platform_fee'] = $this->currency->format($data['grand_total_platform_fee'], $this->config->get('config_currency'));
+		$data['grand_total_commission'] = $this->currency->format($data['grand_total_commission'], $this->config->get('config_currency'));
+
 		$data['grand_total_paid'] = $this->currency->format($data['grand_total_paid'], $this->config->get('config_currency'));
 		$data['grand_total_admin'] = $this->currency->format($data['grand_total_admin'], $this->config->get('config_currency'));
 		$data['grand_total_rem'] = $this->currency->format($data['grand_total_rem'], $this->config->get('config_currency'));

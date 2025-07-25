@@ -27,7 +27,8 @@
 
     <div class="row col-sm-8">
       <div class="d-flex justify-content-center">
-
+        {% if isMember %}
+          {% if not in_process %}
         <form action="{{ action }}" method="post" enctype="multipart/form-data" class="form-horizontal">
           <h1>Be a MeowChant</h1>
           {% if customer_id %}
@@ -80,8 +81,14 @@
             <input type="submit" value="Continue" class="btn btn-primary btn-lg" style="background-color: #162F65; border-color: #162F65; border-radius: 25px; padding: 10px 40px;"/>
           </div>
         </form>
-
-        {{ content_bottom }}
+        {% else %}
+          <div class="alert alert-info"><i class="fa fa-exclamation-circle"></i> {{ text_delay}}</div>
+        {% endif %}
+        {% else %}
+        <div class="text-danger">
+          {{ error_warning_authenticate}}
+        </div>
+      {% endif %}
       </div>
     </div>
   </div>
