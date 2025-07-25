@@ -18,21 +18,26 @@
 }
 
 .custom-panel-body {
-    padding: 10px 30px 30px 30px;
+    padding: 20px;
 }
 
 .custom-row-contact {
     display: flex;
     justify-content: space-around;
     align-items: center;
-    flex-wrap: wrap;
     gap: 15px;
     font-size: 14px;
+    color: white;
 }
 
 .custom-col {
     min-width: 100px;
     align-items: center;
+    margin: 0;
+}
+
+.custom-col p{
+margin: 0;
 }
 
 .custom-col-1 {

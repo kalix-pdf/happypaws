@@ -28,7 +28,6 @@
       {# <h3>{{ text_location }}</h3> #}
       <div class="custom-panel">
         <div class="custom-panel-body">
-          <h3 class="letter-head">{{ text_location }}</h3>
           <div class="custom-row-contact">
             {% if image %}
             <div class="custom-col-1">
@@ -36,32 +35,30 @@
             </div>
             {% endif %}
             <div class="custom-col">
-              <strong>{{ store }}</strong><br />
-              <address>
-                {{ address }}
-              </address>
+              <p><strong>{{ store }}</strong><br /></p>
+              <p>{{ address }}
               {% if geocode %}
               <a href="https://maps.google.com/maps?q={{ geocode|url_encode }}&hl={{ geocode_hl }}&t=m&z=15" target="_blank" class="custom-btn custom-btn-info">
                 <i class="fa fa-map-marker"></i> {{ button_map }}
-              </a>
+              </a></p>
               {% endif %}
             </div>
             <div class="custom-col">
-              <strong>{{ text_telephone }}</strong><br>
-              {{ telephone }}<br /><br />
+              <p><strong>{{ text_telephone }}</strong></p>
+              <p>{{ telephone }}
               {% if fax %}
-              <strong>{{ text_fax }}</strong><br>
-              {{ fax }}
+              <strong>{{ text_fax }}</strong>
+              {{ fax }}</p>
               {% endif %}
             </div>
             <div class="custom-col">
               {% if open %}
-              <strong>{{ text_open }}</strong><br />
-              {{ open }}<br /><br />
+              <p><strong>{{ text_open }}</strong></p>
+              <p>{{ open }}</p>
               {% endif %}
               {% if comment %}
-              <strong>{{ text_comment }}</strong><br />
-              {{ comment }}
+              <p><strong>{{ text_comment }}</strong></p>
+              <p>{{ comment }}</p>
               {% endif %}
             </div>
           </div>

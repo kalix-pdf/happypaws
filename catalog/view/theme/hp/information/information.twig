@@ -1,4 +1,4 @@
-<head>
+
   <meta charset="UTF-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -6,48 +6,71 @@
   <link href="{{ 'https://fonts.googleapis.com/css2?family=Poppins+One&family=Poppins:wght@400;500;600;700&display=swap' }}" rel="stylesheet">
   <link rel="stylesheet" href="catalog\view\theme\hp\stylesheet\about-us.css">
   <link href="{{ 'https://fonts.googleapis.com/css2?family=Poppins+One&family=Poppins:wght@400;500;600;700&display=swap' }}" rel="stylesheet">
-</head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <link href="catalog\view\theme\hp\stylesheet\enhanced-hp\home\category.css" rel="stylesheet" />
+  <link href="{{ 'https://fonts.googleapis.com/css2?family=Poppins+One&family=Poppins:wght@400;500;600;700&display=swap' }}" rel="stylesheet">
 
 {{ header }}
 
-<div class="upper-section">
-  <div class="left-pannel">
-    <div class="text-container">
-     <h1>ABOUT</h1>
-    </div>
-    <div class="text-container">
-     <h1>HAPPYPAWS</h1>
-    </div>
-    <div class="text-container">
-      <h6>Welcome to HappyPaws - The Philippines' First One-Stop Shop for your pets!</h6>
-    </div>
-  </div>
+<div class="main">
 
-  <div class="right-pannel">
-    <img src="catalog/view/theme/hp/image/aboutus1.png" alt="">
-  </div>
+  {% if heading_title == 'About Us' %}
+    {# ✅ CUSTOM ABOUT US LAYOUT #}
+    <div class="upper-section">
+      <div class="left-pannel">
+        <div class="text-container"><h1>ABOUT</h1></div>
+        <div class="text-container"><h1>HAPPYPAWS</h1></div>
+        <div class="text-container">
+          <h6>Welcome to HappyPaws - The Philippines' First One-Stop Shop for your pets!</h6>
+        </div>
+      </div>
+
+      <div class="right-pannel">
+        <img src="catalog/view/theme/hp/image/aboutus1.png" alt="">
+      </div>
+    </div>
+
+    <div class="bottom-section">
+      <div class="content-container">
+        <img src="catalog/view/theme/hp/image/as-element1.png" alt="">
+        <h1> What We Are </h1>
+        <p>HappyPaws is an e-commerce dropshipping business made exclusively for pets. We’re the first one-stop shop in the Philippines focused entirely on pet goods and services — all in one platform.</p>
+      </div>
+      <div class="content-container">
+        <img src="catalog/view/theme/hp/image/as-element2.png" alt="">
+        <h1> What We Offer </h1>
+        <p>We provide a wide selection of high-quality, vet-approved pet products and services. From food and grooming supplies to online vet bookings, everything your pet needs is just a few clicks away — delivered straight to your door.</p>
+      </div>
+      <div class="content-container">
+        <img src="catalog/view/theme/hp/image/as-element3.png" alt="">
+        <h1> Why Choose Us </h1>
+        <p>We're 100% focused on pets. Our model ensures fresh, readily available products without the need for big storage. As a proudly Filipino-owned brand, we understand the needs of local pet parents and are committed to offering only the best — with care, convenience, and trust.</p>
+      </div>
+    </div>
+
+  {% else %}
+    {# ✅ DEFAULT FOR OTHER PAGES (Privacy, Terms, etc.) #}
+    <div class="row-about">{{ column_left }}
+      {% if column_left and column_right %}
+      {% set class = 'col-sm-6' %}
+      {% elseif column_left or column_right %}
+      {% set class = 'col-sm-9' %}
+      {% else %}
+      {% set class = 'col-sm-12' %}
+      {% endif %}
+      <div id="content" class="about-us {{ class }}">
+        {{ content_top }}
+        <h1>{{ heading_title }}</h1>
+        <div class="info-description">{{ description }}</div>
+        {{ content_bottom }}
+      </div>
+      {{ column_right }}
+    </div>
+  {% endif %}
 </div>
 
-<div class="bottom-section">
-  <div class="content-container">
-    <img src="catalog/view/theme/hp/image/as-element1.png" alt="">
-    <h1> What We Are </h1>
-    <p>
-      HappyPaws is an e-commerce dropshipping business made exclusively for pets. We’re the first one-stop shop in the Philippines focused entirely on pet goods and services — all in one platform.
-    </p>
-  </div>
-  <div class="content-container">
-    <img src="catalog/view/theme/hp/image/as-element2.png" alt="">
-    <h1> What We Offer </h1>
-    <p>
-      We provide a wide selection of high-quality, vet-approved pet products and services. From food and grooming supplies to online vet bookings, everything your pet needs is just a few clicks away — delivered straight to your door.
-    </p>
-  </div>
-  <div class="content-container">
-    <img src="catalog/view/theme/hp/image/as-element3.png" alt="">
-    <h1> Why Choose Us </h1>
-    <p>
-      We're 100% focused on pets. Our model ensures fresh, readily available products without the need for big storage. As a proudly Filipino-owned brand, we understand the needs of local pet parents and are committed to offering only the best — with care, convenience, and trust.
-    </p>
-  </div>
-</div>
+{{ footer }}
+
+
