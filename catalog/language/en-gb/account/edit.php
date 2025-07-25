@@ -5,14 +5,14 @@ $_['heading_title']      = 'My Account Information';
 // Text
 $_['text_account']       = 'Account';
 $_['text_edit']          = 'Edit Information';
-$_['text_your_details']  = 'Your Personal Details';
+$_['text_your_details']  = 'Personal Details';
 $_['text_success']       = 'Success: Your account has been successfully updated.';
 
 // Entry
 $_['entry_firstname']    = 'First Name';
 $_['entry_lastname']     = 'Last Name';
 $_['entry_email']        = 'E-Mail';
-$_['entry_telephone']    = 'Telephone';
+$_['entry_telephone']    = 'Contact Number';
 
 // Error
 $_['error_exists']       = 'Warning: E-Mail address is already registered!';

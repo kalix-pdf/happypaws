@@ -146,6 +146,8 @@ class ControllerAccountAddress extends Controller {
 			'href' => $this->url->link('account/address', '', true)
 		);
 
+		$data['default_address_id'] = $this->customer->getAddressId();
+
 		if (isset($this->error['warning'])) {
 			$data['error_warning'] = $this->error['warning'];
 		} else {
@@ -168,8 +170,11 @@ class ControllerAccountAddress extends Controller {
 			if ($result['address_format']) {
 				$format = $result['address_format'];
 			} else {
-				$format = '{firstname} {lastname}' . "\n" . '{company}' . "\n" . '{address_1}' . "\n" . '{address_2}' . "\n" . '{city} {postcode}' . "\n" . '{zone}' . "\n" . '{country}';
+				$format = '<strong style="color:#162F65;">{firstname} {lastname} | {company} </strong>' . "\n"  . '{address_1} {city}, {zone}'. "\n" . '{postcode} {country}';
 			}
+
+				$firstname = ucwords(strtolower($result['firstname']));
+				$lastname = ucwords(strtolower($result['lastname']));
 
 			$find = array(
 				'{firstname}',
@@ -185,8 +190,8 @@ class ControllerAccountAddress extends Controller {
 			);
 
 			$replace = array(
-				'firstname' => $result['firstname'],
-				'lastname'  => $result['lastname'],
+				'firstname' => $firstname,
+				'lastname'  => $lastname,
 				'company'   => $result['company'],
 				'address_1' => $result['address_1'],
 				'address_2' => $result['address_2'],
@@ -203,6 +208,12 @@ class ControllerAccountAddress extends Controller {
 				'update'     => $this->url->link('account/address/edit', 'address_id=' . $result['address_id'], true),
 				'delete'     => $this->url->link('account/address/delete', 'address_id=' . $result['address_id'], true)
 			);
+
+			usort($data['addresses'], function($a, $b) use ($data) {
+				if ($a['address_id'] == $data['default_address_id']) return -1;
+				if ($b['address_id'] == $data['default_address_id']) return 1;
+				return 0;
+			});
 		}
 
 		$data['add'] = $this->url->link('account/address/add', '', true);
